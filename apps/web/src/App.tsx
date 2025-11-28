@@ -11,6 +11,7 @@ import { HomePage } from './routes/HomePage';
 import { CoursesPage } from './routes/CoursesPage';
 import { CoursePage } from './routes/CoursePage';
 import { LessonPage } from './routes/LessonPage';
+import { ProjectsPage } from './routes/ProjectsPage';
 import { CommunityPage } from './routes/CommunityPage';
 import { NotFoundPage } from './routes/NotFoundPage';
 
@@ -114,6 +115,7 @@ function App() {
               <Route path="/:lang/courses" element={<CoursesPage />} />
               <Route path="/:lang/courses/:courseSlug" element={<CoursePage />} />
               <Route path="/:lang/lessons/:lessonSlug" element={<LessonPage />} />
+              <Route path="/:lang/projects" element={<ProjectsPage />} />
               <Route path="/:lang/community" element={<CommunityPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>

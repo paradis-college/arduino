@@ -37,7 +37,7 @@ export const SiteLayout: FC<SiteLayoutProps> = ({ children, theme, onToggleTheme
                 <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
                   <span className="text-white font-bold text-sm">A</span>
                 </div>
-                <span className="font-semibold text-lg text-text">Arduino Learn</span>
+                <span className="font-semibold text-lg text-text">Arduino @ Paradis</span>
               </div>
               <p className="text-text-secondary text-sm">
                 {language === 'ro'
@@ -58,6 +58,14 @@ export const SiteLayout: FC<SiteLayoutProps> = ({ children, theme, onToggleTheme
                     className="text-text-secondary hover:text-primary transition-colors"
                   >
                     {t('common.courses')}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`/${language}/projects`}
+                    className="text-text-secondary hover:text-primary transition-colors"
+                  >
+                    {t('common.projects')}
                   </a>
                 </li>
                 <li>

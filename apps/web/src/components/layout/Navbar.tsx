@@ -24,6 +24,7 @@ export const Navbar: FC<NavbarProps> = ({ theme, onToggleTheme }) => {
   const navItems = [
     { key: 'home', labelKey: 'common.home', path: `/${currentLang}` },
     { key: 'courses', labelKey: 'common.courses', path: `/${currentLang}/courses` },
+    { key: 'projects', labelKey: 'common.projects', path: `/${currentLang}/projects` },
     { key: 'community', labelKey: 'common.community', path: `/${currentLang}/community` },
   ];
 
@@ -37,7 +38,7 @@ export const Navbar: FC<NavbarProps> = ({ theme, onToggleTheme }) => {
               <span className="text-white font-bold text-sm">A</span>
             </div>
             <span className="font-semibold text-lg text-text hidden sm:block">
-              Arduino Learn
+              Arduino @ Paradis
             </span>
           </Link>
 
