@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card, Badge } from '@/components/common';
-import { coursesManifest, getCourse } from '@/lib/lessonsManifest';
+import { Button } from '@/components/common';
 import type { Language } from '@/lib/types';
 
 /**
@@ -10,40 +9,37 @@ import type { Language } from '@/lib/types';
  */
 const CONTENT = {
   en: {
-    heroTitle: 'Learn Arduino Programming',
-    heroSubtitle: 'Master electronics and programming through hands-on courses, interactive labs, and real-world projects.',
+    brand: 'Arduino @ Paradis',
+    heroTitle: 'Arduino courses for 2024–2025',
+    heroSubtitle: 'Hands-on lessons with boards, sensors and real classroom projects.',
     browseCourses: 'Browse Courses',
-    viewCommunity: 'View Community',
-    featuredCourses: 'Featured Courses',
-    upcomingLabs: 'Upcoming Labs',
-    viewAllCourses: 'View All Courses',
-    lessons: 'lessons',
-    hours: 'hours',
+    coursesSection: 'Courses',
+    upcomingLabs: 'Upcoming labs & projects',
+    courses: [
+      { id: '9a', title: '9A', subtitle: 'Introduction to Arduino' },
+      { id: '9b', title: '9B', subtitle: 'Sensors and Inputs' },
+    ],
     labs: [
-      { id: 'lab1', title: 'Intro Lab: Blink an LED', subtitle: 'Next session: April 28', badge: 'Beginner' },
-      { id: 'lab2', title: 'Workshop: Line-following Robot', subtitle: 'Coming soon', badge: 'Intermediate' },
+      { id: 'lab1', title: 'Intro Lab: Blink an LED', subtitle: 'Next session: April 28' },
+      { id: 'lab2', title: 'Workshop: Line-following robot', subtitle: 'Coming soon' },
     ],
   },
   ro: {
-    heroTitle: 'Învață Programare Arduino',
-    heroSubtitle: 'Stăpânește electronica și programarea prin cursuri practice, laboratoare interactive și proiecte reale.',
-    browseCourses: 'Vezi Cursurile',
-    viewCommunity: 'Comunitate',
-    featuredCourses: 'Cursuri Recomandate',
-    upcomingLabs: 'Laboratoare Programate',
-    viewAllCourses: 'Toate Cursurile',
-    lessons: 'lecții',
-    hours: 'ore',
+    brand: 'Arduino @ Paradis',
+    heroTitle: 'Cursuri Arduino pentru 2024–2025',
+    heroSubtitle: 'Lecții practice cu plăci, senzori și proiecte reale în clasă.',
+    browseCourses: 'Explorează cursurile',
+    coursesSection: 'Cursuri',
+    upcomingLabs: 'Laboratoare & proiecte viitoare',
+    courses: [
+      { id: '9a', title: '9A', subtitle: 'Introducere în Arduino' },
+      { id: '9b', title: '9B', subtitle: 'Senzori și Intrări' },
+    ],
     labs: [
-      { id: 'lab1', title: 'Lab Intro: Aprinde un LED', subtitle: 'Următoarea sesiune: 28 Aprilie', badge: 'Începător' },
-      { id: 'lab2', title: 'Atelier: Robot Line-follower', subtitle: 'În curând', badge: 'Intermediar' },
+      { id: 'lab1', title: 'Lab intro: Aprinde un LED', subtitle: 'Următoarea sesiune: 28 Aprilie' },
+      { id: 'lab2', title: 'Atelier: Robot care urmărește linia', subtitle: 'În curând' },
     ],
   },
-};
-
-const DIFFICULTY_LABELS = {
-  en: { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' },
-  ro: { beginner: 'Începător', intermediate: 'Intermediar', advanced: 'Avansat' },
 };
 
 interface ArduinoHomeCardProps {
@@ -52,61 +48,96 @@ interface ArduinoHomeCardProps {
 
 /**
  * Professional Arduino home page component
- * Features hero section, featured courses, and upcoming labs
+ * Clean card-based design matching the mockup
  */
 export const ArduinoHomeCard: FC<ArduinoHomeCardProps> = ({ language }) => {
   const content = CONTENT[language];
-  const difficultyLabels = DIFFICULTY_LABELS[language];
-  const courses = coursesManifest.map((c) => getCourse(c.id, language)!).slice(0, 3);
 
   return (
-    <div className="space-y-16">
-      {/* Hero Section */}
-      <section className="text-center py-12 md:py-20">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text mb-6 leading-tight">
+    <div className="max-w-5xl mx-auto">
+      {/* Main Hero Card */}
+      <div className="bg-surface rounded-2xl border border-border shadow-sm p-8 md:p-12">
+        {/* Brand */}
+        <p className="text-text-secondary text-sm mb-6">{content.brand}</p>
+        
+        {/* Hero Title & Subtitle */}
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text mb-4 leading-tight">
           {content.heroTitle}
         </h1>
-        <p className="text-lg md:text-xl text-text-secondary max-w-3xl mx-auto mb-8">
+        <p className="text-lg text-text-secondary mb-8 max-w-2xl">
           {content.heroSubtitle}
         </p>
-        <div className="flex flex-wrap justify-center gap-4">
-          <Link to={`/${language}/courses`}>
-            <Button variant="primary" size="lg">
-              {content.browseCourses}
-            </Button>
-          </Link>
-          <Link to={`/${language}/community`}>
-            <Button variant="outline" size="lg">
-              {content.viewCommunity}
-            </Button>
-          </Link>
-        </div>
-      </section>
+        
+        {/* CTA Button */}
+        <Link to={`/${language}/courses`}>
+          <Button variant="primary" size="lg">
+            {content.browseCourses}
+          </Button>
+        </Link>
 
-      {/* Featured Courses Section */}
-      <section>
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold text-text">
-            {content.featuredCourses}
-          </h2>
-          <Link 
-            to={`/${language}/courses`}
-            className="text-primary hover:text-primary-hover font-medium transition-colors"
-          >
-            {content.viewAllCourses} →
-          </Link>
+        {/* Hero Images Section */}
+        {/* TODO: Add actual project images when available */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+          <div className="aspect-video bg-background-alt rounded-xl flex items-center justify-center border border-border overflow-hidden">
+            <img 
+              src="/images/arduino-hero-1.jpg" 
+              alt="Arduino project setup"
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                target.parentElement!.innerHTML = `
+                  <div class="flex flex-col items-center justify-center text-text-secondary p-4">
+                    <svg class="w-12 h-12 mb-2 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                    </svg>
+                    <span class="text-sm">Arduino Project</span>
+                  </div>
+                `;
+              }}
+            />
+          </div>
+          <div className="aspect-video bg-background-alt rounded-xl flex items-center justify-center border border-border overflow-hidden">
+            <img 
+              src="/images/arduino-hero-2.jpg" 
+              alt="Arduino workshop"
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                target.parentElement!.innerHTML = `
+                  <div class="flex flex-col items-center justify-center text-text-secondary p-4">
+                    <svg class="w-12 h-12 mb-2 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                    </svg>
+                    <span class="text-sm">Workshop Setup</span>
+                  </div>
+                `;
+              }}
+            />
+          </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {courses.map((course) => (
-            <Link
-              key={course.id}
-              to={`/${language}/courses/${course.slug}`}
-              className="block"
-            >
-              <Card hoverable padding="none" className="overflow-hidden h-full">
-                <div className="h-32 bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+
+        {/* Two Column Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+          {/* Left Column - Courses */}
+          <div>
+            <h2 className="text-xl font-semibold text-text mb-4">
+              {content.coursesSection}
+            </h2>
+            <div className="space-y-3">
+              {content.courses.map((course) => (
+                <Link
+                  key={course.id}
+                  to={`/${language}/courses`}
+                  className="group flex items-center justify-between p-4 bg-background rounded-xl border border-border hover:border-primary hover:shadow-sm transition-all duration-200"
+                >
+                  <div>
+                    <span className="font-semibold text-primary">{course.title}</span>
+                    <span className="text-text-secondary ml-2">– {course.subtitle}</span>
+                  </div>
                   <svg
-                    className="w-12 h-12 text-primary/60"
+                    className="w-5 h-5 text-text-secondary group-hover:text-primary transition-colors"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -115,68 +146,35 @@ export const ArduinoHomeCard: FC<ArduinoHomeCardProps> = ({ language }) => {
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
                     />
                   </svg>
-                </div>
-                <div className="p-5">
-                  <Badge variant="success" size="sm" className="mb-3">
-                    {difficultyLabels[course.difficulty as keyof typeof difficultyLabels]}
-                  </Badge>
-                  <h3 className="font-semibold text-text text-lg mb-2">
-                    {course.title}
-                  </h3>
-                  <p className="text-text-secondary text-sm mb-4 line-clamp-2">
-                    {course.description}
-                  </p>
-                  <div className="flex items-center gap-4 text-sm text-text-secondary">
-                    <span>{course.lessonCount} {content.lessons}</span>
-                    <span>~{course.estimatedHours} {content.hours}</span>
-                  </div>
-                </div>
-              </Card>
-            </Link>
-          ))}
-        </div>
-      </section>
+                </Link>
+              ))}
+            </div>
+          </div>
 
-      {/* Upcoming Labs Section */}
-      <section>
-        <h2 className="text-2xl font-bold text-text mb-6">
-          {content.upcomingLabs}
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* TODO: Replace static data with real data from backend when available */}
-          {content.labs.map((lab) => (
-            <Card key={lab.id} padding="lg" className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
-                <svg
-                  className="w-6 h-6 text-primary"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
+          {/* Right Column - Upcoming Labs */}
+          <div>
+            <h2 className="text-xl font-semibold text-text mb-4">
+              {content.upcomingLabs}
+            </h2>
+            <div className="space-y-3">
+              {/* TODO: Replace static data with real data from backend when available */}
+              {content.labs.map((lab) => (
+                <div
+                  key={lab.id}
+                  className="p-4 bg-background rounded-xl border border-border"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-                  />
-                </svg>
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-1">
-                  <h3 className="font-semibold text-text">{lab.title}</h3>
-                  <Badge variant="default" size="sm">{lab.badge}</Badge>
+                  <h3 className="font-semibold text-text mb-1">{lab.title}</h3>
+                  <p className="text-sm text-text-secondary">{lab.subtitle}</p>
                 </div>
-                <p className="text-sm text-text-secondary">{lab.subtitle}</p>
-              </div>
-            </Card>
-          ))}
+              ))}
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };

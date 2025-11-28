@@ -34,11 +34,8 @@ export const Navbar: FC<NavbarProps> = ({ theme, onToggleTheme }) => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to={`/${currentLang}`} className="flex items-center gap-2 shrink-0">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">P</span>
-            </div>
-            <span className="font-semibold text-lg text-text hidden sm:block">
-              Paradis College
+            <span className="font-semibold text-lg text-primary">
+              Arduino @ Paradis
             </span>
           </Link>
 
