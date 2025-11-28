@@ -90,7 +90,12 @@ export function getCourse(courseId: string, language: Language): CourseMeta | un
   const course = coursesManifest.find((c) => c.id === courseId);
   if (!course) return undefined;
 
-  // TODO: Add localized titles from a separate translations file
+  // TODO: This hard-coded string comparison for translations is fragile and 
+  // difficult to maintain. Better approaches:
+  // 1. Store translations in the i18n JSON files with course IDs as keys
+  // 2. Store both language versions in the coursesManifest
+  // 3. Use a translation key system (e.g., course.id + '.title')
+  // For now, this works for Phase 1 but should be refactored with backend.
   if (language === 'en') {
     return {
       ...course,

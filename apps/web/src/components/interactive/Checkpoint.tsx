@@ -40,7 +40,7 @@ export const Checkpoint: FC<CheckpointProps> = ({ id, lessonKey, label }) => {
 
   return (
     <div
-      className={`my-6 p-4 rounded-lg border-2 transition-all duration-300 ${
+      className={`relative my-6 p-4 rounded-lg border-2 transition-all duration-300 ${
         completed
           ? 'bg-success/10 border-success'
           : 'bg-surface border-border hover:border-primary'

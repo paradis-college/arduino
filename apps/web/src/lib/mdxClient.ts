@@ -29,6 +29,12 @@ export async function loadMDX(slug: string, language: Language): Promise<MDXModu
   try {
     // Dynamic import based on language and slug
     // Vite will handle code-splitting automatically
+    // 
+    // TODO: This hard-coded module mapping doesn't scale well. Each new lesson
+    // requires manual code changes. Consider:
+    // 1. Using import.meta.glob to dynamically discover MDX files
+    // 2. Generating this mapping at build time via a Vite plugin
+    // 3. Using a manifest file that's auto-generated from the content directory
     const modules: Record<string, () => Promise<MDXModule>> = {
       'ro/basics-blink': () => import('@/content/lessons/ro/basics-blink.mdx'),
       'ro/pwm-led': () => import('@/content/lessons/ro/pwm-led.mdx'),

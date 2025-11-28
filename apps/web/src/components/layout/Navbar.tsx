@@ -62,8 +62,10 @@ export const Navbar: FC<NavbarProps> = ({ theme, onToggleTheme }) => {
             {/* Login button placeholder */}
             {/* TODO: Replace with actual auth when backend is ready */}
             <button
-              className="hidden sm:inline-flex px-4 py-2 text-sm font-medium text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors duration-200"
+              className="hidden sm:inline-flex px-4 py-2 text-sm font-medium text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
               disabled
+              aria-disabled="true"
+              aria-label={`${t('common.login')} - Coming soon`}
               title="Coming soon"
             >
               {t('common.login')}
@@ -127,8 +129,10 @@ export const Navbar: FC<NavbarProps> = ({ theme, onToggleTheme }) => {
               ))}
               {/* Mobile login button */}
               <button
-                className="mt-2 px-4 py-2 text-sm font-medium text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors duration-200"
+                className="mt-2 px-4 py-2 text-sm font-medium text-primary border border-primary rounded-lg hover:bg-primary hover:text-white transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled
+                aria-disabled="true"
+                aria-label={`${t('common.login')} - Coming soon`}
                 title="Coming soon"
               >
                 {t('common.login')}
