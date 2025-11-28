@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60">
+  <circle cx="30" cy="30" r="25" fill="#00979D" />
+  <text x="30" y="40" text-anchor="middle" fill="white" font-size="24" font-family="Arial, sans-serif" font-weight="bold">A</text>
+  <text x="70" y="38" fill="currentColor" font-size="20" font-family="Inter, sans-serif" font-weight="600">Arduino Learn</text>
+</svg>

@@ -1,0 +1,148 @@
+---
+id: basics-blink
+title: "LED Blink de bază"
+course: "intro-arduino"
+difficulty: "beginner"
+tags: ["digitalWrite", "delay", "pinMode", "LED"]
+estimatedMinutes: 20
+tinkercadUrl: "https://www.tinkercad.com/things/example-blink"
+hasInteractiveExercises: true
+---
+
+# LED Blink de bază
+
+În această lecție vei învăța cum să aprinzi și să stingi un LED folosind Arduino. Este primul pas în lumea electronicii și programării cu microcontrolere!
+
+## Ce vei învăța
+
+- Cum funcționează un LED
+- Cum să folosești funcția `pinMode()`
+- Cum să folosești funcția `digitalWrite()`
+- Cum să folosești funcția `delay()`
+
+<InfoBox type="info">
+  LED-ul (Light Emitting Diode) este o componentă electronică care emite lumină când curentul electric trece prin ea.
+</InfoBox>
+
+## Componentele necesare
+
+Pentru acest proiect ai nevoie de:
+
+- 1x Arduino Uno
+- 1x LED (orice culoare)
+- 1x Rezistor 220Ω
+- Fire de conexiune
+- Breadboard
+
+## Schema de conectare
+
+Conectează LED-ul la pinul 13 al Arduino:
+
+1. Conectează piciorul lung (anodul +) al LED-ului la pinul 13
+2. Conectează piciorul scurt (catodul -) la rezistor
+3. Conectează celălalt capăt al rezistorului la GND
+
+<InfoBox type="warning">
+  Întotdeauna folosește un rezistor cu LED-ul! Fără rezistor, LED-ul poate arde.
+</InfoBox>
+
+## Simularea Tinkercad
+
+<TinkercadEmbed url="https://www.tinkercad.com/things/example-blink" title="LED Blink Simulation" />
+
+## Codul
+
+```cpp
+// Definim pinul pentru LED
+const int LED_PIN = 13;
+
+void setup() {
+  // Setăm pinul ca ieșire (OUTPUT)
+  pinMode(LED_PIN, OUTPUT);
+}
+
+void loop() {
+  // Aprindem LED-ul
+  digitalWrite(LED_PIN, HIGH);
+  
+  // Așteptăm 1 secundă (1000 milisecunde)
+  delay(1000);
+  
+  // Stingem LED-ul
+  digitalWrite(LED_PIN, LOW);
+  
+  // Așteptăm încă 1 secundă
+  delay(1000);
+}
+```
+
+## Explicația codului
+
+### `pinMode(pin, mode)`
+
+Această funcție configurează un pin ca intrare (INPUT) sau ieșire (OUTPUT).
+
+- `pin` - numărul pinului
+- `mode` - `INPUT` sau `OUTPUT`
+
+<Checkpoint id="checkpoint-1" lessonKey="ro/basics-blink" label="Am înțeles funcția pinMode()" />
+
+### `digitalWrite(pin, value)`
+
+Scrie o valoare digitală (HIGH sau LOW) pe un pin.
+
+- `HIGH` = 5V (LED aprins)
+- `LOW` = 0V (LED stins)
+
+### `delay(ms)`
+
+Oprește execuția programului pentru un număr specificat de milisecunde.
+
+<Checkpoint id="checkpoint-2" lessonKey="ro/basics-blink" label="Am înțeles funcțiile digitalWrite() și delay()" />
+
+## Exercițiu: Verifică-ți cunoștințele
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="ro/basics-blink"
+  question="Ce face funcția pinMode(13, OUTPUT)?"
+  options={[
+    { id: "a", text: "Citește valoarea de pe pinul 13" },
+    { id: "b", text: "Configurează pinul 13 ca ieșire" },
+    { id: "c", text: "Aprinde LED-ul de pe pinul 13" },
+    { id: "d", text: "Setează pinul 13 la 5V" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="ro/basics-blink"
+  question="Cât timp va sta LED-ul aprins dacă folosim delay(2000)?"
+  options={[
+    { id: "a", text: "2 secunde" },
+    { id: "b", text: "20 secunde" },
+    { id: "c", text: "0.2 secunde" },
+    { id: "d", text: "200 secunde" }
+  ]}
+  correctIndex={0}
+/>
+
+## Provocare
+
+<InfoBox type="tip">
+  Încearcă să modifici valorile din `delay()` pentru a face LED-ul să clipească mai repede sau mai încet. Ce se întâmplă dacă folosești `delay(100)`?
+</InfoBox>
+
+<Checkpoint id="checkpoint-3" lessonKey="ro/basics-blink" label="Am completat lecția!" />
+
+## Rezumat
+
+În această lecție ai învățat:
+
+- ✅ Cum să conectezi un LED la Arduino
+- ✅ Cum să configurezi un pin ca ieșire cu `pinMode()`
+- ✅ Cum să controlezi starea LED-ului cu `digitalWrite()`
+- ✅ Cum să creezi delay-uri cu `delay()`
+
+Felicitări! Ești gata să treci la următoarea lecție despre controlul PWM al LED-urilor.

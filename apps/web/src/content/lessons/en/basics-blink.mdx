@@ -1,0 +1,148 @@
+---
+id: basics-blink
+title: "Basic LED Blink"
+course: "intro-arduino"
+difficulty: "beginner"
+tags: ["digitalWrite", "delay", "pinMode", "LED"]
+estimatedMinutes: 20
+tinkercadUrl: "https://www.tinkercad.com/things/example-blink"
+hasInteractiveExercises: true
+---
+
+# Basic LED Blink
+
+In this lesson, you'll learn how to turn an LED on and off using Arduino. This is your first step into the world of electronics and microcontroller programming!
+
+## What You'll Learn
+
+- How an LED works
+- How to use the `pinMode()` function
+- How to use the `digitalWrite()` function
+- How to use the `delay()` function
+
+<InfoBox type="info">
+  An LED (Light Emitting Diode) is an electronic component that emits light when electric current passes through it.
+</InfoBox>
+
+## Required Components
+
+For this project you'll need:
+
+- 1x Arduino Uno
+- 1x LED (any color)
+- 1x 220Ω Resistor
+- Jumper wires
+- Breadboard
+
+## Wiring Diagram
+
+Connect the LED to pin 13 of the Arduino:
+
+1. Connect the long leg (anode +) of the LED to pin 13
+2. Connect the short leg (cathode -) to the resistor
+3. Connect the other end of the resistor to GND
+
+<InfoBox type="warning">
+  Always use a resistor with an LED! Without a resistor, the LED can burn out.
+</InfoBox>
+
+## Tinkercad Simulation
+
+<TinkercadEmbed url="https://www.tinkercad.com/things/example-blink" title="LED Blink Simulation" />
+
+## The Code
+
+```cpp
+// Define the pin for the LED
+const int LED_PIN = 13;
+
+void setup() {
+  // Set the pin as output
+  pinMode(LED_PIN, OUTPUT);
+}
+
+void loop() {
+  // Turn the LED on
+  digitalWrite(LED_PIN, HIGH);
+  
+  // Wait for 1 second (1000 milliseconds)
+  delay(1000);
+  
+  // Turn the LED off
+  digitalWrite(LED_PIN, LOW);
+  
+  // Wait another second
+  delay(1000);
+}
+```
+
+## Code Explanation
+
+### `pinMode(pin, mode)`
+
+This function configures a pin as either input (INPUT) or output (OUTPUT).
+
+- `pin` - the pin number
+- `mode` - `INPUT` or `OUTPUT`
+
+<Checkpoint id="checkpoint-1" lessonKey="en/basics-blink" label="I understand the pinMode() function" />
+
+### `digitalWrite(pin, value)`
+
+Writes a digital value (HIGH or LOW) to a pin.
+
+- `HIGH` = 5V (LED on)
+- `LOW` = 0V (LED off)
+
+### `delay(ms)`
+
+Pauses program execution for a specified number of milliseconds.
+
+<Checkpoint id="checkpoint-2" lessonKey="en/basics-blink" label="I understand digitalWrite() and delay()" />
+
+## Exercise: Test Your Knowledge
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/basics-blink"
+  question="What does pinMode(13, OUTPUT) do?"
+  options={[
+    { id: "a", text: "Reads the value from pin 13" },
+    { id: "b", text: "Configures pin 13 as an output" },
+    { id: "c", text: "Turns on the LED on pin 13" },
+    { id: "d", text: "Sets pin 13 to 5V" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/basics-blink"
+  question="How long will the LED stay on if we use delay(2000)?"
+  options={[
+    { id: "a", text: "2 seconds" },
+    { id: "b", text: "20 seconds" },
+    { id: "c", text: "0.2 seconds" },
+    { id: "d", text: "200 seconds" }
+  ]}
+  correctIndex={0}
+/>
+
+## Challenge
+
+<InfoBox type="tip">
+  Try changing the values in `delay()` to make the LED blink faster or slower. What happens if you use `delay(100)`?
+</InfoBox>
+
+<Checkpoint id="checkpoint-3" lessonKey="en/basics-blink" label="I completed the lesson!" />
+
+## Summary
+
+In this lesson you learned:
+
+- ✅ How to connect an LED to Arduino
+- ✅ How to configure a pin as output with `pinMode()`
+- ✅ How to control the LED state with `digitalWrite()`
+- ✅ How to create delays with `delay()`
+
+Congratulations! You're ready to move on to the next lesson about PWM LED control.

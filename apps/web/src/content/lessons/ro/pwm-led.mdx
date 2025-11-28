@@ -1,0 +1,156 @@
+---
+id: pwm-led
+title: "Control PWM pentru LED"
+course: "intro-arduino"
+difficulty: "beginner"
+tags: ["analogWrite", "PWM", "LED", "fade"]
+estimatedMinutes: 25
+tinkercadUrl: "https://www.tinkercad.com/things/example-pwm"
+hasInteractiveExercises: true
+---
+
+# Control PWM pentru LED
+
+În această lecție vei învăța cum să controlezi luminozitatea unui LED folosind PWM (Pulse Width Modulation).
+
+## Ce vei învăța
+
+- Ce este PWM și cum funcționează
+- Cum să folosești funcția `analogWrite()`
+- Cum să creezi efecte de fade (estompare)
+
+<InfoBox type="info">
+  PWM (Pulse Width Modulation) este o tehnică care permite controlul analog prin semnale digitale, variind durata impulsurilor HIGH într-un ciclu.
+</InfoBox>
+
+## Cum funcționează PWM
+
+PWM funcționează prin aprinderea și stingerea rapidă a LED-ului. Prin varierea raportului dintre timpul ON și OFF (duty cycle), ochiul nostru percepe diferite nivele de luminozitate.
+
+- **0** = LED complet stins (0% duty cycle)
+- **127** = Luminozitate la 50%
+- **255** = LED complet aprins (100% duty cycle)
+
+<Checkpoint id="checkpoint-1" lessonKey="ro/pwm-led" label="Am înțeles conceptul PWM" />
+
+## Componentele necesare
+
+- 1x Arduino Uno
+- 1x LED
+- 1x Rezistor 220Ω
+- Fire de conexiune
+- Breadboard
+
+<InfoBox type="warning">
+  PWM funcționează doar pe anumite pini ai Arduino! Pe Arduino Uno, pinii PWM sunt: 3, 5, 6, 9, 10, 11 (marcați cu ~).
+</InfoBox>
+
+## Simularea Tinkercad
+
+<TinkercadEmbed url="https://www.tinkercad.com/things/example-pwm" title="PWM LED Control" />
+
+## Codul pentru Fade
+
+```cpp
+const int LED_PIN = 9;  // Pin PWM
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+}
+
+void loop() {
+  // Fade in (de la stins la aprins)
+  for (int brightness = 0; brightness <= 255; brightness += 5) {
+    analogWrite(LED_PIN, brightness);
+    delay(30);
+  }
+  
+  // Fade out (de la aprins la stins)
+  for (int brightness = 255; brightness >= 0; brightness -= 5) {
+    analogWrite(LED_PIN, brightness);
+    delay(30);
+  }
+}
+```
+
+## Explicația codului
+
+### `analogWrite(pin, value)`
+
+Această funcție scrie o valoare PWM pe un pin.
+
+- `pin` - numărul pinului PWM (3, 5, 6, 9, 10, sau 11)
+- `value` - valoare între 0 (stins) și 255 (aprins complet)
+
+<Checkpoint id="checkpoint-2" lessonKey="ro/pwm-led" label="Am înțeles funcția analogWrite()" />
+
+### Bucla for
+
+Bucla `for` ne permite să incrementăm sau decrementăm luminozitatea gradual:
+
+```cpp
+for (int brightness = 0; brightness <= 255; brightness += 5) {
+  // Se execută pentru brightness: 0, 5, 10, 15, ... 255
+}
+```
+
+## Exerciții interactive
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="ro/pwm-led"
+  question="Ce valoare trebuie să folosești pentru analogWrite() pentru a avea LED-ul la 50% luminozitate?"
+  options={[
+    { id: "a", text: "50" },
+    { id: "b", text: "127 sau 128" },
+    { id: "c", text: "500" },
+    { id: "d", text: "255" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="ro/pwm-led"
+  question="Care dintre următorii pini NU suportă PWM pe Arduino Uno?"
+  options={[
+    { id: "a", text: "Pin 9" },
+    { id: "b", text: "Pin 11" },
+    { id: "c", text: "Pin 13" },
+    { id: "d", text: "Pin 6" }
+  ]}
+  correctIndex={2}
+/>
+
+## Exercițiu: Mapare pini
+
+<ExercisePinMapping
+  id="pin-mapping-1"
+  lessonKey="ro/pwm-led"
+  pins={["Pin 9", "GND", "5V"]}
+  components={["LED Anod (+)", "LED Catod (-)", "Neconectat"]}
+  correctMappings={[
+    { pinLabel: "Pin 9", componentLabel: "LED Anod (+)" },
+    { pinLabel: "GND", componentLabel: "LED Catod (-)" },
+    { pinLabel: "5V", componentLabel: "Neconectat" }
+  ]}
+/>
+
+## Provocare
+
+<InfoBox type="tip">
+  Încearcă să modifici viteza de fade schimbând valoarea din `delay(30)`. Ce efect produce un delay mai mic? Dar unul mai mare?
+</InfoBox>
+
+<Checkpoint id="checkpoint-3" lessonKey="ro/pwm-led" label="Am completat lecția PWM!" />
+
+## Rezumat
+
+În această lecție ai învățat:
+
+- ✅ Ce este PWM și cum simulează valori analog
+- ✅ Cum să folosești `analogWrite()` pentru a controla luminozitatea
+- ✅ Care sunt pinii PWM pe Arduino Uno
+- ✅ Cum să creezi efecte de fade folosind bucle
+
+Acum poți crea efecte vizuale mai sofisticate cu LED-urile tale!

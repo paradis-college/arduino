@@ -1,0 +1,156 @@
+---
+id: pwm-led
+title: "PWM LED Control"
+course: "intro-arduino"
+difficulty: "beginner"
+tags: ["analogWrite", "PWM", "LED", "fade"]
+estimatedMinutes: 25
+tinkercadUrl: "https://www.tinkercad.com/things/example-pwm"
+hasInteractiveExercises: true
+---
+
+# PWM LED Control
+
+In this lesson, you'll learn how to control LED brightness using PWM (Pulse Width Modulation).
+
+## What You'll Learn
+
+- What PWM is and how it works
+- How to use the `analogWrite()` function
+- How to create fade effects
+
+<InfoBox type="info">
+  PWM (Pulse Width Modulation) is a technique that allows analog control through digital signals by varying the duration of HIGH pulses in a cycle.
+</InfoBox>
+
+## How PWM Works
+
+PWM works by rapidly turning the LED on and off. By varying the ratio between ON and OFF time (duty cycle), our eyes perceive different brightness levels.
+
+- **0** = LED completely off (0% duty cycle)
+- **127** = 50% brightness
+- **255** = LED fully on (100% duty cycle)
+
+<Checkpoint id="checkpoint-1" lessonKey="en/pwm-led" label="I understand the PWM concept" />
+
+## Required Components
+
+- 1x Arduino Uno
+- 1x LED
+- 1x 220Ω Resistor
+- Jumper wires
+- Breadboard
+
+<InfoBox type="warning">
+  PWM only works on certain Arduino pins! On Arduino Uno, PWM pins are: 3, 5, 6, 9, 10, 11 (marked with ~).
+</InfoBox>
+
+## Tinkercad Simulation
+
+<TinkercadEmbed url="https://www.tinkercad.com/things/example-pwm" title="PWM LED Control" />
+
+## Fade Code
+
+```cpp
+const int LED_PIN = 9;  // PWM pin
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+}
+
+void loop() {
+  // Fade in (from off to on)
+  for (int brightness = 0; brightness <= 255; brightness += 5) {
+    analogWrite(LED_PIN, brightness);
+    delay(30);
+  }
+  
+  // Fade out (from on to off)
+  for (int brightness = 255; brightness >= 0; brightness -= 5) {
+    analogWrite(LED_PIN, brightness);
+    delay(30);
+  }
+}
+```
+
+## Code Explanation
+
+### `analogWrite(pin, value)`
+
+This function writes a PWM value to a pin.
+
+- `pin` - the PWM pin number (3, 5, 6, 9, 10, or 11)
+- `value` - value between 0 (off) and 255 (fully on)
+
+<Checkpoint id="checkpoint-2" lessonKey="en/pwm-led" label="I understand the analogWrite() function" />
+
+### The for loop
+
+The `for` loop allows us to gradually increment or decrement brightness:
+
+```cpp
+for (int brightness = 0; brightness <= 255; brightness += 5) {
+  // Executes for brightness: 0, 5, 10, 15, ... 255
+}
+```
+
+## Interactive Exercises
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/pwm-led"
+  question="What value should you use for analogWrite() to have the LED at 50% brightness?"
+  options={[
+    { id: "a", text: "50" },
+    { id: "b", text: "127 or 128" },
+    { id: "c", text: "500" },
+    { id: "d", text: "255" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/pwm-led"
+  question="Which of the following pins does NOT support PWM on Arduino Uno?"
+  options={[
+    { id: "a", text: "Pin 9" },
+    { id: "b", text: "Pin 11" },
+    { id: "c", text: "Pin 13" },
+    { id: "d", text: "Pin 6" }
+  ]}
+  correctIndex={2}
+/>
+
+## Exercise: Pin Mapping
+
+<ExercisePinMapping
+  id="pin-mapping-1"
+  lessonKey="en/pwm-led"
+  pins={["Pin 9", "GND", "5V"]}
+  components={["LED Anode (+)", "LED Cathode (-)", "Not connected"]}
+  correctMappings={[
+    { pinLabel: "Pin 9", componentLabel: "LED Anode (+)" },
+    { pinLabel: "GND", componentLabel: "LED Cathode (-)" },
+    { pinLabel: "5V", componentLabel: "Not connected" }
+  ]}
+/>
+
+## Challenge
+
+<InfoBox type="tip">
+  Try changing the fade speed by modifying the value in `delay(30)`. What effect does a smaller delay produce? What about a larger one?
+</InfoBox>
+
+<Checkpoint id="checkpoint-3" lessonKey="en/pwm-led" label="I completed the PWM lesson!" />
+
+## Summary
+
+In this lesson you learned:
+
+- ✅ What PWM is and how it simulates analog values
+- ✅ How to use `analogWrite()` to control brightness
+- ✅ Which pins are PWM capable on Arduino Uno
+- ✅ How to create fade effects using loops
+
+Now you can create more sophisticated visual effects with your LEDs!
