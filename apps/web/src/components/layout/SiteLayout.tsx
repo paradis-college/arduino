@@ -34,12 +34,15 @@ export const SiteLayout: FC<SiteLayoutProps> = ({ children, theme, onToggleTheme
             {/* Brand */}
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <span className="font-semibold text-lg text-primary">Arduino @ Paradis</span>
+                <span className="font-bold text-xl tracking-tight">
+                  <span className="text-primary">Paradis</span>
+                  <span className="text-text"> College</span>
+                </span>
               </div>
               <p className="text-text-secondary text-sm">
                 {language === 'ro'
-                  ? 'Platformă de învățare Arduino de la Paradis College'
-                  : 'Arduino learning platform by Paradis College'}
+                  ? 'Platformă de învățare Arduino'
+                  : 'Arduino Learning Platform'}
               </p>
             </div>
 
