@@ -7,24 +7,29 @@ tags: ["digitalWrite", "delay", "pinMode", "LED"]
 estimatedMinutes: 20
 tinkercadUrl: "https://www.tinkercad.com/things/example-blink"
 hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
 ---
 
 # Basic LED Blink
 
-In this lesson, you'll learn how to turn an LED on and off using Arduino. This is your first step into the world of electronics and microcontroller programming!
+<LessonIntro videoId="dQw4w9WgXcQ" videoTitle="LED Blink Tutorial">
 
-## What You'll Learn
+<KeyPoints title="What You'll Learn">
 
 - How an LED works
 - How to use the `pinMode()` function
 - How to use the `digitalWrite()` function
 - How to use the `delay()` function
 
+</KeyPoints>
+
 <InfoBox type="info">
-  An LED (Light Emitting Diode) is an electronic component that emits light when electric current passes through it.
+  An LED (Light Emitting Diode) is an electronic component that emits light when electric current passes through it. This is your first step into the world of electronics!
 </InfoBox>
 
-## Required Components
+</LessonIntro>
+
+<Chapter number={1} title="Required Components" id="required-components">
 
 For this project you'll need:
 
@@ -34,23 +39,55 @@ For this project you'll need:
 - Jumper wires
 - Breadboard
 
-## Wiring Diagram
+<InfoBox type="tip">
+  If you're using Tinkercad, all these components are available in the virtual lab!
+</InfoBox>
+
+</Chapter>
+
+<Chapter number={2} title="Wiring Diagram" id="wiring-diagram">
 
 Connect the LED to pin 13 of the Arduino:
 
-1. Connect the long leg (anode +) of the LED to pin 13
-2. Connect the short leg (cathode -) to the resistor
-3. Connect the other end of the resistor to GND
+<StepWithGif stepNumber={1} title="Connect the LED anode" gifUrl="/images/lessons/step1-led-anode.gif" gifAlt="Connecting LED anode to pin 13">
+
+Connect the **long leg (anode +)** of the LED to pin 13 on the Arduino. The anode is the positive terminal and is always the longer leg of the LED.
+
+Make sure the connection is firm and the wire is properly inserted into the breadboard holes.
+
+</StepWithGif>
+
+<StepWithGif stepNumber={2} title="Connect the LED cathode to the resistor" gifUrl="/images/lessons/step2-led-resistor.gif" gifAlt="Connecting LED cathode to resistor">
+
+Connect the **short leg (cathode -)** to the resistor. The cathode is the negative terminal and is always the shorter leg.
+
+The resistor limits the current flowing through the LED to prevent it from burning out.
+
+</StepWithGif>
+
+<StepWithGif stepNumber={3} title="Connect the resistor to GND" gifUrl="/images/lessons/step3-gnd.gif" gifAlt="Connecting resistor to ground">
+
+Connect the **other end of the resistor** to the GND (Ground) pin on the Arduino. This completes the circuit.
+
+The current will flow from pin 13, through the LED, through the resistor, and back to ground.
+
+</StepWithGif>
 
 <InfoBox type="warning">
-  Always use a resistor with an LED! Without a resistor, the LED can burn out.
+  Always use a resistor with an LED! Without a resistor, too much current can flow through the LED and permanently damage it.
 </InfoBox>
 
-## Tinkercad Simulation
+</Chapter>
+
+<Chapter number={3} title="Tinkercad Simulation" id="tinkercad-simulation">
+
+Try the circuit in Tinkercad before building it with real components:
 
 <TinkercadEmbed url="https://www.tinkercad.com/things/example-blink" title="LED Blink Simulation" />
 
-## The Code
+</Chapter>
+
+<Chapter number={4} title="The Code" id="the-code">
 
 ```cpp
 // Define the pin for the LED
@@ -76,9 +113,7 @@ void loop() {
 }
 ```
 
-## Code Explanation
-
-### `pinMode(pin, mode)`
+### Understanding `pinMode(pin, mode)`
 
 This function configures a pin as either input (INPUT) or output (OUTPUT).
 
@@ -87,20 +122,22 @@ This function configures a pin as either input (INPUT) or output (OUTPUT).
 
 <Checkpoint id="checkpoint-1" lessonKey="en/basics-blink" label="I understand the pinMode() function" />
 
-### `digitalWrite(pin, value)`
+### Understanding `digitalWrite(pin, value)`
 
 Writes a digital value (HIGH or LOW) to a pin.
 
 - `HIGH` = 5V (LED on)
 - `LOW` = 0V (LED off)
 
-### `delay(ms)`
+### Understanding `delay(ms)`
 
 Pauses program execution for a specified number of milliseconds.
 
 <Checkpoint id="checkpoint-2" lessonKey="en/basics-blink" label="I understand digitalWrite() and delay()" />
 
-## Exercise: Test Your Knowledge
+</Chapter>
+
+<Chapter number={5} title="Test Your Knowledge" id="test-your-knowledge">
 
 <ExerciseMultipleChoice
   id="quiz-1"
@@ -128,7 +165,9 @@ Pauses program execution for a specified number of milliseconds.
   correctIndex={0}
 />
 
-## Challenge
+</Chapter>
+
+<Chapter number={6} title="Challenge" id="challenge">
 
 <InfoBox type="tip">
   Try changing the values in `delay()` to make the LED blink faster or slower. What happens if you use `delay(100)`?
@@ -136,7 +175,9 @@ Pauses program execution for a specified number of milliseconds.
 
 <Checkpoint id="checkpoint-3" lessonKey="en/basics-blink" label="I completed the lesson!" />
 
-## Summary
+</Chapter>
+
+<Chapter number={7} title="Summary" id="summary">
 
 In this lesson you learned:
 
@@ -146,3 +187,5 @@ In this lesson you learned:
 - ✅ How to create delays with `delay()`
 
 Congratulations! You're ready to move on to the next lesson about PWM LED control.
+
+</Chapter>

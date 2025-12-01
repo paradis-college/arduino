@@ -3,13 +3,25 @@ import { useState, useEffect, Suspense } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
 import { MDXProvider } from '@mdx-js/react';
 import { useLanguage } from '@/i18n';
-import { getLesson, getAdjacentLessons } from '@/lib/lessonsManifest';
+import { getLesson, getAdjacentLessons, getCourse } from '@/lib/lessonsManifest';
 import { loadMDX } from '@/lib/mdxClient';
 import { getProjectsForLesson } from '@/lib/mockProjects';
 import { LessonHeader, LessonOutline, LessonFooterBiscuits } from '@/components/lessons';
-import { InfoBox, Checkpoint, TinkercadEmbed, ExerciseMultipleChoice, ExercisePinMapping } from '@/components/interactive';
-import { Button, Card } from '@/components/common';
+import { 
+  InfoBox, 
+  Checkpoint, 
+  TinkercadEmbed, 
+  ExerciseMultipleChoice, 
+  ExercisePinMapping,
+  YouTubeEmbed,
+  LessonIntro,
+  Chapter,
+  StepWithGif,
+  KeyPoints
+} from '@/components/interactive';
+import { Button, Card, Breadcrumbs } from '@/components/common';
 import type { Language, OutlineHeading } from '@/lib/types';
+import type { BreadcrumbItem } from '@/components/common/Breadcrumbs';
 
 // MDX components mapping - cast to satisfy MDXProvider's expected type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -19,6 +31,11 @@ const mdxComponents: Record<string, ComponentType<any>> = {
   TinkercadEmbed,
   ExerciseMultipleChoice,
   ExercisePinMapping,
+  YouTubeEmbed,
+  LessonIntro,
+  Chapter,
+  StepWithGif,
+  KeyPoints,
   // Add more components as needed
 };
 
@@ -41,6 +58,9 @@ export const LessonPage: FC = () => {
   const lesson = getLesson(lessonSlug, currentLang);
   const { prev, next } = getAdjacentLessons(lessonSlug, currentLang);
   const relatedProjects = getProjectsForLesson(lessonSlug);
+  
+  // Get course info for breadcrumbs
+  const course = lesson ? getCourse(lesson.course, currentLang) : undefined;
 
   // Load MDX content
   useEffect(() => {
@@ -87,10 +107,28 @@ export const LessonPage: FC = () => {
   // TODO: Calculate from MDX content
   const totalCheckpoints = 3;
 
+  // Build breadcrumb items
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { label: t('common.home'), href: `/${currentLang}` },
+    { label: t('common.courses'), href: `/${currentLang}/courses` },
+  ];
+  
+  if (course) {
+    breadcrumbItems.push({ 
+      label: course.title, 
+      href: `/${currentLang}/courses/${lesson.course}` 
+    });
+  }
+  
+  breadcrumbItems.push({ label: lesson.title });
+
   return (
     <div className="flex gap-8">
       {/* Main content */}
       <div className="flex-1 min-w-0">
+        {/* Breadcrumbs */}
+        <Breadcrumbs items={breadcrumbItems} />
+        
         {/* Header */}
         <LessonHeader lesson={lesson} totalCheckpoints={totalCheckpoints} />
 

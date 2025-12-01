@@ -55,7 +55,9 @@
     "outline": "Outline",
     "nextLesson": "Next lesson",
     "previousLesson": "Previous lesson",
-    "communityProjects": "Community Projects"
+    "communityProjects": "Community Projects",
+    "keyPoints": "Key Points",
+    "watchVideo": "Watch the video"
   },
   "exercise": {
     "checkAnswer": "Check Answer",
