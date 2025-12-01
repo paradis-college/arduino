@@ -12,14 +12,14 @@ export interface YouTubeEmbedProps {
 export const YouTubeEmbed: FC<YouTubeEmbedProps> = ({ videoId, title = 'YouTube video' }) => {
   // Support both full URLs and video IDs
   const extractVideoId = (input: string): string => {
-    // If it's already just an ID (11 characters, alphanumeric with - and _)
-    if (/^[a-zA-Z0-9_-]{11}$/.test(input)) {
+    // If it looks like a video ID (alphanumeric with - and _), use as-is
+    if (/^[a-zA-Z0-9_-]+$/.test(input) && !input.includes('.')) {
       return input;
     }
     
     // Try to extract from URL
     const patterns = [
-      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]+)/,
     ];
     
     for (const pattern of patterns) {

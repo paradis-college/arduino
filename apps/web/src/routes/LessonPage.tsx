@@ -116,7 +116,7 @@ export const LessonPage: FC = () => {
   if (course) {
     breadcrumbItems.push({ 
       label: course.title, 
-      href: `/${currentLang}/courses/${lesson.course}` 
+      href: `/${currentLang}/courses/${course.slug}` 
     });
   }
   

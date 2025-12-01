@@ -39,17 +39,21 @@ export const Breadcrumbs: FC<BreadcrumbsProps> = ({ items }) => {
                   />
                 </svg>
               )}
-              {isLast || !item.href ? (
-                <span className={isLast ? 'text-text font-medium' : 'text-text-secondary'}>
+              {isLast ? (
+                <span className="text-text font-medium">
                   {item.label}
                 </span>
-              ) : (
+              ) : item.href ? (
                 <Link
                   to={item.href}
                   className="text-text-secondary hover:text-primary transition-colors duration-200"
                 >
                   {item.label}
                 </Link>
+              ) : (
+                <span className="text-text-secondary">
+                  {item.label}
+                </span>
               )}
             </li>
           );

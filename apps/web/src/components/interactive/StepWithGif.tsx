@@ -19,6 +19,14 @@ export const StepWithGif: FC<StepWithGifProps> = ({
   gifAlt,
   children 
 }) => {
+  const hasGif = Boolean(gifUrl);
+  const containerClasses = hasGif 
+    ? 'grid grid-cols-1 md:grid-cols-2 gap-4 items-start' 
+    : '';
+  const textClasses = hasGif 
+    ? 'text-text-secondary text-sm leading-relaxed' 
+    : 'text-text-secondary text-sm leading-relaxed w-full';
+
   return (
     <div className="my-6 p-4 bg-surface rounded-lg border border-border">
       {/* Step header */}
@@ -30,7 +38,7 @@ export const StepWithGif: FC<StepWithGifProps> = ({
       </div>
 
       {/* Content: GIF on top/left, explanation below/right */}
-      <div className={`${gifUrl ? 'grid grid-cols-1 md:grid-cols-2 gap-4 items-start' : ''}`}>
+      <div className={containerClasses}>
         {/* GIF/Image */}
         {gifUrl && (
           <div className="rounded-lg overflow-hidden border border-border bg-background-alt">
@@ -44,7 +52,7 @@ export const StepWithGif: FC<StepWithGifProps> = ({
         )}
         
         {/* Detailed explanation */}
-        <div className={`text-text-secondary text-sm leading-relaxed ${!gifUrl ? 'w-full' : ''}`}>
+        <div className={textClasses}>
           {children}
         </div>
       </div>
