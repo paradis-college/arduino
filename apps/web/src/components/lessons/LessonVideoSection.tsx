@@ -1,4 +1,5 @@
 import type { FC, ReactNode } from 'react';
+import { useLanguage } from '@/i18n';
 import { YouTubeEmbed } from '@/components/interactive';
 
 export interface KeyPoint {
@@ -27,6 +28,8 @@ export const LessonVideoSection: FC<LessonVideoSectionProps> = ({
   keyPoints = [],
   children,
 }) => {
+  const { t } = useLanguage();
+
   return (
     <section className="my-8 bg-surface rounded-xl border border-border overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
@@ -47,7 +50,7 @@ export const LessonVideoSection: FC<LessonVideoSectionProps> = ({
                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            Key Points
+            {t('lesson.keyPoints')}
           </h3>
 
           {keyPoints.length > 0 && (
