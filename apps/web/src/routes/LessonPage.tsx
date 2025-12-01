@@ -117,6 +117,15 @@ export const LessonPage: FC = () => {
         {/* Header */}
         <LessonHeader lesson={lesson} totalCheckpoints={totalCheckpoints} />
 
+        {/* Video Section - automatically shown if lesson has youtubeUrl */}
+        {lesson.youtubeUrl && (
+          <LessonVideoSection
+            youtubeUrl={lesson.youtubeUrl}
+            videoTitle={lesson.title}
+            keyPoints={lesson.keyPoints}
+          />
+        )}
+
         {/* Content */}
         <div className="mdx-content">
           {loading ? (

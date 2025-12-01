@@ -1,11 +1,7 @@
 import type { FC, ReactNode } from 'react';
 import { useLanguage } from '@/i18n';
 import { YouTubeEmbed } from '@/components/interactive';
-
-export interface KeyPoint {
-  title: string;
-  description?: string;
-}
+import type { LessonKeyPoint } from '@/lib/types';
 
 export interface LessonVideoSectionProps {
   /** YouTube video URL or video ID */
@@ -13,7 +9,7 @@ export interface LessonVideoSectionProps {
   /** Video title */
   videoTitle?: string;
   /** Key points from the video displayed on the left */
-  keyPoints?: KeyPoint[];
+  keyPoints?: LessonKeyPoint[];
   /** Optional additional content to show in the explanations section */
   children?: ReactNode;
 }

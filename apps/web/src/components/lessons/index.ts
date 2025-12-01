@@ -14,4 +14,4 @@ export { GifStep } from './GifStep';
 export type { GifStepProps } from './GifStep';
 
 export { LessonVideoSection } from './LessonVideoSection';
-export type { LessonVideoSectionProps, KeyPoint } from './LessonVideoSection';
+export type { LessonVideoSectionProps } from './LessonVideoSection';
