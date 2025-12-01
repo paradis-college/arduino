@@ -12,3 +12,6 @@ export type { ExerciseMultipleChoiceProps } from './ExerciseMultipleChoice';
 
 export { ExercisePinMapping } from './ExercisePinMapping';
 export type { ExercisePinMappingProps } from './ExercisePinMapping';
+
+export { YouTubeEmbed } from './YouTubeEmbed';
+export type { YouTubeEmbedProps } from './YouTubeEmbed';

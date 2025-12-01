@@ -9,3 +9,6 @@ export type { BadgeProps } from './Badge';
 
 export { ProgressBar } from './ProgressBar';
 export type { ProgressBarProps } from './ProgressBar';
+
+export { Breadcrumbs } from './Breadcrumbs';
+export type { BreadcrumbsProps, BreadcrumbItem } from './Breadcrumbs';
