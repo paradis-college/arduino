@@ -1,0 +1,1 @@
+export { burglarAlarmSketch } from './burglarAlarm';

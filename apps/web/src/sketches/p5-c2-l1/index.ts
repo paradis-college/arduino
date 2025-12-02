@@ -1,0 +1,1 @@
+export { irRemoteSketch } from './irRemote';
