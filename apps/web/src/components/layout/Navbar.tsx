@@ -23,6 +23,7 @@ export const Navbar: FC<NavbarProps> = ({ theme, onToggleTheme }) => {
 
   const navItems = [
     { key: 'home', labelKey: 'common.home', path: `/${currentLang}` },
+    { key: 'paths', labelKey: 'common.paths', path: `/${currentLang}/paths` },
     { key: 'courses', labelKey: 'common.courses', path: `/${currentLang}/courses` },
     { key: 'projects', labelKey: 'common.projects', path: `/${currentLang}/projects` },
     { key: 'community', labelKey: 'common.community', path: `/${currentLang}/community` },

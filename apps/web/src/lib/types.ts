@@ -46,6 +46,19 @@ export interface CourseMeta {
   estimatedHours: number;
   tags: string[];
   thumbnail?: string;
+  pathId?: string;
+  order?: number;
+}
+
+/** Path metadata - represents a learning path containing multiple courses */
+export interface PathMeta {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  icon?: string;
+  courseCount: number;
+  order: number;
 }
 
 /** State for a single checkpoint */

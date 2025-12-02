@@ -4,6 +4,7 @@ import { useParams, Navigate, Link } from 'react-router-dom';
 import { MDXProvider } from '@mdx-js/react';
 import { useLanguage } from '@/i18n';
 import { getLesson, getAdjacentLessons, getCourse } from '@/lib/lessonsManifest';
+import { getPath } from '@/lib/pathsManifest';
 import { loadMDX } from '@/lib/mdxClient';
 import { getProjectsForLesson } from '@/lib/mockProjects';
 import { LessonHeader, LessonOutline, LessonFooterBiscuits, LessonChapter, GifStep, LessonVideoSection } from '@/components/lessons';
@@ -47,8 +48,9 @@ export const LessonPage: FC = () => {
   const { prev, next } = getAdjacentLessons(lessonSlug, currentLang);
   const relatedProjects = getProjectsForLesson(lessonSlug);
   
-  // Get course info for breadcrumbs
+  // Get course and path info for breadcrumbs
   const course = lesson ? getCourse(lesson.course, currentLang) : undefined;
+  const path = course?.pathId ? getPath(course.pathId, currentLang) : undefined;
 
   // Load MDX content
   useEffect(() => {
@@ -98,8 +100,15 @@ export const LessonPage: FC = () => {
   // Build breadcrumb items
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: t('common.home'), href: `/${currentLang}` },
-    { label: t('common.courses'), href: `/${currentLang}/courses` },
+    { label: t('paths.title'), href: `/${currentLang}/paths` },
   ];
+  
+  if (path) {
+    breadcrumbItems.push({ 
+      label: path.title, 
+      href: `/${currentLang}/paths/${path.slug}` 
+    });
+  }
   
   if (course) {
     breadcrumbItems.push({ 
