@@ -20,17 +20,17 @@ export const Button: FC<ButtonProps> = ({
   ...props
 }) => {
   const baseClasses =
-    'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed';
+    'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed';
 
   const variantClasses = {
     primary:
-      'bg-primary text-white hover:bg-primary-hover focus:ring-primary',
+      'bg-primary text-white hover:bg-primary-hover focus:ring-primary disabled:bg-primary/50 disabled:text-white/80',
     secondary:
-      'bg-secondary text-white hover:opacity-90 focus:ring-secondary',
+      'bg-secondary text-white hover:opacity-90 focus:ring-secondary disabled:bg-secondary/50 disabled:text-white/80',
     outline:
-      'border-2 border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary',
+      'border-2 border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary disabled:border-primary/50 disabled:text-primary/50',
     ghost:
-      'text-text-secondary hover:bg-surface-hover focus:ring-primary',
+      'text-text-secondary hover:bg-surface-hover focus:ring-primary disabled:text-text-secondary/50',
   };
 
   const sizeClasses = {
