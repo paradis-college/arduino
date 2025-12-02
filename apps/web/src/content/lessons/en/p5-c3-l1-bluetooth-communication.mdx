@@ -26,6 +26,33 @@ In this lesson, you'll learn how to add wireless Bluetooth communication to your
 
 </LessonChapter>
 
+<GifStep
+  stepNumber={1}
+  title="Wire HC-05 Module"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=BT+Wire+GIF"
+  alt="Wiring Bluetooth module"
+>
+  Connect HC-05: VCC to 5V, GND to ground, **TXD** to Arduino RX (pin 0), **RXD** to TX (pin 1) through voltage divider.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Pair with Phone"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=BT+Pair+GIF"
+  alt="Pairing Bluetooth"
+>
+  Search for HC-05 in phone Bluetooth settings. Default PIN is usually **1234** or **0000**. LED changes from fast blink to slow.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Send Commands from App"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=BT+App+GIF"
+  alt="Using Bluetooth app"
+>
+  Use a Bluetooth terminal app to send text commands. Arduino receives via Serial.read() and responds to commands.
+</GifStep>
+
 <LessonChapter title="Bluetooth Modules" id="bluetooth-modules">
 
 ### HC-05 vs HC-06

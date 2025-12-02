@@ -26,6 +26,33 @@ In this lesson, you'll learn how `delay()` works, its impact on responsiveness, 
 
 </LessonChapter>
 
+<GifStep
+  stepNumber={1}
+  title="Test delay() Behavior"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Delay+Test+GIF"
+  alt="Testing delay function"
+>
+  Upload a simple blink with **delay(1000)**. During the delay, try pressing a button - notice the Arduino ignores it.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Visualize Blocking"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Delay+Block+GIF"
+  alt="Visualizing blocking"
+>
+  The CPU does nothing during delay(). This blocks ALL other code from running - buttons, sensors, everything waits.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Preview millis() Solution"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Millis+Preview+GIF"
+  alt="millis preview"
+>
+  With **millis()**, you can track time without blocking. The loop keeps running, checking if enough time has passed.
+</GifStep>
+
 <LessonChapter title="How delay() Works" id="how-delay-works">
 
 ### Blocking Behavior

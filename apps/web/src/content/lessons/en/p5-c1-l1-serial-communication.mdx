@@ -26,6 +26,33 @@ In this lesson, you'll learn how Arduino communicates with your computer via ser
 
 </LessonChapter>
 
+<GifStep
+  stepNumber={1}
+  title="Initialize Serial"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Serial+Init+GIF"
+  alt="Initializing serial"
+>
+  Add **Serial.begin(9600)** in setup(). This starts communication at 9600 baud (bits per second).
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Send Data to Computer"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Serial+Send+GIF"
+  alt="Sending serial data"
+>
+  Use **Serial.print()** or **Serial.println()** to send text. Open Serial Monitor to see the output.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Receive Commands"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Serial+Receive+GIF"
+  alt="Receiving serial commands"
+>
+  Use **Serial.available()** to check for data, then **Serial.read()** to get characters. Type in Serial Monitor to send.
+</GifStep>
+
 <LessonChapter title="Serial Basics" id="serial-basics">
 
 ### Setting Up Serial

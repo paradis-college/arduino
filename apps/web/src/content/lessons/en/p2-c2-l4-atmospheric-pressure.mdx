@@ -26,6 +26,33 @@ In this lesson, you'll learn how to use barometric pressure sensors to measure a
 
 </LessonChapter>
 
+<GifStep
+  stepNumber={1}
+  title="Connect I2C Pins"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=BMP+I2C+GIF"
+  alt="Connecting I2C pins"
+>
+  Connect **SDA** to A4 and **SCL** to A5 on Arduino Uno. These are the I2C communication pins.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Power the Sensor"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=BMP+Power+GIF"
+  alt="Powering BMP sensor"
+>
+  Connect **VCC** to 3.3V and **GND** to ground. Most BMP/BME modules have an onboard regulator for 5V tolerance.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Install and Test Library"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=BMP+Test+GIF"
+  alt="Testing BMP library"
+>
+  Install **Adafruit BMP280** or **BME280** library. Run the example sketch to see pressure, temperature, and altitude.
+</GifStep>
+
 <LessonChapter title="Sensor Options" id="sensor-options">
 
 ### Common Sensors

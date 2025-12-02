@@ -26,6 +26,33 @@ In this lesson, you'll learn how to use a potentiometer to provide variable anal
 
 </LessonChapter>
 
+<GifStep
+  stepNumber={1}
+  title="Wire the Potentiometer"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Pot+Wire+GIF"
+  alt="Wiring potentiometer"
+>
+  Connect left pin to GND, right pin to 5V, and **middle pin** (wiper) to analog pin A0.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Read Analog Value"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Pot+Read+GIF"
+  alt="Reading analog value"
+>
+  Use **analogRead(A0)** to get a value from **0 to 1023**. Turn the knob and watch values change in Serial Monitor.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Map to LED Brightness"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Pot+Map+GIF"
+  alt="Mapping to LED"
+>
+  Use **map(val, 0, 1023, 0, 255)** to convert potentiometer range to PWM range. Control LED brightness with the knob!
+</GifStep>
+
 <LessonChapter title="Potentiometer Basics" id="potentiometer-basics">
 
 ### How It Works

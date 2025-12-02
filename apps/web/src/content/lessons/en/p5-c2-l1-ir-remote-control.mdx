@@ -26,6 +26,33 @@ In this lesson, you'll learn how to decode IR remote signals and use them to con
 
 </LessonChapter>
 
+<GifStep
+  stepNumber={1}
+  title="Connect IR Receiver"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=IR+Control+Receiver+GIF"
+  alt="Connecting IR receiver"
+>
+  Wire VS1838B or similar receiver: VCC to 5V, GND to ground, OUT to pin 11.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Decode Button Codes"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=IR+Control+Decode+GIF"
+  alt="Decoding button codes"
+>
+  Upload IRremote example sketch. Press remote buttons and note the hex codes shown in Serial Monitor.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Map Codes to Actions"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=IR+Control+Map+GIF"
+  alt="Mapping codes to actions"
+>
+  Create switch/case statements: each hex code triggers a different action like toggling an LED or changing motor speed.
+</GifStep>
+
 <LessonChapter title="Hardware Setup" id="hardware-setup">
 
 ### Components

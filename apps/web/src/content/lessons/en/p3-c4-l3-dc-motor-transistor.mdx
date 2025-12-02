@@ -26,6 +26,33 @@ In this lesson, you'll learn how to control a DC motor using a transistor and PW
 
 </LessonChapter>
 
+<GifStep
+  stepNumber={1}
+  title="Wire the Transistor"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Motor+Transistor+GIF"
+  alt="Wiring transistor"
+>
+  Connect NPN transistor: Base to pin 9 through 1kΩ resistor, Collector to motor negative, Emitter to GND.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Add Flyback Diode"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Motor+Diode+GIF"
+  alt="Adding flyback diode"
+>
+  Connect diode across motor terminals (cathode to +, anode to -). This protects against voltage spikes when motor stops.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Control Speed with PWM"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Motor+PWM+GIF"
+  alt="PWM motor control"
+>
+  Use **analogWrite(9, speed)** to control motor speed from 0 (stopped) to 255 (full speed).
+</GifStep>
+
 <LessonChapter title="Why Use a Transistor?" id="why-transistor">
 
 ### Arduino Pin Limitations

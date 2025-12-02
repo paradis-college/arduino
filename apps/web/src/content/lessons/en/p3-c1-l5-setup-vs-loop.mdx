@@ -26,6 +26,33 @@ In this lesson, you'll understand the fundamental structure of every Arduino pro
 
 </LessonChapter>
 
+<GifStep
+  stepNumber={1}
+  title="Add Serial.begin to setup()"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Setup+Serial+GIF"
+  alt="Serial begin in setup"
+>
+  Put **Serial.begin(9600)** in setup(). This runs once to initialize communication at the start.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Add Print to loop()"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Loop+Print+GIF"
+  alt="Print in loop"
+>
+  Add **Serial.println("Loop!")** in loop(). Open Serial Monitor to see this message repeat continuously.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Observe the Difference"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Setup+Loop+Diff+GIF"
+  alt="Setup vs loop difference"
+>
+  setup() code appears once at start. loop() code repeats forever. This is the foundation of every Arduino program!
+</GifStep>
+
 <LessonChapter title="The setup() Function" id="setup-function">
 
 ### Runs Once at Power-On

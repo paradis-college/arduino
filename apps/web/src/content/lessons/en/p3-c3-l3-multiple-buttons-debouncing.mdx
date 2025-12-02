@@ -26,6 +26,33 @@ In this lesson, you'll learn how to handle multiple buttons and eliminate the "b
 
 </LessonChapter>
 
+<GifStep
+  stepNumber={1}
+  title="Wire Multiple Buttons"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Multi+Button+GIF"
+  alt="Wiring multiple buttons"
+>
+  Connect 3 buttons to pins 2, 3, and 4 using INPUT_PULLUP. Each button connects its pin to GND when pressed.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Observe Button Bounce"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Button+Bounce+GIF"
+  alt="Button bounce noise"
+>
+  Without debouncing, one button press may register as multiple presses due to mechanical contact bounce.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Implement Software Debounce"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Debounce+Code+GIF"
+  alt="Debounce implementation"
+>
+  Use a small delay (50ms) after detecting a press, or use the **Bounce2** library for cleaner debouncing.
+</GifStep>
+
 <LessonChapter title="Multiple Button Inputs" id="multiple-buttons">
 
 ### Wiring Multiple Buttons

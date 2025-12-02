@@ -26,6 +26,33 @@ In this lesson, you'll learn how PWM (Pulse Width Modulation) allows you to cont
 
 </LessonChapter>
 
+<GifStep
+  stepNumber={1}
+  title="Wire LED to PWM Pin"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=PWM+Wire+GIF"
+  alt="Wiring LED to PWM pin"
+>
+  Connect LED anode through 220Ω resistor to pin **9** (or any PWM pin marked with ~). Connect cathode to GND.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Understand PWM Values"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=PWM+Values+GIF"
+  alt="PWM value range"
+>
+  analogWrite accepts values from **0** (off) to **255** (full brightness). 127 gives 50% brightness.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Create Fade Loop"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=PWM+Fade+GIF"
+  alt="Creating fade effect"
+>
+  Upload the fade code and watch the LED smoothly transition from dim to bright and back in a continuous loop.
+</GifStep>
+
 <LessonChapter title="What is PWM?" id="what-is-pwm">
 
 ### Pulse Width Modulation

@@ -26,6 +26,33 @@ In this lesson, you'll learn how MQ gas sensors work and how to build simple air
 
 </LessonChapter>
 
+<GifStep
+  stepNumber={1}
+  title="Mount the MQ Sensor"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=MQ+Mount+GIF"
+  alt="Mounting MQ sensor"
+>
+  The MQ sensor module has 4 pins: **VCC**, **GND**, **AO** (analog), and **DO** (digital). Mount it on a breadboard.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Connect Power and Signal"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=MQ+Wiring+GIF"
+  alt="Wiring MQ sensor"
+>
+  Connect **VCC** to 5V, **GND** to ground, and **AO** to an analog pin (A0). The sensor needs 5V for the heater.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Wait for Warm-Up"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=MQ+Warmup+GIF"
+  alt="MQ sensor warm-up"
+>
+  Allow **2-5 minutes** for the sensor to heat up. Initial readings will drift until stable. Check the datasheet for your specific MQ model.
+</GifStep>
+
 <LessonChapter title="MQ Sensor Types" id="mq-sensor-types">
 
 ### Common MQ Sensors

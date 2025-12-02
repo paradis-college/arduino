@@ -27,6 +27,33 @@ In this project, you'll build a motion-detecting security alarm with armed/trigg
 
 </LessonChapter>
 
+<GifStep
+  stepNumber={1}
+  title="Connect PIR Sensor"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Alarm+PIR+GIF"
+  alt="Connecting PIR sensor"
+>
+  Wire PIR sensor to pin 2. Position it to cover the area you want to monitor for motion.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Add Buzzer and LED"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Alarm+Output+GIF"
+  alt="Adding alarm outputs"
+>
+  Connect buzzer to pin 8 and alert LED to pin 13. These activate when motion is detected in armed state.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Add Arm/Disarm Button"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Alarm+Button+GIF"
+  alt="Arm/disarm button"
+>
+  Wire button to pin 3 with INPUT_PULLUP. Press to toggle between armed and disarmed states.
+</GifStep>
+
 <LessonChapter title="Components Needed" id="components-needed">
 
 - Arduino Uno

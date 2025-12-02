@@ -26,6 +26,33 @@ In this project, you'll build a smart plant monitoring system that tracks soil m
 
 </LessonChapter>
 
+<GifStep
+  stepNumber={1}
+  title="Connect Moisture Sensor"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Plant+Sensor+GIF"
+  alt="Connecting moisture sensor"
+>
+  Wire soil moisture sensor to A0. Insert probes into plant soil at root level.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Add Status LEDs"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Plant+LED+GIF"
+  alt="Adding status LEDs"
+>
+  Connect 3 LEDs: Green (moist), Yellow (getting dry), Red (needs water) to pins 9, 10, 11.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Set Thresholds"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Plant+Threshold+GIF"
+  alt="Setting thresholds"
+>
+  Calibrate thresholds by testing dry and wet soil. Typical ranges: <300 (wet), 300-600 (ok), >600 (dry).
+</GifStep>
+
 <LessonChapter title="Components Needed" id="components-needed">
 
 - Arduino Uno

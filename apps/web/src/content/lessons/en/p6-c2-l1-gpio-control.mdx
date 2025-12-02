@@ -26,6 +26,33 @@ In this lesson, you'll learn how to control Raspberry Pi's GPIO pins for simple 
 
 </LessonChapter>
 
+<GifStep
+  stepNumber={1}
+  title="Identify GPIO Pins"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=GPIO+Pins+GIF"
+  alt="GPIO pin identification"
+>
+  Pi has 40 pins. Use **pinout** command in terminal or reference diagrams. BCM numbering (GPIO17) differs from physical (pin 11).
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Wire LED to GPIO"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=GPIO+LED+GIF"
+  alt="Wiring LED to GPIO"
+>
+  Connect LED anode through 330Ω resistor to **GPIO17** (pin 11). Connect cathode to **GND** (pin 6 or 9).
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Blink with Python"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=GPIO+Python+GIF"
+  alt="Python GPIO blink"
+>
+  Create a Python script using **gpiozero**: `from gpiozero import LED; led = LED(17); led.blink()`
+</GifStep>
+
 <LessonChapter title="GPIO Pin Numbering" id="gpio-numbering">
 
 ### Two Numbering Schemes

@@ -26,6 +26,33 @@ In this lesson, you'll learn how to make sounds with buzzers - from simple beeps
 
 </LessonChapter>
 
+<GifStep
+  stepNumber={1}
+  title="Connect the Buzzer"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Buzzer+Connect+GIF"
+  alt="Connecting buzzer"
+>
+  Connect buzzer positive (+) to pin 8 and negative (-) to GND. Passive buzzers need tone(), active buzzers just need HIGH/LOW.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Play Simple Tones"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Buzzer+Tone+GIF"
+  alt="Playing tones"
+>
+  Use **tone(8, 440)** to play 440Hz (note A). Use **tone(8, 523)** for C. **noTone(8)** stops the sound.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Create a Melody"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Buzzer+Melody+GIF"
+  alt="Playing melody"
+>
+  Store note frequencies in an array. Loop through and play each note with appropriate duration for a simple tune.
+</GifStep>
+
 <LessonChapter title="Buzzer Types" id="buzzer-types">
 
 ### Active Buzzer

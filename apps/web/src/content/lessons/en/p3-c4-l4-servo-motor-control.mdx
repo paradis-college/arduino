@@ -26,6 +26,33 @@ In this lesson, you'll learn how to control servo motors for precise angular pos
 
 </LessonChapter>
 
+<GifStep
+  stepNumber={1}
+  title="Connect Servo Wires"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Servo+Connect+GIF"
+  alt="Connecting servo"
+>
+  Connect servo wires: **Red** to 5V, **Brown/Black** to GND, **Orange/Yellow** (signal) to pin 9.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Include Servo Library"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Servo+Library+GIF"
+  alt="Using Servo library"
+>
+  Add **#include <Servo.h>** at the top. Create servo object with **Servo myServo;** and attach with **myServo.attach(9);**
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Control Angle"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Servo+Angle+GIF"
+  alt="Controlling servo angle"
+>
+  Use **myServo.write(90)** to move to 90 degrees. Valid range is **0-180 degrees** for most hobby servos.
+</GifStep>
+
 <LessonChapter title="Servo vs DC Motor" id="servo-vs-dc">
 
 ### DC Motor

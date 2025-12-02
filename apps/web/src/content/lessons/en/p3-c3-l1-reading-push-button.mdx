@@ -26,6 +26,33 @@ In this lesson, you'll learn how to connect and read a push button to control LE
 
 </LessonChapter>
 
+<GifStep
+  stepNumber={1}
+  title="Wire Button with Pull-Down"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Button+Pulldown+GIF"
+  alt="Button with pull-down"
+>
+  Connect button between 5V and pin 7. Add a 10kΩ resistor from pin 7 to GND. This creates a pull-down configuration.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Or Use INPUT_PULLUP"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Button+Pullup+GIF"
+  alt="Using INPUT_PULLUP"
+>
+  Simpler option: connect button between pin 7 and GND. Use **pinMode(7, INPUT_PULLUP)** for internal pull-up.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Read Button State"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Button+Read+GIF"
+  alt="Reading button state"
+>
+  Use **digitalRead(7)** to get button state. With INPUT_PULLUP, pressed = LOW, released = HIGH (inverted!).
+</GifStep>
+
 <LessonChapter title="Button Wiring" id="button-wiring">
 
 ### The Floating Pin Problem
