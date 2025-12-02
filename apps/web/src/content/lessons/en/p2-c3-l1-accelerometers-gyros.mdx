@@ -1,0 +1,177 @@
+---
+id: p2-c3-l1-accelerometers-gyros
+title: "Accelerometers & Gyros"
+course: "consumer-electronics-sensors"
+difficulty: "intermediate"
+tags: ["accelerometer", "gyroscope", "IMU", "tilt", "I2C", "MPU6050"]
+estimatedMinutes: 35
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Accelerometers & Gyros
+
+In this lesson, you'll learn how accelerometers and gyroscopes measure motion and orientation, enabling tilt detection and motion sensing.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Tilt switch basics as introduction
+- Accelerometer axes and measurements
+- Basic orientation reading
+- Gyroscope rotation sensing
+
+<InfoBox type="info">
+  IMU (Inertial Measurement Unit) sensors combine accelerometers and gyroscopes to track motion in 3D space - used in phones, drones, and game controllers!
+</InfoBox>
+
+</LessonChapter>
+
+<GifStep
+  stepNumber={1}
+  title="Wire the MPU6050"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=MPU+Wiring+GIF"
+  alt="Wiring MPU6050"
+>
+  Connect **VCC** to 3.3V or 5V, **GND** to ground, **SDA** to A4, and **SCL** to A5 for I2C communication.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Install MPU6050 Library"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=MPU+Library+GIF"
+  alt="Installing MPU library"
+>
+  Search for **MPU6050** in Library Manager and install the library by Electronic Cats or similar.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Read Acceleration Data"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=MPU+Read+GIF"
+  alt="Reading acceleration"
+>
+  Open Serial Plotter to visualize **X, Y, Z** acceleration values in real-time as you tilt the sensor.
+</GifStep>
+
+<LessonChapter title="Tilt Switch Introduction" id="tilt-switch">
+
+### Simple Tilt Detection
+
+Before complex IMUs, simple tilt switches detected orientation:
+- Contains a metal ball inside a tube
+- Ball rolls to make/break contact
+- Digital output: tilted or not
+
+### Limitations
+
+- Only detects ON/OFF states
+- Can't measure angle or acceleration
+- Bouncy and imprecise
+
+This is why we use accelerometers for better tilt sensing!
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p2-c3-l1-accelerometers-gyros" label="I understand basic tilt detection" />
+
+</LessonChapter>
+
+<LessonChapter title="Accelerometer Basics" id="accelerometer-basics">
+
+### What It Measures
+
+Accelerometers measure acceleration in 3 axes:
+- **X-axis**: Left/Right
+- **Y-axis**: Forward/Backward
+- **Z-axis**: Up/Down
+
+At rest, an accelerometer measures gravity (1g ≈ 9.8 m/s²).
+
+### Tilt from Gravity
+
+When tilted, gravity distributes across axes:
+- **Flat**: X≈0, Y≈0, Z≈1g
+- **Tilted left**: X positive, Z less than 1g
+- **Tilted forward**: Y positive, Z less than 1g
+
+### Angle Calculation
+
+```cpp
+float roll = atan2(accelY, accelZ) * 180 / PI;
+float pitch = atan2(-accelX, sqrt(accelY*accelY + accelZ*accelZ)) * 180 / PI;
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p2-c3-l1-accelerometers-gyros" label="I understand accelerometer axes" />
+
+</LessonChapter>
+
+<LessonChapter title="Gyroscope Basics" id="gyroscope-basics">
+
+### What It Measures
+
+Gyroscopes measure rotational velocity (degrees per second):
+- **X-axis rotation**: Roll rate
+- **Y-axis rotation**: Pitch rate
+- **Z-axis rotation**: Yaw rate
+
+### Combining with Accelerometer
+
+Accelerometers are accurate long-term but noisy during motion.
+Gyroscopes are smooth but drift over time.
+
+**Sensor fusion** combines both for best results!
+
+<InfoBox type="tip">
+  The MPU6050 is a popular, affordable 6-axis IMU with both accelerometer and gyroscope. It connects via I2C.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a 2D/3D board that tilts based on X/Y sliders. Watch the axis arrows change and see text labels like "tilted left", "tilted right", "tilted forward", "tilted back".
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p2-c3-l1-accelerometers-gyros"
+  question="What does an accelerometer measure at rest?"
+  options={[
+    { id: "a", text: "Nothing - it only works during motion" },
+    { id: "b", text: "Temperature" },
+    { id: "c", text: "Gravity (approximately 1g on Z-axis when flat)" },
+    { id: "d", text: "Magnetic field" }
+  ]}
+  correctIndex={2}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p2-c3-l1-accelerometers-gyros"
+  question="What does a gyroscope measure?"
+  options={[
+    { id: "a", text: "Linear acceleration" },
+    { id: "b", text: "Rotational velocity (degrees per second)" },
+    { id: "c", text: "Magnetic north" },
+    { id: "d", text: "Altitude" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Accelerometers measure acceleration in X, Y, Z axes
+- ✅ At rest, accelerometers sense gravity for tilt detection
+- ✅ Gyroscopes measure rotational velocity
+- ✅ Combining both (sensor fusion) gives best orientation tracking
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p2-c3-l1-accelerometers-gyros" label="I completed the lesson!" />
+
+</LessonChapter>

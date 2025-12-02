@@ -1,0 +1,213 @@
+---
+id: p5-c2-l1-ir-remote-control
+title: "IR Remote Control with Arduino"
+course: "ir-remote-control"
+difficulty: "intermediate"
+tags: ["IR", "remote", "control", "decode", "IRremote"]
+estimatedMinutes: 30
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# IR Remote Control with Arduino
+
+In this lesson, you'll learn how to decode IR remote signals and use them to control Arduino outputs.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Decoding IR codes from any remote
+- Mapping button codes to actions
+- Building remote-controlled projects
+- Using the IRremote library
+
+<InfoBox type="info">
+  Repurpose any old TV remote to control your Arduino projects - no new hardware needed!
+</InfoBox>
+
+</LessonChapter>
+
+<GifStep
+  stepNumber={1}
+  title="Connect IR Receiver"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=IR+Control+Receiver+GIF"
+  alt="Connecting IR receiver"
+>
+  Wire VS1838B or similar receiver: VCC to 5V, GND to ground, OUT to pin 11.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Decode Button Codes"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=IR+Control+Decode+GIF"
+  alt="Decoding button codes"
+>
+  Upload IRremote example sketch. Press remote buttons and note the hex codes shown in Serial Monitor.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Map Codes to Actions"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=IR+Control+Map+GIF"
+  alt="Mapping codes to actions"
+>
+  Create switch/case statements: each hex code triggers a different action like toggling an LED or changing motor speed.
+</GifStep>
+
+<LessonChapter title="Hardware Setup" id="hardware-setup">
+
+### Components
+
+- Arduino Uno
+- IR receiver module (TSOP1838 or similar)
+- Any IR remote control
+
+### Wiring
+
+```
+IR Receiver:
+  VCC → Arduino 5V
+  GND → Arduino GND
+  OUT → Arduino Pin 2
+```
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p5-c2-l1-ir-remote-control" label="I have the hardware ready" />
+
+</LessonChapter>
+
+<LessonChapter title="Discovering Button Codes" id="discovering-codes">
+
+### Code to Find Codes
+
+```cpp
+#include <IRremote.h>
+
+const int IR_PIN = 2;
+
+void setup() {
+  Serial.begin(9600);
+  IrReceiver.begin(IR_PIN, ENABLE_LED_FEEDBACK);
+  Serial.println("IR Receiver Ready");
+}
+
+void loop() {
+  if (IrReceiver.decode()) {
+    Serial.print("Code: 0x");
+    Serial.println(IrReceiver.decodedIRData.decodedRawData, HEX);
+    Serial.print("Command: 0x");
+    Serial.println(IrReceiver.decodedIRData.command, HEX);
+    IrReceiver.resume();
+  }
+}
+```
+
+### Create a Code Map
+
+Press each button and note the codes:
+```cpp
+// Example codes (yours will be different!)
+#define BTN_POWER 0x45
+#define BTN_UP    0x46
+#define BTN_DOWN  0x47
+#define BTN_LEFT  0x44
+#define BTN_RIGHT 0x43
+#define BTN_OK    0x40
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p5-c2-l1-ir-remote-control" label="I can decode remote buttons" />
+
+</LessonChapter>
+
+<LessonChapter title="Mapping Codes to Actions" id="mapping-actions">
+
+### Control LEDs and Motors
+
+```cpp
+#include <IRremote.h>
+
+const int IR_PIN = 2;
+const int LED_PIN = 13;
+int brightness = 0;
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+  IrReceiver.begin(IR_PIN, ENABLE_LED_FEEDBACK);
+}
+
+void loop() {
+  if (IrReceiver.decode()) {
+    switch (IrReceiver.decodedIRData.command) {
+      case 0x45:  // Power - toggle LED
+        digitalWrite(LED_PIN, !digitalRead(LED_PIN));
+        break;
+        
+      case 0x46:  // Up - increase brightness
+        brightness = min(255, brightness + 25);
+        analogWrite(LED_PIN, brightness);
+        break;
+        
+      case 0x47:  // Down - decrease brightness
+        brightness = max(0, brightness - 25);
+        analogWrite(LED_PIN, brightness);
+        break;
+    }
+    IrReceiver.resume();
+  }
+}
+```
+
+<InfoBox type="tip">
+  Test your codes first, then build the switch statement. Different remotes have different codes!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a remote control with clickable buttons that trigger virtual LED and motor actions. Each button press displays its hex code value, showing how codes map to actions.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p5-c2-l1-ir-remote-control"
+  question="Why do you need to call IrReceiver.resume()?"
+  options={[
+    { id: "a", text: "To power on the receiver" },
+    { id: "b", text: "To prepare for the next signal" },
+    { id: "c", text: "To save power" },
+    { id: "d", text: "It's optional" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p5-c2-l1-ir-remote-control"
+  question="Can you use any IR remote with Arduino?"
+  options={[
+    { id: "a", text: "No, only special Arduino remotes" },
+    { id: "b", text: "Yes, just discover the button codes first" },
+    { id: "c", text: "Only TV remotes" },
+    { id: "d", text: "Only Sony remotes" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ IR receivers decode remote control signals
+- ✅ Each button has a unique hex code
+- ✅ Map codes to actions with switch statements
+- ✅ Any IR remote can control your Arduino
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p5-c2-l1-ir-remote-control" label="I completed the lesson!" />
+
+</LessonChapter>

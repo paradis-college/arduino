@@ -1,0 +1,202 @@
+---
+id: p2-c2-l2-soil-moisture
+title: "Soil Moisture Sensors"
+course: "environmental-monitoring-sensors"
+difficulty: "intermediate"
+tags: ["soil", "moisture", "plant", "analog", "gardening"]
+estimatedMinutes: 25
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Soil Moisture Sensors
+
+In this lesson, you'll learn how to use soil moisture sensors for plant monitoring and automated watering systems.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Soil moisture sensor wiring and operation
+- Mapping moisture readings to ranges
+- Setting water-needed thresholds
+- Building plant monitoring projects
+
+<InfoBox type="info">
+  Soil moisture sensors measure the water content in soil by detecting electrical conductivity or capacitance changes.
+</InfoBox>
+
+</LessonChapter>
+
+<GifStep
+  stepNumber={1}
+  title="Connect Sensor Probe"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Soil+Probe+GIF"
+  alt="Connecting soil moisture probe"
+>
+  Connect the two probe wires to the sensor module. Insert probes into soil (not too deep - about 2/3 of the prongs).
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Wire to Arduino"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Soil+Arduino+GIF"
+  alt="Wiring soil sensor to Arduino"
+>
+  Connect **VCC** to 5V, **GND** to ground, and **AO** (analog out) to an analog pin like A0.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Calibrate Readings"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Soil+Calibrate+GIF"
+  alt="Calibrating soil sensor"
+>
+  Test in **dry air** (max value) and **water** (min value) to establish your wet/dry thresholds.
+</GifStep>
+
+<LessonChapter title="Sensor Types" id="sensor-types">
+
+### Resistive Sensors
+
+- Two metal probes measure conductivity
+- Wet soil = lower resistance = higher reading
+- Cheap but corrode over time
+- Good for learning projects
+
+### Capacitive Sensors
+
+- No exposed metal parts
+- Measure soil dielectric properties
+- Don't corrode, last longer
+- Slightly more expensive
+
+<InfoBox type="tip">
+  For long-term projects, invest in capacitive sensors. For quick experiments, resistive sensors work fine.
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p2-c2-l2-soil-moisture" label="I understand sensor types" />
+
+</LessonChapter>
+
+<LessonChapter title="Reading and Mapping Values" id="reading-mapping">
+
+### Basic Reading
+
+```cpp
+const int MOISTURE_PIN = A0;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int rawValue = analogRead(MOISTURE_PIN);
+  Serial.print("Raw value: ");
+  Serial.println(rawValue);
+  delay(1000);
+}
+```
+
+### Calibration
+
+Test your sensor to find the range:
+1. **Dry air**: Note the value (e.g., 1023)
+2. **In water**: Note the value (e.g., 300)
+3. Map these to 0-100% moisture
+
+```cpp
+int moisturePercent = map(rawValue, 1023, 300, 0, 100);
+moisturePercent = constrain(moisturePercent, 0, 100);
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p2-c2-l2-soil-moisture" label="I understand calibration and mapping" />
+
+</LessonChapter>
+
+<LessonChapter title="Threshold-Based Control" id="threshold-control">
+
+### Setting Thresholds
+
+```cpp
+const int DRY_THRESHOLD = 30;     // Below 30% = needs water
+const int WET_THRESHOLD = 70;     // Above 70% = too wet
+
+void checkPlant(int moisture) {
+  if (moisture < DRY_THRESHOLD) {
+    Serial.println("Plant needs water! 🥀");
+    // Could trigger a pump here
+  } else if (moisture > WET_THRESHOLD) {
+    Serial.println("Soil is very wet 💧");
+  } else {
+    Serial.println("Moisture is good! 🌱");
+  }
+}
+```
+
+### Automated Watering
+
+```cpp
+const int PUMP_PIN = 8;
+
+void waterPlant() {
+  digitalWrite(PUMP_PIN, HIGH);
+  delay(2000);  // Water for 2 seconds
+  digitalWrite(PUMP_PIN, LOW);
+}
+```
+
+<InfoBox type="warning">
+  Don't over-water! Add delays between watering cycles and check that moisture actually increased before stopping.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a plant icon whose leaf color and "mood" change with the moisture slider. Watch as it goes from wilted (dry) to happy (ok) to overwatered (wet).
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p2-c2-l2-soil-moisture"
+  question="Which type of soil moisture sensor lasts longer?"
+  options={[
+    { id: "a", text: "Resistive sensors" },
+    { id: "b", text: "Capacitive sensors" },
+    { id: "c", text: "Both last the same" },
+    { id: "d", text: "Neither lasts more than a week" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p2-c2-l2-soil-moisture"
+  question="Why do you need to calibrate a soil moisture sensor?"
+  options={[
+    { id: "a", text: "To make it waterproof" },
+    { id: "b", text: "Sensors have different raw value ranges" },
+    { id: "c", text: "To connect to WiFi" },
+    { id: "d", text: "Calibration is not necessary" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Resistive sensors are cheap, capacitive sensors last longer
+- ✅ Calibrate by testing in dry air and water
+- ✅ Use thresholds to determine watering needs
+- ✅ Add safeguards to prevent over-watering
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p2-c2-l2-soil-moisture" label="I completed the lesson!" />
+
+</LessonChapter>

@@ -1,0 +1,153 @@
+---
+id: p1-c1-l1-leds-resistors
+title: "How LEDs and Resistors Work"
+course: "passive-components"
+difficulty: "beginner"
+tags: ["LED", "resistor", "V/I/R", "polarity", "series"]
+estimatedMinutes: 25
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# How LEDs and Resistors Work
+
+In this lesson, you'll learn the fundamentals of LEDs and resistors - two of the most essential components in electronics.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Basic voltage, current, and resistance (V/I/R) relationships
+- LED polarity (anode and cathode)
+- Why LEDs need series resistors
+- How to calculate resistor values for 5V and 3.3V systems (~220Ω)
+
+<InfoBox type="info">
+  An LED (Light Emitting Diode) is a semiconductor device that emits light when current flows through it in the forward direction.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Understanding Voltage, Current, and Resistance" id="understanding-vir">
+
+### Ohm's Law
+
+The relationship between voltage (V), current (I), and resistance (R) is defined by Ohm's Law:
+
+**V = I × R**
+
+- **Voltage (V)** - Electrical pressure, measured in Volts
+- **Current (I)** - Flow of electrons, measured in Amperes (A)
+- **Resistance (R)** - Opposition to current flow, measured in Ohms (Ω)
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p1-c1-l1-leds-resistors" label="I understand Ohm's Law" />
+
+</LessonChapter>
+
+<LessonChapter title="LED Polarity" id="led-polarity">
+
+<GifStep
+  stepNumber={1}
+  title="Identify the Anode (Positive)"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=LED+Anode+GIF"
+  alt="Identifying the LED anode"
+>
+  The **longer leg** of the LED is the **anode** (positive terminal). It connects to the positive voltage source through a resistor.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Identify the Cathode (Negative)"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=LED+Cathode+GIF"
+  alt="Identifying the LED cathode"
+>
+  The **shorter leg** is the **cathode** (negative terminal). It also has a flat edge on the LED housing. Connect this to ground (GND).
+</GifStep>
+
+<InfoBox type="warning">
+  Connecting an LED backwards won't damage it, but it won't light up either. Always check the polarity!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Why LEDs Need Resistors" id="why-resistors">
+
+LEDs have very low internal resistance. Without a current-limiting resistor, too much current will flow and destroy the LED.
+
+<GifStep
+  stepNumber={3}
+  title="Connect the Resistor in Series"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Resistor+Series+GIF"
+  alt="Connecting resistor in series with LED"
+>
+  Always place a resistor in series with your LED. Connect it between the power source and the LED anode, or between the LED cathode and ground - either works!
+</GifStep>
+
+### Calculating Resistor Value
+
+For a typical LED:
+- Forward voltage drop: ~2V
+- Safe operating current: ~20mA (0.02A)
+
+For a **5V system**:
+```
+R = (5V - 2V) / 0.02A = 150Ω (use 220Ω for safety)
+```
+
+For a **3.3V system**:
+```
+R = (3.3V - 2V) / 0.02A = 65Ω (use 100Ω or 220Ω for safety)
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p1-c1-l1-leds-resistors" label="I understand why LEDs need resistors" />
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a closed-loop circuit with a battery, resistor, and LED. Watch how current (shown as moving dots) slows down through the resistor. Use the slider to switch between 3.3V and 5V to see how current changes.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p1-c1-l1-leds-resistors"
+  question="Which leg of an LED is the anode (positive)?"
+  options={[
+    { id: "a", text: "The shorter leg" },
+    { id: "b", text: "The longer leg" },
+    { id: "c", text: "Both legs are the same" },
+    { id: "d", text: "The flat side" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p1-c1-l1-leds-resistors"
+  question="Why do LEDs need a series resistor?"
+  options={[
+    { id: "a", text: "To make them brighter" },
+    { id: "b", text: "To limit current and prevent damage" },
+    { id: "c", text: "To change the color" },
+    { id: "d", text: "To make them blink" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Ohm's Law: V = I × R
+- ✅ LED polarity: anode (long leg) to positive, cathode (short leg) to ground
+- ✅ LEDs need current-limiting resistors to prevent damage
+- ✅ ~220Ω is a safe resistor value for both 5V and 3.3V systems
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p1-c1-l1-leds-resistors" label="I completed the lesson!" />
+
+</LessonChapter>

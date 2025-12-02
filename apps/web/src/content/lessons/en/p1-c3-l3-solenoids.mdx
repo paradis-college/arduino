@@ -1,0 +1,172 @@
+---
+id: p1-c3-l3-solenoids
+title: "Solenoids – Linear Motion from Coils"
+course: "electromechanical-components"
+difficulty: "intermediate"
+tags: ["solenoid", "coil", "linear motion", "plunger", "flyback diode"]
+estimatedMinutes: 25
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Solenoids – Linear Motion from Coils
+
+In this lesson, you'll learn how solenoids convert electrical energy into linear motion, perfect for locks, valves, and mechanical actuators.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Solenoid structure and operation
+- How the plunger moves when energized
+- Why flyback diodes are essential
+- Practical applications of solenoids
+
+<InfoBox type="info">
+  A solenoid is an electromagnetic coil that creates linear motion. When energized, it pulls or pushes a metal plunger to actuate mechanical systems.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Solenoid Structure" id="solenoid-structure">
+
+<GifStep
+  stepNumber={1}
+  title="Examine Solenoid Parts"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Solenoid+Parts+GIF"
+  alt="Solenoid components"
+>
+  A solenoid has a **wire coil** wrapped around a tube, a **metal plunger** that slides inside, and a **spring** that returns the plunger when power is removed.
+</GifStep>
+
+### Main Components
+
+1. **Coil**: Wire wound around a tube
+2. **Plunger**: Metal rod that moves in/out
+3. **Spring**: Returns plunger when de-energized
+4. **Frame**: Magnetic housing
+
+### Types of Solenoids
+
+- **Pull-type**: Plunger pulls in when energized
+- **Push-type**: Plunger pushes out when energized
+- **Latching**: Stays in position without power
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p1-c3-l3-solenoids" label="I understand solenoid structure" />
+
+</LessonChapter>
+
+<LessonChapter title="How Solenoids Work" id="how-solenoids-work">
+
+<GifStep
+  stepNumber={2}
+  title="Watch the Plunger Move"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Plunger+Movement+GIF"
+  alt="Solenoid plunger in action"
+>
+  When current flows, the magnetic field pulls the plunger into the coil. This mechanical movement can push levers, open valves, or engage locks.
+</GifStep>
+
+### Energizing the Coil
+
+When current flows through the coil:
+1. A magnetic field is created
+2. The field attracts the ferromagnetic plunger
+3. Plunger moves against the spring
+4. Mechanical work is done (push lever, open valve, etc.)
+
+### De-energizing
+
+When current stops:
+1. Magnetic field collapses
+2. Spring pushes plunger back
+3. Returns to rest position
+
+<InfoBox type="tip">
+  Solenoids are used in door locks, pinball machines, car door latches, sprinkler valves, and fuel injectors!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Flyback Diode Protection" id="flyback-protection">
+
+<GifStep
+  stepNumber={3}
+  title="Add the Flyback Diode"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Flyback+Diode+GIF"
+  alt="Installing flyback diode"
+>
+  Connect a diode in **reverse** across the solenoid: cathode to positive, anode to negative. This provides a safe path for current when the solenoid turns off.
+</GifStep>
+
+### Why It's Critical
+
+Solenoids are inductive loads (coils). When you turn them off:
+1. Magnetic field collapses rapidly
+2. Large voltage spike is generated (can be 100V+!)
+3. This spike can destroy transistors and microcontrollers
+
+### Adding Protection
+
+Connect a flyback diode in **reverse** across the solenoid:
+- Cathode to positive terminal
+- Anode to negative terminal
+
+When the spike occurs, the diode conducts and safely dissipates the energy.
+
+<InfoBox type="warning">
+  Never switch a solenoid without a flyback diode! The voltage spike will eventually destroy your circuit.
+</InfoBox>
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p1-c3-l3-solenoids" label="I understand flyback diode protection" />
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a solenoid coil with a plunger and lever mechanism. Press the "Energize" button to see the coil pull in the metal plunger and move the lever. Release to see the spring return it.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p1-c3-l3-solenoids"
+  question="What type of motion does a solenoid produce?"
+  options={[
+    { id: "a", text: "Rotational motion" },
+    { id: "b", text: "Linear motion" },
+    { id: "c", text: "Oscillating motion" },
+    { id: "d", text: "Random motion" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p1-c3-l3-solenoids"
+  question="What happens if you switch a solenoid without a flyback diode?"
+  options={[
+    { id: "a", text: "Nothing, it works fine" },
+    { id: "b", text: "The solenoid won't move" },
+    { id: "c", text: "Voltage spikes can damage your circuit" },
+    { id: "d", text: "The solenoid moves slower" }
+  ]}
+  correctIndex={2}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Solenoids convert electrical energy to linear motion
+- ✅ A coil creates a magnetic field that moves a plunger
+- ✅ Springs return the plunger when de-energized
+- ✅ Flyback diodes are essential to prevent voltage spike damage
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p1-c3-l3-solenoids" label="I completed the lesson!" />
+
+</LessonChapter>

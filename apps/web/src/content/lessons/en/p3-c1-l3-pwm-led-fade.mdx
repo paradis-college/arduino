@@ -1,0 +1,199 @@
+---
+id: p3-c1-l3-pwm-led-fade
+title: "PWM LED Fade (analogWrite)"
+course: "embedded-programming-basics"
+difficulty: "beginner"
+tags: ["PWM", "analogWrite", "fade", "brightness", "LED"]
+estimatedMinutes: 25
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# PWM LED Fade (analogWrite)
+
+In this lesson, you'll learn how PWM (Pulse Width Modulation) allows you to control LED brightness smoothly.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- What PWM is and how it works
+- Using `analogWrite()` for 0-255 control
+- Creating fade in/out effects
+- Which Arduino pins support PWM
+
+<InfoBox type="info">
+  PWM creates the illusion of analog output using fast digital switching. Your eye sees the average brightness!
+</InfoBox>
+
+</LessonChapter>
+
+<GifStep
+  stepNumber={1}
+  title="Wire LED to PWM Pin"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=PWM+Wire+GIF"
+  alt="Wiring LED to PWM pin"
+>
+  Connect LED anode through 220Ω resistor to pin **9** (or any PWM pin marked with ~). Connect cathode to GND.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Understand PWM Values"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=PWM+Values+GIF"
+  alt="PWM value range"
+>
+  analogWrite accepts values from **0** (off) to **255** (full brightness). 127 gives 50% brightness.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Create Fade Loop"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=PWM+Fade+GIF"
+  alt="Creating fade effect"
+>
+  Upload the fade code and watch the LED smoothly transition from dim to bright and back in a continuous loop.
+</GifStep>
+
+<LessonChapter title="What is PWM?" id="what-is-pwm">
+
+### Pulse Width Modulation
+
+PWM rapidly switches between HIGH and LOW:
+- **Duty cycle**: Percentage of time the signal is HIGH
+- 0% = always LOW (LED off)
+- 50% = half HIGH, half LOW (half brightness)
+- 100% = always HIGH (full brightness)
+
+### PWM Pins on Arduino Uno
+
+Only certain pins support PWM (marked with ~):
+- **Pins 3, 5, 6, 9, 10, 11**
+
+<InfoBox type="warning">
+  Pin 13 does NOT support PWM! Use pins 3, 5, 6, 9, 10, or 11 for analogWrite().
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p3-c1-l3-pwm-led-fade" label="I understand PWM basics" />
+
+</LessonChapter>
+
+<LessonChapter title="analogWrite() Function" id="analogwrite-function">
+
+### Syntax
+
+```cpp
+analogWrite(pin, value);
+```
+
+- `pin`: A PWM-capable pin (~)
+- `value`: 0 to 255
+  - 0 = 0% duty cycle (off)
+  - 127 = ~50% duty cycle
+  - 255 = 100% duty cycle (full on)
+
+### Example
+
+```cpp
+const int LED_PIN = 9;  // Must be a PWM pin
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+}
+
+void loop() {
+  analogWrite(LED_PIN, 64);   // 25% brightness
+  delay(1000);
+  analogWrite(LED_PIN, 127);  // 50% brightness
+  delay(1000);
+  analogWrite(LED_PIN, 255);  // 100% brightness
+  delay(1000);
+}
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p3-c1-l3-pwm-led-fade" label="I understand analogWrite" />
+
+</LessonChapter>
+
+<LessonChapter title="Fade Effects" id="fade-effects">
+
+### Fade In and Out
+
+```cpp
+const int LED_PIN = 9;
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+}
+
+void loop() {
+  // Fade in
+  for (int brightness = 0; brightness <= 255; brightness += 5) {
+    analogWrite(LED_PIN, brightness);
+    delay(30);
+  }
+  
+  // Fade out
+  for (int brightness = 255; brightness >= 0; brightness -= 5) {
+    analogWrite(LED_PIN, brightness);
+    delay(30);
+  }
+}
+```
+
+### Adjusting Speed
+
+- Smaller `delay()` = faster fade
+- Larger step size = choppier transition
+- Smaller step size = smoother transition
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a duty-cycle bar with ON/OFF portions. Use the 0-255 slider to control the value and watch the LED brightness change. The bar visually shows how much of the cycle is HIGH vs LOW.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p3-c1-l3-pwm-led-fade"
+  question="What is the range of values for analogWrite()?"
+  options={[
+    { id: "a", text: "0-100" },
+    { id: "b", text: "0-255" },
+    { id: "c", text: "0-1023" },
+    { id: "d", text: "0-5" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p3-c1-l3-pwm-led-fade"
+  question="Which pin does NOT support PWM on Arduino Uno?"
+  options={[
+    { id: "a", text: "Pin 9" },
+    { id: "b", text: "Pin 10" },
+    { id: "c", text: "Pin 13" },
+    { id: "d", text: "Pin 11" }
+  ]}
+  correctIndex={2}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ PWM simulates analog output with fast switching
+- ✅ `analogWrite()` accepts values 0-255
+- ✅ Only pins marked with ~ support PWM
+- ✅ Loops create smooth fade effects
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p3-c1-l3-pwm-led-fade" label="I completed the lesson!" />
+
+</LessonChapter>

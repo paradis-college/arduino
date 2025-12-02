@@ -1,0 +1,212 @@
+---
+id: p3-c1-l5-setup-vs-loop
+title: "setup() vs loop()"
+course: "embedded-programming-basics"
+difficulty: "beginner"
+tags: ["setup", "loop", "structure", "initialization", "basics"]
+estimatedMinutes: 20
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# setup() vs loop()
+
+In this lesson, you'll understand the fundamental structure of every Arduino program - when code runs once vs repeatedly.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- `setup()` runs once at startup
+- `loop()` runs repeatedly forever
+- Where to put initialization vs main logic
+- Program flow visualization
+
+<InfoBox type="info">
+  Every Arduino sketch must have setup() and loop() - understanding when each runs is essential for proper program structure!
+</InfoBox>
+
+</LessonChapter>
+
+<GifStep
+  stepNumber={1}
+  title="Add Serial.begin to setup()"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Setup+Serial+GIF"
+  alt="Serial begin in setup"
+>
+  Put **Serial.begin(9600)** in setup(). This runs once to initialize communication at the start.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Add Print to loop()"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Loop+Print+GIF"
+  alt="Print in loop"
+>
+  Add **Serial.println("Loop!")** in loop(). Open Serial Monitor to see this message repeat continuously.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Observe the Difference"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Setup+Loop+Diff+GIF"
+  alt="Setup vs loop difference"
+>
+  setup() code appears once at start. loop() code repeats forever. This is the foundation of every Arduino program!
+</GifStep>
+
+<LessonChapter title="The setup() Function" id="setup-function">
+
+### Runs Once at Power-On
+
+`setup()` executes exactly once when:
+- Arduino is powered on
+- Reset button is pressed
+- New code is uploaded
+
+### What Goes in setup()
+
+- Pin mode configuration
+- Serial communication initialization
+- Library initialization
+- Variable initial values
+- One-time hardware setup
+
+```cpp
+void setup() {
+  pinMode(13, OUTPUT);           // Configure pins
+  Serial.begin(9600);            // Start serial
+  lcd.begin(16, 2);              // Initialize LCD
+  servo.attach(9);               // Attach servo
+}
+```
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p3-c1-l5-setup-vs-loop" label="I understand setup()" />
+
+</LessonChapter>
+
+<LessonChapter title="The loop() Function" id="loop-function">
+
+### Runs Repeatedly Forever
+
+After `setup()` completes, `loop()` runs continuously:
+
+```
+Start → setup() → loop() → loop() → loop() → loop() → ...
+                    ↑_________|
+                    (forever)
+```
+
+### What Goes in loop()
+
+- Reading sensors
+- Checking buttons
+- Updating outputs
+- Main program logic
+- Anything that needs to repeat
+
+```cpp
+void loop() {
+  int sensorValue = analogRead(A0);  // Read sensor
+  
+  if (sensorValue > 500) {
+    digitalWrite(13, HIGH);          // React
+  } else {
+    digitalWrite(13, LOW);
+  }
+}
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p3-c1-l5-setup-vs-loop" label="I understand loop()" />
+
+</LessonChapter>
+
+<LessonChapter title="Common Mistakes" id="common-mistakes">
+
+### Mistake 1: pinMode in loop()
+
+```cpp
+// BAD - wastes time reconfiguring every loop
+void loop() {
+  pinMode(13, OUTPUT);  // Don't do this!
+  digitalWrite(13, HIGH);
+}
+
+// GOOD - configure once in setup
+void setup() {
+  pinMode(13, OUTPUT);
+}
+void loop() {
+  digitalWrite(13, HIGH);
+}
+```
+
+### Mistake 2: One-time actions in loop()
+
+```cpp
+// BAD - prints forever
+void loop() {
+  Serial.println("Program started!");  // Floods serial!
+}
+
+// GOOD - print once in setup
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Program started!");
+}
+```
+
+<InfoBox type="tip">
+  Ask yourself: "Does this need to happen once or repeatedly?" Put it in the appropriate function!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a flow diagram animating: Start → setup() (runs once) → loop() (cycles repeatedly). Watch the lines highlight each section as the program flows through, clearly showing the difference.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p3-c1-l5-setup-vs-loop"
+  question="How many times does setup() run?"
+  options={[
+    { id: "a", text: "Every loop iteration" },
+    { id: "b", text: "Exactly once at startup" },
+    { id: "c", text: "Twice - once for each core" },
+    { id: "d", text: "Only when a button is pressed" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p3-c1-l5-setup-vs-loop"
+  question="Where should pinMode() calls go?"
+  options={[
+    { id: "a", text: "In loop()" },
+    { id: "b", text: "In setup()" },
+    { id: "c", text: "Before setup()" },
+    { id: "d", text: "It doesn't matter" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ `setup()` runs exactly once at startup
+- ✅ `loop()` runs repeatedly forever
+- ✅ Put initialization in setup(), main logic in loop()
+- ✅ Don't reconfigure pins or initialize libraries in loop()
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p3-c1-l5-setup-vs-loop" label="I completed the lesson!" />
+
+</LessonChapter>

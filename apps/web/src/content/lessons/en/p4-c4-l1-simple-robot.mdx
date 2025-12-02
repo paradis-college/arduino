@@ -1,0 +1,240 @@
+---
+id: p4-c4-l1-simple-robot
+title: "Project – Simple Robot (Line/Obstacle)"
+course: "simple-robot"
+difficulty: "advanced"
+tags: ["robot", "motor", "sensor", "line follower", "obstacle avoidance"]
+estimatedMinutes: 60
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Project – Simple Robot (Line/Obstacle)
+
+In this advanced project, you'll build a simple robot that can follow a line or avoid obstacles.
+
+<LessonChapter title="What You'll Build" id="what-youll-build">
+
+- Two-wheeled robot platform
+- Differential drive control
+- Sensor-based navigation
+- Line following OR obstacle avoidance mode
+
+<InfoBox type="info">
+  Robots combine everything you've learned: motors, sensors, and decision-making logic working together!
+</InfoBox>
+
+</LessonChapter>
+
+<GifStep
+  stepNumber={1}
+  title="Assemble Robot Chassis"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Robot+Chassis+GIF"
+  alt="Assembling robot"
+>
+  Mount two DC motors to chassis with wheels. Add a caster wheel or ball bearing for balance.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Wire Motor Driver"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Robot+Driver+GIF"
+  alt="Wiring motor driver"
+>
+  Connect L298N or L293D motor driver. Wire motor outputs and control pins to Arduino (ENA, IN1-IN4).
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Add Line/Obstacle Sensors"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Robot+Sensor+GIF"
+  alt="Adding sensors"
+>
+  Mount IR line sensors or ultrasonic sensor. For line following, two sensors detect the black line edges.
+</GifStep>
+
+<LessonChapter title="Components Needed" id="components-needed">
+
+- Arduino Uno
+- Robot chassis with 2 DC motors
+- L298N motor driver (or similar)
+- For line following: 2x IR line sensors
+- For obstacle avoidance: HC-SR04 ultrasonic sensor
+- Battery pack (6-12V)
+- Wheels, wires, mounting hardware
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p4-c4-l1-simple-robot" label="I have gathered the components" />
+
+</LessonChapter>
+
+<LessonChapter title="Differential Drive Basics" id="differential-drive">
+
+### How It Works
+
+Two independently controlled motors:
+- Both forward = Go straight
+- Left faster than right = Turn right
+- Right faster than left = Turn left
+- Opposite directions = Spin in place
+
+### Motor Control
+
+```cpp
+void moveForward() {
+  digitalWrite(LEFT_FWD, HIGH);
+  digitalWrite(LEFT_BWD, LOW);
+  digitalWrite(RIGHT_FWD, HIGH);
+  digitalWrite(RIGHT_BWD, LOW);
+}
+
+void turnLeft() {
+  digitalWrite(LEFT_FWD, LOW);
+  digitalWrite(LEFT_BWD, LOW);
+  digitalWrite(RIGHT_FWD, HIGH);
+  digitalWrite(RIGHT_BWD, LOW);
+}
+
+void turnRight() {
+  digitalWrite(LEFT_FWD, HIGH);
+  digitalWrite(LEFT_BWD, LOW);
+  digitalWrite(RIGHT_FWD, LOW);
+  digitalWrite(RIGHT_BWD, LOW);
+}
+
+void stop() {
+  digitalWrite(LEFT_FWD, LOW);
+  digitalWrite(LEFT_BWD, LOW);
+  digitalWrite(RIGHT_FWD, LOW);
+  digitalWrite(RIGHT_BWD, LOW);
+}
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p4-c4-l1-simple-robot" label="I understand differential drive" />
+
+</LessonChapter>
+
+<LessonChapter title="Line Following Logic" id="line-following">
+
+### Two-Sensor Approach
+
+| Left Sensor | Right Sensor | Action |
+|-------------|--------------|--------|
+| Black | Black | Forward |
+| White | Black | Turn Right |
+| Black | White | Turn Left |
+| White | White | Search/Stop |
+
+### Code
+
+```cpp
+void lineFollow() {
+  bool leftOnLine = digitalRead(LEFT_SENSOR) == LOW;
+  bool rightOnLine = digitalRead(RIGHT_SENSOR) == LOW;
+  
+  if (leftOnLine && rightOnLine) {
+    moveForward();
+  } else if (!leftOnLine && rightOnLine) {
+    turnRight();
+  } else if (leftOnLine && !rightOnLine) {
+    turnLeft();
+  } else {
+    // Lost line - search or stop
+    stop();
+  }
+}
+```
+
+</LessonChapter>
+
+<LessonChapter title="Obstacle Avoidance Logic" id="obstacle-avoidance">
+
+### Simple Algorithm
+
+```cpp
+const int OBSTACLE_DISTANCE = 20;  // cm
+
+void obstacleAvoid() {
+  int distance = readUltrasonic();
+  
+  if (distance > OBSTACLE_DISTANCE) {
+    moveForward();
+  } else {
+    stop();
+    delay(200);
+    
+    // Check left
+    turnLeft();
+    delay(300);
+    int leftDistance = readUltrasonic();
+    
+    // Check right
+    turnRight();
+    delay(600);
+    int rightDistance = readUltrasonic();
+    
+    // Turn toward more open direction
+    if (leftDistance > rightDistance) {
+      turnLeft();
+      delay(600);
+    }
+    // Already facing right if right is better
+  }
+}
+```
+
+<InfoBox type="tip">
+  Start with slow motor speeds. It's easier to tune behavior when the robot moves slowly and predictably!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a robot icon in a simple 2D world. In line-follow mode, drag to draw a black line and watch the robot follow it. In obstacle mode, place obstacles and watch the robot navigate around them.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p4-c4-l1-simple-robot"
+  question="In differential drive, how does the robot turn left?"
+  options={[
+    { id: "a", text: "Both motors reverse" },
+    { id: "b", text: "Right motor faster than left (or left stopped)" },
+    { id: "c", text: "Left motor faster than right" },
+    { id: "d", text: "Special steering motor" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p4-c4-l1-simple-robot"
+  question="If a line-following robot's right sensor sees the line but left doesn't, what should it do?"
+  options={[
+    { id: "a", text: "Go straight" },
+    { id: "b", text: "Turn left" },
+    { id: "c", text: "Turn right" },
+    { id: "d", text: "Stop" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this project you learned:
+
+- ✅ Differential drive controls robot direction
+- ✅ Line sensors guide line-following behavior
+- ✅ Ultrasonic sensors enable obstacle avoidance
+- ✅ Decision logic combines sensor input with motor output
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p4-c4-l1-simple-robot" label="I completed the project!" />
+
+</LessonChapter>

@@ -1,0 +1,180 @@
+---
+id: p1-c3-l1-inductors
+title: "Inductors – Coils That Resist Change"
+course: "electromechanical-components"
+difficulty: "intermediate"
+tags: ["inductor", "coil", "magnetic field", "voltage spike", "EMF"]
+estimatedMinutes: 30
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Inductors – Coils That Resist Change
+
+In this lesson, you'll learn how inductors work - coils of wire that oppose changes in current and store energy in magnetic fields.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Inductor symbol and how they work
+- How inductors oppose current changes
+- Energy storage in magnetic fields
+- Why switch-off voltage spikes occur
+
+<InfoBox type="info">
+  An inductor is a coil of wire that creates a magnetic field when current flows through it. This field resists any change in current.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Inductor Basics" id="inductor-basics">
+
+<GifStep
+  stepNumber={1}
+  title="Identify an Inductor"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Inductor+GIF"
+  alt="Identifying inductor components"
+>
+  Inductors appear as coils of wire, often wound around a core. They're marked with their inductance value in Henrys (H), millihenrys (mH), or microhenrys (µH).
+</GifStep>
+
+### Symbol and Units
+
+Inductors are measured in **Henrys (H)**:
+- **mH** (millihenrys) = 10⁻³ H
+- **µH** (microhenrys) = 10⁻⁶ H
+
+### How Inductors Work
+
+1. When current starts flowing, the inductor opposes the increase
+2. When current is established, the inductor acts like a wire
+3. When current tries to decrease, the inductor tries to maintain it
+
+<InfoBox type="tip">
+  Think of an inductor like a heavy flywheel - it takes effort to get it spinning, but once spinning, it wants to keep going.
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p1-c3-l1-inductors" label="I understand inductor basics" />
+
+</LessonChapter>
+
+<LessonChapter title="Opposing Current Changes" id="opposing-changes">
+
+<GifStep
+  stepNumber={2}
+  title="Watch Current Build Up"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Current+Buildup+GIF"
+  alt="Current building up in inductor"
+>
+  When voltage is first applied, current rises slowly as the magnetic field builds. The inductor resists this change, causing a delay.
+</GifStep>
+
+### Back-EMF
+
+When you try to change the current through an inductor, it creates a voltage (back-EMF) that opposes the change:
+
+**V = L × (di/dt)**
+
+Where:
+- V = induced voltage
+- L = inductance in Henrys
+- di/dt = rate of current change
+
+### Rising Current
+
+When current increases:
+- Magnetic field builds up
+- Energy is stored in the field
+- Inductor opposes the increase
+
+### Falling Current
+
+When current decreases:
+- Magnetic field collapses
+- Stored energy is released
+- Inductor tries to maintain current flow
+
+</LessonChapter>
+
+<LessonChapter title="Switch-Off Voltage Spikes" id="voltage-spikes">
+
+<GifStep
+  stepNumber={3}
+  title="Add a Flyback Diode"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Flyback+Diode+GIF"
+  alt="Adding flyback diode for protection"
+>
+  Connect a diode in reverse across the inductor (cathode to positive). When current is cut, the diode provides a safe path for the collapsing energy.
+</GifStep>
+
+### The Danger
+
+When you suddenly cut current to an inductor:
+1. Current can't stop instantly (inductors resist change)
+2. The collapsing magnetic field induces a high voltage
+3. This **voltage spike** can damage transistors and ICs!
+
+### Protection
+
+Use a **flyback diode** in parallel with the inductor:
+- Provides a path for current when switched off
+- Safely dissipates the stored energy
+- Essential for motors, relays, and solenoids
+
+<InfoBox type="warning">
+  Always use flyback diodes when switching inductive loads! The voltage spike can be many times higher than the supply voltage.
+</InfoBox>
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p1-c3-l1-inductors" label="I understand voltage spikes and flyback diodes" />
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a coil with an arrow indicating current flow. Watch how the current rises and falls, and observe the brief voltage spike indicator when the current is suddenly cut.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p1-c3-l1-inductors"
+  question="What does an inductor oppose?"
+  options={[
+    { id: "a", text: "Steady current flow" },
+    { id: "b", text: "Changes in current" },
+    { id: "c", text: "Voltage drops" },
+    { id: "d", text: "Heat generation" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p1-c3-l1-inductors"
+  question="What causes voltage spikes when switching off an inductor?"
+  options={[
+    { id: "a", text: "Short circuit" },
+    { id: "b", text: "Capacitor discharge" },
+    { id: "c", text: "Collapsing magnetic field" },
+    { id: "d", text: "Resistor overheating" }
+  ]}
+  correctIndex={2}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Inductors are coils that oppose changes in current
+- ✅ Energy is stored in the magnetic field
+- ✅ Sudden current cutoff causes dangerous voltage spikes
+- ✅ Flyback diodes protect against these spikes
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p1-c3-l1-inductors" label="I completed the lesson!" />
+
+</LessonChapter>

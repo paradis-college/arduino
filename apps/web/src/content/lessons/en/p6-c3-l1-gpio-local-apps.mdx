@@ -1,0 +1,241 @@
+---
+id: p6-c3-l1-gpio-local-apps
+title: "GPIO with Local Apps"
+course: "gpio-python"
+difficulty: "intermediate"
+tags: ["GPIO", "Python", "event-driven", "UI", "logging"]
+estimatedMinutes: 35
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# GPIO with Local Apps
+
+In this lesson, you'll learn how to create event-driven Python scripts that link GPIO to local applications.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Event-driven GPIO programming
+- Linking GPIO to UI elements
+- Logging sensor data
+- Building responsive applications
+
+<InfoBox type="info">
+  Combine GPIO with Python's power to create real applications - dashboards, data loggers, and interactive displays!
+</InfoBox>
+
+</LessonChapter>
+
+<GifStep
+  stepNumber={1}
+  title="Setup Python Environment"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=GPIO+Setup+GIF"
+  alt="Setting up Python"
+>
+  Open terminal and run **python3 --version** to verify Python. Install gpiozero if needed: **pip3 install gpiozero**
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Create Event Handler"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=GPIO+Event+GIF"
+  alt="Creating event handler"
+>
+  Use **button.when_pressed = my_function** to call a function when button is pressed. No polling needed!
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Log Sensor Data"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=GPIO+Log+GIF"
+  alt="Logging sensor data"
+>
+  Read sensor, append timestamp and value to a file. Use Python **datetime** and file writing for data logging.
+</GifStep>
+
+<LessonChapter title="Event-Driven Design" id="event-driven-design">
+
+### Callbacks vs Polling
+
+**Polling** (less efficient):
+```python
+while True:
+    if button.is_pressed:
+        do_something()
+    sleep(0.1)
+```
+
+**Event-driven** (better):
+```python
+button.when_pressed = do_something
+pause()  # CPU efficient
+```
+
+### Multiple Events
+
+```python
+from gpiozero import Button
+from signal import pause
+
+button = Button(17)
+
+def on_press():
+    print("Pressed!")
+    log_event("button_press")
+
+def on_release():
+    print("Released!")
+
+button.when_pressed = on_press
+button.when_released = on_release
+
+pause()
+```
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p6-c3-l1-gpio-local-apps" label="I understand event-driven programming" />
+
+</LessonChapter>
+
+<LessonChapter title="Data Logging" id="data-logging">
+
+### Logging to File
+
+```python
+from gpiozero import Button
+from datetime import datetime
+from signal import pause
+
+button = Button(17)
+
+def log_press():
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open("button_log.txt", "a") as f:
+        f.write(f"{timestamp} - Button pressed\n")
+    print(f"Logged: {timestamp}")
+
+button.when_pressed = log_press
+pause()
+```
+
+### Sensor Data Logging
+
+```python
+from gpiozero import MCP3008  # ADC for analog sensors
+from datetime import datetime
+from time import sleep
+import csv
+
+sensor = MCP3008(channel=0)
+
+with open("sensor_data.csv", "w", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerow(["timestamp", "value"])
+    
+    while True:
+        timestamp = datetime.now().isoformat()
+        value = sensor.value
+        writer.writerow([timestamp, value])
+        print(f"{timestamp}: {value:.3f}")
+        sleep(1)
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p6-c3-l1-gpio-local-apps" label="I understand data logging" />
+
+</LessonChapter>
+
+<LessonChapter title="Simple GUI Integration" id="gui-integration">
+
+### Using Tkinter
+
+```python
+from gpiozero import LED, Button
+import tkinter as tk
+
+led = LED(17)
+hw_button = Button(27)
+
+# Create window
+root = tk.Tk()
+root.title("GPIO Control")
+
+# Status label
+status = tk.Label(root, text="LED: OFF", font=("Arial", 24))
+status.pack(pady=20)
+
+# Control buttons
+def turn_on():
+    led.on()
+    status.config(text="LED: ON")
+
+def turn_off():
+    led.off()
+    status.config(text="LED: OFF")
+
+tk.Button(root, text="ON", command=turn_on).pack(side="left", padx=10)
+tk.Button(root, text="OFF", command=turn_off).pack(side="right", padx=10)
+
+# Hardware button updates GUI
+def hw_pressed():
+    root.after(0, lambda: status.config(text="HW Button Pressed!"))
+
+hw_button.when_pressed = hw_pressed
+
+root.mainloop()
+```
+
+<InfoBox type="tip">
+  Tkinter comes pre-installed with Python. For more advanced UIs, consider PyQt5 or Kivy.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a virtual application window whose elements react to simulated GPIO events. Press the virtual hardware button to see how it triggers UI changes in the application.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p6-c3-l1-gpio-local-apps"
+  question="Why is event-driven programming better than polling for buttons?"
+  options={[
+    { id: "a", text: "It's faster" },
+    { id: "b", text: "It uses less CPU when idle" },
+    { id: "c", text: "It's required by gpiozero" },
+    { id: "d", text: "Polling doesn't work" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p6-c3-l1-gpio-local-apps"
+  question="What Python library provides a simple built-in GUI toolkit?"
+  options={[
+    { id: "a", text: "pygame" },
+    { id: "b", text: "tkinter" },
+    { id: "c", text: "flask" },
+    { id: "d", text: "gpiozero" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Event-driven programming with callbacks
+- ✅ Logging data to files and CSV
+- ✅ Integrating GPIO with Tkinter GUI
+- ✅ Building responsive local applications
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p6-c3-l1-gpio-local-apps" label="I completed the lesson!" />
+
+</LessonChapter>

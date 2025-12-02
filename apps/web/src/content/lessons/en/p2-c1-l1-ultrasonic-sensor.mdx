@@ -1,0 +1,159 @@
+---
+id: p2-c1-l1-ultrasonic-sensor
+title: "Ultrasonic Distance Sensor"
+course: "vision-detection-sensors"
+difficulty: "intermediate"
+tags: ["ultrasonic", "HC-SR04", "distance", "echo", "sonar"]
+estimatedMinutes: 30
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Ultrasonic Distance Sensor
+
+In this lesson, you'll learn how ultrasonic sensors measure distance using sound waves, and how to use them with Arduino.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- HC-SR04 sensor pins and wiring
+- How echo time converts to distance
+- Reading distance values with Arduino
+- Simple distance-based control projects
+
+<InfoBox type="info">
+  Ultrasonic sensors work like bat echolocation - they emit a sound pulse and measure how long it takes to bounce back from an object.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="HC-SR04 Basics" id="hc-sr04-basics">
+
+<GifStep
+  stepNumber={1}
+  title="Connect VCC and GND"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=HC-SR04+Power+GIF"
+  alt="Connecting HC-SR04 power"
+>
+  Connect the **VCC** pin to Arduino's 5V and **GND** to ground. The sensor needs a stable 5V power supply to work correctly.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Connect Trig and Echo Pins"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=HC-SR04+Signal+GIF"
+  alt="Connecting HC-SR04 signal pins"
+>
+  Connect **Trig** to a digital output pin (e.g., pin 9) and **Echo** to a digital input pin (e.g., pin 10). These pins send and receive the ultrasonic signals.
+</GifStep>
+
+### Pin Configuration
+
+| Pin | Function |
+|-----|----------|
+| VCC | 5V Power |
+| GND | Ground |
+| Trig | Trigger Input |
+| Echo | Echo Output |
+
+### How It Works
+
+1. Send a 10µs HIGH pulse to **Trig** pin
+2. Sensor emits 8 ultrasonic pulses at 40kHz
+3. Sensor waits for echo
+4. **Echo** pin goes HIGH for duration proportional to distance
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p2-c1-l1-ultrasonic-sensor" label="I understand HC-SR04 basics" />
+
+</LessonChapter>
+
+<LessonChapter title="Distance Calculation" id="distance-calculation">
+
+### The Formula
+
+```cpp
+distance = (echo_time × speed_of_sound) / 2
+```
+
+Sound travels at ~343 m/s (or 0.0343 cm/µs). We divide by 2 because sound travels to the object AND back.
+
+### Arduino Code
+
+```cpp
+long readDistance() {
+  // Send trigger pulse
+  digitalWrite(TRIG_PIN, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG_PIN, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG_PIN, LOW);
+  
+  // Read echo duration
+  long duration = pulseIn(ECHO_PIN, HIGH);
+  
+  // Calculate distance in cm
+  return duration * 0.0343 / 2;
+}
+```
+
+### Range
+
+The HC-SR04 can measure distances from **2cm to 400cm** with reasonable accuracy.
+
+<InfoBox type="warning">
+  Soft materials (fabric, foam) may absorb sound and give poor readings. Hard surfaces work best.
+</InfoBox>
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p2-c1-l1-ultrasonic-sensor" label="I understand distance calculation" />
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a sensor icon emitting expanding circles that bounce off a draggable object. Watch the distance bar update in real-time as you move the object closer or farther.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p2-c1-l1-ultrasonic-sensor"
+  question="Why do we divide the echo time by 2 when calculating distance?"
+  options={[
+    { id: "a", text: "The sensor has two ultrasonic emitters" },
+    { id: "b", text: "Sound travels to the object AND back" },
+    { id: "c", text: "To convert from cm to inches" },
+    { id: "d", text: "To improve accuracy" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p2-c1-l1-ultrasonic-sensor"
+  question="What is the typical range of the HC-SR04 sensor?"
+  options={[
+    { id: "a", text: "0-10 cm" },
+    { id: "b", text: "2-400 cm" },
+    { id: "c", text: "1-1000 cm" },
+    { id: "d", text: "10-50 cm" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ HC-SR04 has VCC, GND, Trig, and Echo pins
+- ✅ Distance = (echo_time × 0.0343) / 2 in centimeters
+- ✅ Sensor range is approximately 2-400cm
+- ✅ Hard surfaces give better readings than soft materials
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p2-c1-l1-ultrasonic-sensor" label="I completed the lesson!" />
+
+</LessonChapter>

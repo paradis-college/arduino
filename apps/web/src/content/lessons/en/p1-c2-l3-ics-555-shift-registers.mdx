@@ -1,0 +1,175 @@
+---
+id: p1-c2-l3-ics-555-shift-registers
+title: "ICs – 555 Timers & Shift Registers"
+course: "active-components"
+difficulty: "intermediate"
+tags: ["IC", "555", "timer", "74HC595", "shift register", "oscillator"]
+estimatedMinutes: 35
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# ICs – 555 Timers & Shift Registers
+
+In this lesson, you'll learn about integrated circuits (ICs) - the building blocks of modern electronics, focusing on two popular chips.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- What integrated circuits (ICs) are and why they're useful
+- How the 555 timer works as an oscillator
+- Using the 74HC595 shift register to expand outputs
+- Serial-to-parallel data conversion
+
+<InfoBox type="info">
+  An IC (Integrated Circuit) is a tiny package containing many transistors, resistors, and other components that work together to perform specific functions.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Introduction to ICs" id="intro-to-ics">
+
+<GifStep
+  stepNumber={1}
+  title="Find Pin 1 on the IC"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=IC+Pin+1+GIF"
+  alt="Finding pin 1 on an IC"
+>
+  Look for a **notch** or **dot** on one end of the IC chip. Pin 1 is to the left of the notch (or beside the dot). Pins are numbered counter-clockwise when viewed from above.
+</GifStep>
+
+### Why Use ICs?
+
+- **Compact**: Many components in a small package
+- **Reliable**: Factory-tested and proven designs
+- **Easy to use**: Just connect power and signal pins
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p1-c2-l3-ics-555-shift-registers" label="I understand IC basics" />
+
+</LessonChapter>
+
+<LessonChapter title="The 555 Timer" id="555-timer">
+
+<GifStep
+  stepNumber={2}
+  title="Wire the 555 in Astable Mode"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=555+Astable+GIF"
+  alt="Wiring 555 timer in astable mode"
+>
+  In astable mode, the 555 generates a continuous square wave. Connect pins 2 and 6 together, add two resistors and a capacitor to set the frequency.
+</GifStep>
+
+### Astable Mode (Oscillator)
+
+The 555 timer can generate a continuous square wave signal:
+
+```
+Pin 1: GND
+Pin 2: Trigger (connect to pin 6)
+Pin 3: Output (LED or speaker)
+Pin 4: Reset (connect to VCC)
+Pin 5: Control (0.01µF to GND)
+Pin 6: Threshold (connect to pin 2)
+Pin 7: Discharge
+Pin 8: VCC (5-15V)
+```
+
+### Frequency Formula
+
+```
+Frequency = 1.44 / ((R1 + 2×R2) × C)
+```
+
+<InfoBox type="tip">
+  The 555 is one of the most versatile ICs ever made. It can create timers, oscillators, PWM signals, and more!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="74HC595 Shift Register" id="shift-register">
+
+<GifStep
+  stepNumber={3}
+  title="Connect the Shift Register"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Shift+Register+GIF"
+  alt="Wiring 74HC595 shift register"
+>
+  Connect 3 Arduino pins to the 74HC595: **Data** (pin 14), **Clock** (pin 11), and **Latch** (pin 12). This gives you control of 8 outputs!
+</GifStep>
+
+### Expanding Outputs
+
+Arduino has limited pins, but a shift register lets you control 8 outputs using only 3 pins!
+
+### How It Works
+
+1. **Data Pin**: Send bits one at a time
+2. **Clock Pin**: Each pulse shifts the data in
+3. **Latch Pin**: Transfer shifted data to outputs
+
+### Pins
+
+```
+Pin 14 (DS): Serial data input
+Pin 11 (SRCLK): Shift register clock
+Pin 12 (RCLK): Storage register clock (latch)
+Pin 13 (OE): Output enable (active LOW)
+Pin 10 (SRCLR): Clear (active LOW, connect to VCC)
+Pins 1-7, 15 (Q0-Q7): Parallel outputs
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p1-c2-l3-ics-555-shift-registers" label="I understand shift registers" />
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows two demonstrations:
+  1. Eight output squares with a "1" bit shifting through on each clock pulse
+  2. A 555 timer generating a square wave that blinks an LED
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p1-c2-l3-ics-555-shift-registers"
+  question="What does a shift register do?"
+  options={[
+    { id: "a", text: "Amplifies signals" },
+    { id: "b", text: "Converts serial data to parallel outputs" },
+    { id: "c", text: "Stores large amounts of data" },
+    { id: "d", text: "Generates random numbers" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p1-c2-l3-ics-555-shift-registers"
+  question="How many Arduino pins are needed to control a 74HC595?"
+  options={[
+    { id: "a", text: "1 pin" },
+    { id: "b", text: "3 pins" },
+    { id: "c", text: "8 pins" },
+    { id: "d", text: "16 pins" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ ICs contain many components in a single package
+- ✅ The 555 timer can generate oscillating signals
+- ✅ The 74HC595 shift register expands 3 pins to 8 outputs
+- ✅ Serial-to-parallel conversion for efficient pin usage
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p1-c2-l3-ics-555-shift-registers" label="I completed the lesson!" />
+
+</LessonChapter>

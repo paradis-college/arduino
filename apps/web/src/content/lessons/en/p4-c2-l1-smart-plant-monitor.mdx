@@ -1,0 +1,206 @@
+---
+id: p4-c2-l1-smart-plant-monitor
+title: "Project – Smart Plant Monitor"
+course: "smart-plant-monitor"
+difficulty: "intermediate"
+tags: ["soil moisture", "automation", "sensor", "project", "plant"]
+estimatedMinutes: 40
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Project – Smart Plant Monitor
+
+In this project, you'll build a smart plant monitoring system that tracks soil moisture and provides feedback through LEDs.
+
+<LessonChapter title="What You'll Build" id="what-youll-build">
+
+- Soil moisture monitoring system
+- Visual indicators (LEDs) for moisture levels
+- Threshold-based alerts
+- Optional: Automated watering trigger
+
+<InfoBox type="info">
+  Combining sensors with feedback creates automation - your plant can tell you when it needs water!
+</InfoBox>
+
+</LessonChapter>
+
+<GifStep
+  stepNumber={1}
+  title="Connect Moisture Sensor"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Plant+Sensor+GIF"
+  alt="Connecting moisture sensor"
+>
+  Wire soil moisture sensor to A0. Insert probes into plant soil at root level.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Add Status LEDs"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Plant+LED+GIF"
+  alt="Adding status LEDs"
+>
+  Connect 3 LEDs: Green (moist), Yellow (getting dry), Red (needs water) to pins 9, 10, 11.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Set Thresholds"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Plant+Threshold+GIF"
+  alt="Setting thresholds"
+>
+  Calibrate thresholds by testing dry and wet soil. Typical ranges: <300 (wet), 300-600 (ok), >600 (dry).
+</GifStep>
+
+<LessonChapter title="Components Needed" id="components-needed">
+
+- Arduino Uno
+- Soil moisture sensor
+- 3x LEDs (Red, Yellow, Green)
+- 3x 220Ω resistors
+- Optional: Relay module + water pump
+- Breadboard and jumper wires
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p4-c2-l1-smart-plant-monitor" label="I have gathered the components" />
+
+</LessonChapter>
+
+<LessonChapter title="Moisture Thresholds" id="moisture-thresholds">
+
+### Calibration
+
+First, find your sensor's range:
+1. Sensor in dry air → Record value (e.g., 800)
+2. Sensor in water → Record value (e.g., 300)
+3. Sensor in moist soil → Record value (e.g., 500)
+
+### Setting Thresholds
+
+```cpp
+const int DRY_THRESHOLD = 600;     // Below this = needs water
+const int WET_THRESHOLD = 400;     // Above this = too wet
+// Between = optimal moisture
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p4-c2-l1-smart-plant-monitor" label="I understand moisture calibration" />
+
+</LessonChapter>
+
+<LessonChapter title="Code Structure" id="code-structure">
+
+### Pin Definitions
+
+```cpp
+const int MOISTURE_PIN = A0;
+const int LED_RED = 2;     // Dry - needs water
+const int LED_YELLOW = 3;  // OK - monitor
+const int LED_GREEN = 4;   // Well watered
+
+const int DRY_THRESHOLD = 600;
+const int WET_THRESHOLD = 400;
+```
+
+### Reading and Display
+
+```cpp
+void loop() {
+  int moisture = analogRead(MOISTURE_PIN);
+  
+  // Turn off all LEDs first
+  digitalWrite(LED_RED, LOW);
+  digitalWrite(LED_YELLOW, LOW);
+  digitalWrite(LED_GREEN, LOW);
+  
+  if (moisture > DRY_THRESHOLD) {
+    // Too dry - needs water!
+    digitalWrite(LED_RED, HIGH);
+    Serial.println("🥀 Plant needs water!");
+  } else if (moisture < WET_THRESHOLD) {
+    // Well watered
+    digitalWrite(LED_GREEN, HIGH);
+    Serial.println("🌱 Plant is happy!");
+  } else {
+    // In between - OK
+    digitalWrite(LED_YELLOW, HIGH);
+    Serial.println("😊 Moisture OK");
+  }
+  
+  Serial.print("Raw value: ");
+  Serial.println(moisture);
+  
+  delay(5000);  // Check every 5 seconds
+}
+```
+
+### Optional: Auto Watering
+
+```cpp
+const int PUMP_PIN = 5;
+
+void waterPlant() {
+  digitalWrite(PUMP_PIN, HIGH);
+  delay(3000);  // Water for 3 seconds
+  digitalWrite(PUMP_PIN, LOW);
+  
+  // Wait for water to soak in before next reading
+  delay(10000);
+}
+```
+
+<InfoBox type="warning">
+  Be careful with automated watering! Add safeguards to prevent over-watering, like maximum daily watering time.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a plant icon whose health and leaf color change based on a moisture slider. Watch the indicator LEDs light up as you adjust moisture from dry to wet, and trigger the optional "water" action to see the plant respond.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p4-c2-l1-smart-plant-monitor"
+  question="Why is calibration important for soil moisture sensors?"
+  options={[
+    { id: "a", text: "To make the sensor waterproof" },
+    { id: "b", text: "Different sensors have different value ranges" },
+    { id: "c", text: "To connect to WiFi" },
+    { id: "d", text: "Calibration is optional" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p4-c2-l1-smart-plant-monitor"
+  question="What safeguard should automated watering systems have?"
+  options={[
+    { id: "a", text: "None needed" },
+    { id: "b", text: "Password protection" },
+    { id: "c", text: "Maximum watering time limits" },
+    { id: "d", text: "GPS tracking" }
+  ]}
+  correctIndex={2}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this project you learned:
+
+- ✅ Calibrate sensors for accurate readings
+- ✅ Use thresholds to categorize conditions
+- ✅ Visual feedback with multi-color LED indicators
+- ✅ Automation basics with safeguards
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p4-c2-l1-smart-plant-monitor" label="I completed the project!" />
+
+</LessonChapter>

@@ -1,0 +1,203 @@
+---
+id: p3-c1-l1-basic-led-blink
+title: "Basic LED Blink (Pin 13)"
+course: "embedded-programming-basics"
+difficulty: "beginner"
+tags: ["LED", "blink", "digitalWrite", "delay", "pinMode"]
+estimatedMinutes: 20
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Basic LED Blink (Pin 13)
+
+In this lesson, you'll write your first Arduino program to blink an LED - the "Hello World" of electronics!
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Arduino sketch structure
+- `pinMode()` for OUTPUT configuration
+- `digitalWrite()` for HIGH/LOW control
+- `delay()` for timing
+
+<InfoBox type="info">
+  Blinking an LED is the first step in learning Arduino. It teaches you the basic structure of every Arduino program!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Sketch Structure" id="sketch-structure">
+
+<GifStep
+  stepNumber={1}
+  title="Open the Arduino IDE"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Arduino+IDE+GIF"
+  alt="Opening Arduino IDE"
+>
+  Launch the Arduino IDE. You'll see a blank sketch with `setup()` and `loop()` functions already created.
+</GifStep>
+
+### Every Arduino Sketch Has Two Functions
+
+```cpp
+void setup() {
+  // Runs once when Arduino powers on
+  // Put initialization code here
+}
+
+void loop() {
+  // Runs repeatedly forever
+  // Put your main code here
+}
+```
+
+<GifStep
+  stepNumber={2}
+  title="Connect Your Arduino"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Connect+Arduino+GIF"
+  alt="Connecting Arduino via USB"
+>
+  Connect the Arduino to your computer with a USB cable. Select your board type and port in **Tools → Board** and **Tools → Port**.
+</GifStep>
+
+### Pin 13 - Built-in LED
+
+Arduino Uno has an LED connected to pin 13 on the board itself - no external wiring needed to start!
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p3-c1-l1-basic-led-blink" label="I understand sketch structure" />
+
+</LessonChapter>
+
+<LessonChapter title="pinMode() Function" id="pinmode-function">
+
+### Configuring Pins
+
+Before using a pin, tell Arduino whether it's an input or output:
+
+```cpp
+pinMode(pin, mode);
+```
+
+- `pin`: The pin number (0-13 for digital)
+- `mode`: `INPUT`, `OUTPUT`, or `INPUT_PULLUP`
+
+### Example
+
+```cpp
+void setup() {
+  pinMode(13, OUTPUT);  // Pin 13 will send signals out
+}
+```
+
+</LessonChapter>
+
+<LessonChapter title="digitalWrite() Function" id="digitalwrite-function">
+
+### Setting Pin State
+
+```cpp
+digitalWrite(pin, value);
+```
+
+- `pin`: The pin number
+- `value`: `HIGH` (5V, LED on) or `LOW` (0V, LED off)
+
+### Example
+
+```cpp
+digitalWrite(13, HIGH);  // Turn LED on
+digitalWrite(13, LOW);   // Turn LED off
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p3-c1-l1-basic-led-blink" label="I understand digitalWrite" />
+
+</LessonChapter>
+
+<LessonChapter title="delay() Function" id="delay-function">
+
+### Pausing Execution
+
+```cpp
+delay(milliseconds);
+```
+
+- 1000 milliseconds = 1 second
+- 500 milliseconds = 0.5 seconds
+- 100 milliseconds = 0.1 seconds
+
+<GifStep
+  stepNumber={3}
+  title="Upload Your First Sketch"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Upload+Sketch+GIF"
+  alt="Uploading sketch to Arduino"
+>
+  Click the **Upload** button (right arrow icon). Watch the TX/RX LEDs blink as code transfers. When complete, the built-in LED will start blinking!
+</GifStep>
+
+### Complete Blink Code
+
+```cpp
+void setup() {
+  pinMode(13, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(13, HIGH);  // LED on
+  delay(1000);             // Wait 1 second
+  digitalWrite(13, LOW);   // LED off
+  delay(1000);             // Wait 1 second
+}
+```
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a square-wave timeline for pin 13 with a moving cursor. Watch the LED blink in sync with the timeline. Use the delay slider to change the blink period and see how it affects the pattern.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p3-c1-l1-basic-led-blink"
+  question="Which function runs only once when Arduino starts?"
+  options={[
+    { id: "a", text: "loop()" },
+    { id: "b", text: "setup()" },
+    { id: "c", text: "main()" },
+    { id: "d", text: "begin()" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p3-c1-l1-basic-led-blink"
+  question="What does delay(2000) do?"
+  options={[
+    { id: "a", text: "Waits 2 seconds" },
+    { id: "b", text: "Waits 20 seconds" },
+    { id: "c", text: "Waits 0.2 seconds" },
+    { id: "d", text: "Waits 200 seconds" }
+  ]}
+  correctIndex={0}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Arduino sketches have `setup()` and `loop()` functions
+- ✅ `pinMode(pin, OUTPUT)` configures a pin for output
+- ✅ `digitalWrite(pin, HIGH/LOW)` turns the pin on or off
+- ✅ `delay(ms)` pauses for the specified milliseconds
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p3-c1-l1-basic-led-blink" label="I completed the lesson!" />
+
+</LessonChapter>

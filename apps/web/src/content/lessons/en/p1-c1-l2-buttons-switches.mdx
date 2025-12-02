@@ -1,0 +1,159 @@
+---
+id: p1-c1-l2-buttons-switches
+title: "Buttons & Switches (Series vs Parallel)"
+course: "passive-components"
+difficulty: "beginner"
+tags: ["button", "switch", "series", "parallel", "AND", "OR", "logic"]
+estimatedMinutes: 25
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Buttons & Switches (Series vs Parallel)
+
+In this lesson, you'll learn how buttons and switches work, and how connecting them in series or parallel creates different logic behaviors.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- How push buttons work (open/closed states)
+- Series connections create AND logic
+- Parallel connections create OR logic
+- How to read simple logic from circuits
+
+<InfoBox type="info">
+  A push button is a momentary switch - it only makes contact while being pressed. When released, the circuit opens again.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Push Button Basics" id="push-button-basics">
+
+<GifStep
+  stepNumber={1}
+  title="Understanding Button Pins"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Button+Pins+GIF"
+  alt="Button pin configuration"
+>
+  Most tactile buttons have four pins arranged in two pairs. The pins on the same side are internally connected. When pressed, all four pins connect together.
+</GifStep>
+
+### Open vs Closed States
+
+- **Open (not pressed)**: No current flows - circuit is broken
+- **Closed (pressed)**: Current flows - circuit is complete
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p1-c1-l2-buttons-switches" label="I understand button open/closed states" />
+
+</LessonChapter>
+
+<LessonChapter title="Series Connection (AND Logic)" id="series-connection">
+
+<GifStep
+  stepNumber={2}
+  title="Wire Buttons in Series"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Series+Buttons+GIF"
+  alt="Wiring buttons in series"
+>
+  Connect the output of Button A to the input of Button B. Current must flow through both buttons to reach the LED.
+</GifStep>
+
+When buttons are connected in **series**, the LED only turns on when **ALL** buttons are pressed.
+
+```
+[Battery+] → [Button A] → [Button B] → [LED] → [Ground]
+```
+
+This creates **AND logic**:
+| Button A | Button B | LED |
+|----------|----------|-----|
+| Open | Open | OFF |
+| Open | Closed | OFF |
+| Closed | Open | OFF |
+| Closed | Closed | ON |
+
+<InfoBox type="tip">
+  Think of series buttons like security checkpoints - you must pass through ALL of them to reach the destination.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Parallel Connection (OR Logic)" id="parallel-connection">
+
+<GifStep
+  stepNumber={3}
+  title="Wire Buttons in Parallel"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Parallel+Buttons+GIF"
+  alt="Wiring buttons in parallel"
+>
+  Connect both buttons between the same two points. Either button can complete the circuit independently.
+</GifStep>
+
+When buttons are connected in **parallel**, the LED turns on when **ANY** button is pressed.
+
+```
+[Battery+] → [Button A] ─┬─ [LED] → [Ground]
+            [Button B] ─┘
+```
+
+This creates **OR logic**:
+| Button A | Button B | LED |
+|----------|----------|-----|
+| Open | Open | OFF |
+| Open | Closed | ON |
+| Closed | Open | ON |
+| Closed | Closed | ON |
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p1-c1-l2-buttons-switches" label="I understand series and parallel logic" />
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows series and parallel button circuits with an LED. Click the buttons to toggle their state and watch the live AND/OR truth table highlight the current combination.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p1-c1-l2-buttons-switches"
+  question="In a series connection, when does the LED turn on?"
+  options={[
+    { id: "a", text: "When any button is pressed" },
+    { id: "b", text: "When all buttons are pressed" },
+    { id: "c", text: "When no buttons are pressed" },
+    { id: "d", text: "When exactly one button is pressed" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p1-c1-l2-buttons-switches"
+  question="What type of logic does a parallel button connection create?"
+  options={[
+    { id: "a", text: "AND logic" },
+    { id: "b", text: "OR logic" },
+    { id: "c", text: "NOT logic" },
+    { id: "d", text: "XOR logic" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Push buttons have open (not pressed) and closed (pressed) states
+- ✅ Series connections = AND logic (all buttons must be pressed)
+- ✅ Parallel connections = OR logic (any button can complete the circuit)
+- ✅ How to read truth tables for button combinations
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p1-c1-l2-buttons-switches" label="I completed the lesson!" />
+
+</LessonChapter>

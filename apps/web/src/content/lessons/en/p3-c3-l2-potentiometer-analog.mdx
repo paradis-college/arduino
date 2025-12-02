@@ -1,0 +1,205 @@
+---
+id: p3-c3-l2-potentiometer-analog
+title: "Potentiometer as Analog Input"
+course: "working-with-inputs"
+difficulty: "beginner"
+tags: ["potentiometer", "analogRead", "analog", "variable resistor"]
+estimatedMinutes: 25
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Potentiometer as Analog Input
+
+In this lesson, you'll learn how to use a potentiometer to provide variable analog input to your Arduino.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Potentiometer wiring
+- Using `analogRead()` to get 0-1023 values
+- Mapping values to useful ranges
+- Controlling outputs based on potentiometer position
+
+<InfoBox type="info">
+  Potentiometers are variable resistors - turn the knob to smoothly change the voltage read by Arduino!
+</InfoBox>
+
+</LessonChapter>
+
+<GifStep
+  stepNumber={1}
+  title="Wire the Potentiometer"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Pot+Wire+GIF"
+  alt="Wiring potentiometer"
+>
+  Connect left pin to GND, right pin to 5V, and **middle pin** (wiper) to analog pin A0.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Read Analog Value"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Pot+Read+GIF"
+  alt="Reading analog value"
+>
+  Use **analogRead(A0)** to get a value from **0 to 1023**. Turn the knob and watch values change in Serial Monitor.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Map to LED Brightness"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Pot+Map+GIF"
+  alt="Mapping to LED"
+>
+  Use **map(val, 0, 1023, 0, 255)** to convert potentiometer range to PWM range. Control LED brightness with the knob!
+</GifStep>
+
+<LessonChapter title="Potentiometer Basics" id="potentiometer-basics">
+
+### How It Works
+
+A potentiometer has three pins:
+1. **Pin 1**: Connect to 5V
+2. **Pin 2 (Wiper)**: Connect to Arduino analog pin
+3. **Pin 3**: Connect to GND
+
+As you turn the knob, the wiper moves along a resistive element, dividing voltage between 0V and 5V.
+
+### Wiring
+
+```
+Pot Pin 1 → 5V
+Pot Pin 2 (middle) → A0
+Pot Pin 3 → GND
+```
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p3-c3-l2-potentiometer-analog" label="I understand potentiometer wiring" />
+
+</LessonChapter>
+
+<LessonChapter title="analogRead() Function" id="analogread-function">
+
+### Reading Analog Values
+
+```cpp
+int value = analogRead(pin);
+```
+
+- Returns 0-1023 (10-bit resolution)
+- 0 = 0V, 1023 = 5V
+- Pins A0-A5 on Arduino Uno
+
+### Example
+
+```cpp
+const int POT_PIN = A0;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int potValue = analogRead(POT_PIN);
+  Serial.println(potValue);
+  delay(100);
+}
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p3-c3-l2-potentiometer-analog" label="I understand analogRead" />
+
+</LessonChapter>
+
+<LessonChapter title="Mapping Values" id="mapping-values">
+
+### The map() Function
+
+Convert 0-1023 to other ranges:
+
+```cpp
+int newValue = map(value, fromLow, fromHigh, toLow, toHigh);
+```
+
+### Examples
+
+```cpp
+// Map to PWM range (0-255)
+int brightness = map(potValue, 0, 1023, 0, 255);
+analogWrite(LED_PIN, brightness);
+
+// Map to servo angle (0-180)
+int angle = map(potValue, 0, 1023, 0, 180);
+myServo.write(angle);
+
+// Map to percentage (0-100)
+int percent = map(potValue, 0, 1023, 0, 100);
+```
+
+### Complete LED Brightness Control
+
+```cpp
+const int POT_PIN = A0;
+const int LED_PIN = 9;
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+}
+
+void loop() {
+  int potValue = analogRead(POT_PIN);
+  int brightness = map(potValue, 0, 1023, 0, 255);
+  analogWrite(LED_PIN, brightness);
+  delay(10);
+}
+```
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a rotary potentiometer knob that you can drag to rotate. Watch the numeric value (0-1023) change, see a bar graph update, and observe the LED brightness following the pot position.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p3-c3-l2-potentiometer-analog"
+  question="What is the range of values returned by analogRead()?"
+  options={[
+    { id: "a", text: "0-100" },
+    { id: "b", text: "0-255" },
+    { id: "c", text: "0-1023" },
+    { id: "d", text: "0-5" }
+  ]}
+  correctIndex={2}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p3-c3-l2-potentiometer-analog"
+  question="What does map(512, 0, 1023, 0, 255) return?"
+  options={[
+    { id: "a", text: "512" },
+    { id: "b", text: "About 127" },
+    { id: "c", text: "255" },
+    { id: "d", text: "0" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Potentiometers provide variable voltage output
+- ✅ analogRead() returns 0-1023 based on voltage
+- ✅ Use map() to convert to useful ranges
+- ✅ Perfect for controlling brightness, speed, angles
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p3-c3-l2-potentiometer-analog" label="I completed the lesson!" />
+
+</LessonChapter>
