@@ -99,15 +99,23 @@ import { obstacleAvoidanceSketch } from './p4-c4-l1/obstacleAvoidance';
 
 // Import all sketches - Path 5
 import { serialSketch } from './p5-c1-l1/serial';
+import { serialMonitorSketch } from './p5-c1-l1/serialMonitor';
 import { irRemoteSketch } from './p5-c2-l1/irRemote';
+import { irCodeDisplaySketch } from './p5-c2-l1/irCodeDisplay';
 import { bluetoothSketch } from './p5-c3-l1/bluetooth';
+import { btLedMotorSketch } from './p5-c3-l1/btLedMotor';
 import { wifiSketch } from './p5-c4-l1/wifi';
+import { espResponseSketch } from './p5-c4-l1/espResponse';
 
 // Import all sketches - Path 6
 import { linuxBasicsSketch } from './p6-c1-l1/linuxBasics';
+import { nanoEditorSketch } from './p6-c1-l1/nanoEditor';
 import { gpioSketch } from './p6-c2-l1/gpio';
+import { breadboardLedsSketch } from './p6-c2-l1/breadboardLeds';
 import { gpioAppsSketch } from './p6-c3-l1/gpioApps';
+import { eventLogSketch } from './p6-c3-l1/eventLog';
 import { deviceCommSketch } from './p6-c4-l1/deviceComm';
+import { byteCounterSketch } from './p6-c4-l1/byteCounter';
 
 /**
  * Registry mapping string IDs to sketch functions
@@ -211,15 +219,23 @@ export const sketchRegistry: Record<string, SketchFunction> = {
   
   // Path 5: Networking
   'p5-c1-l1-serial': serialSketch,
+  'p5-c1-l1-serial-monitor': serialMonitorSketch,
   'p5-c2-l1-ir-remote': irRemoteSketch,
+  'p5-c2-l1-ir-code-display': irCodeDisplaySketch,
   'p5-c3-l1-bluetooth': bluetoothSketch,
+  'p5-c3-l1-bt-led-motor': btLedMotorSketch,
   'p5-c4-l1-wifi': wifiSketch,
+  'p5-c4-l1-esp-response': espResponseSketch,
   
   // Path 6: Raspberry Pi
   'p6-c1-l1-linux-basics': linuxBasicsSketch,
+  'p6-c1-l1-nano-editor': nanoEditorSketch,
   'p6-c2-l1-gpio': gpioSketch,
+  'p6-c2-l1-breadboard-leds': breadboardLedsSketch,
   'p6-c3-l1-gpio-apps': gpioAppsSketch,
+  'p6-c3-l1-event-log': eventLogSketch,
   'p6-c4-l1-device-comm': deviceCommSketch,
+  'p6-c4-l1-byte-counter': byteCounterSketch,
 };
 
 /**

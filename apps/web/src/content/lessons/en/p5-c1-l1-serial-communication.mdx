@@ -38,32 +38,15 @@ In this lesson, you'll learn how Arduino communicates with your computer via ser
   Watch data packets travel between the PC and Arduino. Type a message to send it to the Arduino, and see the response come back. The serial monitor displays incoming and outgoing messages.
 </P5SketchEmbed>
 
-<GifStep
+<P5SketchEmbed
+  id="serial-monitor-animation"
+  sketchId="p5-c1-l1-serial-monitor"
   stepNumber={2}
-  title="Initialize Serial"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Serial+Init+GIF"
-  alt="Initializing serial"
+  title="Serial Monitor Display"
+  alt="Serial monitor printing incoming/outgoing messages"
 >
-  Add **Serial.begin(9600)** in setup(). This starts communication at 9600 baud (bits per second).
-</GifStep>
-
-<GifStep
-  stepNumber={2}
-  title="Send Data to Computer"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Serial+Send+GIF"
-  alt="Sending serial data"
->
-  Use **Serial.print()** or **Serial.println()** to send text. Open Serial Monitor to see the output.
-</GifStep>
-
-<GifStep
-  stepNumber={3}
-  title="Receive Commands"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Serial+Receive+GIF"
-  alt="Receiving serial commands"
->
-  Use **Serial.available()** to check for data, then **Serial.read()** to get characters. Type in Serial Monitor to send.
-</GifStep>
+  Watch the serial monitor display incoming and outgoing messages. The TX counter shows bytes sent, RX shows bytes received.
+</P5SketchEmbed>
 
 </LessonChapter>
 

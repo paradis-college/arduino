@@ -38,32 +38,15 @@ In this lesson, you'll learn how to add wireless Bluetooth communication to your
   Watch the smartphone send commands wirelessly to the Arduino via the Bluetooth symbol. The virtual LED and motor respond to the wireless commands in real time.
 </P5SketchEmbed>
 
-<GifStep
+<P5SketchEmbed
+  id="bt-led-motor-animation"
+  sketchId="p5-c3-l1-bt-led-motor"
   stepNumber={2}
-  title="Wire HC-05 Module"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=BT+Wire+GIF"
-  alt="Wiring Bluetooth module"
+  title="LED & Motor Response"
+  alt="Virtual LED/motor responding to wireless commands"
 >
-  Connect HC-05: VCC to 5V, GND to ground, **TXD** to Arduino RX (pin 0), **RXD** to TX (pin 1) through voltage divider.
-</GifStep>
-
-<GifStep
-  stepNumber={2}
-  title="Pair with Phone"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=BT+Pair+GIF"
-  alt="Pairing Bluetooth"
->
-  Search for HC-05 in phone Bluetooth settings. Default PIN is usually **1234** or **0000**. LED changes from fast blink to slow.
-</GifStep>
-
-<GifStep
-  stepNumber={3}
-  title="Send Commands from App"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=BT+App+GIF"
-  alt="Using Bluetooth app"
->
-  Use a Bluetooth terminal app to send text commands. Arduino receives via Serial.read() and responds to commands.
-</GifStep>
+  Click phone buttons to send Bluetooth commands. Watch the LED toggle and motor speed change in response to wireless control signals.
+</P5SketchEmbed>
 
 </LessonChapter>
 
