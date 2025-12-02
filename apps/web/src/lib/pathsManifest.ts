@@ -5,7 +5,7 @@
  * A path is a collection of related courses forming a complete learning track
  */
 
-import type { PathMeta, CourseMeta, Language } from './types';
+import type { PathMeta, Language } from './types';
 
 /** All available paths */
 export const pathsManifest: PathMeta[] = [
@@ -160,11 +160,4 @@ export function getPath(slug: string, language: Language): PathMeta | undefined 
     };
   }
   return path;
-}
-
-/** Get courses for a specific path */
-export function getCoursesByPath(pathId: string, courses: CourseMeta[]): CourseMeta[] {
-  return courses
-    .filter((course) => course.pathId === pathId)
-    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 }
