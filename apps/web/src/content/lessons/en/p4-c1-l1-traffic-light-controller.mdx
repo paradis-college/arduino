@@ -6,6 +6,7 @@ difficulty: "intermediate"
 tags: ["LED", "state machine", "timing", "project", "traffic light"]
 estimatedMinutes: 45
 hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
 ---
 
 # Project – Traffic Light Controller
@@ -27,11 +28,38 @@ In this project, you'll build a complete traffic light intersection controller w
 
 <LessonChapter title="Components Needed" id="components-needed">
 
+<GifStep
+  stepNumber={1}
+  title="Gather Your Components"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Traffic+Light+Parts+GIF"
+  alt="Traffic light project components"
+>
+  Collect all the LEDs (red, yellow, green), resistors, push button, breadboard, and wires. Organize them by color before wiring.
+</GifStep>
+
 - Arduino Uno
 - 3x Red LEDs, 3x Yellow LEDs, 3x Green LEDs
 - 9x 220Ω resistors
 - 1x Push button (pedestrian crossing)
 - Breadboard and jumper wires
+
+<GifStep
+  stepNumber={2}
+  title="Wire the Main Road LEDs"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Main+Road+LEDs+GIF"
+  alt="Wiring main road traffic light"
+>
+  Connect the red LED to pin 2, yellow to pin 3, and green to pin 4. Each LED needs a 220Ω resistor to ground.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Wire the Side Road LEDs and Button"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Side+Road+Button+GIF"
+  alt="Wiring side road and pedestrian button"
+>
+  Connect side road LEDs to pins 5, 6, 7 with resistors. Add the pedestrian button between pin 8 and ground (use INPUT_PULLUP).
+</GifStep>
 
 <Checkpoint id="checkpoint-1" lessonKey="en/p4-c1-l1-traffic-light-controller" label="I have gathered the components" />
 

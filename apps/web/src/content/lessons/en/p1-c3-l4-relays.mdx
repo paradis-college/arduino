@@ -6,6 +6,7 @@ difficulty: "intermediate"
 tags: ["relay", "NO", "NC", "isolation", "high voltage", "switch"]
 estimatedMinutes: 30
 hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
 ---
 
 # Relays – Electrically Controlled Switches
@@ -27,6 +28,15 @@ In this lesson, you'll learn how relays work as electrically controlled switches
 
 <LessonChapter title="Relay Structure" id="relay-structure">
 
+<GifStep
+  stepNumber={1}
+  title="Identify Relay Terminals"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Relay+Terminals+GIF"
+  alt="Relay terminal identification"
+>
+  A relay has two sets of terminals: **Coil** terminals (DC+ and DC-) that control the switch, and **Contact** terminals (COM, NO, NC) for the load circuit.
+</GifStep>
+
 ### Main Components
 
 1. **Coil**: Electromagnet that creates the switching action
@@ -46,6 +56,15 @@ In this lesson, you'll learn how relays work as electrically controlled switches
 </LessonChapter>
 
 <LessonChapter title="Contact Types" id="contact-types">
+
+<GifStep
+  stepNumber={2}
+  title="Understand NO and NC Contacts"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=NO+NC+Contacts+GIF"
+  alt="NO and NC contact demonstration"
+>
+  **NO (Normally Open)** is disconnected when off - use it to turn things ON. **NC (Normally Closed)** is connected when off - use it for fail-safe circuits.
+</GifStep>
 
 ### Common Terminal
 
@@ -78,6 +97,15 @@ Most relays have all three terminals:
 </LessonChapter>
 
 <LessonChapter title="Electrical Isolation" id="electrical-isolation">
+
+<GifStep
+  stepNumber={3}
+  title="Connect Arduino to Relay Module"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Relay+Module+GIF"
+  alt="Connecting relay module to Arduino"
+>
+  Relay modules include the transistor driver and flyback diode. Connect VCC to 5V, GND to ground, and IN to a digital pin. The load connects to COM and NO/NC.
+</GifStep>
 
 ### Why Isolation Matters
 

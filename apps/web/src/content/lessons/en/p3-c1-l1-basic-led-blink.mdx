@@ -6,6 +6,7 @@ difficulty: "beginner"
 tags: ["LED", "blink", "digitalWrite", "delay", "pinMode"]
 estimatedMinutes: 20
 hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
 ---
 
 # Basic LED Blink (Pin 13)
@@ -27,6 +28,15 @@ In this lesson, you'll write your first Arduino program to blink an LED - the "H
 
 <LessonChapter title="Sketch Structure" id="sketch-structure">
 
+<GifStep
+  stepNumber={1}
+  title="Open the Arduino IDE"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Arduino+IDE+GIF"
+  alt="Opening Arduino IDE"
+>
+  Launch the Arduino IDE. You'll see a blank sketch with `setup()` and `loop()` functions already created.
+</GifStep>
+
 ### Every Arduino Sketch Has Two Functions
 
 ```cpp
@@ -40,6 +50,15 @@ void loop() {
   // Put your main code here
 }
 ```
+
+<GifStep
+  stepNumber={2}
+  title="Connect Your Arduino"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Connect+Arduino+GIF"
+  alt="Connecting Arduino via USB"
+>
+  Connect the Arduino to your computer with a USB cable. Select your board type and port in **Tools → Board** and **Tools → Port**.
+</GifStep>
 
 ### Pin 13 - Built-in LED
 
@@ -105,6 +124,15 @@ delay(milliseconds);
 - 1000 milliseconds = 1 second
 - 500 milliseconds = 0.5 seconds
 - 100 milliseconds = 0.1 seconds
+
+<GifStep
+  stepNumber={3}
+  title="Upload Your First Sketch"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Upload+Sketch+GIF"
+  alt="Uploading sketch to Arduino"
+>
+  Click the **Upload** button (right arrow icon). Watch the TX/RX LEDs blink as code transfers. When complete, the built-in LED will start blinking!
+</GifStep>
 
 ### Complete Blink Code
 

@@ -6,6 +6,7 @@ difficulty: "beginner"
 tags: ["LDR", "photoresistor", "light", "analog", "voltage divider"]
 estimatedMinutes: 25
 hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
 ---
 
 # Light Sensor (LDR)
@@ -27,10 +28,28 @@ In this lesson, you'll learn how to use a Light Dependent Resistor (LDR) to dete
 
 <LessonChapter title="LDR Basics" id="ldr-basics">
 
+<GifStep
+  stepNumber={1}
+  title="Identify the LDR"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=LDR+Component+GIF"
+  alt="Identifying an LDR"
+>
+  An LDR looks like a small disc with a wavy pattern on top. It has two legs and is not polarized - either leg can connect to either side.
+</GifStep>
+
 ### How LDRs Work
 
 - **In darkness**: Resistance is HIGH (100kΩ - 1MΩ)
 - **In bright light**: Resistance is LOW (1kΩ - 10kΩ)
+
+<GifStep
+  stepNumber={2}
+  title="Build the Voltage Divider"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Voltage+Divider+GIF"
+  alt="Building voltage divider circuit"
+>
+  Connect 5V to one leg of the LDR. Connect the other leg to both a 10kΩ resistor (going to GND) and the Arduino analog pin (A0). This creates a voltage divider.
+</GifStep>
 
 ### Voltage Divider Circuit
 

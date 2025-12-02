@@ -6,6 +6,7 @@ difficulty: "beginner"
 tags: ["LED", "resistor", "V/I/R", "polarity", "series"]
 estimatedMinutes: 25
 hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
 ---
 
 # How LEDs and Resistors Work
@@ -43,10 +44,23 @@ The relationship between voltage (V), current (I), and resistance (R) is defined
 
 <LessonChapter title="LED Polarity" id="led-polarity">
 
-LEDs have polarity - they only work when connected in the correct direction:
+<GifStep
+  stepNumber={1}
+  title="Identify the Anode (Positive)"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=LED+Anode+GIF"
+  alt="Identifying the LED anode"
+>
+  The **longer leg** of the LED is the **anode** (positive terminal). It connects to the positive voltage source through a resistor.
+</GifStep>
 
-- **Anode (+)** - The longer leg, connects to positive voltage
-- **Cathode (-)** - The shorter leg, connects to ground
+<GifStep
+  stepNumber={2}
+  title="Identify the Cathode (Negative)"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=LED+Cathode+GIF"
+  alt="Identifying the LED cathode"
+>
+  The **shorter leg** is the **cathode** (negative terminal). It also has a flat edge on the LED housing. Connect this to ground (GND).
+</GifStep>
 
 <InfoBox type="warning">
   Connecting an LED backwards won't damage it, but it won't light up either. Always check the polarity!
@@ -57,6 +71,15 @@ LEDs have polarity - they only work when connected in the correct direction:
 <LessonChapter title="Why LEDs Need Resistors" id="why-resistors">
 
 LEDs have very low internal resistance. Without a current-limiting resistor, too much current will flow and destroy the LED.
+
+<GifStep
+  stepNumber={3}
+  title="Connect the Resistor in Series"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Resistor+Series+GIF"
+  alt="Connecting resistor in series with LED"
+>
+  Always place a resistor in series with your LED. Connect it between the power source and the LED anode, or between the LED cathode and ground - either works!
+</GifStep>
 
 ### Calculating Resistor Value
 

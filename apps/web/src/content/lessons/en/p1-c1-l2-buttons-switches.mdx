@@ -6,6 +6,7 @@ difficulty: "beginner"
 tags: ["button", "switch", "series", "parallel", "AND", "OR", "logic"]
 estimatedMinutes: 25
 hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
 ---
 
 # Buttons & Switches (Series vs Parallel)
@@ -27,18 +28,34 @@ In this lesson, you'll learn how buttons and switches work, and how connecting t
 
 <LessonChapter title="Push Button Basics" id="push-button-basics">
 
+<GifStep
+  stepNumber={1}
+  title="Understanding Button Pins"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Button+Pins+GIF"
+  alt="Button pin configuration"
+>
+  Most tactile buttons have four pins arranged in two pairs. The pins on the same side are internally connected. When pressed, all four pins connect together.
+</GifStep>
+
 ### Open vs Closed States
 
 - **Open (not pressed)**: No current flows - circuit is broken
 - **Closed (pressed)**: Current flows - circuit is complete
-
-Most buttons have four pins arranged in two pairs that are internally connected.
 
 <Checkpoint id="checkpoint-1" lessonKey="en/p1-c1-l2-buttons-switches" label="I understand button open/closed states" />
 
 </LessonChapter>
 
 <LessonChapter title="Series Connection (AND Logic)" id="series-connection">
+
+<GifStep
+  stepNumber={2}
+  title="Wire Buttons in Series"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Series+Buttons+GIF"
+  alt="Wiring buttons in series"
+>
+  Connect the output of Button A to the input of Button B. Current must flow through both buttons to reach the LED.
+</GifStep>
 
 When buttons are connected in **series**, the LED only turns on when **ALL** buttons are pressed.
 
@@ -61,6 +78,15 @@ This creates **AND logic**:
 </LessonChapter>
 
 <LessonChapter title="Parallel Connection (OR Logic)" id="parallel-connection">
+
+<GifStep
+  stepNumber={3}
+  title="Wire Buttons in Parallel"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Parallel+Buttons+GIF"
+  alt="Wiring buttons in parallel"
+>
+  Connect both buttons between the same two points. Either button can complete the circuit independently.
+</GifStep>
 
 When buttons are connected in **parallel**, the LED turns on when **ANY** button is pressed.
 

@@ -6,6 +6,7 @@ difficulty: "intermediate"
 tags: ["motor", "DC motor", "servo", "PWM", "speed control"]
 estimatedMinutes: 30
 hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
 ---
 
 # Motors – Turning Electricity into Motion
@@ -26,6 +27,15 @@ In this lesson, you'll learn how motors convert electrical energy into mechanica
 </LessonChapter>
 
 <LessonChapter title="DC Motors" id="dc-motors">
+
+<GifStep
+  stepNumber={1}
+  title="Connect a DC Motor"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=DC+Motor+GIF"
+  alt="Connecting DC motor"
+>
+  DC motors have two wires. Connect them to a power source and the motor spins! Reverse the wires to change direction.
+</GifStep>
 
 ### How They Work
 
@@ -50,6 +60,24 @@ Most DC motors need more current than Arduino can provide directly. Use a transi
 </LessonChapter>
 
 <LessonChapter title="Servo Motors" id="servo-motors">
+
+<GifStep
+  stepNumber={2}
+  title="Connect a Servo Motor"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Servo+Motor+GIF"
+  alt="Connecting servo motor"
+>
+  Servos have 3 wires: **Brown/Black** (GND), **Red** (5V power), and **Orange/Yellow** (signal). Connect the signal wire to a PWM-capable Arduino pin.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Control Servo Position"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Servo+Angle+GIF"
+  alt="Controlling servo angle"
+>
+  Use the Arduino Servo library to set angles from 0° to 180°. The servo automatically moves to and holds the specified position.
+</GifStep>
 
 ### What Makes Servos Different
 

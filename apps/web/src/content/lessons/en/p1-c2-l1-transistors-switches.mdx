@@ -6,6 +6,7 @@ difficulty: "intermediate"
 tags: ["transistor", "NPN", "switch", "amplifier", "motor"]
 estimatedMinutes: 30
 hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
 ---
 
 # Transistors as Switches
@@ -27,6 +28,15 @@ In this lesson, you'll learn how transistors work as electronic switches, allowi
 
 <LessonChapter title="NPN Transistor Basics" id="npn-basics">
 
+<GifStep
+  stepNumber={1}
+  title="Identify the Transistor Pins"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Transistor+Pins+GIF"
+  alt="Identifying transistor pins"
+>
+  Looking at the flat side of a common NPN transistor (like 2N2222), the pins from left to right are typically: **Emitter**, **Base**, **Collector**. Always check the datasheet for your specific transistor!
+</GifStep>
+
 ### Pin Identification
 
 An NPN transistor has three pins:
@@ -46,6 +56,24 @@ When a small current flows into the base:
 </LessonChapter>
 
 <LessonChapter title="Transistor as a Switch" id="transistor-switch">
+
+<GifStep
+  stepNumber={2}
+  title="Connect the Base Resistor"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Base+Resistor+GIF"
+  alt="Connecting base resistor"
+>
+  Connect a **1kΩ resistor** between the Arduino pin and the transistor base. This limits the current and protects both the Arduino and transistor.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Connect the Load Circuit"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Load+Circuit+GIF"
+  alt="Connecting the load circuit"
+>
+  Connect the positive side of your load (motor/LED strip) to the power supply, and the negative side to the transistor's collector. Connect the emitter to ground.
+</GifStep>
 
 ### Arduino to Motor Example
 

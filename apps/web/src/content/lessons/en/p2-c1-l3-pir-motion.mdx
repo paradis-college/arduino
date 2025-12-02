@@ -6,6 +6,7 @@ difficulty: "intermediate"
 tags: ["PIR", "motion", "infrared", "security", "detection"]
 estimatedMinutes: 25
 hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
 ---
 
 # PIR Motion Detection
@@ -27,12 +28,30 @@ In this lesson, you'll learn how PIR (Passive Infrared) sensors detect motion an
 
 <LessonChapter title="PIR Sensor Basics" id="pir-basics">
 
+<GifStep
+  stepNumber={1}
+  title="Identify PIR Sensor Pins"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=PIR+Pins+GIF"
+  alt="PIR sensor pin identification"
+>
+  Most PIR modules have three pins labeled on the back: **VCC** (power), **OUT** (signal), and **GND** (ground). Some also have adjustment potentiometers.
+</GifStep>
+
 ### How PIR Works
 
 1. Sensor has two infrared-sensitive elements
 2. When warm body moves across the field of view
 3. One element sees more IR, then the other
 4. This difference triggers the output signal
+
+<GifStep
+  stepNumber={2}
+  title="Connect the PIR Sensor"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=PIR+Wiring+GIF"
+  alt="Connecting PIR sensor"
+>
+  Connect **VCC** to 5V, **GND** to ground, and **OUT** to a digital input pin (e.g., pin 2). Use INPUT mode in your code.
+</GifStep>
 
 ### Pin Configuration
 

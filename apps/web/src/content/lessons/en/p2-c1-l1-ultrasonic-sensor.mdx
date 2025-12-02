@@ -6,6 +6,7 @@ difficulty: "intermediate"
 tags: ["ultrasonic", "HC-SR04", "distance", "echo", "sonar"]
 estimatedMinutes: 30
 hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
 ---
 
 # Ultrasonic Distance Sensor
@@ -26,6 +27,24 @@ In this lesson, you'll learn how ultrasonic sensors measure distance using sound
 </LessonChapter>
 
 <LessonChapter title="HC-SR04 Basics" id="hc-sr04-basics">
+
+<GifStep
+  stepNumber={1}
+  title="Connect VCC and GND"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=HC-SR04+Power+GIF"
+  alt="Connecting HC-SR04 power"
+>
+  Connect the **VCC** pin to Arduino's 5V and **GND** to ground. The sensor needs a stable 5V power supply to work correctly.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Connect Trig and Echo Pins"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=HC-SR04+Signal+GIF"
+  alt="Connecting HC-SR04 signal pins"
+>
+  Connect **Trig** to a digital output pin (e.g., pin 9) and **Echo** to a digital input pin (e.g., pin 10). These pins send and receive the ultrasonic signals.
+</GifStep>
 
 ### Pin Configuration
 
