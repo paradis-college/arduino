@@ -113,17 +113,18 @@ export const ExercisePinMapping: FC<ExercisePinMappingProps> = ({
                 value={mappings[pin] || ''}
                 onChange={(e) => handleMappingChange(pin, e.target.value)}
                 disabled={allCorrect}
-                className={`flex-1 px-3 py-2 rounded-lg border bg-surface text-text focus:outline-none focus:ring-2 focus:ring-primary ${
+                className={`flex-1 px-3 py-2 rounded-lg border bg-background text-text focus:outline-none focus:ring-2 focus:ring-primary ${
                   showResult
                     ? isCorrect
                       ? 'border-success'
                       : 'border-error'
                     : 'border-border'
                 }`}
+                style={{ colorScheme: 'light dark' }}
               >
-                <option value="">-- Select --</option>
+                <option value="" className="bg-background text-text">-- Select --</option>
                 {components.map((comp) => (
-                  <option key={comp} value={comp}>
+                  <option key={comp} value={comp} className="bg-background text-text">
                     {comp}
                   </option>
                 ))}

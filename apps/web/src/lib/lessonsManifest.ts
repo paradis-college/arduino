@@ -9,6 +9,7 @@
 import type { LessonMeta, CourseMeta, Language } from './types';
 
 /** All available lessons */
+// NOTE: YouTube URLs are placeholder examples. Replace with actual tutorial video URLs.
 export const lessonsManifest: LessonMeta[] = [
   // Romanian lessons
   {
@@ -21,6 +22,14 @@ export const lessonsManifest: LessonMeta[] = [
     tags: ['digitalWrite', 'delay', 'pinMode', 'LED'],
     estimatedMinutes: 20,
     tinkercadUrl: 'https://www.tinkercad.com/things/example-blink',
+    // TODO: Replace with actual Arduino LED blink tutorial video
+    youtubeUrl: 'https://www.youtube.com/watch?v=EXAMPLE_VIDEO_ID',
+    keyPoints: [
+      { title: 'Înțelegerea LED-urilor', description: 'Cum funcționează diodele emițătoare de lumină' },
+      { title: 'Funcția pinMode()', description: 'Configurarea pinilor ca intrări sau ieșiri' },
+      { title: 'Bazele digitalWrite()', description: 'Controlul semnalelor digitale de ieșire' },
+      { title: 'Folosirea delay()', description: 'Crearea temporizărilor în programele tale' },
+    ],
     hasInteractiveExercises: true,
     language: 'ro',
     order: 1,
@@ -35,6 +44,14 @@ export const lessonsManifest: LessonMeta[] = [
     tags: ['analogWrite', 'PWM', 'LED', 'fade'],
     estimatedMinutes: 25,
     tinkercadUrl: 'https://www.tinkercad.com/things/example-pwm',
+    // TODO: Replace with actual Arduino PWM tutorial video
+    youtubeUrl: 'https://www.youtube.com/watch?v=EXAMPLE_VIDEO_ID',
+    keyPoints: [
+      { title: 'Ce este PWM', description: 'Modularea lățimii pulsului explicată' },
+      { title: 'Funcția analogWrite()', description: 'Controlul valorilor analogice pe pinii PWM' },
+      { title: 'Ciclul de funcționare', description: 'Înțelegerea procentelor de luminozitate' },
+      { title: 'Efecte de fade', description: 'Crearea tranzițiilor de luminozitate fluide' },
+    ],
     hasInteractiveExercises: true,
     language: 'ro',
     order: 2,
@@ -50,6 +67,14 @@ export const lessonsManifest: LessonMeta[] = [
     tags: ['digitalWrite', 'delay', 'pinMode', 'LED'],
     estimatedMinutes: 20,
     tinkercadUrl: 'https://www.tinkercad.com/things/example-blink',
+    // TODO: Replace with actual Arduino LED blink tutorial video
+    youtubeUrl: 'https://www.youtube.com/watch?v=EXAMPLE_VIDEO_ID',
+    keyPoints: [
+      { title: 'Understanding LEDs', description: 'Learn how Light Emitting Diodes work and their polarity' },
+      { title: 'The pinMode() function', description: 'Configure pins as inputs or outputs' },
+      { title: 'digitalWrite() basics', description: 'Control digital output signals' },
+      { title: 'Using delay()', description: 'Create timing in your programs' },
+    ],
     hasInteractiveExercises: true,
     language: 'en',
     order: 1,
@@ -64,6 +89,14 @@ export const lessonsManifest: LessonMeta[] = [
     tags: ['analogWrite', 'PWM', 'LED', 'fade'],
     estimatedMinutes: 25,
     tinkercadUrl: 'https://www.tinkercad.com/things/example-pwm',
+    // TODO: Replace with actual Arduino PWM tutorial video
+    youtubeUrl: 'https://www.youtube.com/watch?v=EXAMPLE_VIDEO_ID',
+    keyPoints: [
+      { title: 'What is PWM', description: 'Pulse Width Modulation explained' },
+      { title: 'The analogWrite() function', description: 'Control analog values on PWM pins' },
+      { title: 'Duty cycle', description: 'Understanding brightness percentages' },
+      { title: 'Fade effects', description: 'Creating smooth brightness transitions' },
+    ],
     hasInteractiveExercises: true,
     language: 'en',
     order: 2,

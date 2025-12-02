@@ -11,6 +11,12 @@ export type Difficulty = 'beginner' | 'intermediate' | 'advanced';
 /** Theme options */
 export type Theme = 'light' | 'dark';
 
+/** Key point for lesson video section */
+export interface LessonKeyPoint {
+  title: string;
+  description?: string;
+}
+
 /** Lesson metadata from MDX frontmatter */
 export interface LessonMeta {
   id: string;
@@ -22,6 +28,8 @@ export interface LessonMeta {
   tags: string[];
   estimatedMinutes: number;
   tinkercadUrl?: string;
+  youtubeUrl?: string;
+  keyPoints?: LessonKeyPoint[];
   hasInteractiveExercises: boolean;
   language: Language;
   order?: number;

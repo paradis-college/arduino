@@ -6,22 +6,11 @@ import { useLanguage } from '@/i18n';
 import { getLesson, getAdjacentLessons, getCourse } from '@/lib/lessonsManifest';
 import { loadMDX } from '@/lib/mdxClient';
 import { getProjectsForLesson } from '@/lib/mockProjects';
-import { LessonHeader, LessonOutline, LessonFooterBiscuits } from '@/components/lessons';
-import { 
-  InfoBox, 
-  Checkpoint, 
-  TinkercadEmbed, 
-  ExerciseMultipleChoice, 
-  ExercisePinMapping,
-  YouTubeEmbed,
-  LessonIntro,
-  Chapter,
-  StepWithGif,
-  KeyPoints
-} from '@/components/interactive';
+import { LessonHeader, LessonOutline, LessonFooterBiscuits, LessonChapter, GifStep, LessonVideoSection } from '@/components/lessons';
+import { InfoBox, Checkpoint, TinkercadEmbed, ExerciseMultipleChoice, ExercisePinMapping, YouTubeEmbed } from '@/components/interactive';
 import { Button, Card, Breadcrumbs } from '@/components/common';
 import type { Language, OutlineHeading } from '@/lib/types';
-import type { BreadcrumbItem } from '@/components/common/Breadcrumbs';
+import type { BreadcrumbItem } from '@/components/common';
 
 // MDX components mapping - cast to satisfy MDXProvider's expected type
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -32,10 +21,9 @@ const mdxComponents: Record<string, ComponentType<any>> = {
   ExerciseMultipleChoice,
   ExercisePinMapping,
   YouTubeEmbed,
-  LessonIntro,
-  Chapter,
-  StepWithGif,
-  KeyPoints,
+  LessonChapter,
+  GifStep,
+  LessonVideoSection,
   // Add more components as needed
 };
 
@@ -127,10 +115,19 @@ export const LessonPage: FC = () => {
       {/* Main content */}
       <div className="flex-1 min-w-0">
         {/* Breadcrumbs */}
-        <Breadcrumbs items={breadcrumbItems} />
-        
+        <Breadcrumbs items={breadcrumbItems} className="mb-6" />
+
         {/* Header */}
         <LessonHeader lesson={lesson} totalCheckpoints={totalCheckpoints} />
+
+        {/* Video Section - automatically shown if lesson has youtubeUrl */}
+        {lesson.youtubeUrl && (
+          <LessonVideoSection
+            youtubeUrl={lesson.youtubeUrl}
+            videoTitle={lesson.title}
+            keyPoints={lesson.keyPoints}
+          />
+        )}
 
         {/* Content */}
         <div className="mdx-content">

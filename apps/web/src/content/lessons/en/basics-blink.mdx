@@ -12,24 +12,22 @@ videoId: "dQw4w9WgXcQ"
 
 # Basic LED Blink
 
-<LessonIntro videoId="dQw4w9WgXcQ" videoTitle="LED Blink Tutorial">
+In this lesson, you'll learn how to turn an LED on and off using Arduino. This is your first step into the world of electronics and microcontroller programming!
 
-<KeyPoints title="What You'll Learn">
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
 
 - How an LED works
 - How to use the `pinMode()` function
 - How to use the `digitalWrite()` function
 - How to use the `delay()` function
 
-</KeyPoints>
-
 <InfoBox type="info">
-  An LED (Light Emitting Diode) is an electronic component that emits light when electric current passes through it. This is your first step into the world of electronics!
+  An LED (Light Emitting Diode) is an electronic component that emits light when electric current passes through it.
 </InfoBox>
 
-</LessonIntro>
+</LessonChapter>
 
-<Chapter number={1} title="Required Components" id="required-components">
+<LessonChapter title="Required Components" id="required-components">
 
 For this project you'll need:
 
@@ -39,55 +37,52 @@ For this project you'll need:
 - Jumper wires
 - Breadboard
 
-<InfoBox type="tip">
-  If you're using Tinkercad, all these components are available in the virtual lab!
-</InfoBox>
+</LessonChapter>
 
-</Chapter>
-
-<Chapter number={2} title="Wiring Diagram" id="wiring-diagram">
+<LessonChapter title="Wiring Diagram" id="wiring-diagram">
 
 Connect the LED to pin 13 of the Arduino:
 
-<StepWithGif stepNumber={1} title="Connect the LED anode" gifUrl="/images/lessons/step1-led-anode.gif" gifAlt="Connecting LED anode to pin 13">
+<GifStep
+  stepNumber={1}
+  title="Connect the LED's long leg (anode)"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Step+1+GIF"
+  alt="Connecting LED anode to pin 13"
+>
+  The **long leg** of the LED is called the **anode** (positive terminal). Connect this leg directly to **pin 13** on your Arduino board. You can use a jumper wire to make this connection on a breadboard.
+</GifStep>
 
-Connect the **long leg (anode +)** of the LED to pin 13 on the Arduino. The anode is the positive terminal and is always the longer leg of the LED.
+<GifStep
+  stepNumber={2}
+  title="Connect the resistor to the short leg (cathode)"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Step+2+GIF"
+  alt="Connecting resistor to LED cathode"
+>
+  The **short leg** is the **cathode** (negative terminal). Connect one end of the **220Ω resistor** to this leg. The resistor limits the current flowing through the LED to prevent it from burning out.
+</GifStep>
 
-Make sure the connection is firm and the wire is properly inserted into the breadboard holes.
-
-</StepWithGif>
-
-<StepWithGif stepNumber={2} title="Connect the LED cathode to the resistor" gifUrl="/images/lessons/step2-led-resistor.gif" gifAlt="Connecting LED cathode to resistor">
-
-Connect the **short leg (cathode -)** to the resistor. The cathode is the negative terminal and is always the shorter leg.
-
-The resistor limits the current flowing through the LED to prevent it from burning out.
-
-</StepWithGif>
-
-<StepWithGif stepNumber={3} title="Connect the resistor to GND" gifUrl="/images/lessons/step3-gnd.gif" gifAlt="Connecting resistor to ground">
-
-Connect the **other end of the resistor** to the GND (Ground) pin on the Arduino. This completes the circuit.
-
-The current will flow from pin 13, through the LED, through the resistor, and back to ground.
-
-</StepWithGif>
+<GifStep
+  stepNumber={3}
+  title="Connect to Ground (GND)"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Step+3+GIF"
+  alt="Connecting resistor to ground"
+>
+  Connect the other end of the resistor to **GND** (Ground) on the Arduino. This completes the circuit, allowing current to flow from pin 13, through the LED, through the resistor, and back to ground.
+</GifStep>
 
 <InfoBox type="warning">
   Always use a resistor with an LED! Without a resistor, too much current can flow through the LED and permanently damage it.
 </InfoBox>
 
-</Chapter>
+</LessonChapter>
 
-<Chapter number={3} title="Tinkercad Simulation" id="tinkercad-simulation">
-
-Try the circuit in Tinkercad before building it with real components:
+<LessonChapter title="Tinkercad Simulation" id="tinkercad-simulation">
 
 <TinkercadEmbed url="https://www.tinkercad.com/things/example-blink" title="LED Blink Simulation" />
 
-</Chapter>
+</LessonChapter>
 
-<Chapter number={4} title="The Code" id="the-code">
+<LessonChapter title="The Code" id="the-code">
 
 ```cpp
 // Define the pin for the LED
@@ -113,7 +108,11 @@ void loop() {
 }
 ```
 
-### Understanding `pinMode(pin, mode)`
+</LessonChapter>
+
+<LessonChapter title="Code Explanation" id="code-explanation">
+
+### `pinMode(pin, mode)`
 
 This function configures a pin as either input (INPUT) or output (OUTPUT).
 
@@ -135,9 +134,9 @@ Pauses program execution for a specified number of milliseconds.
 
 <Checkpoint id="checkpoint-2" lessonKey="en/basics-blink" label="I understand digitalWrite() and delay()" />
 
-</Chapter>
+</LessonChapter>
 
-<Chapter number={5} title="Test Your Knowledge" id="test-your-knowledge">
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
 
 <ExerciseMultipleChoice
   id="quiz-1"
@@ -165,9 +164,9 @@ Pauses program execution for a specified number of milliseconds.
   correctIndex={0}
 />
 
-</Chapter>
+</LessonChapter>
 
-<Chapter number={6} title="Challenge" id="challenge">
+<LessonChapter title="Challenge" id="challenge">
 
 <InfoBox type="tip">
   Try changing the values in `delay()` to make the LED blink faster or slower. What happens if you use `delay(100)`?
@@ -175,9 +174,9 @@ Pauses program execution for a specified number of milliseconds.
 
 <Checkpoint id="checkpoint-3" lessonKey="en/basics-blink" label="I completed the lesson!" />
 
-</Chapter>
+</LessonChapter>
 
-<Chapter number={7} title="Summary" id="summary">
+<LessonChapter title="Summary" id="summary">
 
 In this lesson you learned:
 
@@ -188,4 +187,4 @@ In this lesson you learned:
 
 Congratulations! You're ready to move on to the next lesson about PWM LED control.
 
-</Chapter>
+</LessonChapter>

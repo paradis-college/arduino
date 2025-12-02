@@ -31,7 +31,7 @@ export const LessonIntro: FC<LessonIntroProps> = ({
       
       {/* Right side: YouTube video */}
       <div className="order-1 lg:order-2 lg:sticky lg:top-20">
-        <YouTubeEmbed videoId={videoId} title={videoTitle} />
+        <YouTubeEmbed url={videoId} title={videoTitle} />
       </div>
     </div>
   );
