@@ -127,3 +127,23 @@ pre code {
   background-color: var(--color-primary);
   color: white;
 }
+
+/* Form elements - ensure proper dark mode support */
+select,
+select option {
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+/* Ensure select dropdown options inherit theme colors */
+.theme-dark select,
+.theme-dark select option {
+  background-color: var(--color-background-alt);
+  color: var(--color-text);
+}
+
+.theme-light select,
+.theme-light select option {
+  background-color: var(--color-background);
+  color: var(--color-text);
+}

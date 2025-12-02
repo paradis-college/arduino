@@ -2,6 +2,7 @@
   "common": {
     "home": "Home",
     "courses": "Courses",
+    "projects": "Projects",
     "community": "Community",
     "login": "Login",
     "logout": "Logout",
@@ -52,10 +53,14 @@
     "checkpointCompleted": "Checkpoint completed!",
     "markComplete": "Mark as complete",
     "loadSimulation": "Load simulation",
+    "loadVideo": "Load video",
+    "keyPoints": "Key Points",
     "outline": "Outline",
     "nextLesson": "Next lesson",
     "previousLesson": "Previous lesson",
-    "communityProjects": "Community Projects"
+    "communityProjects": "Community Projects",
+    "keyPoints": "Key Points",
+    "watchVideo": "Watch the video"
   },
   "exercise": {
     "checkAnswer": "Check Answer",
