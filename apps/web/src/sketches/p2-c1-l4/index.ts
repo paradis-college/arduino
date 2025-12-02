@@ -1,0 +1,1 @@
+export { proximitySketch } from './proximity';

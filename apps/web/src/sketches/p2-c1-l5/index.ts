@@ -1,0 +1,1 @@
+export { irCommunicationSketch } from './irCommunication';
