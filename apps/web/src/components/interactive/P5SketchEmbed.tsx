@@ -1,13 +1,16 @@
-import { useEffect, useRef, type FC, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type FC, type ReactNode } from 'react';
 import type p5 from 'p5';
+import { getSketch, type SketchFunction } from '@/sketches/registry';
 
-export type SketchFunction = (p: p5) => void;
+export type { SketchFunction };
 
 export interface P5SketchEmbedProps {
-  /** Unique identifier for the sketch */
+  /** Unique identifier for the sketch (used for DOM id) */
   id: string;
-  /** The p5.js sketch function */
-  sketch: SketchFunction;
+  /** The p5.js sketch function - can be passed directly or use sketchId instead */
+  sketch?: SketchFunction;
+  /** String ID to look up sketch from registry - alternative to passing sketch directly */
+  sketchId?: string;
   /** Step number for ordering */
   stepNumber?: number;
   /** Brief title for the step */
@@ -30,6 +33,7 @@ export interface P5SketchEmbedProps {
 export const P5SketchEmbed: FC<P5SketchEmbedProps> = ({
   id,
   sketch,
+  sketchId,
   stepNumber,
   title,
   alt,
@@ -39,12 +43,21 @@ export const P5SketchEmbed: FC<P5SketchEmbedProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const p5InstanceRef = useRef<p5 | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  // Resolve the sketch function from either direct prop or registry
+  const resolvedSketch = sketch || (sketchId ? getSketch(sketchId) : undefined);
 
   useEffect(() => {
     let mounted = true;
 
     const initSketch = async () => {
       if (!containerRef.current || !mounted) return;
+
+      if (!resolvedSketch) {
+        setError(`Sketch not found: ${sketchId || 'no sketch provided'}`);
+        return;
+      }
 
       // Dynamically import p5 to avoid SSR issues
       const p5Module = await import('p5');
@@ -59,9 +72,10 @@ export const P5SketchEmbed: FC<P5SketchEmbedProps> = ({
       }
 
       // Create new p5 instance - the sketch function sets up its own setup/draw
-      const p5Instance = new P5(sketch, containerRef.current);
+      const p5Instance = new P5(resolvedSketch, containerRef.current);
 
       p5InstanceRef.current = p5Instance;
+      setError(null);
     };
 
     initSketch();
@@ -73,7 +87,7 @@ export const P5SketchEmbed: FC<P5SketchEmbedProps> = ({
         p5InstanceRef.current = null;
       }
     };
-  }, [sketch, width, height]);
+  }, [resolvedSketch, sketchId, width, height]);
 
   return (
     <div className="my-6 rounded-lg border border-border bg-surface overflow-hidden">
@@ -102,12 +116,21 @@ export const P5SketchEmbed: FC<P5SketchEmbedProps> = ({
           role="img"
           aria-label={alt || title || 'Interactive p5.js sketch'}
         >
-          <div
-            ref={containerRef}
-            id={id}
-            className="flex items-center justify-center"
-            style={{ minHeight: height }}
-          />
+          {error ? (
+            <div 
+              className="flex items-center justify-center text-error text-sm p-4"
+              style={{ minHeight: height }}
+            >
+              {error}
+            </div>
+          ) : (
+            <div
+              ref={containerRef}
+              id={id}
+              className="flex items-center justify-center"
+              style={{ minHeight: height }}
+            />
+          )}
         </div>
       </div>
 
