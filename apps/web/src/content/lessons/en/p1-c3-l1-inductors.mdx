@@ -38,14 +38,15 @@ In this lesson, you'll learn how inductors work - coils of wire that oppose chan
   Watch the current rise through the coil and see the magnetic field lines expand outward. The inductor stores energy in its magnetic field, resisting changes in current flow.
 </P5SketchEmbed>
 
-<GifStep
+<P5SketchEmbed
+  id="inductor-spike-animation"
+  sketchId="p1-c3-l1-inductor-spike"
   stepNumber={2}
-  title="Identify an Inductor"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Inductor+GIF"
-  alt="Identifying inductor components"
+  title="Inductor Voltage Spike"
+  alt="Sudden switch-off creates voltage spike spark across coil terminals"
 >
-  Inductors appear as coils of wire, often wound around a core. They're marked with their inductance value in Henrys (H), millihenrys (mH), or microhenrys (µH).
-</GifStep>
+  Watch what happens when current is suddenly cut! The collapsing magnetic field creates a dangerous voltage spike (back-EMF) that can spark across the terminals. This is why flyback diodes are essential.
+</P5SketchEmbed>
 
 ### Symbol and Units
 
@@ -69,14 +70,7 @@ Inductors are measured in **Henrys (H)**:
 
 <LessonChapter title="Opposing Current Changes" id="opposing-changes">
 
-<GifStep
-  stepNumber={2}
-  title="Watch Current Build Up"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Current+Buildup+GIF"
-  alt="Current building up in inductor"
->
-  When voltage is first applied, current rises slowly as the magnetic field builds. The inductor resists this change, causing a delay.
-</GifStep>
+
 
 ### Back-EMF
 
@@ -107,14 +101,7 @@ When current decreases:
 
 <LessonChapter title="Switch-Off Voltage Spikes" id="voltage-spikes">
 
-<GifStep
-  stepNumber={3}
-  title="Add a Flyback Diode"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Flyback+Diode+GIF"
-  alt="Adding flyback diode for protection"
->
-  Connect a diode in reverse across the inductor (cathode to positive). When current is cut, the diode provides a safe path for the collapsing energy.
-</GifStep>
+
 
 ### The Danger
 

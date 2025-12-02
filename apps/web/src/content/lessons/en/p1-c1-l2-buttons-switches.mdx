@@ -38,14 +38,15 @@ In this lesson, you'll learn how buttons and switches work, and how connecting t
   Click the button to toggle between open and closed states. When open, the gap blocks current flow and the LED stays dark. When closed, current flows and the LED lights up.
 </P5SketchEmbed>
 
-<GifStep
+<P5SketchEmbed
+  id="buttons-series-animation"
+  sketchId="p1-c1-l2-buttons-series"
   stepNumber={2}
-  title="Understanding Button Pins"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Button+Pins+GIF"
-  alt="Button pin configuration"
+  title="Buttons in Series (AND Logic)"
+  alt="Two buttons in series with LED lighting only when both pressed"
 >
-  Most tactile buttons have four pins arranged in two pairs. The pins on the same side are internally connected. When pressed, all four pins connect together.
-</GifStep>
+  Click both buttons to see AND logic in action. The LED only lights when BOTH buttons are pressed. If either button is open, the circuit is broken and no current flows.
+</P5SketchEmbed>
 
 ### Open vs Closed States
 
@@ -58,14 +59,15 @@ In this lesson, you'll learn how buttons and switches work, and how connecting t
 
 <LessonChapter title="Series Connection (AND Logic)" id="series-connection">
 
-<GifStep
-  stepNumber={2}
-  title="Wire Buttons in Series"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Series+Buttons+GIF"
-  alt="Wiring buttons in series"
+<P5SketchEmbed
+  id="buttons-parallel-animation"
+  sketchId="p1-c1-l2-buttons-parallel"
+  stepNumber={3}
+  title="Buttons in Parallel (OR Logic)"
+  alt="Two buttons in parallel with LED lighting when any button pressed"
 >
-  Connect the output of Button A to the input of Button B. Current must flow through both buttons to reach the LED.
-</GifStep>
+  Click either button to see OR logic. The LED lights when ANY button is pressed because current can flow through either path. Both buttons open = LED off.
+</P5SketchEmbed>
 
 When buttons are connected in **series**, the LED only turns on when **ALL** buttons are pressed.
 
@@ -89,14 +91,15 @@ This creates **AND logic**:
 
 <LessonChapter title="Parallel Connection (OR Logic)" id="parallel-connection">
 
-<GifStep
-  stepNumber={3}
-  title="Wire Buttons in Parallel"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Parallel+Buttons+GIF"
-  alt="Wiring buttons in parallel"
+<P5SketchEmbed
+  id="truth-table-animation"
+  sketchId="p1-c1-l2-truth-table"
+  stepNumber={4}
+  title="Live Truth Table"
+  alt="Live truth table highlighting based on current button states"
 >
-  Connect both buttons between the same two points. Either button can complete the circuit independently.
-</GifStep>
+  Toggle the buttons and watch the truth table highlight the current combination. See how AND and OR logic produce different outputs for each input state.
+</P5SketchEmbed>
 
 When buttons are connected in **parallel**, the LED turns on when **ANY** button is pressed.
 

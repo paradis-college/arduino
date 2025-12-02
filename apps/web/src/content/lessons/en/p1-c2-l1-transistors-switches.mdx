@@ -38,14 +38,15 @@ In this lesson, you'll learn how transistors work as electronic switches, allowi
   Use the slider to increase base current. Watch how a small base current unlocks a much larger collector-emitter flow, lighting up the load (LED/motor). The transistor acts as an electronic valve.
 </P5SketchEmbed>
 
-<GifStep
+<P5SketchEmbed
+  id="transistor-load-animation"
+  sketchId="p1-c2-l1-transistor-load"
   stepNumber={2}
-  title="Identify the Transistor Pins"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Transistor+Pins+GIF"
-  alt="Identifying transistor pins"
+  title="Transistor Switching a Load"
+  alt="Load (motor/LED) turning on/off as transistor saturates/cuts off"
 >
-  Looking at the flat side of a common NPN transistor (like 2N2222), the pins from left to right are typically: **Emitter**, **Base**, **Collector**. Always check the datasheet for your specific transistor!
-</GifStep>
+  Watch the load (motor or LED) turn on and off as the transistor switches. When base current flows, the transistor saturates and the load activates. Cut the base current and the transistor turns off.
+</P5SketchEmbed>
 
 ### Pin Identification
 
@@ -67,23 +68,7 @@ When a small current flows into the base:
 
 <LessonChapter title="Transistor as a Switch" id="transistor-switch">
 
-<GifStep
-  stepNumber={2}
-  title="Connect the Base Resistor"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Base+Resistor+GIF"
-  alt="Connecting base resistor"
->
-  Connect a **1kΩ resistor** between the Arduino pin and the transistor base. This limits the current and protects both the Arduino and transistor.
-</GifStep>
 
-<GifStep
-  stepNumber={3}
-  title="Connect the Load Circuit"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Load+Circuit+GIF"
-  alt="Connecting the load circuit"
->
-  Connect the positive side of your load (motor/LED strip) to the power supply, and the negative side to the transistor's collector. Connect the emitter to ground.
-</GifStep>
 
 ### Arduino to Motor Example
 
