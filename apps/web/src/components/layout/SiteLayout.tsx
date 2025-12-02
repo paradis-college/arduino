@@ -34,15 +34,15 @@ export const SiteLayout: FC<SiteLayoutProps> = ({ children, theme, onToggleTheme
             {/* Brand */}
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">A</span>
-                </div>
-                <span className="font-semibold text-lg text-text">Arduino Learn</span>
+                <span className="font-bold text-xl tracking-tight">
+                  <span className="text-primary">Paradis</span>
+                  <span className="text-text"> College</span>
+                </span>
               </div>
               <p className="text-text-secondary text-sm">
                 {language === 'ro'
-                  ? 'Platformă de învățare Arduino de la Paradis College'
-                  : 'Arduino learning platform by Paradis College'}
+                  ? 'Platformă de învățare Arduino'
+                  : 'Arduino Learning Platform'}
               </p>
             </div>
 
@@ -58,6 +58,14 @@ export const SiteLayout: FC<SiteLayoutProps> = ({ children, theme, onToggleTheme
                     className="text-text-secondary hover:text-primary transition-colors"
                   >
                     {t('common.courses')}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`/${language}/projects`}
+                    className="text-text-secondary hover:text-primary transition-colors"
+                  >
+                    {t('common.projects')}
                   </a>
                 </li>
                 <li>

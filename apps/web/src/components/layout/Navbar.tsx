@@ -24,6 +24,7 @@ export const Navbar: FC<NavbarProps> = ({ theme, onToggleTheme }) => {
   const navItems = [
     { key: 'home', labelKey: 'common.home', path: `/${currentLang}` },
     { key: 'courses', labelKey: 'common.courses', path: `/${currentLang}/courses` },
+    { key: 'projects', labelKey: 'common.projects', path: `/${currentLang}/projects` },
     { key: 'community', labelKey: 'common.community', path: `/${currentLang}/community` },
   ];
 
@@ -33,11 +34,9 @@ export const Navbar: FC<NavbarProps> = ({ theme, onToggleTheme }) => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to={`/${currentLang}`} className="flex items-center gap-2 shrink-0">
-            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm">A</span>
-            </div>
-            <span className="font-semibold text-lg text-text hidden sm:block">
-              Arduino Learn
+            <span className="font-bold text-xl tracking-tight">
+              <span className="text-primary">Paradis</span>
+              <span className="text-text"> College</span>
             </span>
           </Link>
 

@@ -7,11 +7,12 @@ tags: ["digitalWrite", "delay", "pinMode", "LED"]
 estimatedMinutes: 20
 tinkercadUrl: "https://www.tinkercad.com/things/example-blink"
 hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
 ---
 
 # Basic LED Blink
 
-In this lesson, you'll learn how to turn an LED on and off using Arduino. This is your first step into the world of electronics and microcontroller programming!
+<LessonIntro videoId="dQw4w9WgXcQ" videoTitle="LED Blink Tutorial">
 
 <LessonChapter title="What You'll Learn" id="what-youll-learn">
 
@@ -20,8 +21,10 @@ In this lesson, you'll learn how to turn an LED on and off using Arduino. This i
 - How to use the `digitalWrite()` function
 - How to use the `delay()` function
 
+</KeyPoints>
+
 <InfoBox type="info">
-  An LED (Light Emitting Diode) is an electronic component that emits light when electric current passes through it.
+  An LED (Light Emitting Diode) is an electronic component that emits light when electric current passes through it. This is your first step into the world of electronics!
 </InfoBox>
 
 </LessonChapter>
@@ -70,7 +73,7 @@ Connect the LED to pin 13 of the Arduino:
 </GifStep>
 
 <InfoBox type="warning">
-  Always use a resistor with an LED! Without a resistor, the LED can burn out.
+  Always use a resistor with an LED! Without a resistor, too much current can flow through the LED and permanently damage it.
 </InfoBox>
 
 </LessonChapter>
@@ -120,14 +123,14 @@ This function configures a pin as either input (INPUT) or output (OUTPUT).
 
 <Checkpoint id="checkpoint-1" lessonKey="en/basics-blink" label="I understand the pinMode() function" />
 
-### `digitalWrite(pin, value)`
+### Understanding `digitalWrite(pin, value)`
 
 Writes a digital value (HIGH or LOW) to a pin.
 
 - `HIGH` = 5V (LED on)
 - `LOW` = 0V (LED off)
 
-### `delay(ms)`
+### Understanding `delay(ms)`
 
 Pauses program execution for a specified number of milliseconds.
 

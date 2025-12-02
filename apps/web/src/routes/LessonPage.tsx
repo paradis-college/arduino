@@ -46,6 +46,9 @@ export const LessonPage: FC = () => {
   const lesson = getLesson(lessonSlug, currentLang);
   const { prev, next } = getAdjacentLessons(lessonSlug, currentLang);
   const relatedProjects = getProjectsForLesson(lessonSlug);
+  
+  // Get course info for breadcrumbs
+  const course = lesson ? getCourse(lesson.course, currentLang) : undefined;
 
   // Load MDX content
   useEffect(() => {
@@ -106,6 +109,21 @@ export const LessonPage: FC = () => {
   // Count total checkpoints (for progress bar)
   // TODO: Calculate from MDX content
   const totalCheckpoints = 3;
+
+  // Build breadcrumb items
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { label: t('common.home'), href: `/${currentLang}` },
+    { label: t('common.courses'), href: `/${currentLang}/courses` },
+  ];
+  
+  if (course) {
+    breadcrumbItems.push({ 
+      label: course.title, 
+      href: `/${currentLang}/courses/${course.slug}` 
+    });
+  }
+  
+  breadcrumbItems.push({ label: lesson.title });
 
   return (
     <div className="flex gap-8">

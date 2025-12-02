@@ -2,6 +2,7 @@
   "common": {
     "home": "Acasă",
     "courses": "Cursuri",
+    "projects": "Proiecte",
     "community": "Comunitate",
     "login": "Autentificare",
     "logout": "Deconectare",
@@ -57,7 +58,9 @@
     "outline": "Cuprins",
     "nextLesson": "Lecția următoare",
     "previousLesson": "Lecția anterioară",
-    "communityProjects": "Proiecte din comunitate"
+    "communityProjects": "Proiecte din comunitate",
+    "keyPoints": "Puncte cheie",
+    "watchVideo": "Urmărește videoclipul"
   },
   "exercise": {
     "checkAnswer": "Verifică răspunsul",
