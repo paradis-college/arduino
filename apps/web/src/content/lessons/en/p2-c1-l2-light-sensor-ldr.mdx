@@ -37,10 +37,12 @@ In this lesson, you'll learn how to use a Light Dependent Resistor (LDR) to dete
 Since Arduino can only read voltage (not resistance), we create a voltage divider:
 
 ```
-5V → [LDR] → [Analog Pin] → [10kΩ Resistor] → GND
+5V → [LDR] ─┬─→ [10kΩ Resistor] → GND
+            │
+            └─→ Analog Pin (A0)
 ```
 
-As light increases, LDR resistance drops, and voltage at the analog pin increases.
+The analog pin reads the voltage at the junction between the LDR and resistor. As light increases, LDR resistance drops, and voltage at the analog pin increases.
 
 <Checkpoint id="checkpoint-1" lessonKey="en/p2-c1-l2-light-sensor-ldr" label="I understand LDR basics" />
 
