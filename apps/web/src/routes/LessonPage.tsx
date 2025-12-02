@@ -81,21 +81,6 @@ export const LessonPage: FC = () => {
     return <Navigate to={`/${currentLang}/courses`} replace />;
   }
 
-  // Get course info for breadcrumbs
-  const course = getCourse(lesson.course, currentLang);
-
-  // Build breadcrumb items
-  const breadcrumbItems: BreadcrumbItem[] = [
-    { label: t('common.courses'), href: `/${currentLang}/courses` },
-  ];
-  if (course) {
-    breadcrumbItems.push({
-      label: course.title,
-      href: `/${currentLang}/courses/${course.slug}`,
-    });
-  }
-  breadcrumbItems.push({ label: lesson.title });
-
   // Static outline for now
   // TODO: Extract headings from MDX content dynamically
   const outlineHeadings: OutlineHeading[] = [
