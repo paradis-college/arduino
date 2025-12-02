@@ -89,9 +89,13 @@ import { angleTextSketch } from './p3-c4-l4/angleText';
 
 // Import all sketches - Path 4
 import { trafficLightSketch } from './p4-c1-l1/trafficLight';
+import { pedestrianButtonSketch } from './p4-c1-l1/pedestrianButton';
 import { smartPlantSketch } from './p4-c2-l1/smartPlant';
+import { waterButtonSketch } from './p4-c2-l1/waterButton';
 import { burglarAlarmSketch } from './p4-c3-l1/burglarAlarm';
+import { armedStateSketch } from './p4-c3-l1/armedState';
 import { simpleRobotSketch } from './p4-c4-l1/simpleRobot';
+import { obstacleAvoidanceSketch } from './p4-c4-l1/obstacleAvoidance';
 
 // Import all sketches - Path 5
 import { serialSketch } from './p5-c1-l1/serial';
@@ -197,9 +201,13 @@ export const sketchRegistry: Record<string, SketchFunction> = {
   
   // Path 4: Advanced Projects
   'p4-c1-l1-traffic-light': trafficLightSketch,
+  'p4-c1-l1-pedestrian-button': pedestrianButtonSketch,
   'p4-c2-l1-smart-plant': smartPlantSketch,
+  'p4-c2-l1-water-button': waterButtonSketch,
   'p4-c3-l1-burglar-alarm': burglarAlarmSketch,
+  'p4-c3-l1-armed-state': armedStateSketch,
   'p4-c4-l1-simple-robot': simpleRobotSketch,
+  'p4-c4-l1-obstacle-avoidance': obstacleAvoidanceSketch,
   
   // Path 5: Networking
   'p5-c1-l1-serial': serialSketch,
