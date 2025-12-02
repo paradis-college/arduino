@@ -1,0 +1,176 @@
+---
+id: p4-c1-l1-traffic-light-controller
+title: "Project – Traffic Light Controller"
+course: "traffic-light-controller"
+difficulty: "intermediate"
+tags: ["LED", "state machine", "timing", "project", "traffic light"]
+estimatedMinutes: 45
+hasInteractiveExercises: true
+---
+
+# Project – Traffic Light Controller
+
+In this project, you'll build a complete traffic light intersection controller with timed phases and pedestrian button handling.
+
+<LessonChapter title="What You'll Build" id="what-youll-build">
+
+- A working traffic light with Red, Yellow, Green LEDs
+- State-based timing logic
+- Pedestrian crossing button
+- Phase sequencing
+
+<InfoBox type="info">
+  Traffic lights are excellent examples of state machines - systems that transition between defined states based on timing and inputs!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Components Needed" id="components-needed">
+
+- Arduino Uno
+- 3x Red LEDs, 3x Yellow LEDs, 3x Green LEDs
+- 9x 220Ω resistors
+- 1x Push button (pedestrian crossing)
+- Breadboard and jumper wires
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p4-c1-l1-traffic-light-controller" label="I have gathered the components" />
+
+</LessonChapter>
+
+<LessonChapter title="State Machine Concept" id="state-machine">
+
+### Traffic Light States
+
+| State | Main Road | Side Road | Duration |
+|-------|-----------|-----------|----------|
+| 1 | GREEN | RED | 5 seconds |
+| 2 | YELLOW | RED | 2 seconds |
+| 3 | RED | RED | 1 second |
+| 4 | RED | GREEN | 5 seconds |
+| 5 | RED | YELLOW | 2 seconds |
+| 6 | RED | RED | 1 second |
+| (repeat) | | | |
+
+### Pedestrian Interrupt
+
+When button pressed during green phase:
+1. Shorten green phase
+2. Go to yellow immediately
+3. All red for pedestrian crossing
+4. Resume normal cycle
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p4-c1-l1-traffic-light-controller" label="I understand the state machine" />
+
+</LessonChapter>
+
+<LessonChapter title="Code Structure" id="code-structure">
+
+### Pin Definitions
+
+```cpp
+// Main road lights
+const int MAIN_RED = 2;
+const int MAIN_YELLOW = 3;
+const int MAIN_GREEN = 4;
+
+// Side road lights
+const int SIDE_RED = 5;
+const int SIDE_YELLOW = 6;
+const int SIDE_GREEN = 7;
+
+// Pedestrian button
+const int PED_BUTTON = 8;
+
+int currentState = 1;
+unsigned long stateStartTime;
+bool pedestrianWaiting = false;
+```
+
+### State Timing
+
+```cpp
+const unsigned long STATE_TIMES[] = {
+  0,     // Not used (states start at 1)
+  5000,  // State 1: Main green
+  2000,  // State 2: Main yellow
+  1000,  // State 3: All red
+  5000,  // State 4: Side green
+  2000,  // State 5: Side yellow
+  1000   // State 6: All red
+};
+```
+
+### Main Loop
+
+```cpp
+void loop() {
+  checkPedestrianButton();
+  
+  unsigned long elapsed = millis() - stateStartTime;
+  unsigned long stateTime = STATE_TIMES[currentState];
+  
+  // Shorten green if pedestrian waiting
+  if (pedestrianWaiting && (currentState == 1 || currentState == 4)) {
+    stateTime = min(stateTime, 2000UL);
+  }
+  
+  if (elapsed >= stateTime) {
+    nextState();
+  }
+  
+  updateLights();
+}
+```
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a top-down view of an intersection with animated traffic lights. A timeline displays the current phase. Click the pedestrian button to see how it affects the light sequence.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p4-c1-l1-traffic-light-controller"
+  question="Why is there an 'all red' state between green phases?"
+  options={[
+    { id: "a", text: "To save power" },
+    { id: "b", text: "To allow intersection to clear before other direction goes green" },
+    { id: "c", text: "It's not necessary" },
+    { id: "d", text: "To reset the timer" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p4-c1-l1-traffic-light-controller"
+  question="What programming pattern is used for traffic light control?"
+  options={[
+    { id: "a", text: "Object-oriented programming" },
+    { id: "b", text: "Recursion" },
+    { id: "c", text: "State machine" },
+    { id: "d", text: "Functional programming" }
+  ]}
+  correctIndex={2}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this project you learned:
+
+- ✅ State machines manage traffic light phases
+- ✅ Timing controls phase duration
+- ✅ External input (button) can modify state transitions
+- ✅ Safety states (all red) prevent collisions
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p4-c1-l1-traffic-light-controller" label="I completed the project!" />
+
+</LessonChapter>

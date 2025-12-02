@@ -1,0 +1,193 @@
+---
+id: p5-c1-l1-serial-communication
+title: "Serial Communication Basics"
+course: "serial-communication"
+difficulty: "intermediate"
+tags: ["Serial", "UART", "baud rate", "communication"]
+estimatedMinutes: 30
+hasInteractiveExercises: true
+---
+
+# Serial Communication Basics
+
+In this lesson, you'll learn how Arduino communicates with your computer via serial - the foundation for debugging and data exchange.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Serial.begin(), Serial.print(), Serial.read()
+- Understanding baud rate
+- Simple text protocols
+- Serial Monitor usage
+
+<InfoBox type="info">
+  Serial communication is your window into Arduino's mind - it lets you see what's happening inside your code!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Serial Basics" id="serial-basics">
+
+### Setting Up Serial
+
+```cpp
+void setup() {
+  Serial.begin(9600);  // Start serial at 9600 baud
+  Serial.println("Arduino Ready!");
+}
+```
+
+### Baud Rate
+
+Baud rate = bits per second
+- Both sender and receiver must match
+- Common rates: 9600, 115200
+- Higher = faster, but more error-prone
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p5-c1-l1-serial-communication" label="I understand serial setup" />
+
+</LessonChapter>
+
+<LessonChapter title="Sending Data" id="sending-data">
+
+### Print Functions
+
+```cpp
+Serial.print("Hello");      // No newline
+Serial.println("World");    // With newline
+Serial.print(42);           // Print number
+Serial.println(3.14);       // Print float
+
+// Formatted output
+int temp = 25;
+Serial.print("Temperature: ");
+Serial.print(temp);
+Serial.println("°C");
+```
+
+### Output
+
+```
+HelloWorld
+42
+3.14
+Temperature: 25°C
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p5-c1-l1-serial-communication" label="I understand sending data" />
+
+</LessonChapter>
+
+<LessonChapter title="Receiving Data" id="receiving-data">
+
+### Reading Characters
+
+```cpp
+void loop() {
+  if (Serial.available() > 0) {
+    char received = Serial.read();
+    Serial.print("Received: ");
+    Serial.println(received);
+  }
+}
+```
+
+### Reading Strings
+
+```cpp
+void loop() {
+  if (Serial.available() > 0) {
+    String message = Serial.readStringUntil('\n');
+    Serial.print("Got: ");
+    Serial.println(message);
+    
+    // React to commands
+    if (message == "ON") {
+      digitalWrite(LED_PIN, HIGH);
+    } else if (message == "OFF") {
+      digitalWrite(LED_PIN, LOW);
+    }
+  }
+}
+```
+
+<InfoBox type="tip">
+  Use Serial.readStringUntil('\\n') to read complete lines. Make sure Serial Monitor is set to "Newline" ending!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Simple Protocols" id="simple-protocols">
+
+### Command:Value Format
+
+```cpp
+void processCommand(String cmd) {
+  int colonPos = cmd.indexOf(':');
+  if (colonPos > 0) {
+    String command = cmd.substring(0, colonPos);
+    String value = cmd.substring(colonPos + 1);
+    
+    if (command == "LED") {
+      int brightness = value.toInt();
+      analogWrite(LED_PIN, brightness);
+    } else if (command == "SERVO") {
+      int angle = value.toInt();
+      servo.write(angle);
+    }
+  }
+}
+// Usage: "LED:128" sets LED to 50%, "SERVO:90" moves servo
+```
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows PC and Arduino icons with text packets flowing between them. A virtual serial console displays sent and received strings as you interact with the simulated communication.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p5-c1-l1-serial-communication"
+  question="What does Serial.begin(9600) configure?"
+  options={[
+    { id: "a", text: "Pin 9600 for serial" },
+    { id: "b", text: "Communication speed to 9600 bits/second" },
+    { id: "c", text: "Serial timeout to 9600ms" },
+    { id: "d", text: "Buffer size to 9600 bytes" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p5-c1-l1-serial-communication"
+  question="What does Serial.available() return?"
+  options={[
+    { id: "a", text: "True or false" },
+    { id: "b", text: "The next character" },
+    { id: "c", text: "Number of bytes waiting to be read" },
+    { id: "d", text: "Baud rate" }
+  ]}
+  correctIndex={2}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Serial.begin() starts communication at specified baud rate
+- ✅ Serial.print/println() sends data to computer
+- ✅ Serial.read() receives data from computer
+- ✅ Simple text protocols enable command/control
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p5-c1-l1-serial-communication" label="I completed the lesson!" />
+
+</LessonChapter>

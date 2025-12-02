@@ -1,0 +1,172 @@
+---
+id: p2-c2-l3-gas-sensors-mq
+title: "Gas Level Sensors (MQ)"
+course: "environmental-monitoring-sensors"
+difficulty: "intermediate"
+tags: ["MQ", "gas", "air quality", "smoke", "analog"]
+estimatedMinutes: 30
+hasInteractiveExercises: true
+---
+
+# Gas Level Sensors (MQ)
+
+In this lesson, you'll learn how MQ gas sensors work and how to build simple air quality indicators.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- MQ sensor basics and warm-up requirements
+- Analog output vs gas concentration relationship
+- Building simple air quality indicators
+- Different MQ sensor types
+
+<InfoBox type="info">
+  MQ sensors use a heating element and a sensing material that changes resistance when exposed to specific gases.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="MQ Sensor Types" id="mq-sensor-types">
+
+### Common MQ Sensors
+
+| Sensor | Detects |
+|--------|---------|
+| MQ-2 | Smoke, LPG, propane, methane |
+| MQ-3 | Alcohol, ethanol |
+| MQ-4 | Methane, natural gas |
+| MQ-5 | LPG, natural gas |
+| MQ-6 | LPG, butane |
+| MQ-7 | Carbon monoxide |
+| MQ-135 | Air quality (NH3, NOx, benzene) |
+
+### Module Pins
+
+Most MQ modules have 4 pins:
+- **VCC**: 5V
+- **GND**: Ground
+- **DO**: Digital output (threshold trigger)
+- **AO**: Analog output (continuous reading)
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p2-c2-l3-gas-sensors-mq" label="I understand MQ sensor types" />
+
+</LessonChapter>
+
+<LessonChapter title="Warm-Up Period" id="warm-up">
+
+### Why Warm-Up Is Critical
+
+MQ sensors have a heating element that must reach operating temperature:
+- **First use**: 24-48 hours for "burn-in"
+- **Each power-on**: 2-5 minutes warm-up
+- Readings are unreliable until stabilized
+
+```cpp
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Warming up sensor...");
+  delay(180000);  // 3 minutes
+  Serial.println("Sensor ready!");
+}
+```
+
+<InfoBox type="warning">
+  Don't trust readings during the warm-up period! The sensor needs time to reach stable operating temperature.
+</InfoBox>
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p2-c2-l3-gas-sensors-mq" label="I understand warm-up requirements" />
+
+</LessonChapter>
+
+<LessonChapter title="Reading Gas Levels" id="reading-gas-levels">
+
+### Analog Output
+
+```cpp
+const int MQ_PIN = A0;
+
+void loop() {
+  int gasValue = analogRead(MQ_PIN);
+  
+  Serial.print("Gas level: ");
+  Serial.println(gasValue);
+  
+  delay(1000);
+}
+```
+
+### Air Quality Zones
+
+```cpp
+void checkAirQuality(int value) {
+  if (value < 200) {
+    Serial.println("🟢 Good air quality");
+  } else if (value < 400) {
+    Serial.println("🟡 Moderate - ventilate");
+  } else {
+    Serial.println("🔴 Poor - danger!");
+    // Trigger alarm
+  }
+}
+```
+
+### Calibration
+
+For accurate PPM readings, you need:
+1. Clean air baseline (Ro value)
+2. Sensor characteristic curves from datasheet
+3. Mathematical conversion
+
+For simple projects, relative readings (low/medium/high) work well.
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a gas sensor with drifting gas cloud particles. Watch the concentration bar change and see the air quality indicator move between green, yellow, and red zones.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p2-c2-l3-gas-sensors-mq"
+  question="Why do MQ sensors need a warm-up period?"
+  options={[
+    { id: "a", text: "To connect to WiFi" },
+    { id: "b", text: "The heating element needs to reach operating temperature" },
+    { id: "c", text: "To calibrate with atmospheric pressure" },
+    { id: "d", text: "Warm-up is optional" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p2-c2-l3-gas-sensors-mq"
+  question="Which MQ sensor detects carbon monoxide?"
+  options={[
+    { id: "a", text: "MQ-2" },
+    { id: "b", text: "MQ-3" },
+    { id: "c", text: "MQ-7" },
+    { id: "d", text: "MQ-135" }
+  ]}
+  correctIndex={2}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Different MQ sensors detect different gases
+- ✅ Warm-up period is critical for accurate readings
+- ✅ Use analog output for continuous gas level monitoring
+- ✅ Simple zone-based indicators work well for air quality
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p2-c2-l3-gas-sensors-mq" label="I completed the lesson!" />
+
+</LessonChapter>

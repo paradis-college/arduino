@@ -1,0 +1,191 @@
+---
+id: p3-c1-l4-understanding-delay
+title: "Understanding delay() and Timing"
+course: "embedded-programming-basics"
+difficulty: "beginner"
+tags: ["delay", "timing", "millis", "blocking", "non-blocking"]
+estimatedMinutes: 25
+hasInteractiveExercises: true
+---
+
+# Understanding delay() and Timing
+
+In this lesson, you'll learn how `delay()` works, its impact on responsiveness, and get a preview of non-blocking timing techniques.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- How `delay()` pauses your program
+- Impact of blocking delays on responsiveness
+- Preview of non-blocking timing with `millis()`
+- When to use delay vs millis
+
+<InfoBox type="info">
+  Understanding timing is crucial for responsive Arduino projects. delay() is simple but has important limitations!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="How delay() Works" id="how-delay-works">
+
+### Blocking Behavior
+
+When `delay()` is called:
+1. Arduino completely stops executing code
+2. Waits for the specified time
+3. Then continues to the next line
+
+```cpp
+void loop() {
+  digitalWrite(13, HIGH);
+  delay(5000);  // BLOCKED for 5 seconds!
+  digitalWrite(13, LOW);
+  delay(5000);  // BLOCKED again!
+}
+```
+
+During those 5 seconds, Arduino can't:
+- Read buttons
+- Update sensors
+- Respond to serial commands
+- Do anything else!
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p3-c1-l4-understanding-delay" label="I understand delay blocking" />
+
+</LessonChapter>
+
+<LessonChapter title="Impact on Responsiveness" id="impact-responsiveness">
+
+### The Problem
+
+```cpp
+void loop() {
+  // Check button - might miss presses!
+  if (digitalRead(BUTTON_PIN) == LOW) {
+    doSomething();
+  }
+  
+  delay(2000);  // Button won't respond for 2 seconds!
+}
+```
+
+### Visual Example
+
+```
+Time:    0s   1s   2s   3s   4s   5s
+         |----delay----|----delay----|
+Button:     X    X         X
+         (missed!)  (missed!)   (detected!)
+```
+
+<InfoBox type="warning">
+  Long delays make your project feel sluggish. Users expect immediate response to button presses!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Preview: Non-Blocking Timing" id="non-blocking-preview">
+
+### The millis() Function
+
+`millis()` returns milliseconds since Arduino started:
+
+```cpp
+unsigned long currentTime = millis();
+```
+
+### Blink Without Delay
+
+```cpp
+unsigned long previousMillis = 0;
+const long interval = 1000;
+int ledState = LOW;
+
+void loop() {
+  unsigned long currentMillis = millis();
+  
+  if (currentMillis - previousMillis >= interval) {
+    previousMillis = currentMillis;
+    ledState = !ledState;
+    digitalWrite(13, ledState);
+  }
+  
+  // Other code runs freely here!
+  checkButton();
+  readSensors();
+}
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p3-c1-l4-understanding-delay" label="I understand non-blocking timing concept" />
+
+</LessonChapter>
+
+<LessonChapter title="When to Use Each" id="when-to-use">
+
+### Use delay() When:
+
+- Simple projects with one task
+- Learning and testing
+- Short delays (< 100ms) where responsiveness isn't critical
+
+### Use millis() When:
+
+- Multiple things need to happen
+- Responsive input is needed
+- Professional/production projects
+
+<InfoBox type="tip">
+  Start with delay() to understand timing, then learn millis() for more complex projects!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a timeline with CPU "blocked" segments highlighted during long delays. Watch how other tasks (button check, sensor read) are paused during the delay period.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p3-c1-l4-understanding-delay"
+  question="What happens during delay(5000)?"
+  options={[
+    { id: "a", text: "Arduino runs other code while waiting" },
+    { id: "b", text: "Arduino completely stops for 5 seconds" },
+    { id: "c", text: "Only the LED code pauses" },
+    { id: "d", text: "Button presses are queued" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p3-c1-l4-understanding-delay"
+  question="What does millis() return?"
+  options={[
+    { id: "a", text: "Current clock time" },
+    { id: "b", text: "Milliseconds since Arduino started" },
+    { id: "c", text: "Seconds since last delay" },
+    { id: "d", text: "CPU speed in MHz" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ delay() blocks ALL code execution
+- ✅ Long delays make projects unresponsive
+- ✅ millis() enables non-blocking timing
+- ✅ Use delay() for simple projects, millis() for complex ones
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p3-c1-l4-understanding-delay" label="I completed the lesson!" />
+
+</LessonChapter>

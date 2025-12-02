@@ -1,0 +1,184 @@
+---
+id: p3-c4-l2-buzzer-tones
+title: "Buzzer and Tones"
+course: "working-with-outputs"
+difficulty: "intermediate"
+tags: ["buzzer", "tone", "music", "frequency", "sound"]
+estimatedMinutes: 25
+hasInteractiveExercises: true
+---
+
+# Buzzer and Tones
+
+In this lesson, you'll learn how to make sounds with buzzers - from simple beeps to musical notes!
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Active vs passive buzzer differences
+- Using `tone()` and `noTone()` functions
+- Mapping musical notes to frequencies
+- Creating simple melodies
+
+<InfoBox type="info">
+  Sound adds a whole new dimension to your projects - alarms, feedback beeps, and even music!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Buzzer Types" id="buzzer-types">
+
+### Active Buzzer
+
+- Has internal oscillator
+- Just apply power → makes sound
+- One fixed tone/frequency
+- Use with `digitalWrite()`
+
+### Passive Buzzer
+
+- No internal oscillator
+- Requires PWM signal to generate sound
+- Can play different frequencies
+- Use with `tone()` function
+
+<InfoBox type="tip">
+  For musical projects, use a passive buzzer - it can play any frequency you want!
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p3-c4-l2-buzzer-tones" label="I understand buzzer types" />
+
+</LessonChapter>
+
+<LessonChapter title="tone() Function" id="tone-function">
+
+### Syntax
+
+```cpp
+tone(pin, frequency);           // Play indefinitely
+tone(pin, frequency, duration); // Play for duration ms
+noTone(pin);                    // Stop the tone
+```
+
+- `pin`: The buzzer pin
+- `frequency`: Hz (262 = middle C)
+- `duration`: Milliseconds (optional)
+
+### Simple Beep
+
+```cpp
+const int BUZZER_PIN = 8;
+
+void setup() {
+  // No pinMode needed for tone()
+}
+
+void loop() {
+  tone(BUZZER_PIN, 1000, 500);  // 1kHz for 500ms
+  delay(1000);
+}
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p3-c4-l2-buzzer-tones" label="I understand tone() function" />
+
+</LessonChapter>
+
+<LessonChapter title="Musical Notes" id="musical-notes">
+
+### Note Frequencies (Hz)
+
+```cpp
+#define NOTE_C4  262
+#define NOTE_D4  294
+#define NOTE_E4  330
+#define NOTE_F4  349
+#define NOTE_G4  392
+#define NOTE_A4  440
+#define NOTE_B4  494
+#define NOTE_C5  523
+```
+
+### Playing a Scale
+
+```cpp
+int melody[] = {NOTE_C4, NOTE_D4, NOTE_E4, NOTE_F4, 
+                NOTE_G4, NOTE_A4, NOTE_B4, NOTE_C5};
+int noteDuration = 250;
+
+void playScale() {
+  for (int i = 0; i < 8; i++) {
+    tone(BUZZER_PIN, melody[i], noteDuration);
+    delay(noteDuration + 50);  // Gap between notes
+  }
+  noTone(BUZZER_PIN);
+}
+```
+
+### Simple Melody
+
+```cpp
+// Twinkle Twinkle Little Star
+int melody[] = {NOTE_C4, NOTE_C4, NOTE_G4, NOTE_G4, 
+                NOTE_A4, NOTE_A4, NOTE_G4};
+int durations[] = {250, 250, 250, 250, 250, 250, 500};
+
+void playMelody() {
+  for (int i = 0; i < 7; i++) {
+    tone(BUZZER_PIN, melody[i], durations[i]);
+    delay(durations[i] + 50);
+  }
+  noTone(BUZZER_PIN);
+}
+```
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows piano keys (C, D, E, F, G, A, B, C) that you can click. Each key plays its corresponding tone frequency and shows a simple waveform visualization.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p3-c4-l2-buzzer-tones"
+  question="Which type of buzzer can play different frequencies?"
+  options={[
+    { id: "a", text: "Active buzzer" },
+    { id: "b", text: "Passive buzzer" },
+    { id: "c", text: "Both can play any frequency" },
+    { id: "d", text: "Neither can change frequency" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p3-c4-l2-buzzer-tones"
+  question="What is the frequency of the note A4 (concert pitch)?"
+  options={[
+    { id: "a", text: "262 Hz" },
+    { id: "b", text: "440 Hz" },
+    { id: "c", text: "1000 Hz" },
+    { id: "d", text: "330 Hz" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Active buzzers have fixed tone, passive are programmable
+- ✅ `tone(pin, freq, duration)` plays sounds
+- ✅ Musical notes map to specific frequencies
+- ✅ Arrays can store melodies as frequency sequences
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p3-c4-l2-buzzer-tones" label="I completed the lesson!" />
+
+</LessonChapter>

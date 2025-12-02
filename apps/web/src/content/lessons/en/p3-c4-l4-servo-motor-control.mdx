@@ -1,0 +1,214 @@
+---
+id: p3-c4-l4-servo-motor-control
+title: "Servo Motor Control"
+course: "working-with-outputs"
+difficulty: "intermediate"
+tags: ["servo", "Servo library", "angle", "position control"]
+estimatedMinutes: 25
+hasInteractiveExercises: true
+---
+
+# Servo Motor Control
+
+In this lesson, you'll learn how to control servo motors for precise angular positioning.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Servo vs DC motor differences
+- Using the Servo library
+- Mapping input to angles
+- Practical servo applications
+
+<InfoBox type="info">
+  Servos are motors that move to a specific angle and hold position - perfect for robotic arms, camera mounts, and automated mechanisms!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Servo vs DC Motor" id="servo-vs-dc">
+
+### DC Motor
+
+- Spins continuously
+- Speed control (not position)
+- Needs encoder for position feedback
+- Simple wiring
+
+### Servo Motor
+
+- Moves to specific angle (0-180°)
+- Built-in position feedback
+- Three wires: power, ground, signal
+- Holds position automatically
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p3-c4-l4-servo-motor-control" label="I understand servo vs DC motor" />
+
+</LessonChapter>
+
+<LessonChapter title="Servo Wiring" id="servo-wiring">
+
+### Three-Wire Connection
+
+| Wire Color | Connection |
+|------------|------------|
+| Red/Orange | 5V (or external 5-6V) |
+| Brown/Black | GND |
+| Yellow/Orange/White | Signal (any digital pin) |
+
+### Power Considerations
+
+- Small servos: Can use Arduino 5V
+- Multiple or large servos: Use external 5V power supply
+- Always share ground between Arduino and external supply
+
+<InfoBox type="warning">
+  Large servos can draw 500mA+ and may cause Arduino to reset if powered from USB. Use external power for reliability!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Servo Library" id="servo-library">
+
+### Basic Usage
+
+```cpp
+#include <Servo.h>
+
+Servo myServo;
+
+void setup() {
+  myServo.attach(9);  // Attach to pin 9
+}
+
+void loop() {
+  myServo.write(0);    // Move to 0 degrees
+  delay(1000);
+  myServo.write(90);   // Move to 90 degrees
+  delay(1000);
+  myServo.write(180);  // Move to 180 degrees
+  delay(1000);
+}
+```
+
+### Key Functions
+
+- `attach(pin)` - Connect servo to a pin
+- `write(angle)` - Move to angle (0-180)
+- `read()` - Get current angle
+- `detach()` - Disconnect servo
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p3-c4-l4-servo-motor-control" label="I understand the Servo library" />
+
+</LessonChapter>
+
+<LessonChapter title="Mapping Input to Angle" id="mapping-input">
+
+### Potentiometer Control
+
+```cpp
+#include <Servo.h>
+
+Servo myServo;
+const int POT_PIN = A0;
+
+void setup() {
+  myServo.attach(9);
+}
+
+void loop() {
+  int potValue = analogRead(POT_PIN);
+  int angle = map(potValue, 0, 1023, 0, 180);
+  myServo.write(angle);
+  delay(15);  // Small delay for servo to move
+}
+```
+
+### Button Controlled Sweep
+
+```cpp
+if (digitalRead(BTN_LEFT) == LOW) {
+  currentAngle = max(0, currentAngle - 5);
+}
+if (digitalRead(BTN_RIGHT) == LOW) {
+  currentAngle = min(180, currentAngle + 5);
+}
+myServo.write(currentAngle);
+```
+
+</LessonChapter>
+
+<LessonChapter title="Smooth Sweep" id="smooth-sweep">
+
+### Gradual Movement
+
+```cpp
+void smoothSweep() {
+  // Sweep from 0 to 180
+  for (int angle = 0; angle <= 180; angle += 1) {
+    myServo.write(angle);
+    delay(15);
+  }
+  // Sweep back from 180 to 0
+  for (int angle = 180; angle >= 0; angle -= 1) {
+    myServo.write(angle);
+    delay(15);
+  }
+}
+```
+
+<InfoBox type="tip">
+  Smaller delay values make the servo move faster, but too fast may skip positions. 15ms is a good starting point.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a servo arm that rotates from 0° to 180° based on a slider. The current angle is displayed numerically, and you can see how the arm position corresponds to the angle value.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p3-c4-l4-servo-motor-control"
+  question="What is the typical angle range for a standard servo?"
+  options={[
+    { id: "a", text: "0° to 90°" },
+    { id: "b", text: "0° to 180°" },
+    { id: "c", text: "0° to 360°" },
+    { id: "d", text: "-90° to 90°" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p3-c4-l4-servo-motor-control"
+  question="Which library function moves a servo to a specific angle?"
+  options={[
+    { id: "a", text: "servo.move()" },
+    { id: "b", text: "servo.angle()" },
+    { id: "c", text: "servo.write()" },
+    { id: "d", text: "servo.position()" }
+  ]}
+  correctIndex={2}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Servos move to specific angles (0-180°)
+- ✅ Use the Servo library's `attach()` and `write()` functions
+- ✅ Map potentiometer values to servo angles
+- ✅ Use loops for smooth sweeping motions
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p3-c4-l4-servo-motor-control" label="I completed the lesson!" />
+
+</LessonChapter>

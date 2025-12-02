@@ -11,6 +11,9 @@ import type { LessonMeta, CourseMeta, Language } from './types';
 /** All available lessons - currently placeholder for existing content */
 // NOTE: YouTube URLs are placeholder examples. Replace with actual tutorial video URLs.
 export const lessonsManifest: LessonMeta[] = [
+  // ==========================================
+  // EXISTING LESSONS (keep for backward compatibility)
+  // ==========================================
   // Romanian lessons - Arduino Basics - Embedded Programming Basics
   {
     id: 'basics-blink-ro',
@@ -97,6 +100,85 @@ export const lessonsManifest: LessonMeta[] = [
     language: 'en',
     order: 3,
   },
+
+  // ==========================================
+  // PATH 1: ELECTRONIC ENGINEERING - English
+  // ==========================================
+  // Course: Passive Components
+  { id: 'p1-c1-l1-leds-resistors-en', slug: 'p1-c1-l1-leds-resistors', title: 'How LEDs and Resistors Work', description: 'Learn V/I/R, LED polarity, and resistor calculations.', course: 'passive-components', difficulty: 'beginner', tags: ['LED', 'resistor', 'V/I/R', 'polarity'], estimatedMinutes: 25, hasInteractiveExercises: true, language: 'en', order: 1 },
+  { id: 'p1-c1-l2-buttons-switches-en', slug: 'p1-c1-l2-buttons-switches', title: 'Buttons & Switches (Series vs Parallel)', description: 'Learn button logic: series=AND, parallel=OR.', course: 'passive-components', difficulty: 'beginner', tags: ['button', 'switch', 'AND', 'OR', 'logic'], estimatedMinutes: 25, hasInteractiveExercises: true, language: 'en', order: 2 },
+  // Course: Active Components
+  { id: 'p1-c2-l1-transistors-switches-en', slug: 'p1-c2-l1-transistors-switches', title: 'Transistors as Switches', description: 'NPN transistors to control high-current loads.', course: 'active-components', difficulty: 'intermediate', tags: ['transistor', 'NPN', 'switch', 'motor'], estimatedMinutes: 30, hasInteractiveExercises: true, language: 'en', order: 1 },
+  { id: 'p1-c2-l2-capacitors-en', slug: 'p1-c2-l2-capacitors', title: 'Capacitors (Charging & Discharging)', description: 'Capacitor basics and RC timing circuits.', course: 'active-components', difficulty: 'intermediate', tags: ['capacitor', 'RC', 'timing', 'charge'], estimatedMinutes: 30, hasInteractiveExercises: true, language: 'en', order: 2 },
+  { id: 'p1-c2-l3-ics-555-shift-registers-en', slug: 'p1-c2-l3-ics-555-shift-registers', title: 'ICs – 555 Timers & Shift Registers', description: '555 oscillator and 74HC595 output expansion.', course: 'active-components', difficulty: 'intermediate', tags: ['IC', '555', 'shift register', '74HC595'], estimatedMinutes: 35, hasInteractiveExercises: true, language: 'en', order: 3 },
+  // Course: Electromechanical Components
+  { id: 'p1-c3-l1-inductors-en', slug: 'p1-c3-l1-inductors', title: 'Inductors – Coils That Resist Change', description: 'Inductors, magnetic fields, and voltage spikes.', course: 'electromechanical-components', difficulty: 'intermediate', tags: ['inductor', 'coil', 'magnetic field', 'EMF'], estimatedMinutes: 30, hasInteractiveExercises: true, language: 'en', order: 1 },
+  { id: 'p1-c3-l2-motors-en', slug: 'p1-c3-l2-motors', title: 'Motors – Turning Electricity into Motion', description: 'DC and servo motors with PWM speed control.', course: 'electromechanical-components', difficulty: 'intermediate', tags: ['motor', 'DC', 'servo', 'PWM'], estimatedMinutes: 30, hasInteractiveExercises: true, language: 'en', order: 2 },
+  { id: 'p1-c3-l3-solenoids-en', slug: 'p1-c3-l3-solenoids', title: 'Solenoids – Linear Motion from Coils', description: 'Solenoid structure and flyback protection.', course: 'electromechanical-components', difficulty: 'intermediate', tags: ['solenoid', 'coil', 'plunger', 'flyback'], estimatedMinutes: 25, hasInteractiveExercises: true, language: 'en', order: 3 },
+  { id: 'p1-c3-l4-relays-en', slug: 'p1-c3-l4-relays', title: 'Relays – Electrically Controlled Switches', description: 'Relay coils, NO/NC contacts, and isolation.', course: 'electromechanical-components', difficulty: 'intermediate', tags: ['relay', 'NO', 'NC', 'isolation'], estimatedMinutes: 30, hasInteractiveExercises: true, language: 'en', order: 4 },
+
+  // ==========================================
+  // PATH 2: ELECTRONIC SENSORS - English
+  // ==========================================
+  // Course: Vision/Detection Sensors
+  { id: 'p2-c1-l1-ultrasonic-sensor-en', slug: 'p2-c1-l1-ultrasonic-sensor', title: 'Ultrasonic Distance Sensor', description: 'HC-SR04 distance measurement basics.', course: 'vision-detection-sensors', difficulty: 'intermediate', tags: ['ultrasonic', 'HC-SR04', 'distance'], estimatedMinutes: 30, hasInteractiveExercises: true, language: 'en', order: 1 },
+  { id: 'p2-c1-l2-light-sensor-ldr-en', slug: 'p2-c1-l2-light-sensor-ldr', title: 'Light Sensor (LDR)', description: 'Light dependent resistors and voltage dividers.', course: 'vision-detection-sensors', difficulty: 'beginner', tags: ['LDR', 'light', 'analog', 'photoresistor'], estimatedMinutes: 25, hasInteractiveExercises: true, language: 'en', order: 2 },
+  { id: 'p2-c1-l3-pir-motion-en', slug: 'p2-c1-l3-pir-motion', title: 'PIR Motion Detection', description: 'Passive infrared motion sensors for alarms.', course: 'vision-detection-sensors', difficulty: 'intermediate', tags: ['PIR', 'motion', 'infrared', 'detection'], estimatedMinutes: 25, hasInteractiveExercises: true, language: 'en', order: 3 },
+  { id: 'p2-c1-l4-proximity-sensors-en', slug: 'p2-c1-l4-proximity-sensors', title: 'Proximity Sensors', description: 'Threshold detection and avoiding false triggers.', course: 'vision-detection-sensors', difficulty: 'intermediate', tags: ['proximity', 'threshold', 'detection'], estimatedMinutes: 25, hasInteractiveExercises: true, language: 'en', order: 4 },
+  { id: 'p2-c1-l5-ir-communication-en', slug: 'p2-c1-l5-ir-communication', title: 'IR Communication Sensors & Transmitters', description: 'IR remotes and modulated signals.', course: 'vision-detection-sensors', difficulty: 'intermediate', tags: ['IR', 'remote', 'communication', 'receiver'], estimatedMinutes: 30, hasInteractiveExercises: true, language: 'en', order: 5 },
+  // Course: Environmental Monitoring Sensors
+  { id: 'p2-c2-l1-temperature-humidity-dht-en', slug: 'p2-c2-l1-temperature-humidity-dht', title: 'Temperature & Humidity Sensors (DHT)', description: 'DHT11/DHT22 for environmental monitoring.', course: 'environmental-monitoring-sensors', difficulty: 'intermediate', tags: ['DHT11', 'DHT22', 'temperature', 'humidity'], estimatedMinutes: 25, hasInteractiveExercises: true, language: 'en', order: 1 },
+  { id: 'p2-c2-l2-soil-moisture-en', slug: 'p2-c2-l2-soil-moisture', title: 'Soil Moisture Sensors', description: 'Plant monitoring and automated watering.', course: 'environmental-monitoring-sensors', difficulty: 'intermediate', tags: ['soil', 'moisture', 'plant', 'gardening'], estimatedMinutes: 25, hasInteractiveExercises: true, language: 'en', order: 2 },
+  { id: 'p2-c2-l3-gas-sensors-mq-en', slug: 'p2-c2-l3-gas-sensors-mq', title: 'Gas Level Sensors (MQ)', description: 'MQ sensors for air quality monitoring.', course: 'environmental-monitoring-sensors', difficulty: 'intermediate', tags: ['MQ', 'gas', 'air quality', 'smoke'], estimatedMinutes: 30, hasInteractiveExercises: true, language: 'en', order: 3 },
+  { id: 'p2-c2-l4-atmospheric-pressure-en', slug: 'p2-c2-l4-atmospheric-pressure', title: 'Atmospheric Pressure Sensors', description: 'BMP/BME sensors and weather correlation.', course: 'environmental-monitoring-sensors', difficulty: 'intermediate', tags: ['BMP', 'BME', 'pressure', 'weather', 'I2C'], estimatedMinutes: 30, hasInteractiveExercises: true, language: 'en', order: 4 },
+  // Course: Consumer Electronics Sensors
+  { id: 'p2-c3-l1-accelerometers-gyros-en', slug: 'p2-c3-l1-accelerometers-gyros', title: 'Accelerometers & Gyros', description: 'IMU sensors for tilt and motion detection.', course: 'consumer-electronics-sensors', difficulty: 'intermediate', tags: ['accelerometer', 'gyroscope', 'IMU', 'tilt'], estimatedMinutes: 35, hasInteractiveExercises: true, language: 'en', order: 1 },
+  { id: 'p2-c3-l2-touch-sensors-en', slug: 'p2-c3-l2-touch-sensors', title: 'Touch Sensors', description: 'Capacitive touch as button replacement.', course: 'consumer-electronics-sensors', difficulty: 'intermediate', tags: ['touch', 'capacitive', 'TTP223', 'button'], estimatedMinutes: 25, hasInteractiveExercises: true, language: 'en', order: 2 },
+  { id: 'p2-c3-l3-vibration-sensors-en', slug: 'p2-c3-l3-vibration-sensors', title: 'Vibration Sensors', description: 'Shock detection for alarms and monitoring.', course: 'consumer-electronics-sensors', difficulty: 'intermediate', tags: ['vibration', 'shock', 'SW-420', 'alarm'], estimatedMinutes: 25, hasInteractiveExercises: true, language: 'en', order: 3 },
+
+  // ==========================================
+  // PATH 3: ARDUINO BASICS - English
+  // ==========================================
+  // Course: Embedded Programming Basics
+  { id: 'p3-c1-l1-basic-led-blink-en', slug: 'p3-c1-l1-basic-led-blink', title: 'Basic LED Blink (Pin 13)', description: 'Your first Arduino sketch: blinking an LED.', course: 'embedded-programming-basics', difficulty: 'beginner', tags: ['LED', 'blink', 'digitalWrite', 'delay'], estimatedMinutes: 20, hasInteractiveExercises: true, language: 'en', order: 10 },
+  { id: 'p3-c1-l2-multi-led-blink-en', slug: 'p3-c1-l2-multi-led-blink', title: 'Multi-LED Blink (Pins 9, 10, 11)', description: 'Control multiple LEDs with arrays and patterns.', course: 'embedded-programming-basics', difficulty: 'beginner', tags: ['LED', 'array', 'pattern', 'multiple'], estimatedMinutes: 25, hasInteractiveExercises: true, language: 'en', order: 11 },
+  { id: 'p3-c1-l3-pwm-led-fade-en', slug: 'p3-c1-l3-pwm-led-fade', title: 'PWM LED Fade (analogWrite)', description: 'Smooth LED brightness control with PWM.', course: 'embedded-programming-basics', difficulty: 'beginner', tags: ['PWM', 'analogWrite', 'fade', 'brightness'], estimatedMinutes: 25, hasInteractiveExercises: true, language: 'en', order: 12 },
+  { id: 'p3-c1-l4-understanding-delay-en', slug: 'p3-c1-l4-understanding-delay', title: 'Understanding delay() and Timing', description: 'Blocking vs non-blocking timing approaches.', course: 'embedded-programming-basics', difficulty: 'beginner', tags: ['delay', 'timing', 'millis', 'blocking'], estimatedMinutes: 25, hasInteractiveExercises: true, language: 'en', order: 13 },
+  { id: 'p3-c1-l5-setup-vs-loop-en', slug: 'p3-c1-l5-setup-vs-loop', title: 'setup() vs loop()', description: 'Understanding Arduino program structure.', course: 'embedded-programming-basics', difficulty: 'beginner', tags: ['setup', 'loop', 'structure', 'basics'], estimatedMinutes: 20, hasInteractiveExercises: true, language: 'en', order: 14 },
+  // Course: Working with Inputs
+  { id: 'p3-c3-l1-reading-push-button-en', slug: 'p3-c3-l1-reading-push-button', title: 'Reading a Push Button', description: 'Button wiring and INPUT_PULLUP mode.', course: 'working-with-inputs', difficulty: 'beginner', tags: ['button', 'digitalRead', 'INPUT_PULLUP'], estimatedMinutes: 25, hasInteractiveExercises: true, language: 'en', order: 1 },
+  { id: 'p3-c3-l2-potentiometer-analog-en', slug: 'p3-c3-l2-potentiometer-analog', title: 'Potentiometer as Analog Input', description: 'Reading variable resistance with analogRead.', course: 'working-with-inputs', difficulty: 'beginner', tags: ['potentiometer', 'analogRead', 'analog'], estimatedMinutes: 25, hasInteractiveExercises: true, language: 'en', order: 2 },
+  { id: 'p3-c3-l3-multiple-buttons-debouncing-en', slug: 'p3-c3-l3-multiple-buttons-debouncing', title: 'Multiple Buttons & Debouncing', description: 'Handling button bounce and multiple inputs.', course: 'working-with-inputs', difficulty: 'intermediate', tags: ['button', 'debounce', 'multiple inputs'], estimatedMinutes: 30, hasInteractiveExercises: true, language: 'en', order: 3 },
+  { id: 'p3-c3-l4-combining-inputs-outputs-en', slug: 'p3-c3-l4-combining-inputs-outputs', title: 'Combining Inputs and Outputs', description: 'Building interactive control panels.', course: 'working-with-inputs', difficulty: 'intermediate', tags: ['input', 'output', 'control panel', 'logic'], estimatedMinutes: 30, hasInteractiveExercises: true, language: 'en', order: 4 },
+  // Course: Working with Outputs
+  { id: 'p3-c4-l1-multiple-leds-patterns-en', slug: 'p3-c4-l1-multiple-leds-patterns', title: 'Multiple LEDs & Patterns', description: 'Chase, ping-pong, and binary LED patterns.', course: 'working-with-outputs', difficulty: 'intermediate', tags: ['LED', 'array', 'pattern', 'chase'], estimatedMinutes: 30, hasInteractiveExercises: true, language: 'en', order: 1 },
+  { id: 'p3-c4-l2-buzzer-tones-en', slug: 'p3-c4-l2-buzzer-tones', title: 'Buzzer and Tones', description: 'Making sounds with tone() and buzzers.', course: 'working-with-outputs', difficulty: 'intermediate', tags: ['buzzer', 'tone', 'music', 'sound'], estimatedMinutes: 25, hasInteractiveExercises: true, language: 'en', order: 2 },
+  { id: 'p3-c4-l3-dc-motor-transistor-en', slug: 'p3-c4-l3-dc-motor-transistor', title: 'DC Motor with Transistor', description: 'Motor control with transistors and PWM.', course: 'working-with-outputs', difficulty: 'intermediate', tags: ['motor', 'transistor', 'PWM', 'diode'], estimatedMinutes: 30, hasInteractiveExercises: true, language: 'en', order: 3 },
+  { id: 'p3-c4-l4-servo-motor-control-en', slug: 'p3-c4-l4-servo-motor-control', title: 'Servo Motor Control', description: 'Precise angle control with the Servo library.', course: 'working-with-outputs', difficulty: 'intermediate', tags: ['servo', 'Servo library', 'angle', 'position'], estimatedMinutes: 25, hasInteractiveExercises: true, language: 'en', order: 4 },
+
+  // ==========================================
+  // PATH 4: ARDUINO ADVANCED PROJECTS - English
+  // ==========================================
+  { id: 'p4-c1-l1-traffic-light-controller-en', slug: 'p4-c1-l1-traffic-light-controller', title: 'Project – Traffic Light Controller', description: 'State machine traffic light with pedestrian button.', course: 'traffic-light-controller', difficulty: 'intermediate', tags: ['LED', 'state machine', 'timing', 'project'], estimatedMinutes: 45, hasInteractiveExercises: true, language: 'en', order: 1 },
+  { id: 'p4-c2-l1-smart-plant-monitor-en', slug: 'p4-c2-l1-smart-plant-monitor', title: 'Project – Smart Plant Monitor', description: 'Soil moisture monitoring with visual feedback.', course: 'smart-plant-monitor', difficulty: 'intermediate', tags: ['soil moisture', 'automation', 'sensor', 'project'], estimatedMinutes: 40, hasInteractiveExercises: true, language: 'en', order: 1 },
+  { id: 'p4-c3-l1-mini-burglar-alarm-en', slug: 'p4-c3-l1-mini-burglar-alarm', title: 'Project – Mini Burglar Alarm', description: 'PIR motion alarm with armed/triggered states.', course: 'burglar-alarm-system', difficulty: 'intermediate', tags: ['PIR', 'buzzer', 'alarm', 'security', 'project'], estimatedMinutes: 40, hasInteractiveExercises: true, language: 'en', order: 1 },
+  { id: 'p4-c4-l1-simple-robot-en', slug: 'p4-c4-l1-simple-robot', title: 'Project – Simple Robot (Line/Obstacle)', description: 'Line follower or obstacle avoiding robot.', course: 'simple-robot', difficulty: 'advanced', tags: ['robot', 'motor', 'sensor', 'line follower'], estimatedMinutes: 60, hasInteractiveExercises: true, language: 'en', order: 1 },
+
+  // ==========================================
+  // PATH 5: ARDUINO NETWORKING - English
+  // ==========================================
+  { id: 'p5-c1-l1-serial-communication-en', slug: 'p5-c1-l1-serial-communication', title: 'Serial Communication Basics', description: 'Serial.begin/print/read and simple protocols.', course: 'serial-communication', difficulty: 'intermediate', tags: ['Serial', 'UART', 'baud rate', 'communication'], estimatedMinutes: 30, hasInteractiveExercises: true, language: 'en', order: 1 },
+  { id: 'p5-c2-l1-ir-remote-control-en', slug: 'p5-c2-l1-ir-remote-control', title: 'IR Remote Control with Arduino', description: 'Decode IR codes and map to actions.', course: 'ir-remote-control', difficulty: 'intermediate', tags: ['IR', 'remote', 'control', 'IRremote'], estimatedMinutes: 30, hasInteractiveExercises: true, language: 'en', order: 1 },
+  { id: 'p5-c3-l1-bluetooth-communication-en', slug: 'p5-c3-l1-bluetooth-communication', title: 'Bluetooth Communication', description: 'HC-05/06 wireless serial communication.', course: 'bluetooth-communication', difficulty: 'intermediate', tags: ['Bluetooth', 'HC-05', 'wireless', 'serial'], estimatedMinutes: 35, hasInteractiveExercises: true, language: 'en', order: 1 },
+  { id: 'p5-c4-l1-wifi-web-server-en', slug: 'p5-c4-l1-wifi-web-server', title: 'Wi-Fi & Simple Web Server', description: 'ESP8266/ESP32 web server for IoT control.', course: 'wifi-web-server', difficulty: 'advanced', tags: ['WiFi', 'ESP8266', 'web server', 'IoT'], estimatedMinutes: 45, hasInteractiveExercises: true, language: 'en', order: 1 },
+
+  // ==========================================
+  // PATH 6: RASPBERRY PI - English
+  // ==========================================
+  { id: 'p6-c1-l1-linux-basics-en', slug: 'p6-c1-l1-linux-basics', title: 'Linux Basics on Raspberry Pi', description: 'Terminal commands: ls, cd, mkdir, nano.', course: 'linux-basics', difficulty: 'intermediate', tags: ['Linux', 'Raspberry Pi', 'terminal', 'commands'], estimatedMinutes: 40, hasInteractiveExercises: true, language: 'en', order: 1 },
+  { id: 'p6-c2-l1-gpio-control-en', slug: 'p6-c2-l1-gpio-control', title: 'Raspberry Pi GPIO Control', description: 'GPIO numbering and gpiozero library.', course: 'gpio-pins', difficulty: 'intermediate', tags: ['GPIO', 'Raspberry Pi', 'Python', 'gpiozero'], estimatedMinutes: 35, hasInteractiveExercises: true, language: 'en', order: 1 },
+  { id: 'p6-c3-l1-gpio-local-apps-en', slug: 'p6-c3-l1-gpio-local-apps', title: 'GPIO with Local Apps', description: 'Event-driven GPIO with Python UIs.', course: 'gpio-python', difficulty: 'intermediate', tags: ['GPIO', 'Python', 'event-driven', 'UI'], estimatedMinutes: 35, hasInteractiveExercises: true, language: 'en', order: 1 },
+  { id: 'p6-c4-l1-gpio-device-communication-en', slug: 'p6-c4-l1-gpio-device-communication', title: 'Pi GPIO to Other Devices', description: 'UART/I2C/SPI communication with Arduino.', course: 'gpio-device-communication', difficulty: 'advanced', tags: ['I2C', 'SPI', 'UART', 'Arduino', 'communication'], estimatedMinutes: 45, hasInteractiveExercises: true, language: 'en', order: 1 },
 ];
 
 /**

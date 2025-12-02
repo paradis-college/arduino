@@ -1,0 +1,168 @@
+---
+id: p2-c1-l5-ir-communication
+title: "IR Communication Sensors & Transmitters"
+course: "vision-detection-sensors"
+difficulty: "intermediate"
+tags: ["IR", "infrared", "remote", "communication", "receiver", "transmitter"]
+estimatedMinutes: 30
+hasInteractiveExercises: true
+---
+
+# IR Communication Sensors & Transmitters
+
+In this lesson, you'll learn how infrared communication works, allowing you to read remote control signals and build your own IR projects.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Difference between IR LED and IR receiver
+- How modulated IR signals work
+- Reading and decoding remote control codes
+- Mapping codes to actions in your project
+
+<InfoBox type="info">
+  IR communication uses invisible infrared light to send data wirelessly. It's the same technology your TV remote uses!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="IR Components" id="ir-components">
+
+### IR LED (Transmitter)
+
+- Looks like a clear or dark purple LED
+- Emits infrared light (940nm typically)
+- Driven like a regular LED with current-limiting resistor
+- Used in remotes to send commands
+
+### IR Receiver Module
+
+- Contains photodiode + amplifier + filter
+- Tuned to 38kHz modulation frequency
+- Outputs demodulated digital signal
+- Common modules: TSOP1838, VS1838B
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p2-c1-l5-ir-communication" label="I understand IR components" />
+
+</LessonChapter>
+
+<LessonChapter title="Modulated IR Signals" id="modulated-signals">
+
+### Why Modulation?
+
+IR from the sun and lights is everywhere. To distinguish signal from noise:
+1. IR LED is rapidly switched on/off at 38kHz
+2. Receiver only responds to 38kHz signals
+3. Ambient IR is filtered out
+
+### Signal Structure
+
+Remote signals contain:
+- **Start pulse**: Long burst to indicate start
+- **Address bits**: Device ID (TV, AC, etc.)
+- **Command bits**: Button code
+- **Stop/repeat**: End marker
+
+### Common Protocols
+
+- **NEC**: Most common, used by many devices
+- **Sony SIRC**: Sony devices
+- **RC5/RC6**: Philips protocol
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p2-c1-l5-ir-communication" label="I understand IR modulation" />
+
+</LessonChapter>
+
+<LessonChapter title="Reading Remote Codes" id="reading-codes">
+
+### Using IRremote Library
+
+```cpp
+#include <IRremote.h>
+
+const int IR_PIN = 2;
+IRrecv irrecv(IR_PIN);
+
+void setup() {
+  Serial.begin(9600);
+  irrecv.enableIRIn();
+}
+
+void loop() {
+  if (irrecv.decode()) {
+    Serial.print("Code: 0x");
+    Serial.println(irrecv.decodedIRData.decodedRawData, HEX);
+    irrecv.resume();
+  }
+}
+```
+
+### Mapping Codes to Actions
+
+```cpp
+switch (irrecv.decodedIRData.command) {
+  case 0x45:  // Power button
+    togglePower();
+    break;
+  case 0x46:  // Volume Up
+    volumeUp();
+    break;
+  // Add more buttons...
+}
+```
+
+<InfoBox type="tip">
+  Point your remote at the receiver and press buttons while watching Serial Monitor to discover each button's code!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a remote control icon sending an IR beam to a receiver. Click the on-screen remote buttons to see hex codes appear in a virtual console display, simulating how you'd discover button codes.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p2-c1-l5-ir-communication"
+  question="Why is the IR signal modulated at 38kHz?"
+  options={[
+    { id: "a", text: "To make it travel farther" },
+    { id: "b", text: "To distinguish it from ambient IR light" },
+    { id: "c", text: "To make it invisible" },
+    { id: "d", text: "To reduce power consumption" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p2-c1-l5-ir-communication"
+  question="What does an IR receiver module output?"
+  options={[
+    { id: "a", text: "Analog voltage proportional to IR intensity" },
+    { id: "b", text: "Demodulated digital signal" },
+    { id: "c", text: "38kHz sine wave" },
+    { id: "d", text: "Serial data stream" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ IR LED transmits, IR receiver module receives
+- ✅ 38kHz modulation filters out ambient IR noise
+- ✅ Remotes send address + command codes
+- ✅ Use IRremote library to decode and map button presses
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p2-c1-l5-ir-communication" label="I completed the lesson!" />
+
+</LessonChapter>

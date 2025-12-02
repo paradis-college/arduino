@@ -1,0 +1,209 @@
+---
+id: p5-c4-l1-wifi-web-server
+title: "Wi-Fi & Simple Web Server"
+course: "wifi-web-server"
+difficulty: "advanced"
+tags: ["WiFi", "ESP8266", "ESP32", "web server", "IoT", "HTTP"]
+estimatedMinutes: 45
+hasInteractiveExercises: true
+---
+
+# Wi-Fi & Simple Web Server
+
+In this lesson, you'll learn how to connect Arduino/ESP to WiFi and create a web interface to control pins remotely.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Connecting ESP8266/ESP32 to WiFi
+- Serving a minimal web page
+- HTTP-controlled pin toggling
+- Basic IoT concepts
+
+<InfoBox type="info">
+  Turn your Arduino into an IoT device! Control LEDs and read sensors from any web browser on your network.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Hardware Options" id="hardware-options">
+
+### WiFi-Capable Boards
+
+| Board | Built-in WiFi | Notes |
+|-------|---------------|-------|
+| ESP8266 (NodeMCU) | ✅ | Popular, cheap |
+| ESP32 | ✅ | More powerful, BT too |
+| Arduino + ESP-01 | Via module | More complex |
+| Arduino Uno WiFi | ✅ | Integrated |
+
+### This Lesson Uses
+
+ESP8266 or ESP32 with Arduino IDE support installed.
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p5-c4-l1-wifi-web-server" label="I have a WiFi-capable board" />
+
+</LessonChapter>
+
+<LessonChapter title="Connecting to WiFi" id="connecting-wifi">
+
+### ESP8266 Example
+
+```cpp
+#include <ESP8266WiFi.h>
+
+const char* ssid = "YourNetworkName";
+const char* password = "YourPassword";
+
+void setup() {
+  Serial.begin(115200);
+  
+  WiFi.begin(ssid, password);
+  Serial.print("Connecting");
+  
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  
+  Serial.println();
+  Serial.print("Connected! IP: ");
+  Serial.println(WiFi.localIP());
+}
+```
+
+### ESP32 Version
+
+```cpp
+#include <WiFi.h>
+// Rest is the same!
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p5-c4-l1-wifi-web-server" label="I can connect to WiFi" />
+
+</LessonChapter>
+
+<LessonChapter title="Simple Web Server" id="web-server">
+
+### Serving a Page
+
+```cpp
+#include <ESP8266WiFi.h>
+#include <ESP8266WebServer.h>
+
+ESP8266WebServer server(80);
+const int LED_PIN = 2;
+bool ledState = false;
+
+void handleRoot() {
+  String html = "<html><body>";
+  html += "<h1>Arduino Control</h1>";
+  html += "<p>LED is " + String(ledState ? "ON" : "OFF") + "</p>";
+  html += "<a href='/on'><button>Turn ON</button></a> ";
+  html += "<a href='/off'><button>Turn OFF</button></a>";
+  html += "</body></html>";
+  server.send(200, "text/html", html);
+}
+
+void handleOn() {
+  ledState = true;
+  digitalWrite(LED_PIN, HIGH);
+  server.sendHeader("Location", "/");
+  server.send(303);
+}
+
+void handleOff() {
+  ledState = false;
+  digitalWrite(LED_PIN, LOW);
+  server.sendHeader("Location", "/");
+  server.send(303);
+}
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+  // WiFi connection code here...
+  
+  server.on("/", handleRoot);
+  server.on("/on", handleOn);
+  server.on("/off", handleOff);
+  server.begin();
+}
+
+void loop() {
+  server.handleClient();
+}
+```
+
+<InfoBox type="tip">
+  Open a browser on your phone/computer and go to the IP address shown in Serial Monitor to see your web page!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="HTTP Request Flow" id="http-flow">
+
+### What Happens
+
+1. Browser sends HTTP GET request to ESP's IP
+2. ESP receives request and matches route
+3. Handler function runs, controls pins
+4. ESP sends HTML response back
+5. Browser renders the page
+
+### URLs as Commands
+
+- `http://192.168.1.100/` → Show status page
+- `http://192.168.1.100/on` → Turn LED on
+- `http://192.168.1.100/off` → Turn LED off
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a board-router-browser diagram. Click the on-page button to see the HTTP request flow animate from browser to ESP and watch the virtual LED toggle in response.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p5-c4-l1-wifi-web-server"
+  question="What does server.handleClient() do?"
+  options={[
+    { id: "a", text: "Connects to WiFi" },
+    { id: "b", text: "Processes incoming HTTP requests" },
+    { id: "c", text: "Sends emails" },
+    { id: "d", text: "Controls the LED" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p5-c4-l1-wifi-web-server"
+  question="Which port does a standard web server use?"
+  options={[
+    { id: "a", text: "9600" },
+    { id: "b", text: "22" },
+    { id: "c", text: "80" },
+    { id: "d", text: "3000" }
+  ]}
+  correctIndex={2}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ ESP8266/ESP32 connect Arduino to WiFi
+- ✅ Web servers respond to HTTP requests
+- ✅ URL routes map to handler functions
+- ✅ Control pins from any web browser!
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p5-c4-l1-wifi-web-server" label="I completed the lesson!" />
+
+</LessonChapter>

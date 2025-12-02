@@ -1,0 +1,190 @@
+---
+id: p3-c3-l3-multiple-buttons-debouncing
+title: "Multiple Buttons & Debouncing"
+course: "working-with-inputs"
+difficulty: "intermediate"
+tags: ["button", "debounce", "multiple inputs", "noise"]
+estimatedMinutes: 30
+hasInteractiveExercises: true
+---
+
+# Multiple Buttons & Debouncing
+
+In this lesson, you'll learn how to handle multiple buttons and eliminate the "bouncing" problem that causes false triggers.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Working with many button inputs
+- Understanding switch bouncing behavior
+- Software debouncing techniques
+- Reliable button reading
+
+<InfoBox type="info">
+  Real buttons don't switch cleanly - they "bounce" rapidly for a few milliseconds, causing multiple false triggers!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Multiple Button Inputs" id="multiple-buttons">
+
+### Wiring Multiple Buttons
+
+Each button uses one digital pin with INPUT_PULLUP:
+
+```cpp
+const int BTN_1 = 2;
+const int BTN_2 = 3;
+const int BTN_3 = 4;
+
+void setup() {
+  pinMode(BTN_1, INPUT_PULLUP);
+  pinMode(BTN_2, INPUT_PULLUP);
+  pinMode(BTN_3, INPUT_PULLUP);
+}
+```
+
+### Using Arrays
+
+```cpp
+const int buttonPins[] = {2, 3, 4, 5};
+const int numButtons = 4;
+
+void setup() {
+  for (int i = 0; i < numButtons; i++) {
+    pinMode(buttonPins[i], INPUT_PULLUP);
+  }
+}
+```
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p3-c3-l3-multiple-buttons-debouncing" label="I understand multiple button setup" />
+
+</LessonChapter>
+
+<LessonChapter title="The Bouncing Problem" id="bouncing-problem">
+
+### What Happens When You Press a Button
+
+When a button is pressed, the metal contacts don't make a clean connection immediately. They "bounce" - rapidly connecting and disconnecting for 1-50 milliseconds.
+
+```
+What you think:  ____/‾‾‾‾‾‾‾‾‾‾
+What happens:    ____/‾\_/‾\_/‾‾‾‾
+                     ↑↑↑↑↑
+                   (bounces!)
+```
+
+### The Result
+
+Without debouncing:
+- One press might register as 2-10 presses!
+- Counters increment randomly
+- Toggle switches flicker
+
+<InfoBox type="warning">
+  Bouncing happens so fast you can't see it, but Arduino is fast enough to detect every bounce!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Software Debouncing" id="software-debouncing">
+
+### Simple Delay Debounce
+
+```cpp
+bool buttonPressed = false;
+
+void loop() {
+  if (digitalRead(BUTTON_PIN) == LOW && !buttonPressed) {
+    buttonPressed = true;
+    handleButtonPress();  // Your action
+    delay(50);  // Wait for bouncing to settle
+  }
+  
+  if (digitalRead(BUTTON_PIN) == HIGH) {
+    buttonPressed = false;
+  }
+}
+```
+
+### Better: Time-Based Debounce
+
+```cpp
+unsigned long lastDebounceTime = 0;
+const unsigned long debounceDelay = 50;
+int lastButtonState = HIGH;
+int buttonState;
+
+void loop() {
+  int reading = digitalRead(BUTTON_PIN);
+  
+  if (reading != lastButtonState) {
+    lastDebounceTime = millis();
+  }
+  
+  if ((millis() - lastDebounceTime) > debounceDelay) {
+    if (reading != buttonState) {
+      buttonState = reading;
+      if (buttonState == LOW) {
+        // Button was pressed!
+        handleButtonPress();
+      }
+    }
+  }
+  lastButtonState = reading;
+}
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p3-c3-l3-multiple-buttons-debouncing" label="I understand debouncing" />
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a virtual button press with two signal timelines: raw (with visible noise/bouncing edges) and debounced (clean, single transition). Press the button to see the difference!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p3-c3-l3-multiple-buttons-debouncing"
+  question="What causes switch bounce?"
+  options={[
+    { id: "a", text: "Software bugs" },
+    { id: "b", text: "Mechanical contacts rapidly connecting/disconnecting" },
+    { id: "c", text: "Low battery" },
+    { id: "d", text: "Wrong resistor value" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p3-c3-l3-multiple-buttons-debouncing"
+  question="How long does switch bounce typically last?"
+  options={[
+    { id: "a", text: "1-50 milliseconds" },
+    { id: "b", text: "1-2 seconds" },
+    { id: "c", text: "Less than 1 microsecond" },
+    { id: "d", text: "Exactly 100ms" }
+  ]}
+  correctIndex={0}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Multiple buttons can use arrays for cleaner code
+- ✅ Switch bounce causes false multiple triggers
+- ✅ Software debouncing filters out the noise
+- ✅ Wait ~50ms after a press for reliable detection
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p3-c3-l3-multiple-buttons-debouncing" label="I completed the lesson!" />
+
+</LessonChapter>

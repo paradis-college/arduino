@@ -1,0 +1,199 @@
+---
+id: p3-c1-l2-multi-led-blink
+title: "Multi-LED Blink (Pins 9, 10, 11)"
+course: "embedded-programming-basics"
+difficulty: "beginner"
+tags: ["LED", "array", "pattern", "multiple outputs"]
+estimatedMinutes: 25
+hasInteractiveExercises: true
+---
+
+# Multi-LED Blink (Pins 9, 10, 11)
+
+In this lesson, you'll control multiple LEDs and create simple blink patterns using arrays.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Working with multiple outputs
+- Using arrays to store pin numbers
+- Creating simple blink patterns
+- Loop structures for LED sequences
+
+<InfoBox type="info">
+  Controlling multiple LEDs teaches you about arrays and loops - essential programming concepts for more complex projects!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Multiple Outputs" id="multiple-outputs">
+
+### The Hard Way
+
+```cpp
+void setup() {
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(11, OUTPUT);
+}
+```
+
+### The Better Way - Arrays
+
+```cpp
+int ledPins[] = {9, 10, 11};
+int numLeds = 3;
+
+void setup() {
+  for (int i = 0; i < numLeds; i++) {
+    pinMode(ledPins[i], OUTPUT);
+  }
+}
+```
+
+<InfoBox type="tip">
+  Arrays make it easy to add more LEDs - just update the array and count!
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p3-c1-l2-multi-led-blink" label="I understand arrays for multiple pins" />
+
+</LessonChapter>
+
+<LessonChapter title="All Blink Pattern" id="all-blink">
+
+### Blink All LEDs Together
+
+```cpp
+void allBlink() {
+  // All on
+  for (int i = 0; i < numLeds; i++) {
+    digitalWrite(ledPins[i], HIGH);
+  }
+  delay(500);
+  
+  // All off
+  for (int i = 0; i < numLeds; i++) {
+    digitalWrite(ledPins[i], LOW);
+  }
+  delay(500);
+}
+```
+
+</LessonChapter>
+
+<LessonChapter title="Chase Pattern" id="chase-pattern">
+
+### One LED at a Time
+
+```cpp
+void chasePattern() {
+  for (int i = 0; i < numLeds; i++) {
+    // Turn current LED on
+    digitalWrite(ledPins[i], HIGH);
+    delay(200);
+    // Turn current LED off
+    digitalWrite(ledPins[i], LOW);
+  }
+}
+```
+
+### Bounce/Ping-Pong Pattern
+
+```cpp
+void pingPongPattern() {
+  // Forward
+  for (int i = 0; i < numLeds; i++) {
+    digitalWrite(ledPins[i], HIGH);
+    delay(150);
+    digitalWrite(ledPins[i], LOW);
+  }
+  // Backward
+  for (int i = numLeds - 2; i > 0; i--) {
+    digitalWrite(ledPins[i], HIGH);
+    delay(150);
+    digitalWrite(ledPins[i], LOW);
+  }
+}
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p3-c1-l2-multi-led-blink" label="I understand LED patterns" />
+
+</LessonChapter>
+
+<LessonChapter title="Alternate Pattern" id="alternate-pattern">
+
+### Every Other LED
+
+```cpp
+void alternatePattern() {
+  // Odd LEDs on
+  for (int i = 0; i < numLeds; i += 2) {
+    digitalWrite(ledPins[i], HIGH);
+  }
+  for (int i = 1; i < numLeds; i += 2) {
+    digitalWrite(ledPins[i], LOW);
+  }
+  delay(300);
+  
+  // Even LEDs on
+  for (int i = 0; i < numLeds; i += 2) {
+    digitalWrite(ledPins[i], LOW);
+  }
+  for (int i = 1; i < numLeds; i += 2) {
+    digitalWrite(ledPins[i], HIGH);
+  }
+  delay(300);
+}
+```
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows three LEDs labeled 9, 10, and 11. Use the dropdown to select different patterns: "All Blink", "Chase", or "Alternate". Watch the LEDs animate according to the selected pattern.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p3-c1-l2-multi-led-blink"
+  question="What is the benefit of using arrays for LED pins?"
+  options={[
+    { id: "a", text: "LEDs are brighter" },
+    { id: "b", text: "Easier to add/remove LEDs and use loops" },
+    { id: "c", text: "Uses less power" },
+    { id: "d", text: "LEDs blink faster" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p3-c1-l2-multi-led-blink"
+  question="In a chase pattern, how many LEDs are on at once?"
+  options={[
+    { id: "a", text: "All of them" },
+    { id: "b", text: "Half of them" },
+    { id: "c", text: "One at a time" },
+    { id: "d", text: "None" }
+  ]}
+  correctIndex={2}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Arrays store multiple pin numbers efficiently
+- ✅ Loops make it easy to control many LEDs
+- ✅ Different patterns: all blink, chase, alternate
+- ✅ Modular functions for each pattern
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p3-c1-l2-multi-led-blink" label="I completed the lesson!" />
+
+</LessonChapter>

@@ -1,0 +1,164 @@
+---
+id: p2-c1-l3-pir-motion
+title: "PIR Motion Detection"
+course: "vision-detection-sensors"
+difficulty: "intermediate"
+tags: ["PIR", "motion", "infrared", "security", "detection"]
+estimatedMinutes: 25
+hasInteractiveExercises: true
+---
+
+# PIR Motion Detection
+
+In this lesson, you'll learn how PIR (Passive Infrared) sensors detect motion and how to use them for alarm and lighting triggers.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- PIR sensor field of view and operation
+- Reading HIGH/LOW motion signals
+- Building simple alarm and lighting triggers
+- Timing and sensitivity adjustments
+
+<InfoBox type="info">
+  PIR sensors detect changes in infrared radiation - they sense the heat signature of moving warm objects like people and animals.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="PIR Sensor Basics" id="pir-basics">
+
+### How PIR Works
+
+1. Sensor has two infrared-sensitive elements
+2. When warm body moves across the field of view
+3. One element sees more IR, then the other
+4. This difference triggers the output signal
+
+### Pin Configuration
+
+| Pin | Function |
+|-----|----------|
+| VCC | 5V-12V Power |
+| GND | Ground |
+| OUT | Digital Output (HIGH when motion detected) |
+
+### Field of View
+
+Typical PIR sensors have:
+- ~110° horizontal detection angle
+- ~70° vertical detection angle
+- 3-7 meter range
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p2-c1-l3-pir-motion" label="I understand PIR basics" />
+
+</LessonChapter>
+
+<LessonChapter title="Reading Motion Signals" id="reading-motion">
+
+### Simple Code
+
+```cpp
+const int PIR_PIN = 2;
+const int LED_PIN = 13;
+
+void setup() {
+  pinMode(PIR_PIN, INPUT);
+  pinMode(LED_PIN, OUTPUT);
+  Serial.begin(9600);
+  
+  // Allow PIR to stabilize (30-60 seconds)
+  delay(30000);
+}
+
+void loop() {
+  int motion = digitalRead(PIR_PIN);
+  
+  if (motion == HIGH) {
+    Serial.println("Motion detected!");
+    digitalWrite(LED_PIN, HIGH);
+  } else {
+    digitalWrite(LED_PIN, LOW);
+  }
+  delay(100);
+}
+```
+
+<InfoBox type="warning">
+  PIR sensors need 30-60 seconds to stabilize after power-on. Don't move during this calibration period!
+</InfoBox>
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p2-c1-l3-pir-motion" label="I understand reading PIR signals" />
+
+</LessonChapter>
+
+<LessonChapter title="Adjustments" id="adjustments">
+
+### Onboard Potentiometers
+
+Most PIR modules have two adjustable potentiometers:
+
+1. **Sensitivity**: Adjust detection range
+2. **Time Delay**: How long output stays HIGH after detection
+
+### Jumper Settings
+
+Some modules have a jumper to select:
+- **H (Repeatable)**: Re-triggers while motion continues
+- **L (Non-repeatable)**: Single trigger per motion event
+
+<InfoBox type="tip">
+  For security alarms, use non-repeatable mode. For automatic lights, use repeatable mode with longer delay.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a room with a PIR sensor cone. Drag the walking person figure - when they enter the detection cone, watch the "motion" LED light up and see the HIGH pulse on the timeline.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p2-c1-l3-pir-motion"
+  question="What does PIR stand for?"
+  options={[
+    { id: "a", text: "Powered Infrared Reader" },
+    { id: "b", text: "Passive Infrared" },
+    { id: "c", text: "Proximity Infrared Radar" },
+    { id: "d", text: "Pulse Infrared Receiver" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p2-c1-l3-pir-motion"
+  question="Why do PIR sensors need a warm-up period?"
+  options={[
+    { id: "a", text: "To heat up the sensor" },
+    { id: "b", text: "To calibrate to the ambient IR levels" },
+    { id: "c", text: "To charge internal capacitors" },
+    { id: "d", text: "To synchronize with Arduino" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ PIR sensors detect infrared radiation changes from moving warm bodies
+- ✅ Output is HIGH when motion detected, LOW otherwise
+- ✅ Sensors need 30-60 seconds warm-up time
+- ✅ Sensitivity and timing can be adjusted with onboard potentiometers
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p2-c1-l3-pir-motion" label="I completed the lesson!" />
+
+</LessonChapter>

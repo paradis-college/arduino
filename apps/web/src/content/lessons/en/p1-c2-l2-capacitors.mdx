@@ -1,0 +1,146 @@
+---
+id: p1-c2-l2-capacitors
+title: "Capacitors (Charging & Discharging)"
+course: "active-components"
+difficulty: "intermediate"
+tags: ["capacitor", "RC", "timing", "charge", "discharge"]
+estimatedMinutes: 30
+hasInteractiveExercises: true
+---
+
+# Capacitors (Charging & Discharging)
+
+In this lesson, you'll learn how capacitors store and release electrical energy, and how to use them for timing circuits.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Capacitor symbol and how they work
+- Charging and discharging through resistors
+- Simple RC timing concepts
+- Practical applications of capacitors
+
+<InfoBox type="info">
+  A capacitor is like a tiny rechargeable battery - it stores electrical energy in an electric field between two conductive plates.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Capacitor Basics" id="capacitor-basics">
+
+### Symbol and Units
+
+Capacitors are measured in **Farads (F)**, but most practical capacitors are:
+- **µF** (microfarads) = 10⁻⁶ F
+- **nF** (nanofarads) = 10⁻⁹ F
+- **pF** (picofarads) = 10⁻¹² F
+
+### Types
+
+- **Ceramic capacitors** - Small values, non-polarized
+- **Electrolytic capacitors** - Large values, polarized (+ and - terminals)
+
+<InfoBox type="warning">
+  Electrolytic capacitors have polarity! Connecting them backwards can cause damage or even explosion.
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p1-c2-l2-capacitors" label="I understand capacitor basics" />
+
+</LessonChapter>
+
+<LessonChapter title="Charging and Discharging" id="charging-discharging">
+
+### Charging Behavior
+
+When connected to a voltage source through a resistor:
+1. Initially, current flows quickly (capacitor acts like a short circuit)
+2. As the capacitor charges, current decreases
+3. Eventually, current stops (capacitor is fully charged)
+
+### Discharging Behavior
+
+When the voltage source is removed:
+1. The capacitor releases its stored energy
+2. Current flows in the opposite direction
+3. Voltage decreases exponentially to zero
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p1-c2-l2-capacitors" label="I understand charging and discharging" />
+
+</LessonChapter>
+
+<LessonChapter title="RC Time Constant" id="rc-time-constant">
+
+### The Formula
+
+The **time constant** (τ) determines how fast a capacitor charges or discharges:
+
+**τ = R × C**
+
+- τ (tau) is in seconds
+- R is resistance in ohms
+- C is capacitance in farads
+
+### Timing Reference
+
+- After **1τ**: Capacitor is ~63% charged
+- After **5τ**: Capacitor is ~99% charged (considered fully charged)
+
+### Example
+
+With R = 10kΩ and C = 100µF:
+```
+τ = 10,000Ω × 0.0001F = 1 second
+Full charge time ≈ 5 seconds
+```
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a capacitor as a tank filling (charging) and emptying (discharging). Toggle the Charge/Discharge button to see the voltage vs time curve and watch the exponential behavior.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p1-c2-l2-capacitors"
+  question="What is the time constant formula for an RC circuit?"
+  options={[
+    { id: "a", text: "τ = R / C" },
+    { id: "b", text: "τ = R × C" },
+    { id: "c", text: "τ = R + C" },
+    { id: "d", text: "τ = C / R" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p1-c2-l2-capacitors"
+  question="After how many time constants is a capacitor considered fully charged?"
+  options={[
+    { id: "a", text: "1 time constant" },
+    { id: "b", text: "3 time constants" },
+    { id: "c", text: "5 time constants" },
+    { id: "d", text: "10 time constants" }
+  ]}
+  correctIndex={2}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Capacitors store electrical energy between conductive plates
+- ✅ Charging and discharging follow exponential curves
+- ✅ Time constant τ = R × C determines charging speed
+- ✅ Electrolytic capacitors are polarized - mind the orientation!
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p1-c2-l2-capacitors" label="I completed the lesson!" />
+
+</LessonChapter>
