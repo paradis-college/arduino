@@ -59,18 +59,33 @@ import { vibrationTimelineSketch } from './p2-c3-l3/vibrationTimeline';
 
 // Import all sketches - Path 3
 import { basicBlinkSketch } from './p3-c1-l1/basicBlink';
+import { delaySliderSketch } from './p3-c1-l1/delaySlider';
+import { ledSyncSketch } from './p3-c1-l1/ledSync';
 import { multiLedChaseSketch } from './p3-c1-l2/multiLedChase';
+import { simultaneousBlinkSketch } from './p3-c1-l2/simultaneousBlink';
 import { pwmFadeSketch } from './p3-c1-l3/pwmFade';
+import { ledBrightnessSketch } from './p3-c1-l3/ledBrightness';
+import { rgbMixingSketch } from './p3-c1-l3/rgbMixing';
 import { delayTimingSketch } from './p3-c1-l4/delayTiming';
+import { frozenTaskSketch } from './p3-c1-l4/frozenTask';
 import { setupVsLoopSketch } from './p3-c1-l5/setupVsLoop';
+import { codeHighlightSketch } from './p3-c1-l5/codeHighlight';
 import { pushButtonSketch } from './p3-c3-l1/pushButton';
+import { ledButtonStateSketch } from './p3-c3-l1/ledButtonState';
 import { potentiometerSketch } from './p3-c3-l2/potentiometer';
+import { potLedBrightnessSketch } from './p3-c3-l2/potLedBrightness';
 import { debouncingSketch } from './p3-c3-l3/debouncing';
+import { filteredSignalSketch } from './p3-c3-l3/filteredSignal';
 import { controlPanelSketch } from './p3-c3-l4/controlPanel';
+import { logicDiagramSketch } from './p3-c3-l4/logicDiagram';
 import { ledPatternsSketch } from './p3-c4-l1/ledPatterns';
+import { binaryCounterSketch } from './p3-c4-l1/binaryCounter';
 import { buzzerSketch } from './p3-c4-l2/buzzer';
+import { pianoKeysSketch } from './p3-c4-l2/pianoKeys';
 import { dcMotorSketch } from './p3-c4-l3/dcMotor';
+import { transistorFlowSketch } from './p3-c4-l3/transistorFlow';
 import { servoSketch } from './p3-c4-l4/servo';
+import { angleTextSketch } from './p3-c4-l4/angleText';
 
 // Import all sketches - Path 4
 import { trafficLightSketch } from './p4-c1-l1/trafficLight';
@@ -152,18 +167,33 @@ export const sketchRegistry: Record<string, SketchFunction> = {
   
   // Path 3: Arduino Basics
   'p3-c1-l1-basic-blink': basicBlinkSketch,
+  'p3-c1-l1-delay-slider': delaySliderSketch,
+  'p3-c1-l1-led-sync': ledSyncSketch,
   'p3-c1-l2-multi-led': multiLedChaseSketch,
+  'p3-c1-l2-simultaneous-blink': simultaneousBlinkSketch,
   'p3-c1-l3-pwm-fade': pwmFadeSketch,
+  'p3-c1-l3-led-brightness': ledBrightnessSketch,
+  'p3-c1-l3-rgb-mixing': rgbMixingSketch,
   'p3-c1-l4-delay': delayTimingSketch,
+  'p3-c1-l4-frozen-task': frozenTaskSketch,
   'p3-c1-l5-setup-loop': setupVsLoopSketch,
+  'p3-c1-l5-code-highlight': codeHighlightSketch,
   'p3-c3-l1-push-button': pushButtonSketch,
+  'p3-c3-l1-led-button-state': ledButtonStateSketch,
   'p3-c3-l2-potentiometer': potentiometerSketch,
+  'p3-c3-l2-pot-led-brightness': potLedBrightnessSketch,
   'p3-c3-l3-debouncing': debouncingSketch,
+  'p3-c3-l3-filtered-signal': filteredSignalSketch,
   'p3-c3-l4-control-panel': controlPanelSketch,
+  'p3-c3-l4-logic-diagram': logicDiagramSketch,
   'p3-c4-l1-led-patterns': ledPatternsSketch,
+  'p3-c4-l1-binary-counter': binaryCounterSketch,
   'p3-c4-l2-buzzer': buzzerSketch,
+  'p3-c4-l2-piano-keys': pianoKeysSketch,
   'p3-c4-l3-dc-motor': dcMotorSketch,
+  'p3-c4-l3-transistor-flow': transistorFlowSketch,
   'p3-c4-l4-servo': servoSketch,
+  'p3-c4-l4-angle-text': angleTextSketch,
   
   // Path 4: Advanced Projects
   'p4-c1-l1-traffic-light': trafficLightSketch,

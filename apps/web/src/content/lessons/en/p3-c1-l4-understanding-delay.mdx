@@ -38,8 +38,18 @@ In this lesson, you'll learn how `delay()` works, its impact on responsiveness, 
   Watch the CPU timeline showing how delay() creates 'blocked' segments. Notice how a secondary task (like button reading) is completely frozen during long delays.
 </P5SketchEmbed>
 
-<GifStep
+<P5SketchEmbed
+  id="frozen-task-animation"
+  sketchId="p3-c1-l4-frozen-task"
   stepNumber={2}
+  title="Secondary Task Frozen"
+  alt="Animation showing secondary task frozen during long delay"
+>
+  See how a secondary task (like reading a button) is completely blocked during delay(). The task remains frozen until the delay completes.
+</P5SketchEmbed>
+
+<GifStep
+  stepNumber={3}
   title="Test delay() Behavior"
   gifUrl="https://placehold.co/600x400/2563eb/white?text=Delay+Test+GIF"
   alt="Testing delay function"
