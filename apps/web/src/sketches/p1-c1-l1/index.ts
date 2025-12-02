@@ -4,3 +4,7 @@
  */
 
 export { currentLoopSketch } from './currentLoop';
+export { diodeDirectionSketch } from './diodeDirection';
+export { resistorColorCodeSketch } from './resistorColorCode';
+export { voltageSliderSketch } from './voltageSlider';
+export { ledPolaritySketch } from './ledPolarity';

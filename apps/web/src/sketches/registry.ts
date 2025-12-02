@@ -6,16 +6,32 @@ import type p5 from 'p5';
 
 export type SketchFunction = (p: p5) => void;
 
-// Import all sketches
+// Import all sketches - Path 1
 import { currentLoopSketch } from './p1-c1-l1/currentLoop';
+import { diodeDirectionSketch } from './p1-c1-l1/diodeDirection';
+import { resistorColorCodeSketch } from './p1-c1-l1/resistorColorCode';
+import { voltageSliderSketch } from './p1-c1-l1/voltageSlider';
+import { ledPolaritySketch } from './p1-c1-l1/ledPolarity';
 import { buttonGapSketch } from './p1-c1-l2/buttonGap';
+import { buttonsSeriesSketch } from './p1-c1-l2/buttonsSeries';
+import { buttonsParallelSketch } from './p1-c1-l2/buttonsParallel';
+import { truthTableSketch } from './p1-c1-l2/truthTable';
 import { transistorSliderSketch } from './p1-c2-l1/transistorSlider';
+import { transistorLoadSketch } from './p1-c2-l1/transistorLoad';
 import { capacitorChargeSketch } from './p1-c2-l2/capacitorCharge';
+import { ledRCTimingSketch } from './p1-c2-l2/ledRCTiming';
 import { timer555Sketch } from './p1-c2-l3/timer555';
+import { shiftRegisterSketch } from './p1-c2-l3/shiftRegister';
 import { inductorFieldSketch } from './p1-c3-l1/inductorField';
+import { inductorSpikeSketch } from './p1-c3-l1/inductorSpike';
 import { dcMotorPWMSketch } from './p1-c3-l2/dcMotorPWM';
+import { servoControlSketch } from './p1-c3-l2/servoControl';
 import { solenoidSketch } from './p1-c3-l3/solenoid';
+import { flybackDiodeSketch } from './p1-c3-l3/flybackDiode';
 import { relaySketch } from './p1-c3-l4/relay';
+import { relayIsolationSketch } from './p1-c3-l4/relayIsolation';
+
+// Import all sketches - Path 2
 import { ultrasonicSketch } from './p2-c1-l1/ultrasonic';
 import { ldrSketch } from './p2-c1-l2/ldr';
 import { pirSketch } from './p2-c1-l3/pir';
@@ -28,6 +44,8 @@ import { pressureSketch } from './p2-c2-l4/pressure';
 import { accelGyroSketch } from './p2-c3-l1/accelGyro';
 import { touchSensorSketch } from './p2-c3-l2/touchSensor';
 import { vibrationSketch } from './p2-c3-l3/vibration';
+
+// Import all sketches - Path 3
 import { basicBlinkSketch } from './p3-c1-l1/basicBlink';
 import { multiLedChaseSketch } from './p3-c1-l2/multiLedChase';
 import { pwmFadeSketch } from './p3-c1-l3/pwmFade';
@@ -41,14 +59,20 @@ import { ledPatternsSketch } from './p3-c4-l1/ledPatterns';
 import { buzzerSketch } from './p3-c4-l2/buzzer';
 import { dcMotorSketch } from './p3-c4-l3/dcMotor';
 import { servoSketch } from './p3-c4-l4/servo';
+
+// Import all sketches - Path 4
 import { trafficLightSketch } from './p4-c1-l1/trafficLight';
 import { smartPlantSketch } from './p4-c2-l1/smartPlant';
 import { burglarAlarmSketch } from './p4-c3-l1/burglarAlarm';
 import { simpleRobotSketch } from './p4-c4-l1/simpleRobot';
+
+// Import all sketches - Path 5
 import { serialSketch } from './p5-c1-l1/serial';
 import { irRemoteSketch } from './p5-c2-l1/irRemote';
 import { bluetoothSketch } from './p5-c3-l1/bluetooth';
 import { wifiSketch } from './p5-c4-l1/wifi';
+
+// Import all sketches - Path 6
 import { linuxBasicsSketch } from './p6-c1-l1/linuxBasics';
 import { gpioSketch } from './p6-c2-l1/gpio';
 import { gpioAppsSketch } from './p6-c3-l1/gpioApps';
@@ -59,16 +83,34 @@ import { deviceCommSketch } from './p6-c4-l1/deviceComm';
  * Use these IDs in MDX files with the P5SketchEmbed component
  */
 export const sketchRegistry: Record<string, SketchFunction> = {
-  // Path 1: Electronic Engineering
+  // Path 1: Electronic Engineering - Course 1: Passive Components
   'p1-c1-l1-current-loop': currentLoopSketch,
+  'p1-c1-l1-diode-direction': diodeDirectionSketch,
+  'p1-c1-l1-resistor-color': resistorColorCodeSketch,
+  'p1-c1-l1-voltage-slider': voltageSliderSketch,
+  'p1-c1-l1-led-polarity': ledPolaritySketch,
   'p1-c1-l2-button-gap': buttonGapSketch,
+  'p1-c1-l2-buttons-series': buttonsSeriesSketch,
+  'p1-c1-l2-buttons-parallel': buttonsParallelSketch,
+  'p1-c1-l2-truth-table': truthTableSketch,
+  
+  // Path 1: Course 2: Active Components
   'p1-c2-l1-transistor': transistorSliderSketch,
+  'p1-c2-l1-transistor-load': transistorLoadSketch,
   'p1-c2-l2-capacitor': capacitorChargeSketch,
+  'p1-c2-l2-led-rc-timing': ledRCTimingSketch,
   'p1-c2-l3-555-timer': timer555Sketch,
+  'p1-c2-l3-shift-register': shiftRegisterSketch,
+  
+  // Path 1: Course 3: Electromechanical Components
   'p1-c3-l1-inductor': inductorFieldSketch,
+  'p1-c3-l1-inductor-spike': inductorSpikeSketch,
   'p1-c3-l2-motor-pwm': dcMotorPWMSketch,
+  'p1-c3-l2-servo-control': servoControlSketch,
   'p1-c3-l3-solenoid': solenoidSketch,
+  'p1-c3-l3-flyback-diode': flybackDiodeSketch,
   'p1-c3-l4-relay': relaySketch,
+  'p1-c3-l4-relay-isolation': relayIsolationSketch,
   
   // Path 2: Electronic Sensors
   'p2-c1-l1-ultrasonic': ultrasonicSketch,
