@@ -8,7 +8,7 @@ import { getPath } from '@/lib/pathsManifest';
 import { loadMDX } from '@/lib/mdxClient';
 import { getProjectsForLesson } from '@/lib/mockProjects';
 import { LessonHeader, LessonOutline, LessonFooterBiscuits, LessonChapter, GifStep, LessonVideoSection } from '@/components/lessons';
-import { InfoBox, Checkpoint, TinkercadEmbed, ExerciseMultipleChoice, ExercisePinMapping, YouTubeEmbed } from '@/components/interactive';
+import { InfoBox, Checkpoint, TinkercadEmbed, ExerciseMultipleChoice, ExercisePinMapping, YouTubeEmbed, P5SketchEmbed } from '@/components/interactive';
 import { Button, Card, Breadcrumbs } from '@/components/common';
 import type { Language, OutlineHeading } from '@/lib/types';
 import type { BreadcrumbItem } from '@/components/common';
@@ -25,6 +25,7 @@ const mdxComponents: Record<string, ComponentType<any>> = {
   LessonChapter,
   GifStep,
   LessonVideoSection,
+  P5SketchEmbed,
   // Add more components as needed
 };
 
