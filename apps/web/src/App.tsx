@@ -8,6 +8,8 @@ import type { Language, Theme } from './lib/types';
 
 // Import pages
 import { HomePage } from './routes/HomePage';
+import { PathsPage } from './routes/PathsPage';
+import { PathPage } from './routes/PathPage';
 import { CoursesPage } from './routes/CoursesPage';
 import { CoursePage } from './routes/CoursePage';
 import { LessonPage } from './routes/LessonPage';
@@ -112,6 +114,8 @@ function App() {
             <Route path="/" element={<LanguageRedirect />} />
             <Route element={<LayoutWrapper />}>
               <Route path="/:lang" element={<HomePage />} />
+              <Route path="/:lang/paths" element={<PathsPage />} />
+              <Route path="/:lang/paths/:pathSlug" element={<PathPage />} />
               <Route path="/:lang/courses" element={<CoursesPage />} />
               <Route path="/:lang/courses/:courseSlug" element={<CoursePage />} />
               <Route path="/:lang/lessons/:lessonSlug" element={<LessonPage />} />

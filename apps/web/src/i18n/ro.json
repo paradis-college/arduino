@@ -2,6 +2,7 @@
   "common": {
     "home": "Acasă",
     "courses": "Cursuri",
+    "paths": "Trasee",
     "projects": "Proiecte",
     "community": "Comunitate",
     "login": "Autentificare",
@@ -23,9 +24,15 @@
     "subtitle": "Platformă interactivă pentru învățarea electronicii și programării cu Arduino",
     "startLearning": "Începe să înveți",
     "exploreCourses": "Explorează cursurile",
+    "explorePaths": "Explorează traseele",
     "featuredCourses": "Cursuri populare",
     "whyArduino": "De ce Arduino?",
     "whyArduinoDesc": "Arduino este platforma perfectă pentru a începe să înveți programare și electronică."
+  },
+  "paths": {
+    "title": "Trasee de Învățare",
+    "subtitle": "Alege un traseu complet de învățare",
+    "courses": "cursuri"
   },
   "courses": {
     "title": "Cursuri",
@@ -59,7 +66,6 @@
     "nextLesson": "Lecția următoare",
     "previousLesson": "Lecția anterioară",
     "communityProjects": "Proiecte din comunitate",
-    "keyPoints": "Puncte cheie",
     "watchVideo": "Urmărește videoclipul"
   },
   "exercise": {
