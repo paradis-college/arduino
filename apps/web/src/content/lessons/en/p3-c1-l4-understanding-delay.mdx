@@ -242,6 +242,69 @@ void loop() {
 
 </LessonChapter>
 
+<LessonChapter title="Practical Example: Comparison" id="practical-example">
+
+### With delay() - Unresponsive Button 😞
+
+```cpp
+const int LED_PIN = 13;
+const int BUTTON_PIN = 2;
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+}
+
+void loop() {
+  // Button is checked ONLY here
+  if (digitalRead(BUTTON_PIN) == LOW) {
+    Serial.println("Button pressed!");
+  }
+  
+  // Then we sleep 2 seconds - button is ignored!
+  digitalWrite(LED_PIN, HIGH);
+  delay(2000);
+  digitalWrite(LED_PIN, LOW);
+  delay(2000);
+}
+```
+
+### With millis() - Responsive Button 😊
+
+```cpp
+const int LED_PIN = 13;
+const int BUTTON_PIN = 2;
+unsigned long previousMillis = 0;
+const long interval = 2000;
+int ledState = LOW;
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+}
+
+void loop() {
+  // Check button EVERY cycle!
+  if (digitalRead(BUTTON_PIN) == LOW) {
+    Serial.println("Button pressed!");
+  }
+  
+  // Check if it's time to change the LED
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= interval) {
+    previousMillis = currentMillis;
+    ledState = !ledState;
+    digitalWrite(LED_PIN, ledState);
+  }
+}
+```
+
+<InfoBox type="info">
+  In the millis() version, the loop runs thousands of times per second, checking the button every time! There are no moments when the button is ignored.
+</InfoBox>
+
+</LessonChapter>
+
 <LessonChapter title="Interactive Simulation" id="interactive-simulation">
 
 <InfoBox type="info">

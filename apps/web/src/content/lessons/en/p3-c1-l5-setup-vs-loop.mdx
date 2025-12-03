@@ -243,6 +243,68 @@ void loop() {
 
 </LessonChapter>
 
+<LessonChapter title="Complete Example" id="complete-example">
+
+### Well-Structured Program
+
+```cpp
+// === GLOBAL VARIABLES ===
+const int LED_PIN = 13;
+const int BUTTON_PIN = 2;
+const int SENSOR_PIN = A0;
+int sensorReadings = 0;
+
+// === SETUP - Runs ONCE ===
+void setup() {
+  // Configure pins
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+  
+  // Start serial communication
+  Serial.begin(9600);
+  
+  // Startup message
+  Serial.println("=== Arduino Started ===");
+  Serial.println("System is ready!");
+  
+  // Confirmation LED
+  digitalWrite(LED_PIN, HIGH);
+  delay(500);
+  digitalWrite(LED_PIN, LOW);
+}
+
+// === LOOP - Repeats Forever ===
+void loop() {
+  // Read the sensor
+  sensorReadings = analogRead(SENSOR_PIN);
+  
+  // Check the button
+  if (digitalRead(BUTTON_PIN) == LOW) {
+    Serial.println("Button pressed!");
+    digitalWrite(LED_PIN, HIGH);
+  } else {
+    digitalWrite(LED_PIN, LOW);
+  }
+  
+  // Display sensor value periodically
+  Serial.print("Sensor: ");
+  Serial.println(sensorReadings);
+  
+  delay(100);  // Small pause for stability
+}
+```
+
+<InfoBox type="info">
+  **Good structure:** 
+  1. Global variables at the top
+  2. setup() with initializations
+  3. loop() with main logic
+  
+  This makes code easy to read and understand!
+</InfoBox>
+
+</LessonChapter>
+
 <LessonChapter title="Flow Diagram" id="flow-diagram">
 
 ### Visualization: How the Program Runs
