@@ -1,0 +1,426 @@
+---
+id: p3-c1-l5-setup-vs-loop
+title: "setup() vs loop()"
+course: "embedded-programming-basics"
+difficulty: "beginner"
+tags: ["setup", "loop", "structură", "inițializare", "bazele"]
+estimatedMinutes: 20
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# setup() vs loop()
+
+În această lecție, vei înțelege structura fundamentală a fiecărui program Arduino - când rulează codul o singură dată și când se repetă! 🔄
+
+<LessonChapter title="Ce Vei Învăța" id="ce-vei-invata">
+
+- `setup()` rulează **o singură dată** la pornire
+- `loop()` rulează **repetat** la nesfârșit
+- Unde să pui inițializarea vs logica principală
+- Vizualizarea fluxului programului
+
+<InfoBox type="info">
+  Fiecare sketch Arduino TREBUIE să aibă setup() și loop() - înțelegerea când rulează fiecare este esențială pentru structurarea corectă a programului! Este ca diferența dintre pregătirea pentru școală (o faci o dată dimineața) și respirația (o faci tot timpul)! 🏫
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Structura Programului" id="structura-program">
+
+<P5SketchEmbed
+  id="setup-loop-animation"
+  sketchId="p3-c1-l5-setup-loop"
+  stepNumber={1}
+  title="Fluxul setup() și loop()"
+  alt="Animație care arată diagrama de flux: setup o dată, apoi loop ciclează"
+>
+  Urmărește diagrama de flux care arată cum setup() rulează o singură dată la pornirea programului, apoi loop() ciclează repetat la infinit. Evidențierea codului sare prin loop() la fiecare iterație.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="code-highlight-animation"
+  sketchId="p3-c1-l5-code-highlight"
+  stepNumber={2}
+  title="Evidențierea Execuției Codului"
+  alt="Animație care arată evidențierea codului sărind prin loop repetat"
+>
+  Urmărește fluxul de execuție a codului. Evidențierea arată ce linie se execută în prezent, sărind prin funcția loop() în mod repetat.
+</P5SketchEmbed>
+
+<GifStep
+  stepNumber={3}
+  title="Adaugă Serial.begin în setup()"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Setup+Serial+GIF"
+  alt="Serial begin în setup"
+>
+  Pune **Serial.begin(9600)** în setup(). Aceasta rulează o singură dată pentru a inițializa comunicarea la pornire.
+</GifStep>
+
+<GifStep
+  stepNumber={4}
+  title="Adaugă Print în loop()"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Loop+Print+GIF"
+  alt="Print în loop"
+>
+  Adaugă **Serial.println("Loop!")** în loop(). Deschide Serial Monitor pentru a vedea acest mesaj repetându-se continuu!
+</GifStep>
+
+<GifStep
+  stepNumber={5}
+  title="Observă Diferența"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Setup+Loop+Diferenta+GIF"
+  alt="Diferența setup vs loop"
+>
+  Codul din setup() apare o singură dată la început. Codul din loop() se repetă la infinit. Aceasta este fundația fiecărui program Arduino!
+</GifStep>
+
+</LessonChapter>
+
+<LessonChapter title="Funcția setup()" id="functia-setup">
+
+### Rulează O Singură Dată la Pornire
+
+`setup()` se execută exact o singură dată când:
+- Arduino este **alimentat** (conectat la curent)
+- Butonul **Reset** este apăsat
+- **Cod nou** este încărcat
+
+<InfoBox type="tip">
+  **Pentru copii:** `setup()` este ca dimineața când te pregătești pentru școală. Te îmbraci, îți faci ghiozdanul, mănânci - toate acestea o singură dată. Nu te îmbraci din nou și din nou tot timpul! 🎒👕
+</InfoBox>
+
+### Ce Punem în setup()
+
+- ⚙️ **Configurarea pinilor** - pinMode()
+- 📡 **Inițializarea comunicării seriale** - Serial.begin()
+- 📚 **Inițializarea bibliotecilor** - lcd.begin(), servo.attach()
+- 🔢 **Valori inițiale** ale variabilelor
+- 🔧 **Configurare hardware** care se face o singură dată
+
+### Exemplu
+
+```cpp
+void setup() {
+  pinMode(13, OUTPUT);           // Configurează pinul 13 ca ieșire
+  Serial.begin(9600);            // Pornește comunicarea serială
+  lcd.begin(16, 2);              // Inițializează ecranul LCD
+  servo.attach(9);               // Atașează servo la pinul 9
+  
+  Serial.println("Program pornit!");  // Mesaj de pornire
+}
+```
+
+<InfoBox type="info">
+  **Pentru părinți:** setup() este locul perfect pentru a pune tot ce trebuie făcut o singură dată. Dacă ceva trebuie să fie gata înainte ca programul să înceapă să funcționeze, merge în setup().
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="ro/p3-c1-l5-setup-vs-loop" label="Înțeleg setup()" />
+
+</LessonChapter>
+
+<LessonChapter title="Funcția loop()" id="functia-loop">
+
+### Rulează Repetat La Infinit
+
+După ce `setup()` se termină, `loop()` rulează continuu:
+
+```
+Start → setup() → loop() → loop() → loop() → loop() → ...
+                    ↑_________|
+                    (la infinit)
+```
+
+<InfoBox type="tip">
+  **Pentru copii:** `loop()` este ca respirația ta! O faci mereu, fără să te oprești - inspiri, expiri, inspiri, expiri... La fel, loop() rulează cod, apoi rulează din nou, și din nou! 🌬️
+</InfoBox>
+
+### Ce Punem în loop()
+
+- 📖 **Citirea senzorilor** - analogRead(), digitalRead()
+- 🔘 **Verificarea butoanelor** - if(digitalRead(...))
+- 💡 **Actualizarea ieșirilor** - digitalWrite(), analogWrite()
+- 🧠 **Logica principală** a programului
+- 🔄 **Orice trebuie să se repete**
+
+### Exemplu
+
+```cpp
+void loop() {
+  int valoareSenzor = analogRead(A0);  // Citește senzorul
+  
+  if (valoareSenzor > 500) {
+    digitalWrite(13, HIGH);            // Aprinde LED-ul
+    Serial.println("Senzor detectat!");
+  } else {
+    digitalWrite(13, LOW);             // Stinge LED-ul
+  }
+  
+  delay(100);  // Mică pauză
+}
+// Apoi tot acest cod rulează din nou, și din nou...
+```
+
+### Cât de Rapid Rulează Loop?
+
+Fără delay(), loop() poate rula de **zeci de mii de ori pe secundă**! Este foarte rapid!
+
+```cpp
+void loop() {
+  // Acest cod rulează DE MII de ori pe secundă
+  // dacă nu ai delay()!
+}
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="ro/p3-c1-l5-setup-vs-loop" label="Înțeleg loop()" />
+
+</LessonChapter>
+
+<LessonChapter title="Greșeli Comune" id="greseli-comune">
+
+### Greșeala 1: pinMode în loop()
+
+```cpp
+// GREȘIT ❌ - irosește timp reconfigurând la fiecare ciclu
+void loop() {
+  pinMode(13, OUTPUT);  // Nu face asta!
+  digitalWrite(13, HIGH);
+}
+
+// CORECT ✅ - configurează o singură dată în setup
+void setup() {
+  pinMode(13, OUTPUT);
+}
+void loop() {
+  digitalWrite(13, HIGH);
+}
+```
+
+<InfoBox type="warning">
+  Nu reconfigura pinii în loop()! Este ca și cum te-ai îmbrăca, te-ai dezbrăca și te-ai îmbrăca din nou de fiecare dată când faci un pas. Irosești timp și energie!
+</InfoBox>
+
+### Greșeala 2: Acțiuni Unice în loop()
+
+```cpp
+// GREȘIT ❌ - printează la infinit, inundând Serial Monitor
+void loop() {
+  Serial.println("Programul a pornit!");  // Apare de mii de ori!
+}
+
+// CORECT ✅ - printează o singură dată în setup
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Programul a pornit!");  // Apare o singură dată
+}
+void loop() {
+  // Logica principală aici
+}
+```
+
+### Greșeala 3: Inițializare în loop()
+
+```cpp
+// GREȘIT ❌ - resetează variabila la fiecare ciclu!
+void loop() {
+  int contor = 0;  // Mereu resetat la 0!
+  contor++;        // Devine 1, dar la următorul ciclu e iar 0
+  Serial.println(contor);  // Printează mereu 1
+}
+
+// CORECT ✅ - variabila persistă între cicluri
+int contor = 0;  // Declarat în afara funcțiilor
+
+void loop() {
+  contor++;
+  Serial.println(contor);  // 1, 2, 3, 4, 5...
+}
+```
+
+<InfoBox type="tip">
+  **Întreabă-te:** "Aceasta trebuie să se întâmple o singură dată sau repetat?" Pune codul în funcția corespunzătoare! 🤔
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Exemplu Complet" id="exemplu-complet">
+
+### Program Bine Structurat
+
+```cpp
+// === VARIABILE GLOBALE ===
+const int PIN_LED = 13;
+const int PIN_BUTON = 2;
+const int PIN_SENZOR = A0;
+int citiriSenzor = 0;
+
+// === SETUP - Rulează O DATĂ ===
+void setup() {
+  // Configurare pini
+  pinMode(PIN_LED, OUTPUT);
+  pinMode(PIN_BUTON, INPUT_PULLUP);
+  
+  // Pornire comunicare serială
+  Serial.begin(9600);
+  
+  // Mesaj de pornire
+  Serial.println("=== Arduino Pornit ===");
+  Serial.println("Sistemul este gata!");
+  
+  // LED de confirmare
+  digitalWrite(PIN_LED, HIGH);
+  delay(500);
+  digitalWrite(PIN_LED, LOW);
+}
+
+// === LOOP - Se Repetă Mereu ===
+void loop() {
+  // Citește senzorul
+  citiriSenzor = analogRead(PIN_SENZOR);
+  
+  // Verifică butonul
+  if (digitalRead(PIN_BUTON) == LOW) {
+    Serial.println("Buton apasat!");
+    digitalWrite(PIN_LED, HIGH);
+  } else {
+    digitalWrite(PIN_LED, LOW);
+  }
+  
+  // Afișează valoarea senzorului periodic
+  Serial.print("Senzor: ");
+  Serial.println(citiriSenzor);
+  
+  delay(100);  // Mică pauză pentru stabilitate
+}
+```
+
+<InfoBox type="info">
+  **Structură bună:** 
+  1. Variabile globale sus
+  2. setup() cu inițializări
+  3. loop() cu logica principală
+  
+  Aceasta face codul ușor de citit și de înțeles!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Diagrama Fluxului" id="diagrama-flux">
+
+### Vizualizare: Cum Rulează Programul
+
+```
+    ┌─────────────────┐
+    │  PORNIRE        │
+    │  (alimentare/   │
+    │   reset)        │
+    └────────┬────────┘
+             │
+             ▼
+    ┌─────────────────┐
+    │    setup()      │
+    │                 │
+    │  • pinMode()    │
+    │  • Serial.begin │
+    │  • Inițializări │
+    │                 │
+    │  (rulează O     │
+    │   SINGURĂ DATĂ) │
+    └────────┬────────┘
+             │
+             ▼
+    ┌─────────────────┐
+    │    loop()       │◄────┐
+    │                 │     │
+    │  • Citiri       │     │
+    │  • Verificări   │     │
+    │  • Acțiuni      │     │
+    │                 │     │
+    │  (se REPETĂ)    │     │
+    └────────┬────────┘     │
+             │              │
+             └──────────────┘
+             (bucla infinită)
+```
+
+<InfoBox type="tip">
+  **Pentru copii:** Este ca o zi: te trezești și te pregătești (setup - o dată), apoi faci activitățile zilei care se repetă - mănânci, te joci, înveți (loop - se repetă)! 📅
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Simulare Interactivă" id="simulare-interactiva">
+
+<InfoBox type="info">
+  Simularea interactivă arată o diagramă de flux animată: Start → setup() (rulează o dată) → loop() (ciclează repetat). Urmărește cum liniile se evidențiază pe măsură ce programul trece prin ele, arătând clar diferența! 🎮
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Testează-ți Cunoștințele" id="testeaza-cunostintele">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="ro/p3-c1-l5-setup-vs-loop"
+  question="De câte ori rulează setup()?"
+  options={[
+    { id: "a", text: "La fiecare iterație a buclei" },
+    { id: "b", text: "Exact o singură dată la pornire" },
+    { id: "c", text: "De două ori - o dată pentru fiecare procesor" },
+    { id: "d", text: "Doar când un buton este apăsat" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="ro/p3-c1-l5-setup-vs-loop"
+  question="Unde ar trebui să fie apelurile pinMode()?"
+  options={[
+    { id: "a", text: "În loop() pentru a fi actualizate constant" },
+    { id: "b", text: "În setup() pentru că trebuie făcute o singură dată" },
+    { id: "c", text: "Înainte de setup() în zona globală" },
+    { id: "d", text: "Nu contează unde" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-3"
+  lessonKey="ro/p3-c1-l5-setup-vs-loop"
+  question="Ce se întâmplă dacă pui Serial.println('Hello') în loop()?"
+  options={[
+    { id: "a", text: "Printează 'Hello' o singură dată" },
+    { id: "b", text: "Printează 'Hello' la infinit (de mii de ori)" },
+    { id: "c", text: "Nu printează nimic" },
+    { id: "d", text: "Printează 'Hello' de 100 de ori" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Rezumat" id="rezumat">
+
+În această lecție ai învățat: 🎓
+
+- ✅ `setup()` rulează **exact o singură dată** la pornire
+- ✅ `loop()` rulează **repetat la infinit**
+- ✅ Pune **inițializarea** în setup(), **logica principală** în loop()
+- ✅ **Nu reconfigura** pini sau reinițializa biblioteci în loop()
+- ✅ **Variabilele** declarate în loop() se resetează la fiecare ciclu
+
+### Rezumat Rapid
+
+| Funcție | Când Rulează | Ce Punem |
+|---------|--------------|----------|
+| `setup()` | O dată la pornire | pinMode, Serial.begin, inițializări |
+| `loop()` | Repetat la infinit | Citiri, verificări, acțiuni principale |
+
+<InfoBox type="tip">
+  **Felicitări!** 🎉 Acum înțelegi structura fundamentală a fiecărui program Arduino! Această cunoaștere este esențială pentru toate proiectele viitoare. setup() pregătește, loop() acționează!
+</InfoBox>
+
+<Checkpoint id="checkpoint-3" lessonKey="ro/p3-c1-l5-setup-vs-loop" label="Am completat lecția!" />
+
+</LessonChapter>
