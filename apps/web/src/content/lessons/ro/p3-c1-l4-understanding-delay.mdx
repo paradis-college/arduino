@@ -29,8 +29,8 @@ Azi vei:
 <LessonChapter title="Urmărește Ce Se Întâmplă! 🎬" id="urmareste-ce-se-intampla">
 
 <P5SketchEmbed
-  id="delay-animation"
-  sketchId="p3-c1-l4-delay"
+  id="arduino-nap-animation"
+  sketchId="p3-c1-l4-arduino-nap"
   stepNumber={1}
   title="Timpul de Somn al Arduino!"
   alt="Vizualizarea blocării delay"
@@ -48,14 +48,15 @@ Azi vei:
 
 Când scrii `delay(1000)`, iată ce se întâmplă:
 
-<GifStep
-  stepNumber={1}
+<P5SketchEmbed
+  id="delay-timing-animation"
+  sketchId="p3-c1-l4-delay"
+  stepNumber={2}
   title="Arduino Adoarme!"
-  gifUrl="https://placehold.co/600x400/3b82f6/white?text=Zzzzz...+1+secunda"
   alt="Arduino doarme în timpul delay"
 >
   Arduino OPREȘTE tot și numără: "un elefant... 🐘" Nu poate vedea butoane, nu poate citi senzori, nu poate face NIMIC până când nu se trezește!
-</GifStep>
+</P5SketchEmbed>
 
 ### E Ca și Cum Ți-ai Închide Ochii! 🙈
 
@@ -106,14 +107,15 @@ void loop() {
 }
 ```
 
-<GifStep
-  stepNumber={2}
+<P5SketchEmbed
+  id="missed-button-animation"
+  sketchId="p3-c1-l4-missed-button"
+  stepNumber={3}
   title="Apăsare de Buton Ratată!"
-  gifUrl="https://placehold.co/600x400/ef4444/white?text=Buton+Ratat!"
   alt="Apăsare de buton ratată în timpul delay"
 >
-  **Problemă:** În timp ce doarme în timpul delay, Arduino RATEAZĂ apăsările tale de buton! E ca și cum ai încerca să vorbești cu cineva care doarme! 😴
-</GifStep>
+  **Problemă:** În timp ce doarme în timpul delay, Arduino RATEAZĂ apăsările tale de buton! Apasă butonul în timpul delay ca să vezi cum e ratat! E ca și cum ai încerca să vorbești cu cineva care doarme! 😴
+</P5SketchEmbed>
 
 <InfoBox type="tip">
   **Gândește-te:** Dacă delay e 2 secunde, și tu apeși butonul pentru 0.1 secunde, Arduino probabil nu îl va prinde! 🎯
@@ -162,14 +164,15 @@ void setup() {
 
 Există o cale MAI BUNĂ! În loc să doarmă, Arduino poate SĂ SE UITE LA UN CEAS! ⏰
 
-<GifStep
-  stepNumber={3}
+<P5SketchEmbed
+  id="clock-method-animation"
+  sketchId="p3-c1-l4-clock-method"
+  stepNumber={4}
   title="Metoda Ceasului"
-  gifUrl="https://placehold.co/600x400/22c55e/white?text=Metoda+Ceasului"
   alt="Conceptul ceasului millis()"
 >
   În loc să doarmă, Arduino tot verifică ceasul: "A trecut 1 secundă? Nu? OK, verific butonul. A trecut 1 secundă? Da! E timpul să clipesc!"
-</GifStep>
+</P5SketchEmbed>
 
 ### Ideea (Nu-ți Fă Griji de Cod Încă!)
 

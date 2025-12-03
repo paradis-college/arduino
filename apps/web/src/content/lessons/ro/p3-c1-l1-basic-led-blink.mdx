@@ -46,14 +46,15 @@ Azi vei:
 
 <LessonChapter title="Arduino Are o Lumină Încorporată!" id="led-incorporat">
 
-<GifStep
+<P5SketchEmbed
+  id="arduino-board-animation"
+  sketchId="p3-c1-l1-arduino-board"
   stepNumber={1}
   title="Găsește Luminița"
-  gifUrl="https://placehold.co/600x400/22c55e/white?text=LED+pe+Placa+Arduino"
   alt="LED-ul pe placa Arduino"
 >
   Uită-te la placa Arduino. Vezi acea luminiță portocalie sau verde lângă pinul 13? Acela e LED-ul nostru! Nu trebuie să conectăm nimic - e deja acolo! 🎯
-</GifStep>
+</P5SketchEmbed>
 
 ### Ce-i un LED?
 
@@ -74,23 +75,15 @@ Un **LED** e o luminiță mică - ca o lanternă în miniatură!
 
 Fiecare program Arduino are **două cutii speciale** unde punem instrucțiunile:
 
-<GifStep
+<P5SketchEmbed
+  id="setup-loop-boxes-animation"
+  sketchId="p3-c1-l1-setup-loop-boxes"
   stepNumber={2}
-  title="Cutia 1: setup() - Pregătirea!"
-  gifUrl="https://placehold.co/600x400/3b82f6/white?text=Cutia+setup%28%29"
-  alt="Cutia setup"
+  title="setup() și loop() - Cele Două Cutii Magice!"
+  alt="Vizualizarea cutiilor setup și loop"
 >
-  Cutia **setup()** rulează **O SINGURĂ DATĂ** când pornești Arduino. E ca și cum ți-ai pregăti creioanele înainte să desenezi! 🖍️
-</GifStep>
-
-<GifStep
-  stepNumber={3}
-  title="Cutia 2: loop() - Fă-o Iar și Iar!"
-  gifUrl="https://placehold.co/600x400/8b5cf6/white?text=Cutia+loop%28%29"
-  alt="Cutia loop"
->
-  Cutia **loop()** rulează **MEREU** - iar și iar! E ca un carusel care nu se oprește niciodată! 🎠
-</GifStep>
+  Urmărește cum **setup()** rulează O SINGURĂ DATĂ (pregătirea!) și apoi **loop()** rulează MEREU - iar și iar ca un carusel! 🎠
+</P5SketchEmbed>
 
 <InfoBox type="tip">
   **Gândește-te așa:**
@@ -171,14 +164,15 @@ void loop() {
 }
 ```
 
-<GifStep
-  stepNumber={4}
+<P5SketchEmbed
+  id="upload-button-animation"
+  sketchId="p3-c1-l1-upload-button"
+  stepNumber={3}
   title="Încarcă Codul Tău!"
-  gifUrl="https://placehold.co/600x400/22c55e/white?text=Apasa+Butonul+Upload"
   alt="Butonul Upload"
 >
-  Apasă butonul **Upload** (săgeata →). Privește cum luminițele clipesc în timp ce codul se duce la Arduino. Apoi... LED-UL TĂU ÎNCEPE SĂ CLIPEASCĂ! 🎊
-</GifStep>
+  Apasă butonul **Upload** (săgeata verde →). Privește cum luminițele clipesc în timp ce codul se duce la Arduino. Apoi... LED-UL TĂU ÎNCEPE SĂ CLIPEASCĂ! 🎊
+</P5SketchEmbed>
 
 <InfoBox type="tip">
   **Ura!** 🎉 Tocmai ai făcut primul tău program Arduino! Lumina va clipi mereu până când deconectezi Arduino!

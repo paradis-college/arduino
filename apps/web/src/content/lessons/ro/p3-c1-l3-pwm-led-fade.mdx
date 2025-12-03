@@ -51,23 +51,14 @@ Azi vei:
 - `LOW` = COMPLET STINS (0%)
 
 <P5SketchEmbed
-  id="led-brightness-animation"
-  sketchId="p3-c1-l3-led-brightness"
+  id="brightness-scale-animation"
+  sketchId="p3-c1-l3-brightness-scale"
   stepNumber={2}
-  title="Controlează Luminozitatea!"
-  alt="Glisor pentru luminozitatea LED-ului"
->
-  👀 **Încearcă!** Mută glisorul ca să vezi toate nivelele de luminozitate! De la complet STINS la SUPER STRĂLUCITOR! E ca un dimmer pentru lumină! 💡
-</P5SketchEmbed>
-
-<GifStep
-  stepNumber={1}
   title="Acum Avem 256 de Nivele!"
-  gifUrl="https://placehold.co/600x400/f59e0b/white?text=0+pana+la+255+Luminozitate"
   alt="Scară de luminozitate de la 0 la 255"
 >
-  Acum putem alege ORICE luminozitate de la **0** (stins) la **255** (super strălucitor)! Asta e ca și cum ai avea 256 de setări diferite!
-</GifStep>
+  Acum putem alege ORICE luminozitate de la **0** (stins) la **255** (super strălucitor)! Trage glisorul ca să vezi toate cele 256 de setări diferite!
+</P5SketchEmbed>
 
 ### Scala Magică de Numere 🔢
 
@@ -117,14 +108,15 @@ analogWrite(9, 255);  // Lumina e SUPER STRĂLUCITOARE!
 
 Hai să facem lumina să se aprindă și să se stingă încet - ca și cum respiră!
 
-<GifStep
-  stepNumber={2}
+<P5SketchEmbed
+  id="breathing-light-animation"
+  sketchId="p3-c1-l3-breathing-light"
+  stepNumber={3}
   title="Privește Cum Respiră!"
-  gifUrl="https://placehold.co/600x400/8b5cf6/white?text=Lumina+Respira"
   alt="LED animație de respirație"
 >
   Lumina devine încet mai strălucitoare... apoi încet mai slabă... iar și iar! E ca și cum lumina ia respirații lente! 😮‍💨
-</GifStep>
+</P5SketchEmbed>
 
 ### Fade IN (0 → 255) - Devine Mai Strălucitoare! ☀️
 
