@@ -26,8 +26,30 @@ In this lesson, you'll create advanced LED patterns using arrays and loops - cha
 
 </LessonChapter>
 
-<GifStep
+<LessonChapter title="LED Pattern Basics" id="led-pattern-basics">
+
+<P5SketchEmbed
+  id="led-patterns-animation"
+  sketchId="p3-c4-l1-led-patterns"
   stepNumber={1}
+  title="8-LED Chase Pattern"
+  alt="Animation showing 8 LEDs in chase pattern left to right"
+>
+  Watch the 8-LED chase animation running left→right→left like "Knight Rider". Click to toggle between chase mode and binary counter visualizing 00000000→11111111.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="binary-counter-animation"
+  sketchId="p3-c4-l1-binary-counter"
+  stepNumber={2}
+  title="Binary Counter Visualization"
+  alt="Animation showing binary counter from 00000000 to 11111111"
+>
+  Watch 8 LEDs count up in binary from 0 (00000000) to 255 (11111111). Each LED represents one bit. Press UP/DOWN to change speed, SPACE to reset.
+</P5SketchEmbed>
+
+<GifStep
+  stepNumber={3}
   title="Wire 8 LED Strip"
   gifUrl="https://placehold.co/600x400/2563eb/white?text=8LED+Wire+GIF"
   alt="Wiring 8 LEDs"
@@ -52,6 +74,8 @@ In this lesson, you'll create advanced LED patterns using arrays and loops - cha
 >
   Add a potentiometer to control pattern speed. Map analog value to delay time for adjustable animation speed.
 </GifStep>
+
+</LessonChapter>
 
 <LessonChapter title="LED Array Setup" id="led-array-setup">
 

@@ -28,14 +28,25 @@ In this lesson, you'll learn about integrated circuits (ICs) - the building bloc
 
 <LessonChapter title="Introduction to ICs" id="intro-to-ics">
 
-<GifStep
+<P5SketchEmbed
+  id="555-timer-animation"
+  sketchId="p1-c2-l3-555-timer"
   stepNumber={1}
-  title="Find Pin 1 on the IC"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=IC+Pin+1+GIF"
-  alt="Finding pin 1 on an IC"
+  title="555 Timer Blink Rate"
+  alt="Animation showing 555 RC-controlled blink rate with adjustable sliders"
 >
-  Look for a **notch** or **dot** on one end of the IC chip. Pin 1 is to the left of the notch (or beside the dot). Pins are numbered counter-clockwise when viewed from above.
-</GifStep>
+  Adjust the R and C sliders to change the 555 timer's oscillation frequency. Watch how the LED blink rate changes and see the square wave output timing update in real-time.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="shift-register-animation"
+  sketchId="p1-c2-l3-shift-register"
+  stepNumber={2}
+  title="74HC595 Shift Register"
+  alt="74HC595 bit shifting along 8 outputs lighting LEDs sequentially"
+>
+  Watch bits shift through the 74HC595 register. Each clock pulse moves data one position, and the latch transfers it to the 8 LED outputs. One bit travels sequentially through all positions!
+</P5SketchEmbed>
 
 ### Why Use ICs?
 
@@ -49,14 +60,7 @@ In this lesson, you'll learn about integrated circuits (ICs) - the building bloc
 
 <LessonChapter title="The 555 Timer" id="555-timer">
 
-<GifStep
-  stepNumber={2}
-  title="Wire the 555 in Astable Mode"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=555+Astable+GIF"
-  alt="Wiring 555 timer in astable mode"
->
-  In astable mode, the 555 generates a continuous square wave. Connect pins 2 and 6 together, add two resistors and a capacitor to set the frequency.
-</GifStep>
+
 
 ### Astable Mode (Oscillator)
 
@@ -87,14 +91,7 @@ Frequency = 1.44 / ((R1 + 2×R2) × C)
 
 <LessonChapter title="74HC595 Shift Register" id="shift-register">
 
-<GifStep
-  stepNumber={3}
-  title="Connect the Shift Register"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Shift+Register+GIF"
-  alt="Wiring 74HC595 shift register"
->
-  Connect 3 Arduino pins to the 74HC595: **Data** (pin 14), **Clock** (pin 11), and **Latch** (pin 12). This gives you control of 8 outputs!
-</GifStep>
+
 
 ### Expanding Outputs
 

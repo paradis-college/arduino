@@ -28,14 +28,25 @@ In this lesson, you'll learn how motors convert electrical energy into mechanica
 
 <LessonChapter title="DC Motors" id="dc-motors">
 
-<GifStep
+<P5SketchEmbed
+  id="motor-pwm-animation"
+  sketchId="p1-c3-l2-motor-pwm"
   stepNumber={1}
-  title="Connect a DC Motor"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=DC+Motor+GIF"
-  alt="Connecting DC motor"
+  title="DC Motor PWM Speed Control"
+  alt="Animation showing DC motor speed controlled by PWM slider"
 >
-  DC motors have two wires. Connect them to a power source and the motor spins! Reverse the wires to change direction.
-</GifStep>
+  Use the PWM slider to control motor speed. Watch the fan blades spin faster with higher duty cycles. Faster pulses = faster spin!
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="servo-control-animation"
+  sketchId="p1-c3-l2-servo-control"
+  stepNumber={2}
+  title="Servo Motor Control"
+  alt="Servo arm rotating to target angle with smooth interpolation"
+>
+  Use the angle slider to control the servo position from 0° to 180°. Watch the servo arm smoothly rotate to match the target angle. The position is controlled by PWM pulse width.
+</P5SketchEmbed>
 
 ### How They Work
 
@@ -61,23 +72,7 @@ Most DC motors need more current than Arduino can provide directly. Use a transi
 
 <LessonChapter title="Servo Motors" id="servo-motors">
 
-<GifStep
-  stepNumber={2}
-  title="Connect a Servo Motor"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Servo+Motor+GIF"
-  alt="Connecting servo motor"
->
-  Servos have 3 wires: **Brown/Black** (GND), **Red** (5V power), and **Orange/Yellow** (signal). Connect the signal wire to a PWM-capable Arduino pin.
-</GifStep>
 
-<GifStep
-  stepNumber={3}
-  title="Control Servo Position"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Servo+Angle+GIF"
-  alt="Controlling servo angle"
->
-  Use the Arduino Servo library to set angles from 0° to 180°. The servo automatically moves to and holds the specified position.
-</GifStep>
 
 ### What Makes Servos Different
 

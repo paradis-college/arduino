@@ -27,14 +27,27 @@ In this project, you'll build a motion-detecting security alarm with armed/trigg
 
 </LessonChapter>
 
-<GifStep
+<LessonChapter title="Project Setup" id="project-setup">
+
+<P5SketchEmbed
+  id="burglar-alarm-animation"
+  sketchId="p4-c3-l1-burglar-alarm"
   stepNumber={1}
-  title="Connect PIR Sensor"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Alarm+PIR+GIF"
-  alt="Connecting PIR sensor"
+  title="Burglar Alarm System"
+  alt="Animation showing PIR detection zone with intruder causing flashing siren"
 >
-  Wire PIR sensor to pin 2. Position it to cover the area you want to monitor for motion.
-</GifStep>
+  Watch the PIR detection zone for motion. When an intruder enters the detection area while the system is armed, the siren flashes and the alarm triggers. Click the Arm/Disarm button to toggle the system state.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="armed-state-animation"
+  sketchId="p4-c3-l1-armed-state"
+  stepNumber={2}
+  title="Armed/Disarmed State Control"
+  alt="Animation showing armed and disarmed states with countdown"
+>
+  Use the ARM and DISARM buttons to toggle the security system state. Watch the countdown when arming, and click in the PIR sensor zone to simulate motion detection when armed.
+</P5SketchEmbed>
 
 <GifStep
   stepNumber={2}
@@ -53,6 +66,8 @@ In this project, you'll build a motion-detecting security alarm with armed/trigg
 >
   Wire button to pin 3 with INPUT_PULLUP. Press to toggle between armed and disarmed states.
 </GifStep>
+
+</LessonChapter>
 
 <LessonChapter title="Components Needed" id="components-needed">
 

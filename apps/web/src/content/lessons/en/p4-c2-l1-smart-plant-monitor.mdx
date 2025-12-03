@@ -26,14 +26,27 @@ In this project, you'll build a smart plant monitoring system that tracks soil m
 
 </LessonChapter>
 
-<GifStep
+<LessonChapter title="Project Setup" id="project-setup">
+
+<P5SketchEmbed
+  id="smart-plant-animation"
+  sketchId="p4-c2-l1-smart-plant"
   stepNumber={1}
-  title="Connect Moisture Sensor"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Plant+Sensor+GIF"
-  alt="Connecting moisture sensor"
+  title="Smart Plant Monitor"
+  alt="Animation showing plant health responding to moisture changes"
 >
-  Wire soil moisture sensor to A0. Insert probes into plant soil at root level.
-</GifStep>
+  Watch the plant's health change based on soil moisture levels. The leaves turn from healthy green to wilting brown as moisture drops. Click the "Water" button to restore moisture and see the plant return to a healthy state.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="water-button-animation"
+  sketchId="p4-c2-l1-water-button"
+  stepNumber={2}
+  title="Water Button Interaction"
+  alt="Animation showing water button restoring plant health"
+>
+  Click the WATER button to add moisture to the soil and watch the plant return to a healthy green state. The moisture level indicator and plant leaves respond in real-time.
+</P5SketchEmbed>
 
 <GifStep
   stepNumber={2}
@@ -50,8 +63,10 @@ In this project, you'll build a smart plant monitoring system that tracks soil m
   gifUrl="https://placehold.co/600x400/2563eb/white?text=Plant+Threshold+GIF"
   alt="Setting thresholds"
 >
-  Calibrate thresholds by testing dry and wet soil. Typical ranges: <300 (wet), 300-600 (ok), >600 (dry).
+  Calibrate thresholds by testing dry and wet soil. Typical ranges: under 300 (wet), 300-600 (ok), over 600 (dry).
 </GifStep>
+
+</LessonChapter>
 
 <LessonChapter title="Components Needed" id="components-needed">
 

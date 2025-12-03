@@ -26,8 +26,30 @@ In this lesson, you'll learn how to handle multiple buttons and eliminate the "b
 
 </LessonChapter>
 
-<GifStep
+<LessonChapter title="Debouncing Basics" id="debouncing-basics">
+
+<P5SketchEmbed
+  id="debouncing-animation"
+  sketchId="p3-c3-l3-debouncing"
   stepNumber={1}
+  title="Raw vs Debounced Signal"
+  alt="Animation showing noisy raw signal with bounce pulses vs filtered signal"
+>
+  Click the button to see the difference between raw and debounced signals. The raw signal shows rapid bounce pulses, while the filtered debounced signal shows a clean single transition.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="filtered-signal-animation"
+  sketchId="p3-c3-l3-filtered-signal"
+  stepNumber={2}
+  title="Clean Debounced Output"
+  alt="Animation showing filtered debounced signal with smooth single transition"
+>
+  See how the debouncing filter removes noise and produces clean state transitions. Compare the noisy raw signal with the smooth filtered output.
+</P5SketchEmbed>
+
+<GifStep
+  stepNumber={3}
   title="Wire Multiple Buttons"
   gifUrl="https://placehold.co/600x400/2563eb/white?text=Multi+Button+GIF"
   alt="Wiring multiple buttons"
@@ -52,6 +74,8 @@ In this lesson, you'll learn how to handle multiple buttons and eliminate the "b
 >
   Use a small delay (50ms) after detecting a press, or use the **Bounce2** library for cleaner debouncing.
 </GifStep>
+
+</LessonChapter>
 
 <LessonChapter title="Multiple Button Inputs" id="multiple-buttons">
 

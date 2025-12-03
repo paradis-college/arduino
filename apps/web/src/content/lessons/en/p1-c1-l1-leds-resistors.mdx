@@ -44,23 +44,35 @@ The relationship between voltage (V), current (I), and resistance (R) is defined
 
 <LessonChapter title="LED Polarity" id="led-polarity">
 
-<GifStep
+<P5SketchEmbed
+  id="current-loop-animation"
+  sketchId="p1-c1-l1-current-loop"
   stepNumber={1}
-  title="Identify the Anode (Positive)"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=LED+Anode+GIF"
-  alt="Identifying the LED anode"
+  title="Current Flow Animation"
+  alt="Current-loop animation showing battery, resistor, and LED with moving dots"
 >
-  The **longer leg** of the LED is the **anode** (positive terminal). It connects to the positive voltage source through a resistor.
-</GifStep>
+  Watch how current (shown as blue dots) flows through the circuit from the battery, through the resistor where it slows down, and through the LED where it produces light. The resistor limits the current to protect the LED.
+</P5SketchEmbed>
 
-<GifStep
+<P5SketchEmbed
+  id="diode-direction-animation"
+  sketchId="p1-c1-l1-diode-direction"
   stepNumber={2}
-  title="Identify the Cathode (Negative)"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=LED+Cathode+GIF"
-  alt="Identifying the LED cathode"
+  title="Diode Direction Animation"
+  alt="Diode direction showing forward pass and reverse block with LED lighting"
 >
-  The **shorter leg** is the **cathode** (negative terminal). It also has a flat edge on the LED housing. Connect this to ground (GND).
-</GifStep>
+  Watch the diode direction behavior. In forward bias, current passes through and the LED lights up. In reverse bias, current is blocked and the LED stays dark. The longer leg (anode) must connect to positive for current to flow.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="resistor-color-animation"
+  sketchId="p1-c1-l1-resistor-color"
+  stepNumber={3}
+  title="Resistor Color Code"
+  alt="220Ω color-code bands appearing on resistor with numerical decode overlay"
+>
+  Watch the color bands appear on the resistor: Red-Red-Brown = 220Ω. Learn to decode resistor values using the color code system. Each band represents a digit or multiplier.
+</P5SketchEmbed>
 
 <InfoBox type="warning">
   Connecting an LED backwards won't damage it, but it won't light up either. Always check the polarity!
@@ -72,14 +84,25 @@ The relationship between voltage (V), current (I), and resistance (R) is defined
 
 LEDs have very low internal resistance. Without a current-limiting resistor, too much current will flow and destroy the LED.
 
-<GifStep
-  stepNumber={3}
-  title="Connect the Resistor in Series"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Resistor+Series+GIF"
-  alt="Connecting resistor in series with LED"
+<P5SketchEmbed
+  id="voltage-slider-animation"
+  sketchId="p1-c1-l1-voltage-slider"
+  stepNumber={4}
+  title="Voltage & Current Relationship"
+  alt="Voltage slider adjusting bar-graph current with LED brightness updating live"
 >
-  Always place a resistor in series with your LED. Connect it between the power source and the LED anode, or between the LED cathode and ground - either works!
-</GifStep>
+  Use the voltage slider (3.3V–5V) to adjust the power supply. Watch the current bar graph change and the LED brightness update in real-time. Higher voltage = more current = brighter LED!
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="led-polarity-animation"
+  sketchId="p1-c1-l1-led-polarity"
+  stepNumber={5}
+  title="LED Polarity Check"
+  alt="Correct vs reversed LED wiring with current dots bouncing back on reversed"
+>
+  Compare correct vs reversed LED wiring. When connected correctly, current flows and the LED glows. When reversed, current dots bounce back and the LED stays dark. Always check polarity!
+</P5SketchEmbed>
 
 ### Calculating Resistor Value
 

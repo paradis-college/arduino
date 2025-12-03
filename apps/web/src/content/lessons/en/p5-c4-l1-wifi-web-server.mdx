@@ -26,32 +26,29 @@ In this lesson, you'll learn how to connect Arduino/ESP to WiFi and create a web
 
 </LessonChapter>
 
-<GifStep
+<LessonChapter title="WiFi Basics" id="wifi-basics">
+
+<P5SketchEmbed
+  id="wifi-animation"
+  sketchId="p5-c4-l1-wifi"
   stepNumber={1}
-  title="Connect ESP Module"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=WiFi+Connect+GIF"
-  alt="Connecting ESP module"
+  title="WiFi Web Server"
+  alt="Animation showing browser button sending HTTP request to ESP board"
 >
-  Wire ESP8266 or ESP32: 3.3V power, GND, and serial connections. Use Arduino Mega or software serial for ESP-01.
-</GifStep>
+  Click the browser button to send an HTTP request arrow to the ESP board. Watch the ESP toggle the LED and return a response packet back to the browser.
+</P5SketchEmbed>
 
-<GifStep
+<P5SketchEmbed
+  id="esp-response-animation"
+  sketchId="p5-c4-l1-esp-response"
   stepNumber={2}
-  title="Connect to Network"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=WiFi+Network+GIF"
-  alt="Connecting to WiFi"
+  title="HTTP Request/Response Flow"
+  alt="ESP toggling LED and returning response packet"
 >
-  Use **WiFi.begin(ssid, password)** to connect. Check **WiFi.status()** and print **WiFi.localIP()** when connected.
-</GifStep>
+  Click ON/OFF buttons in the browser to send HTTP requests. Watch the request packet travel to the ESP, toggle the LED, and see the response packet return with status.
+</P5SketchEmbed>
 
-<GifStep
-  stepNumber={3}
-  title="Create Web Page"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=WiFi+Page+GIF"
-  alt="Creating web page"
->
-  Start a server on port 80. Send HTML response with buttons that link to URLs like **/led/on** and **/led/off**.
-</GifStep>
+</LessonChapter>
 
 <LessonChapter title="Hardware Options" id="hardware-options">
 

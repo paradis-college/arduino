@@ -28,8 +28,28 @@ In this lesson, you'll learn how to use a Light Dependent Resistor (LDR) to dete
 
 <LessonChapter title="LDR Basics" id="ldr-basics">
 
-<GifStep
+<P5SketchEmbed
+  id="ldr-animation"
+  sketchId="p2-c1-l2-ldr"
   stepNumber={1}
+  title="LDR Light Response"
+  alt="Animation showing room brightness slider changing LDR and analog value"
+>
+  Use the brightness slider to simulate different light conditions. Watch the LDR color change from dark (high resistance) to bright (low resistance), and see the analog value bar (0-1023) update with labels showing "dark", "dim", or "bright".
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="led-auto-dim-animation"
+  sketchId="p2-c1-l2-led-auto-dim"
+  stepNumber={2}
+  title="LED Auto-Dimming"
+  alt="Animation showing LED brightness adjusting based on LDR reading"
+>
+  This demonstrates auto-dimming behavior. As ambient light increases, the LED dims automatically (inverse relationship). The LDR value and LED PWM output are displayed.
+</P5SketchEmbed>
+
+<GifStep
+  stepNumber={2}
   title="Identify the LDR"
   gifUrl="https://placehold.co/600x400/2563eb/white?text=LDR+Component+GIF"
   alt="Identifying an LDR"

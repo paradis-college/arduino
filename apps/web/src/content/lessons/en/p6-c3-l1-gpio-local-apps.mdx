@@ -26,32 +26,29 @@ In this lesson, you'll learn how to create event-driven Python scripts that link
 
 </LessonChapter>
 
-<GifStep
+<LessonChapter title="Event-Driven GPIO" id="event-driven-gpio">
+
+<P5SketchEmbed
+  id="gpio-apps-animation"
+  sketchId="p6-c3-l1-gpio-apps"
   stepNumber={1}
-  title="Setup Python Environment"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=GPIO+Setup+GIF"
-  alt="Setting up Python"
+  title="GPIO Event Handling"
+  alt="Animation showing GPIO event triggering Python callback and updating UI"
 >
-  Open terminal and run **python3 --version** to verify Python. Install gpiozero if needed: **pip3 install gpiozero**
-</GifStep>
+  Click the button to trigger a GPIO event. Watch the event fire a Python callback, which updates the UI dashboard with the sensor reading and logs the timestamp to a virtual console.
+</P5SketchEmbed>
 
-<GifStep
+<P5SketchEmbed
+  id="event-log-animation"
+  sketchId="p6-c3-l1-event-log"
   stepNumber={2}
-  title="Create Event Handler"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=GPIO+Event+GIF"
-  alt="Creating event handler"
+  title="Event Logging Panel"
+  alt="Log panel capturing each GPIO event"
 >
-  Use **button.when_pressed = my_function** to call a function when button is pressed. No polling needed!
-</GifStep>
+  Press the button to trigger GPIO events. Watch the event log panel update with timestamps, event types (IN/OUT/SYS), and descriptions.
+</P5SketchEmbed>
 
-<GifStep
-  stepNumber={3}
-  title="Log Sensor Data"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=GPIO+Log+GIF"
-  alt="Logging sensor data"
->
-  Read sensor, append timestamp and value to a file. Use Python **datetime** and file writing for data logging.
-</GifStep>
+</LessonChapter>
 
 <LessonChapter title="Event-Driven Design" id="event-driven-design">
 

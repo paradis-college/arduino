@@ -26,32 +26,29 @@ In this lesson, you'll learn how to control Raspberry Pi's GPIO pins for simple 
 
 </LessonChapter>
 
-<GifStep
+<LessonChapter title="GPIO Basics" id="gpio-basics">
+
+<P5SketchEmbed
+  id="gpio-animation"
+  sketchId="p6-c2-l1-gpio"
   stepNumber={1}
-  title="Identify GPIO Pins"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=GPIO+Pins+GIF"
-  alt="GPIO pin identification"
+  title="GPIO Pin Control"
+  alt="Animation showing clickable Pi pins toggling LED and reading button state"
 >
-  Pi has 40 pins. Use **pinout** command in terminal or reference diagrams. BCM numbering (GPIO17) differs from physical (pin 11).
-</GifStep>
+  Click the GPIO pins on the virtual Raspberry Pi to toggle them HIGH or LOW. Watch the connected LED light up when the output pin is HIGH, and see the button state indicator update when pins are toggled.
+</P5SketchEmbed>
 
-<GifStep
+<P5SketchEmbed
+  id="breadboard-leds-animation"
+  sketchId="p6-c2-l1-breadboard-leds"
   stepNumber={2}
-  title="Wire LED to GPIO"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=GPIO+LED+GIF"
-  alt="Wiring LED to GPIO"
+  title="Breadboard LED Control"
+  alt="Breadboard LEDs reflecting selected pin state"
 >
-  Connect LED anode through 330Ω resistor to **GPIO17** (pin 11). Connect cathode to **GND** (pin 6 or 9).
-</GifStep>
+  Click GPIO buttons to toggle pin states. Watch the corresponding LEDs on the breadboard light up when pins go HIGH.
+</P5SketchEmbed>
 
-<GifStep
-  stepNumber={3}
-  title="Blink with Python"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=GPIO+Python+GIF"
-  alt="Python GPIO blink"
->
-  Create a Python script using **gpiozero**: `from gpiozero import LED; led = LED(17); led.blink()`
-</GifStep>
+</LessonChapter>
 
 <LessonChapter title="GPIO Pin Numbering" id="gpio-numbering">
 

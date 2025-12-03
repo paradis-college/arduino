@@ -26,8 +26,30 @@ In this lesson, you'll learn how infrared communication works, allowing you to r
 
 </LessonChapter>
 
-<GifStep
+<LessonChapter title="IR Components" id="ir-components-intro">
+
+<P5SketchEmbed
+  id="ir-communication-animation"
+  sketchId="p2-c1-l5-ir-comm"
   stepNumber={1}
+  title="IR Remote Communication"
+  alt="Animation showing remote sending IR beams and receiver decoding button codes"
+>
+  Click the buttons on the virtual remote control to send IR beams to the receiver. Watch the dashed beam travel through the air and see the hex code display update with each button press.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="ir-hex-display-animation"
+  sketchId="p2-c1-l5-ir-hex"
+  stepNumber={2}
+  title="Hex Code Display"
+  alt="Animation showing hex code updating per virtual button pressed"
+>
+  Click the remote buttons to see their unique hex codes appear on the receiver display. Each button has a distinct code that you can decode in your Arduino programs.
+</P5SketchEmbed>
+
+<GifStep
+  stepNumber={2}
   title="Connect the IR Receiver"
   gifUrl="https://placehold.co/600x400/2563eb/white?text=IR+Receiver+GIF"
   alt="Connecting IR receiver"
@@ -52,6 +74,8 @@ In this lesson, you'll learn how infrared communication works, allowing you to r
 >
   Upload the receiver sketch, open Serial Monitor, and press remote buttons to see their **hex codes**.
 </GifStep>
+
+</LessonChapter>
 
 <LessonChapter title="IR Components" id="ir-components">
 

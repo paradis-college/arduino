@@ -26,8 +26,30 @@ In this lesson, you'll learn how to use soil moisture sensors for plant monitori
 
 </LessonChapter>
 
-<GifStep
+<LessonChapter title="Soil Moisture Basics" id="soil-basics-intro">
+
+<P5SketchEmbed
+  id="soil-moisture-animation"
+  sketchId="p2-c2-l2-soil-moisture"
   stepNumber={1}
+  title="Plant Moisture Monitor"
+  alt="Animation showing plant leaves changing color as soil moisture changes"
+>
+  Drag the moisture slider to change soil water content. Watch the plant leaves change from healthy green (moist) to brown (dry). When moisture drops too low, the "Needs Water!" indicator flashes.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="water-threshold-animation"
+  sketchId="p2-c2-l2-water-threshold"
+  stepNumber={2}
+  title="Water Threshold Indicator"
+  alt="Animation showing threshold indicator flashing needs water"
+>
+  Adjust both the moisture level and threshold. When moisture falls below the threshold, the warning indicator flashes "NEEDS WATER!" - perfect for automatic irrigation systems.
+</P5SketchEmbed>
+
+<GifStep
+  stepNumber={2}
   title="Connect Sensor Probe"
   gifUrl="https://placehold.co/600x400/2563eb/white?text=Soil+Probe+GIF"
   alt="Connecting soil moisture probe"
@@ -52,6 +74,8 @@ In this lesson, you'll learn how to use soil moisture sensors for plant monitori
 >
   Test in **dry air** (max value) and **water** (min value) to establish your wet/dry thresholds.
 </GifStep>
+
+</LessonChapter>
 
 <LessonChapter title="Sensor Types" id="sensor-types">
 

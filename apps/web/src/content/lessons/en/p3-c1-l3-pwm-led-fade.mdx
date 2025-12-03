@@ -26,8 +26,40 @@ In this lesson, you'll learn how PWM (Pulse Width Modulation) allows you to cont
 
 </LessonChapter>
 
-<GifStep
+<LessonChapter title="PWM Basics" id="pwm-basics">
+
+<P5SketchEmbed
+  id="pwm-fade-animation"
+  sketchId="p3-c1-l3-pwm-fade"
   stepNumber={1}
+  title="PWM Duty Cycle Control"
+  alt="Animation showing duty cycle bar with slider 0-255"
+>
+  Use the slider to adjust the duty cycle from 0-255. Watch the duty cycle bar grow and shrink, and see the LED brightness change smoothly in response.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="led-brightness-animation"
+  sketchId="p3-c1-l3-led-brightness"
+  stepNumber={2}
+  title="LED Brightness Control"
+  alt="LED brightness rising and falling smoothly"
+>
+  Watch the LED brightness rise and fall smoothly as the PWM value cycles automatically. This demonstrates the fade effect in action.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="rgb-mixing-animation"
+  sketchId="p3-c1-l3-rgb-mixing"
+  stepNumber={3}
+  title="RGB LED Color Mixing"
+  alt="RGB LED mixing colors from 3 independent PWM sliders"
+>
+  Use three independent sliders to control red, green, and blue channels. Mix any color by adjusting the PWM values for each color component.
+</P5SketchEmbed>
+
+<GifStep
+  stepNumber={4}
   title="Wire LED to PWM Pin"
   gifUrl="https://placehold.co/600x400/2563eb/white?text=PWM+Wire+GIF"
   alt="Wiring LED to PWM pin"
@@ -52,6 +84,8 @@ In this lesson, you'll learn how PWM (Pulse Width Modulation) allows you to cont
 >
   Upload the fade code and watch the LED smoothly transition from dim to bright and back in a continuous loop.
 </GifStep>
+
+</LessonChapter>
 
 <LessonChapter title="What is PWM?" id="what-is-pwm">
 

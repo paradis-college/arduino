@@ -26,8 +26,30 @@ In this lesson, you'll learn how MQ gas sensors work and how to build simple air
 
 </LessonChapter>
 
-<GifStep
+<LessonChapter title="Gas Sensor Basics" id="gas-basics-intro">
+
+<P5SketchEmbed
+  id="gas-sensor-animation"
+  sketchId="p2-c2-l3-gas-sensor"
   stepNumber={1}
+  title="Gas Concentration Monitor"
+  alt="Animation showing gas clouds thickening near sensor with concentration bar"
+>
+  Watch the gas clouds thicken as concentration increases. The concentration bar rises and the air quality indicator transitions through color zones: green (good), yellow (moderate), and red (poor).
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="air-quality-zones-animation"
+  sketchId="p2-c2-l3-air-quality"
+  stepNumber={2}
+  title="Air Quality Zone Display"
+  alt="Animation showing air quality color zone transitions"
+>
+  Drag the slider to change gas concentration. Watch the display transition between GOOD (green), MODERATE (yellow), and POOR (red) zones with appropriate icons.
+</P5SketchEmbed>
+
+<GifStep
+  stepNumber={2}
   title="Mount the MQ Sensor"
   gifUrl="https://placehold.co/600x400/2563eb/white?text=MQ+Mount+GIF"
   alt="Mounting MQ sensor"
@@ -52,6 +74,8 @@ In this lesson, you'll learn how MQ gas sensors work and how to build simple air
 >
   Allow **2-5 minutes** for the sensor to heat up. Initial readings will drift until stable. Check the datasheet for your specific MQ model.
 </GifStep>
+
+</LessonChapter>
 
 <LessonChapter title="MQ Sensor Types" id="mq-sensor-types">
 

@@ -26,32 +26,29 @@ In this lesson, you'll learn how to decode IR remote signals and use them to con
 
 </LessonChapter>
 
-<GifStep
+<LessonChapter title="IR Remote Basics" id="ir-remote-basics">
+
+<P5SketchEmbed
+  id="ir-remote-animation"
+  sketchId="p5-c2-l1-ir-remote"
   stepNumber={1}
-  title="Connect IR Receiver"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=IR+Control+Receiver+GIF"
-  alt="Connecting IR receiver"
+  title="IR Remote Control"
+  alt="Animation showing remote beam toggling LED with code display"
 >
-  Wire VS1838B or similar receiver: VCC to 5V, GND to ground, OUT to pin 11.
-</GifStep>
+  Click the remote buttons to send IR beams to the receiver. Watch the LED toggle on/off and see the code display update with each pressed key's hex value.
+</P5SketchEmbed>
 
-<GifStep
+<P5SketchEmbed
+  id="ir-code-display-animation"
+  sketchId="p5-c2-l1-ir-code-display"
   stepNumber={2}
-  title="Decode Button Codes"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=IR+Control+Decode+GIF"
-  alt="Decoding button codes"
+  title="IR Code Decoder"
+  alt="Code display updating with each pressed key"
 >
-  Upload IRremote example sketch. Press remote buttons and note the hex codes shown in Serial Monitor.
-</GifStep>
+  Click remote buttons to decode their hex codes. Each button press displays its unique IR code value and updates the history log.
+</P5SketchEmbed>
 
-<GifStep
-  stepNumber={3}
-  title="Map Codes to Actions"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=IR+Control+Map+GIF"
-  alt="Mapping codes to actions"
->
-  Create switch/case statements: each hex code triggers a different action like toggling an LED or changing motor speed.
-</GifStep>
+</LessonChapter>
 
 <LessonChapter title="Hardware Setup" id="hardware-setup">
 

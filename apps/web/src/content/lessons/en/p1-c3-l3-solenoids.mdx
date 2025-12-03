@@ -28,14 +28,25 @@ In this lesson, you'll learn how solenoids convert electrical energy into linear
 
 <LessonChapter title="Solenoid Structure" id="solenoid-structure">
 
-<GifStep
+<P5SketchEmbed
+  id="solenoid-animation"
+  sketchId="p1-c3-l3-solenoid"
   stepNumber={1}
-  title="Examine Solenoid Parts"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Solenoid+Parts+GIF"
-  alt="Solenoid components"
+  title="Solenoid Magnetic Field"
+  alt="Animation showing coil magnetic field pulling plunger and moving lever"
 >
-  A solenoid has a **wire coil** wrapped around a tube, a **metal plunger** that slides inside, and a **spring** that returns the plunger when power is removed.
-</GifStep>
+  Click the "Energize" button to see the coil create a magnetic field that pulls the plunger inside. Watch the mechanical lever move as the plunger is drawn in by the electromagnetic force.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="flyback-diode-animation"
+  sketchId="p1-c3-l3-flyback-diode"
+  stepNumber={2}
+  title="Flyback Diode Protection"
+  alt="Flyback diode absorbing voltage spike when coil de-energizes"
+>
+  Watch the flyback diode in action! When the solenoid is de-energized, the collapsing magnetic field creates a voltage spike. The diode safely absorbs this energy, protecting your circuit.
+</P5SketchEmbed>
 
 ### Main Components
 
@@ -56,14 +67,7 @@ In this lesson, you'll learn how solenoids convert electrical energy into linear
 
 <LessonChapter title="How Solenoids Work" id="how-solenoids-work">
 
-<GifStep
-  stepNumber={2}
-  title="Watch the Plunger Move"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Plunger+Movement+GIF"
-  alt="Solenoid plunger in action"
->
-  When current flows, the magnetic field pulls the plunger into the coil. This mechanical movement can push levers, open valves, or engage locks.
-</GifStep>
+
 
 ### Energizing the Coil
 
@@ -88,14 +92,7 @@ When current stops:
 
 <LessonChapter title="Flyback Diode Protection" id="flyback-protection">
 
-<GifStep
-  stepNumber={3}
-  title="Add the Flyback Diode"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Flyback+Diode+GIF"
-  alt="Installing flyback diode"
->
-  Connect a diode in **reverse** across the solenoid: cathode to positive, anode to negative. This provides a safe path for current when the solenoid turns off.
-</GifStep>
+
 
 ### Why It's Critical
 

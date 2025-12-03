@@ -26,8 +26,30 @@ In this lesson, you'll learn how `delay()` works, its impact on responsiveness, 
 
 </LessonChapter>
 
-<GifStep
+<LessonChapter title="Delay Timing" id="delay-timing">
+
+<P5SketchEmbed
+  id="delay-timing-animation"
+  sketchId="p3-c1-l4-delay"
   stepNumber={1}
+  title="CPU Timeline with Blocking"
+  alt="Animation showing CPU timeline with blocked segments during delay"
+>
+  Watch the CPU timeline showing how delay() creates 'blocked' segments. Notice how a secondary task (like button reading) is completely frozen during long delays.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="frozen-task-animation"
+  sketchId="p3-c1-l4-frozen-task"
+  stepNumber={2}
+  title="Secondary Task Frozen"
+  alt="Animation showing secondary task frozen during long delay"
+>
+  See how a secondary task (like reading a button) is completely blocked during delay(). The task remains frozen until the delay completes.
+</P5SketchEmbed>
+
+<GifStep
+  stepNumber={3}
   title="Test delay() Behavior"
   gifUrl="https://placehold.co/600x400/2563eb/white?text=Delay+Test+GIF"
   alt="Testing delay function"
@@ -52,6 +74,8 @@ In this lesson, you'll learn how `delay()` works, its impact on responsiveness, 
 >
   With **millis()**, you can track time without blocking. The loop keeps running, checking if enough time has passed.
 </GifStep>
+
+</LessonChapter>
 
 <LessonChapter title="How delay() Works" id="how-delay-works">
 

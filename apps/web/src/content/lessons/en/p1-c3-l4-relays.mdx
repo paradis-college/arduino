@@ -28,14 +28,25 @@ In this lesson, you'll learn how relays work as electrically controlled switches
 
 <LessonChapter title="Relay Structure" id="relay-structure">
 
-<GifStep
+<P5SketchEmbed
+  id="relay-animation"
+  sketchId="p1-c3-l4-relay"
   stepNumber={1}
-  title="Identify Relay Terminals"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Relay+Terminals+GIF"
-  alt="Relay terminal identification"
+  title="Relay Coil & Contacts"
+  alt="Animation showing relay coil energizing and armature switching contacts"
 >
-  A relay has two sets of terminals: **Coil** terminals (DC+ and DC-) that control the switch, and **Contact** terminals (COM, NO, NC) for the load circuit.
-</GifStep>
+  Click to toggle the relay coil. Watch the armature flip and the contacts switch between NO (Normally Open) and NC (Normally Closed). Notice how the low-voltage coil controls a separate high-voltage lamp circuit.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="relay-isolation-animation"
+  sketchId="p1-c3-l4-relay-isolation"
+  stepNumber={2}
+  title="Electrical Isolation"
+  alt="Low-voltage coil controlling separate high-voltage lamp circuit"
+>
+  See electrical isolation in action! The low-voltage Arduino circuit (left) controls the relay coil, which safely switches the separate high-voltage lamp circuit (right). No electrical connection between them!
+</P5SketchEmbed>
 
 ### Main Components
 
@@ -57,14 +68,7 @@ In this lesson, you'll learn how relays work as electrically controlled switches
 
 <LessonChapter title="Contact Types" id="contact-types">
 
-<GifStep
-  stepNumber={2}
-  title="Understand NO and NC Contacts"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=NO+NC+Contacts+GIF"
-  alt="NO and NC contact demonstration"
->
-  **NO (Normally Open)** is disconnected when off - use it to turn things ON. **NC (Normally Closed)** is connected when off - use it for fail-safe circuits.
-</GifStep>
+
 
 ### Common Terminal
 
@@ -98,14 +102,7 @@ Most relays have all three terminals:
 
 <LessonChapter title="Electrical Isolation" id="electrical-isolation">
 
-<GifStep
-  stepNumber={3}
-  title="Connect Arduino to Relay Module"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Relay+Module+GIF"
-  alt="Connecting relay module to Arduino"
->
-  Relay modules include the transistor driver and flyback diode. Connect VCC to 5V, GND to ground, and IN to a digital pin. The load connects to COM and NO/NC.
-</GifStep>
+
 
 ### Why Isolation Matters
 

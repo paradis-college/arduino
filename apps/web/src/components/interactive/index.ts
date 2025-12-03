@@ -27,3 +27,6 @@ export type { StepWithGifProps } from './StepWithGif';
 
 export { KeyPoints } from './KeyPoints';
 export type { KeyPointsProps } from './KeyPoints';
+
+export { P5SketchEmbed } from './P5SketchEmbed';
+export type { P5SketchEmbedProps, SketchFunction } from './P5SketchEmbed';

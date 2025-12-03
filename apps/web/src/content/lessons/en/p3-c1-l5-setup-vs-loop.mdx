@@ -26,8 +26,30 @@ In this lesson, you'll understand the fundamental structure of every Arduino pro
 
 </LessonChapter>
 
-<GifStep
+<LessonChapter title="Program Structure" id="program-structure">
+
+<P5SketchEmbed
+  id="setup-loop-animation"
+  sketchId="p3-c1-l5-setup-loop"
   stepNumber={1}
+  title="setup() and loop() Flow"
+  alt="Animation showing flow diagram of setup once then loop cycling"
+>
+  Watch the flow diagram showing how setup() runs once at program start, then loop() cycles repeatedly forever. The code highlight jumps through loop() each iteration.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="code-highlight-animation"
+  sketchId="p3-c1-l5-code-highlight"
+  stepNumber={2}
+  title="Code Execution Highlight"
+  alt="Animation showing code highlight jumping through loop repeatedly"
+>
+  Watch the code execution flow. The highlight shows which line is currently executing, jumping through the loop() function repeatedly.
+</P5SketchEmbed>
+
+<GifStep
+  stepNumber={3}
   title="Add Serial.begin to setup()"
   gifUrl="https://placehold.co/600x400/2563eb/white?text=Setup+Serial+GIF"
   alt="Serial begin in setup"
@@ -52,6 +74,8 @@ In this lesson, you'll understand the fundamental structure of every Arduino pro
 >
   setup() code appears once at start. loop() code repeats forever. This is the foundation of every Arduino program!
 </GifStep>
+
+</LessonChapter>
 
 <LessonChapter title="The setup() Function" id="setup-function">
 

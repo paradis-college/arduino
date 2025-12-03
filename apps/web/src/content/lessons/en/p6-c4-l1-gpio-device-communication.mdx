@@ -26,32 +26,29 @@ In this lesson, you'll learn how to connect Raspberry Pi to Arduino and other de
 
 </LessonChapter>
 
-<GifStep
+<LessonChapter title="Device Communication" id="device-communication">
+
+<P5SketchEmbed
+  id="device-comm-animation"
+  sketchId="p6-c4-l1-device-comm"
   stepNumber={1}
-  title="Enable I2C/SPI"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Pi+Enable+GIF"
-  alt="Enabling interfaces"
+  title="Pi to Arduino Communication"
+  alt="Animation showing data packets traveling between Pi and Arduino via UART"
 >
-  Run **sudo raspi-config**, go to Interface Options, enable **I2C** and **SPI**. Reboot when prompted.
-</GifStep>
+  Watch data packets travel between the Raspberry Pi and Arduino over the UART connection. Click to send commands and see responses flow back through the serial link.
+</P5SketchEmbed>
 
-<GifStep
+<P5SketchEmbed
+  id="byte-counter-animation"
+  sketchId="p6-c4-l1-byte-counter"
   stepNumber={2}
-  title="Wire UART to Arduino"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Pi+UART+GIF"
-  alt="Wiring UART"
+  title="Byte Counter Display"
+  alt="Live labels updating sent/received byte counts"
 >
-  Connect Pi TX (GPIO14) to Arduino RX, Pi RX (GPIO15) to Arduino TX through voltage divider (5V→3.3V).
-</GifStep>
+  Watch live byte counters as data flows between the Raspberry Pi and Arduino. Click devices to send packets and see TX/RX counters update in real-time.
+</P5SketchEmbed>
 
-<GifStep
-  stepNumber={3}
-  title="Send Data Between Devices"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Pi+Data+GIF"
-  alt="Sending data"
->
-  Use **pyserial** on Pi to send commands. Arduino receives via Serial and can respond back. Both devices communicate!
-</GifStep>
+</LessonChapter>
 
 <LessonChapter title="Communication Protocols" id="protocols">
 
