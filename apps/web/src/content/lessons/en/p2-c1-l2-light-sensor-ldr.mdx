@@ -48,28 +48,30 @@ In this lesson, you'll learn how to use a Light Dependent Resistor (LDR) to dete
   This demonstrates auto-dimming behavior. As ambient light increases, the LED dims automatically (inverse relationship). The LDR value and LED PWM output are displayed.
 </P5SketchEmbed>
 
-<GifStep
-  stepNumber={2}
+<P5SketchEmbed
+  id="ldr-identify"
+  sketchId="p2-c1-l2-ldr-identify"
+  stepNumber={3}
   title="Identify the LDR"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=LDR+Component+GIF"
-  alt="Identifying an LDR"
+  alt="Animation identifying LDR component features"
 >
   An LDR looks like a small disc with a wavy pattern on top. It has two legs and is not polarized - either leg can connect to either side.
-</GifStep>
+</P5SketchEmbed>
 
 ### How LDRs Work
 
 - **In darkness**: Resistance is HIGH (100kΩ - 1MΩ)
 - **In bright light**: Resistance is LOW (1kΩ - 10kΩ)
 
-<GifStep
-  stepNumber={2}
+<P5SketchEmbed
+  id="ldr-voltage-divider"
+  sketchId="p2-c1-l2-voltage-divider"
+  stepNumber={4}
   title="Build the Voltage Divider"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Voltage+Divider+GIF"
-  alt="Building voltage divider circuit"
+  alt="Animation showing voltage divider circuit construction"
 >
   Connect 5V to one leg of the LDR. Connect the other leg to both a 10kΩ resistor (going to GND) and the Arduino analog pin (A0). This creates a voltage divider.
-</GifStep>
+</P5SketchEmbed>
 
 ### Voltage Divider Circuit
 

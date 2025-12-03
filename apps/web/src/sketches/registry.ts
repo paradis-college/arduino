@@ -34,28 +34,52 @@ import { relayIsolationSketch } from './p1-c3-l4/relayIsolation';
 // Import all sketches - Path 2
 import { ultrasonicSketch } from './p2-c1-l1/ultrasonic';
 import { distanceBarSketch } from './p2-c1-l1/distanceBar';
+import { ultrasonicWiringPowerSketch } from './p2-c1-l1/ultrasonicWiringPower';
+import { ultrasonicWiringSignalSketch } from './p2-c1-l1/ultrasonicWiringSignal';
 import { ldrSketch } from './p2-c1-l2/ldr';
 import { ledAutoDimSketch } from './p2-c1-l2/ledAutoDim';
+import { ldrIdentifySketch } from './p2-c1-l2/ldrIdentify';
+import { ldrVoltageDividerSketch } from './p2-c1-l2/ldrVoltageDivider';
 import { pirSketch } from './p2-c1-l3/pir';
 import { pirTimelineSketch } from './p2-c1-l3/pirTimeline';
+import { pirPinIdentifySketch } from './p2-c1-l3/pirPinIdentify';
+import { pirWiringSketch } from './p2-c1-l3/pirWiring';
 import { proximitySketch } from './p2-c1-l4/proximity';
 import { proximityThresholdSketch } from './p2-c1-l4/proximityThreshold';
+import { proximityWiringPowerSketch } from './p2-c1-l4/proximityWiringPower';
+import { proximityWiringSignalSketch } from './p2-c1-l4/proximityWiringSignal';
 import { irCommunicationSketch } from './p2-c1-l5/irCommunication';
 import { irHexDisplaySketch } from './p2-c1-l5/irHexDisplay';
+import { irReceiverWiringSketch } from './p2-c1-l5/irReceiverWiring';
+import { irLibraryInstallSketch } from './p2-c1-l5/irLibraryInstall';
 import { temperatureSketch } from './p2-c2-l1/temperature';
 import { humidityGaugeSketch } from './p2-c2-l1/humidityGauge';
+import { dhtWiringSketch } from './p2-c2-l1/dhtWiring';
+import { dhtLibraryInstallSketch } from './p2-c2-l1/dhtLibraryInstall';
 import { soilMoistureSketch } from './p2-c2-l2/soilMoisture';
 import { waterThresholdSketch } from './p2-c2-l2/waterThreshold';
+import { soilProbeWiringSketch } from './p2-c2-l2/soilProbeWiring';
+import { soilArduinoWiringSketch } from './p2-c2-l2/soilArduinoWiring';
 import { gasSensorSketch } from './p2-c2-l3/gasSensor';
 import { airQualityZonesSketch } from './p2-c2-l3/airQualityZones';
+import { mqMountingSketch } from './p2-c2-l3/mqMounting';
+import { mqWiringSketch } from './p2-c2-l3/mqWiring';
 import { pressureSketch } from './p2-c2-l4/pressure';
 import { weatherPressureSketch } from './p2-c2-l4/weatherPressure';
+import { bmpI2CWiringSketch } from './p2-c2-l4/bmpI2CWiring';
+import { bmpPowerWiringSketch } from './p2-c2-l4/bmpPowerWiring';
 import { accelGyroSketch } from './p2-c3-l1/accelGyro';
 import { rollPitchLabelsSketch } from './p2-c3-l1/rollPitchLabels';
+import { mpuWiringSketch } from './p2-c3-l1/mpuWiring';
+import { mpuLibraryInstallSketch } from './p2-c3-l1/mpuLibraryInstall';
 import { touchSensorSketch } from './p2-c3-l2/touchSensor';
 import { touchIndicatorSketch } from './p2-c3-l2/touchIndicator';
+import { touchWiringSketch } from './p2-c3-l2/touchWiring';
+import { touchToggleModeSketch } from './p2-c3-l2/touchToggleMode';
 import { vibrationSketch } from './p2-c3-l3/vibration';
 import { vibrationTimelineSketch } from './p2-c3-l3/vibrationTimeline';
+import { vibrationMountingSketch } from './p2-c3-l3/vibrationMounting';
+import { vibrationWiringSketch } from './p2-c3-l3/vibrationWiring';
 
 // Import all sketches - Path 3
 import { basicBlinkSketch } from './p3-c1-l1/basicBlink';
@@ -154,28 +178,52 @@ export const sketchRegistry: Record<string, SketchFunction> = {
   // Path 2: Electronic Sensors
   'p2-c1-l1-ultrasonic': ultrasonicSketch,
   'p2-c1-l1-distance-bar': distanceBarSketch,
+  'p2-c1-l1-wiring-power': ultrasonicWiringPowerSketch,
+  'p2-c1-l1-wiring-signal': ultrasonicWiringSignalSketch,
   'p2-c1-l2-ldr': ldrSketch,
   'p2-c1-l2-led-auto-dim': ledAutoDimSketch,
+  'p2-c1-l2-ldr-identify': ldrIdentifySketch,
+  'p2-c1-l2-voltage-divider': ldrVoltageDividerSketch,
   'p2-c1-l3-pir': pirSketch,
   'p2-c1-l3-pir-timeline': pirTimelineSketch,
+  'p2-c1-l3-pir-pins': pirPinIdentifySketch,
+  'p2-c1-l3-pir-wiring': pirWiringSketch,
   'p2-c1-l4-proximity': proximitySketch,
   'p2-c1-l4-proximity-threshold': proximityThresholdSketch,
+  'p2-c1-l4-proximity-power': proximityWiringPowerSketch,
+  'p2-c1-l4-proximity-signal': proximityWiringSignalSketch,
   'p2-c1-l5-ir-comm': irCommunicationSketch,
   'p2-c1-l5-ir-hex': irHexDisplaySketch,
+  'p2-c1-l5-ir-wiring': irReceiverWiringSketch,
+  'p2-c1-l5-ir-library': irLibraryInstallSketch,
   'p2-c2-l1-temperature': temperatureSketch,
   'p2-c2-l1-humidity': humidityGaugeSketch,
+  'p2-c2-l1-dht-wiring': dhtWiringSketch,
+  'p2-c2-l1-dht-library': dhtLibraryInstallSketch,
   'p2-c2-l2-soil-moisture': soilMoistureSketch,
   'p2-c2-l2-water-threshold': waterThresholdSketch,
+  'p2-c2-l2-soil-probe': soilProbeWiringSketch,
+  'p2-c2-l2-soil-arduino': soilArduinoWiringSketch,
   'p2-c2-l3-gas-sensor': gasSensorSketch,
   'p2-c2-l3-air-quality': airQualityZonesSketch,
+  'p2-c2-l3-mq-mounting': mqMountingSketch,
+  'p2-c2-l3-mq-wiring': mqWiringSketch,
   'p2-c2-l4-pressure': pressureSketch,
   'p2-c2-l4-weather': weatherPressureSketch,
+  'p2-c2-l4-bmp-i2c': bmpI2CWiringSketch,
+  'p2-c2-l4-bmp-power': bmpPowerWiringSketch,
   'p2-c3-l1-accel-gyro': accelGyroSketch,
   'p2-c3-l1-roll-pitch': rollPitchLabelsSketch,
+  'p2-c3-l1-mpu-wiring': mpuWiringSketch,
+  'p2-c3-l1-mpu-library': mpuLibraryInstallSketch,
   'p2-c3-l2-touch': touchSensorSketch,
   'p2-c3-l2-touch-indicator': touchIndicatorSketch,
+  'p2-c3-l2-touch-wiring': touchWiringSketch,
+  'p2-c3-l2-touch-toggle': touchToggleModeSketch,
   'p2-c3-l3-vibration': vibrationSketch,
   'p2-c3-l3-vibration-timeline': vibrationTimelineSketch,
+  'p2-c3-l3-vibration-mounting': vibrationMountingSketch,
+  'p2-c3-l3-vibration-wiring': vibrationWiringSketch,
   
   // Path 3: Arduino Basics
   'p3-c1-l1-basic-blink': basicBlinkSketch,
