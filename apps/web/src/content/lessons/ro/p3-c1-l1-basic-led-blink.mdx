@@ -1,257 +1,240 @@
 ---
 id: p3-c1-l1-basic-led-blink
-title: "Clipirea de Bază a LED-ului (Pinul 13)"
+title: "Fă o Lumină să Clipească! 💡"
 course: "embedded-programming-basics"
 difficulty: "beginner"
 tags: ["LED", "clipire", "digitalWrite", "delay", "pinMode"]
-estimatedMinutes: 20
+estimatedMinutes: 15
 hasInteractiveExercises: true
 videoId: "dQw4w9WgXcQ"
 ---
 
-# Clipirea de Bază a LED-ului (Pinul 13)
+# Fă o Lumină să Clipească! 💡
 
-În această lecție, vei scrie primul tău program Arduino pentru a face un LED să clipească - este ca un "Bună ziua!" în lumea electronicii! 🌟
+Hai să facem o luminiță să clipească - exact ca un licurici! ✨
 
-<LessonChapter title="Ce Vei Învăța" id="ce-vei-invata">
+<LessonChapter title="Ce Vom Face Azi" id="ce-vom-face">
 
-- Cum arată un program Arduino (numit "sketch")
-- `pinMode()` - cum spui Arduino-ului ce face un pin
-- `digitalWrite()` - cum aprinzi și stingi LED-ul
-- `delay()` - cum faci pauze între acțiuni
+Azi vei:
+- 🌟 Să aprinzi o luminiță (LED)
+- ⚫ Să stingi lumina
+- 🔄 Să o faci să clipească mereu!
 
 <InfoBox type="info">
-  Să faci un LED să clipească este primul pas în învățarea Arduino! Este ca și cum ai învăța să scrii prima literă înainte de a scrie cuvinte întregi. Fiecare program Arduino este construit pe aceste concepte de bază! 💡
+  **Hei copii!** Să faci o lumină să clipească e ca și cum ai învăța Arduino-ul să facă cu ochiul! 😉 După ce înveți asta, poți face tot felul de lucruri tari!
 </InfoBox>
 
 </LessonChapter>
 
-<LessonChapter title="Structura unui Program Arduino" id="structura-program">
+<LessonChapter title="Urmărește Magia! ✨" id="urmareste-magia">
 
 <P5SketchEmbed
   id="basic-blink-animation"
   sketchId="p3-c1-l1-basic-blink"
   stepNumber={1}
-  title="Animație Clipire LED"
-  alt="Semnal digital sincronizat cu LED-ul care clipește"
+  title="Vezi Lumina Clipind!"
+  alt="O animație cu LED clipind"
 >
-  Privește cum linia de timp arată când pinul 13 este PORNIT (HIGH) sau OPRIT (LOW). LED-ul clipește exact când semnalul se schimbă! Folosește glisorul pentru a schimba viteza de clipire și vezi cum afectează modelul.
+  👀 **Privește!** Vezi cum lumina se aprinde și se stinge. Mută glisorul ca să clipească mai repede sau mai încet. Poți să o faci să clipească ca o inimă? ❤️
 </P5SketchEmbed>
+
+<InfoBox type="tip">
+  **Încearcă!** Mută glisorul la stânga pentru clipire LENTĂ (ca un dragon care doarme 🐉) sau la dreapta pentru clipire RAPIDĂ (ca aripile unui colibri 🐦)!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Arduino Are o Lumină Încorporată!" id="led-incorporat">
+
+<GifStep
+  stepNumber={1}
+  title="Găsește Luminița"
+  gifUrl="https://placehold.co/600x400/22c55e/white?text=LED+pe+Placa+Arduino"
+  alt="LED-ul pe placa Arduino"
+>
+  Uită-te la placa Arduino. Vezi acea luminiță portocalie sau verde lângă pinul 13? Acela e LED-ul nostru! Nu trebuie să conectăm nimic - e deja acolo! 🎯
+</GifStep>
+
+### Ce-i un LED?
+
+Un **LED** e o luminiță mică - ca o lanternă în miniatură!
+
+- 💡 **LED** = **L**ight **E**mitting **D**iode (Diodă Emițătoare de Lumină)
+- E același tip de lumină din telecomanda TV, jucării și luminițele de Crăciun!
+
+<InfoBox type="info">
+  **Pentru părinți:** LED-ul încorporat pe pinul 13 înseamnă că nu e nevoie de fire externe pentru această primă lecție. Copilul se poate concentra doar pe cod!
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="ro/p3-c1-l1-basic-led-blink" label="Am găsit luminița pe Arduino! 🔍" />
+
+</LessonChapter>
+
+<LessonChapter title="Două Cutii Magice 📦📦" id="doua-cutii-magice">
+
+Fiecare program Arduino are **două cutii speciale** unde punem instrucțiunile:
 
 <GifStep
   stepNumber={2}
-  title="Deschide Arduino IDE"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Arduino+IDE+GIF"
-  alt="Deschiderea Arduino IDE"
+  title="Cutia 1: setup() - Pregătirea!"
+  gifUrl="https://placehold.co/600x400/3b82f6/white?text=Cutia+setup%28%29"
+  alt="Cutia setup"
 >
-  Pornește programul Arduino IDE pe computer. Vei vedea o pagină goală cu două funcții speciale: `setup()` și `loop()`. Acestea sunt ca două cutii magice în care punem instrucțiuni!
+  Cutia **setup()** rulează **O SINGURĂ DATĂ** când pornești Arduino. E ca și cum ți-ai pregăti creioanele înainte să desenezi! 🖍️
 </GifStep>
-
-### Fiecare Program Arduino Are Două Funcții Speciale
-
-Gândește-te la un program Arduino ca la o rețetă de bucătărie:
-
-```cpp
-void setup() {
-  // Această parte rulează O SINGURĂ DATĂ când pornești Arduino
-  // Este ca pregătirea ingredientelor înainte de a găti
-  // Aici punem instrucțiuni de pregătire
-}
-
-void loop() {
-  // Această parte se repetă MEREU, fără oprire
-  // Este ca mișcarea de amestecare - continuă și continuă
-  // Aici punem instrucțiunile principale
-}
-```
-
-<InfoBox type="tip">
-  **Pentru copii:** Imaginează-ți că `setup()` este momentul în care îți pregătești jucăriile înainte de joc, iar `loop()` este jocul în sine care continuă cât vrei tu să te joci! 🎮
-</InfoBox>
 
 <GifStep
   stepNumber={3}
-  title="Conectează Arduino-ul"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Conectare+Arduino+GIF"
-  alt="Conectarea Arduino prin USB"
+  title="Cutia 2: loop() - Fă-o Iar și Iar!"
+  gifUrl="https://placehold.co/600x400/8b5cf6/white?text=Cutia+loop%28%29"
+  alt="Cutia loop"
 >
-  Conectează Arduino-ul la computer cu un cablu USB (arată ca un cablu de telefon!). Apoi selectează tipul de placă din **Tools → Board** și portul din **Tools → Port**.
+  Cutia **loop()** rulează **MEREU** - iar și iar! E ca un carusel care nu se oprește niciodată! 🎠
 </GifStep>
 
-### Pinul 13 - LED-ul Încorporat
-
-Arduino Uno are un LED mic chiar pe placă, conectat la pinul 13. Asta înseamnă că poți face experimente fără să conectezi nimic în plus!
-
-<InfoBox type="info">
-  **Pentru părinți:** Pinul 13 este special pentru că are un LED încorporat pe placă. Aceasta este o modalitate excelentă de a începe - copilul poate vedea imediat rezultatele fără să facă conexiuni electrice complexe.
+<InfoBox type="tip">
+  **Gândește-te așa:**
+  - **setup()** = Îți pui pantofii O DATĂ înainte să ieși afară 👟
+  - **loop()** = Mergi pas după pas după pas... 🚶‍♂️
 </InfoBox>
-
-<Checkpoint id="checkpoint-1" lessonKey="ro/p3-c1-l1-basic-led-blink" label="Înțeleg structura programului Arduino" />
 
 </LessonChapter>
 
-<LessonChapter title="Funcția pinMode()" id="functia-pinmode">
+<LessonChapter title="Hai să Scriem Codul! ✏️" id="scrie-codul">
 
-### Configurarea Pinilor - Spune-i Arduino-ului Ce Să Facă!
+### Pasul 1: Spune-i Arduino-ului "Acest pin trimite semnale"
 
-Înainte de a folosi un pin, trebuie să-i spui Arduino-ului dacă pinul va fi folosit pentru a **trimite** semnale (OUTPUT) sau pentru a **primi** semnale (INPUT).
-
-Este ca și cum ai pune o etichetă pe o cutie: "Aceasta este pentru trimis" sau "Aceasta este pentru primit"!
+În cutia **setup()**, scriem:
 
 ```cpp
-pinMode(pin, mod);
+pinMode(13, OUTPUT);
 ```
 
-- `pin`: Numărul pinului (de la 0 la 13 pentru pinii digitali)
-- `mod`: `INPUT` (primește), `OUTPUT` (trimite), sau `INPUT_PULLUP` (primește cu rezistor special)
+Asta îi spune Arduino-ului: *"Hei! Pinul 13 va **trimite** semnale ca să aprindă lumina!"*
 
-### Exemplu Simplu
+### Pasul 2: Aprinde lumina! 💡
+
+În cutia **loop()**, scriem:
+
+```cpp
+digitalWrite(13, HIGH);
+```
+
+**HIGH** înseamnă APRINS! Lumina se aprinde! ☀️
+
+### Pasul 3: Așteaptă puțin... ⏰
+
+```cpp
+delay(1000);
+```
+
+Asta face Arduino-ul să **aștepte** 1 secundă. (1000 = 1 secundă)
+
+### Pasul 4: Stinge lumina! ⚫
+
+```cpp
+digitalWrite(13, LOW);
+```
+
+**LOW** înseamnă STINS! Lumina se stinge! 🌙
+
+### Pasul 5: Așteaptă din nou... ⏰
+
+```cpp
+delay(1000);
+```
+
+Așteaptă încă 1 secundă, apoi totul începe din nou!
+
+<InfoBox type="warning">
+  **Ține minte:** HIGH = APRINS (ca un întrerupător SUS ⬆️) și LOW = STINS (ca un întrerupător JOS ⬇️)!
+</InfoBox>
+
+<Checkpoint id="checkpoint-2" lessonKey="ro/p3-c1-l1-basic-led-blink" label="Am înțeles că HIGH = APRINS și LOW = STINS! 💡" />
+
+</LessonChapter>
+
+<LessonChapter title="Programul Complet! 🎉" id="programul-complet">
+
+Iată tot codul împreună:
 
 ```cpp
 void setup() {
-  pinMode(13, OUTPUT);  // Pinul 13 va trimite semnale - va controla LED-ul!
-}
-```
-
-<InfoBox type="tip">
-  **Analogie pentru copii:** `pinMode()` este ca atunci când îi spui prietenului tău "Tu vorbești, eu ascult!" sau "Eu vorbesc, tu asculți!". Arduino-ul trebuie să știe cine face ce! 🗣️👂
-</InfoBox>
-
-</LessonChapter>
-
-<LessonChapter title="Funcția digitalWrite()" id="functia-digitalwrite">
-
-### Cum Controlezi LED-ul - PORNIT sau OPRIT!
-
-După ce ai configurat pinul ca OUTPUT, poți să-l controlezi:
-
-```cpp
-digitalWrite(pin, valoare);
-```
-
-- `pin`: Numărul pinului
-- `valoare`: `HIGH` (5V, LED aprins 💡) sau `LOW` (0V, LED stins ⚫)
-
-### Ce Înseamnă HIGH și LOW?
-
-| Valoare | Ce Face | Voltaj | LED |
-|---------|---------|--------|-----|
-| `HIGH` | Trimite curent | 5V | Aprins 💡 |
-| `LOW` | Nu trimite curent | 0V | Stins ⚫ |
-
-### Exemplu
-
-```cpp
-digitalWrite(13, HIGH);  // Aprinde LED-ul! 💡
-digitalWrite(13, LOW);   // Stinge LED-ul! ⚫
-```
-
-<InfoBox type="tip">
-  **Pentru copii:** Gândește-te la `HIGH` ca la un întrerupător de lumină pus pe ON, și `LOW` ca la întrerupătorul pus pe OFF. Tu controlezi lumina! 💡
-</InfoBox>
-
-<Checkpoint id="checkpoint-2" lessonKey="ro/p3-c1-l1-basic-led-blink" label="Înțeleg funcția digitalWrite" />
-
-</LessonChapter>
-
-<LessonChapter title="Funcția delay()" id="functia-delay">
-
-### Cum Faci Pauze - Așteaptă Un Pic!
-
-Funcția `delay()` face Arduino-ul să aștepte înainte de a continua:
-
-```cpp
-delay(milisecunde);
-```
-
-- 1000 milisecunde = 1 secundă (poți număra "unu, elefant" 🐘)
-- 500 milisecunde = 0.5 secunde (jumătate de secundă)
-- 100 milisecunde = 0.1 secunde (foarte rapid!)
-
-<InfoBox type="info">
-  **Pentru copii:** O milisecundă este FOARTE rapidă - de 1000 de ori mai rapidă decât o secundă! Imaginează-ți că împarți o secundă în 1000 de bucățele mici. ⏱️
-</InfoBox>
-
-<GifStep
-  stepNumber={4}
-  title="Încarcă Primul Tău Program!"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Incarcare+Program+GIF"
-  alt="Încărcarea programului pe Arduino"
->
-  Apasă butonul **Upload** (arată ca o săgeată →). Urmărește cum LED-urile TX/RX clipesc în timp ce codul se transferă. Când se termină, LED-ul încorporat va începe să clipească! 🎉
-</GifStep>
-
-### Codul Complet pentru Clipire
-
-Iată tot programul - doar 8 linii de cod magic! ✨
-
-```cpp
-void setup() {
-  pinMode(13, OUTPUT);    // Pregătim pinul 13 pentru a trimite semnale
+  pinMode(13, OUTPUT);
 }
 
 void loop() {
-  digitalWrite(13, HIGH); // Aprinde LED-ul 💡
-  delay(1000);            // Așteaptă 1 secundă
-  digitalWrite(13, LOW);  // Stinge LED-ul ⚫
-  delay(1000);            // Așteaptă 1 secundă
-  // Apoi totul se repetă! ♻️
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+  delay(1000);
 }
 ```
 
-<InfoBox type="warning">
-  **Important:** Nu uita `delay()` între `HIGH` și `LOW`! Fără pauze, LED-ul se va aprinde și stinge atât de repede încât ochii tăi nu vor vedea nicio schimbare - va părea că este tot timpul aprins!
+<GifStep
+  stepNumber={4}
+  title="Încarcă Codul Tău!"
+  gifUrl="https://placehold.co/600x400/22c55e/white?text=Apasa+Butonul+Upload"
+  alt="Butonul Upload"
+>
+  Apasă butonul **Upload** (săgeata →). Privește cum luminițele clipesc în timp ce codul se duce la Arduino. Apoi... LED-UL TĂU ÎNCEPE SĂ CLIPEASCĂ! 🎊
+</GifStep>
+
+<InfoBox type="tip">
+  **Ura!** 🎉 Tocmai ai făcut primul tău program Arduino! Lumina va clipi mereu până când deconectezi Arduino!
 </InfoBox>
 
 </LessonChapter>
 
-<LessonChapter title="Experimentează și Învață!" id="experimenteaza">
+<LessonChapter title="Experimente Distractive! 🧪" id="experimente">
 
-### Provocări Distractive 🎯
+### Fă-l să clipească MAI REPEDE! 🏃‍♂️
 
-Încearcă să modifici codul pentru diferite efecte:
-
-**1. Clipire Rapidă (ca o licurici):**
+Schimbă `1000` cu `100`:
 ```cpp
-delay(100);  // Schimbă 1000 cu 100 pentru clipire rapidă!
+delay(100);
 ```
+Acum clipește super repede ca un licurici!
 
-**2. Clipire Lentă (ca un far):**
+### Fă-l să clipească MAI ÎNCET! 🐢
+
+Schimbă `1000` cu `3000`:
 ```cpp
-delay(2000);  // Schimbă 1000 cu 2000 pentru clipire lentă
+delay(3000);
 ```
+Acum clipește încet ca un far!
 
-**3. Cod Morse pentru "SOS":**
+### Fă un pattern! ✨
+
+Încearcă acest pattern de bătaie de inimă:
 ```cpp
-// S = trei scurte, O = trei lungi, S = trei scurte
-// Încearcă să creezi acest model!
+digitalWrite(13, HIGH);
+delay(100);
+digitalWrite(13, LOW);
+delay(100);
+digitalWrite(13, HIGH);
+delay(100);
+digitalWrite(13, LOW);
+delay(500);
 ```
 
 <InfoBox type="tip">
-  **Pentru părinți:** Încurajați copilul să experimenteze cu diferite valori de delay! Este o modalitate excelentă de a înțelege cum funcționează timpul în programare. 🧪
+  **Provocare:** Poți să faci LED-ul să clipească SOS în cod Morse? (3 scurte, 3 lungi, 3 scurte!)
 </InfoBox>
 
 </LessonChapter>
 
-<LessonChapter title="Simulare Interactivă" id="simulare-interactiva">
-
-<InfoBox type="info">
-  Simularea interactivă arată o linie de timp cu semnalul digital de pe pinul 13. Folosește glisorul pentru a schimba viteza de clipire și observă cum LED-ul răspunde la schimbări! Aceasta te ajută să înțelegi relația dintre cod și comportamentul LED-ului. 🎮
-</InfoBox>
-
-</LessonChapter>
-
-<LessonChapter title="Testează-ți Cunoștințele" id="testeaza-cunostintele">
+<LessonChapter title="Test! 🎯" id="testeaza-cunostintele">
 
 <ExerciseMultipleChoice
   id="quiz-1"
   lessonKey="ro/p3-c1-l1-basic-led-blink"
-  question="Care funcție rulează O SINGURĂ DATĂ când pornești Arduino-ul?"
+  question="Care cuvânt aprinde LED-ul?"
   options={[
-    { id: "a", text: "loop() - rulează mereu în buclă" },
-    { id: "b", text: "setup() - pregătește totul la început" },
-    { id: "c", text: "main() - aceasta nu există în Arduino" },
-    { id: "d", text: "begin() - aceasta nu există în Arduino" }
+    { id: "a", text: "LOW - ca mergând în jos" },
+    { id: "b", text: "HIGH - ca mergând în sus!" },
+    { id: "c", text: "POATE - Arduino nu e sigur" },
+    { id: "d", text: "CLIPEȘTE - îl face să clipească" }
   ]}
   correctIndex={1}
 />
@@ -259,12 +242,12 @@ delay(2000);  // Schimbă 1000 cu 2000 pentru clipire lentă
 <ExerciseMultipleChoice
   id="quiz-2"
   lessonKey="ro/p3-c1-l1-basic-led-blink"
-  question="Ce face delay(2000)?"
+  question="Cât timp așteaptă delay(2000)?"
   options={[
-    { id: "a", text: "Așteaptă 2 secunde (2000 milisecunde)" },
-    { id: "b", text: "Așteaptă 20 de secunde" },
-    { id: "c", text: "Așteaptă 0.2 secunde" },
-    { id: "d", text: "Așteaptă 200 de secunde" }
+    { id: "a", text: "2 secunde (numără: un elefant, doi elefanți 🐘🐘)" },
+    { id: "b", text: "20 de secunde - e prea mult!" },
+    { id: "c", text: "Jumătate de secundă - super rapid!" },
+    { id: "d", text: "2 minute - du-te să iei o gustare!" }
   ]}
   correctIndex={0}
 />
@@ -272,32 +255,32 @@ delay(2000);  // Schimbă 1000 cu 2000 pentru clipire lentă
 <ExerciseMultipleChoice
   id="quiz-3"
   lessonKey="ro/p3-c1-l1-basic-led-blink"
-  question="Ce înseamnă digitalWrite(13, HIGH)?"
+  question="Unde punem codul care rulează doar O DATĂ?"
   options={[
-    { id: "a", text: "Stinge LED-ul de pe pinul 13" },
-    { id: "b", text: "Aprinde LED-ul de pe pinul 13" },
-    { id: "c", text: "Citește starea LED-ului" },
-    { id: "d", text: "Setează pinul 13 ca input" }
+    { id: "a", text: "În cutia loop() - rulează mereu" },
+    { id: "b", text: "În cutia setup() - rulează o dată la început!" },
+    { id: "c", text: "Oriunde - Arduino își dă seama" },
+    { id: "d", text: "În afara cutiilor - asta nu merge!" }
   ]}
   correctIndex={1}
 />
 
 </LessonChapter>
 
-<LessonChapter title="Rezumat" id="rezumat">
+<LessonChapter title="Ai Reușit! 🏆" id="rezumat">
 
-În această lecție ai învățat: 🎓
+### Ce ai învățat azi:
 
-- ✅ Programele Arduino au două părți: `setup()` (rulează o dată) și `loop()` (se repetă mereu)
-- ✅ `pinMode(pin, OUTPUT)` pregătește un pin pentru a trimite semnale
-- ✅ `digitalWrite(pin, HIGH/LOW)` aprinde sau stinge LED-ul
-- ✅ `delay(ms)` face o pauză pentru numărul specificat de milisecunde
-- ✅ 1000 milisecunde = 1 secundă
+- ✅ **setup()** rulează O DATĂ - pentru pregătire
+- ✅ **loop()** rulează MEREU - pentru acțiunea principală
+- ✅ **HIGH** = APRINS, **LOW** = STINS
+- ✅ **delay(1000)** = așteaptă 1 secundă
+- ✅ Poți schimba numărul ca să clipească mai repede sau mai încet!
 
 <InfoBox type="tip">
-  **Felicitări!** 🎉 Ai scris primul tău program Arduino! Acum poți controla lumina cu cod - ești pe drumul cel bun spre a deveni un adevărat creator de tehnologie!
+  **Bravo!** 🌟 Ești acum un programator Arduino! În lecția următoare, vom face MAI MULTE lumini să clipească în pattern-uri cool!
 </InfoBox>
 
-<Checkpoint id="checkpoint-3" lessonKey="ro/p3-c1-l1-basic-led-blink" label="Am completat lecția!" />
+<Checkpoint id="checkpoint-3" lessonKey="ro/p3-c1-l1-basic-led-blink" label="Am făcut LED-ul să clipească! Sunt programator Arduino! 🎉" />
 
 </LessonChapter>

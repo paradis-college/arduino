@@ -12,96 +12,6 @@ import type { LessonMeta, CourseMeta, Language } from './types';
 // NOTE: YouTube URLs are placeholder examples. Replace with actual tutorial video URLs.
 export const lessonsManifest: LessonMeta[] = [
   // ==========================================
-  // EXISTING LESSONS (keep for backward compatibility)
-  // ==========================================
-  // Romanian lessons - Arduino Basics - Embedded Programming Basics
-  {
-    id: 'basics-blink-ro',
-    slug: 'basics-blink',
-    title: 'LED Blink de bază',
-    description: 'Învață să aprinzi și să stingi un LED folosind Arduino.',
-    course: 'embedded-programming-basics',
-    difficulty: 'beginner',
-    tags: ['digitalWrite', 'delay', 'pinMode', 'LED'],
-    estimatedMinutes: 20,
-    tinkercadUrl: 'https://www.tinkercad.com/things/example-blink',
-    youtubeUrl: 'https://www.youtube.com/watch?v=EXAMPLE_VIDEO_ID',
-    keyPoints: [
-      { title: 'Înțelegerea LED-urilor', description: 'Cum funcționează diodele emițătoare de lumină' },
-      { title: 'Funcția pinMode()', description: 'Configurarea pinilor ca intrări sau ieșiri' },
-      { title: 'Bazele digitalWrite()', description: 'Controlul semnalelor digitale de ieșire' },
-      { title: 'Folosirea delay()', description: 'Crearea temporizărilor în programele tale' },
-    ],
-    hasInteractiveExercises: true,
-    language: 'ro',
-    order: 1,
-  },
-  {
-    id: 'pwm-led-ro',
-    slug: 'pwm-led',
-    title: 'Control PWM pentru LED',
-    description: 'Folosește PWM pentru a controla luminozitatea LED-ului.',
-    course: 'embedded-programming-basics',
-    difficulty: 'beginner',
-    tags: ['analogWrite', 'PWM', 'LED', 'fade'],
-    estimatedMinutes: 25,
-    tinkercadUrl: 'https://www.tinkercad.com/things/example-pwm',
-    youtubeUrl: 'https://www.youtube.com/watch?v=EXAMPLE_VIDEO_ID',
-    keyPoints: [
-      { title: 'Ce este PWM', description: 'Modularea lățimii pulsului explicată' },
-      { title: 'Funcția analogWrite()', description: 'Controlul valorilor analogice pe pinii PWM' },
-      { title: 'Ciclul de funcționare', description: 'Înțelegerea procentelor de luminozitate' },
-      { title: 'Efecte de fade', description: 'Crearea tranzițiilor de luminozitate fluide' },
-    ],
-    hasInteractiveExercises: true,
-    language: 'ro',
-    order: 3,
-  },
-  // English lessons - Arduino Basics - Embedded Programming Basics
-  {
-    id: 'basics-blink-en',
-    slug: 'basics-blink',
-    title: 'Basic LED Blink',
-    description: 'Learn to turn an LED on and off using Arduino.',
-    course: 'embedded-programming-basics',
-    difficulty: 'beginner',
-    tags: ['digitalWrite', 'delay', 'pinMode', 'LED'],
-    estimatedMinutes: 20,
-    tinkercadUrl: 'https://www.tinkercad.com/things/example-blink',
-    youtubeUrl: 'https://www.youtube.com/watch?v=EXAMPLE_VIDEO_ID',
-    keyPoints: [
-      { title: 'Understanding LEDs', description: 'Learn how Light Emitting Diodes work and their polarity' },
-      { title: 'The pinMode() function', description: 'Configure pins as inputs or outputs' },
-      { title: 'digitalWrite() basics', description: 'Control digital output signals' },
-      { title: 'Using delay()', description: 'Create timing in your programs' },
-    ],
-    hasInteractiveExercises: true,
-    language: 'en',
-    order: 1,
-  },
-  {
-    id: 'pwm-led-en',
-    slug: 'pwm-led',
-    title: 'PWM LED Control',
-    description: 'Use PWM to control LED brightness.',
-    course: 'embedded-programming-basics',
-    difficulty: 'beginner',
-    tags: ['analogWrite', 'PWM', 'LED', 'fade'],
-    estimatedMinutes: 25,
-    tinkercadUrl: 'https://www.tinkercad.com/things/example-pwm',
-    youtubeUrl: 'https://www.youtube.com/watch?v=EXAMPLE_VIDEO_ID',
-    keyPoints: [
-      { title: 'What is PWM', description: 'Pulse Width Modulation explained' },
-      { title: 'The analogWrite() function', description: 'Control analog values on PWM pins' },
-      { title: 'Duty cycle', description: 'Understanding brightness percentages' },
-      { title: 'Fade effects', description: 'Creating smooth brightness transitions' },
-    ],
-    hasInteractiveExercises: true,
-    language: 'en',
-    order: 3,
-  },
-
-  // ==========================================
   // PATH 1: ELECTRONIC ENGINEERING - English
   // ==========================================
   // Course: Passive Components
@@ -145,6 +55,12 @@ export const lessonsManifest: LessonMeta[] = [
   { id: 'p3-c1-l3-pwm-led-fade-en', slug: 'p3-c1-l3-pwm-led-fade', title: 'PWM LED Fade (analogWrite)', description: 'Smooth LED brightness control with PWM.', course: 'embedded-programming-basics', difficulty: 'beginner', tags: ['PWM', 'analogWrite', 'fade', 'brightness'], estimatedMinutes: 25, hasInteractiveExercises: true, youtubeUrl: 'https://www.youtube.com/watch?v=EXAMPLE_VIDEO_ID', keyPoints: [{ title: "PWM Concept", description: "Pulse width modulation explained" }, { title: "analogWrite() Function", description: "0-255 brightness control" }, { title: "PWM Pins", description: "Which Arduino pins support PWM" }, { title: "Fade Effects", description: "Creating smooth brightness transitions" }],  language: 'en', order: 12 },
   { id: 'p3-c1-l4-understanding-delay-en', slug: 'p3-c1-l4-understanding-delay', title: 'Understanding delay() and Timing', description: 'Blocking vs non-blocking timing approaches.', course: 'embedded-programming-basics', difficulty: 'beginner', tags: ['delay', 'timing', 'millis', 'blocking'], estimatedMinutes: 25, hasInteractiveExercises: true, youtubeUrl: 'https://www.youtube.com/watch?v=EXAMPLE_VIDEO_ID', keyPoints: [{ title: "What delay() Does", description: "Blocking program execution" }, { title: "Impact on Responsiveness", description: "Why long delays cause problems" }, { title: "millis() Alternative", description: "Non-blocking timing approach" }, { title: "When to Use delay()", description: "Appropriate use cases" }],  language: 'en', order: 13 },
   { id: 'p3-c1-l5-setup-vs-loop-en', slug: 'p3-c1-l5-setup-vs-loop', title: 'setup() vs loop()', description: 'Understanding Arduino program structure.', course: 'embedded-programming-basics', difficulty: 'beginner', tags: ['setup', 'loop', 'structure', 'basics'], estimatedMinutes: 20, hasInteractiveExercises: true, youtubeUrl: 'https://www.youtube.com/watch?v=EXAMPLE_VIDEO_ID', keyPoints: [{ title: "setup() Runs Once", description: "Initialization at power-on" }, { title: "loop() Repeats Forever", description: "Main program execution" }, { title: "Where to Put Code", description: "Init code vs main logic placement" }, { title: "Program Flow", description: "Understanding execution order" }],  language: 'en', order: 14 },
+  // Course: Embedded Programming Basics - Romanian
+  { id: 'p3-c1-l1-basic-led-blink-ro', slug: 'p3-c1-l1-basic-led-blink', title: 'Clipirea de Bază a LED-ului (Pinul 13)', description: 'Primul tău program Arduino: clipirea unui LED.', course: 'embedded-programming-basics', difficulty: 'beginner', tags: ['LED', 'clipire', 'digitalWrite', 'delay'], estimatedMinutes: 20, hasInteractiveExercises: true, youtubeUrl: 'https://www.youtube.com/watch?v=EXAMPLE_VIDEO_ID', keyPoints: [{ title: "Structura Sketch-ului", description: "Funcțiile setup() și loop()" }, { title: "Funcția pinMode()", description: "Configurarea pinilor ca OUTPUT" }, { title: "Controlul digitalWrite()", description: "Stările HIGH și LOW" }, { title: "Temporizarea delay()", description: "Pauze în execuția programului" }], language: 'ro', order: 10 },
+  { id: 'p3-c1-l2-multi-led-blink-ro', slug: 'p3-c1-l2-multi-led-blink', title: 'Clipirea Multi-LED (Pinii 9, 10, 11)', description: 'Controlează mai multe LED-uri cu array-uri și pattern-uri.', course: 'embedded-programming-basics', difficulty: 'beginner', tags: ['LED', 'array', 'pattern', 'multiple'], estimatedMinutes: 25, hasInteractiveExercises: true, youtubeUrl: 'https://www.youtube.com/watch?v=EXAMPLE_VIDEO_ID', keyPoints: [{ title: "Ieșiri Multiple", description: "Controlul mai multor LED-uri" }, { title: "Array-uri pentru Pini", description: "Stocarea eficientă a numerelor de pini" }, { title: "Control cu Bucle", description: "Iterarea prin array-urile de LED-uri" }, { title: "Pattern-uri de Clipire", description: "Pattern-uri: toate, chase și alternat" }], language: 'ro', order: 11 },
+  { id: 'p3-c1-l3-pwm-led-fade-ro', slug: 'p3-c1-l3-pwm-led-fade', title: 'Fade LED cu PWM (analogWrite)', description: 'Controlul fin al luminozității LED-ului cu PWM.', course: 'embedded-programming-basics', difficulty: 'beginner', tags: ['PWM', 'analogWrite', 'fade', 'luminozitate'], estimatedMinutes: 25, hasInteractiveExercises: true, youtubeUrl: 'https://www.youtube.com/watch?v=EXAMPLE_VIDEO_ID', keyPoints: [{ title: "Conceptul PWM", description: "Modularea lățimii pulsului explicată" }, { title: "Funcția analogWrite()", description: "Controlul luminozității 0-255" }, { title: "Pinii PWM", description: "Care pini Arduino suportă PWM" }, { title: "Efecte de Fade", description: "Crearea tranzițiilor line de luminozitate" }], language: 'ro', order: 12 },
+  { id: 'p3-c1-l4-understanding-delay-ro', slug: 'p3-c1-l4-understanding-delay', title: 'Înțelegerea delay() și Temporizarea', description: 'Abordări blocante vs non-blocante pentru temporizare.', course: 'embedded-programming-basics', difficulty: 'beginner', tags: ['delay', 'temporizare', 'millis', 'blocant'], estimatedMinutes: 25, hasInteractiveExercises: true, youtubeUrl: 'https://www.youtube.com/watch?v=EXAMPLE_VIDEO_ID', keyPoints: [{ title: "Ce Face delay()", description: "Blocarea execuției programului" }, { title: "Impact asupra Răspunsului", description: "De ce delay-urile lungi cauzează probleme" }, { title: "Alternativa millis()", description: "Abordare non-blocantă pentru temporizare" }, { title: "Când să Folosești delay()", description: "Cazuri de utilizare corespunzătoare" }], language: 'ro', order: 13 },
+  { id: 'p3-c1-l5-setup-vs-loop-ro', slug: 'p3-c1-l5-setup-vs-loop', title: 'setup() vs loop()', description: 'Înțelegerea structurii programului Arduino.', course: 'embedded-programming-basics', difficulty: 'beginner', tags: ['setup', 'loop', 'structură', 'baze'], estimatedMinutes: 20, hasInteractiveExercises: true, youtubeUrl: 'https://www.youtube.com/watch?v=EXAMPLE_VIDEO_ID', keyPoints: [{ title: "setup() Rulează O Dată", description: "Inițializare la pornire" }, { title: "loop() Se Repetă Mereu", description: "Execuția principală a programului" }, { title: "Unde Să Pui Codul", description: "Plasarea codului de inițializare vs logica principală" }, { title: "Fluxul Programului", description: "Înțelegerea ordinii de execuție" }], language: 'ro', order: 14 },
   // Course: Working with Inputs
   { id: 'p3-c3-l1-reading-push-button-en', slug: 'p3-c3-l1-reading-push-button', title: 'Reading a Push Button', description: 'Button wiring and INPUT_PULLUP mode.', course: 'working-with-inputs', difficulty: 'beginner', tags: ['button', 'digitalRead', 'INPUT_PULLUP'], estimatedMinutes: 25, hasInteractiveExercises: true, youtubeUrl: 'https://www.youtube.com/watch?v=EXAMPLE_VIDEO_ID', keyPoints: [{ title: "Button Wiring", description: "Pull-up and pull-down configurations" }, { title: "INPUT vs INPUT_PULLUP", description: "Internal pull-up resistors" }, { title: "digitalRead() Function", description: "Reading button state" }, { title: "Button-Controlled LED", description: "Simple input-to-output logic" }],  language: 'en', order: 1 },
   { id: 'p3-c3-l2-potentiometer-analog-en', slug: 'p3-c3-l2-potentiometer-analog', title: 'Potentiometer as Analog Input', description: 'Reading variable resistance with analogRead.', course: 'working-with-inputs', difficulty: 'beginner', tags: ['potentiometer', 'analogRead', 'analog'], estimatedMinutes: 25, hasInteractiveExercises: true, youtubeUrl: 'https://www.youtube.com/watch?v=EXAMPLE_VIDEO_ID', keyPoints: [{ title: "Potentiometer Wiring", description: "3-pin connection to Arduino" }, { title: "analogRead() Function", description: "Reading 0-1023 values" }, { title: "Value Mapping", description: "Converting to useful ranges" }, { title: "Variable Control", description: "Controlling LED brightness" }],  language: 'en', order: 2 },
