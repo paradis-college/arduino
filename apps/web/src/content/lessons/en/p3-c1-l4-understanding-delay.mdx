@@ -29,8 +29,8 @@ Today you will:
 <LessonChapter title="Watch What Happens! 🎬" id="watch-what-happens">
 
 <P5SketchEmbed
-  id="delay-animation"
-  sketchId="p3-c1-l4-delay"
+  id="arduino-nap-animation"
+  sketchId="p3-c1-l4-arduino-nap"
   stepNumber={1}
   title="Arduino's Nap Time!"
   alt="Visualization of delay blocking"
@@ -48,14 +48,15 @@ Today you will:
 
 When you write `delay(1000)`, here's what happens:
 
-<GifStep
-  stepNumber={1}
+<P5SketchEmbed
+  id="delay-timing-animation"
+  sketchId="p3-c1-l4-delay"
+  stepNumber={2}
   title="Arduino Goes to Sleep!"
-  gifUrl="https://placehold.co/600x400/3b82f6/white?text=Zzzzz...+1+second"
   alt="Arduino sleeping during delay"
 >
   Arduino STOPS everything and counts: "one elephant... 🐘" It can't see buttons, can't read sensors, can't do ANYTHING until it wakes up!
-</GifStep>
+</P5SketchEmbed>
 
 ### It's Like Closing Your Eyes! 🙈
 
@@ -106,14 +107,15 @@ void loop() {
 }
 ```
 
-<GifStep
-  stepNumber={2}
+<P5SketchEmbed
+  id="missed-button-animation"
+  sketchId="p3-c1-l4-missed-button"
+  stepNumber={3}
   title="Missed Button Press!"
-  gifUrl="https://placehold.co/600x400/ef4444/white?text=Button+Missed!"
   alt="Button press missed during delay"
 >
-  **Problem:** While sleeping during delay, Arduino MISSES your button presses! It's like trying to talk to someone who's napping! 😴
-</GifStep>
+  **Problem:** While sleeping during delay, Arduino MISSES your button presses! Click the button during delay to see it get missed! It's like trying to talk to someone who's napping! 😴
+</P5SketchEmbed>
 
 <InfoBox type="tip">
   **Think about it:** If delay is 2 seconds, and you press the button for 0.1 seconds, Arduino probably won't catch it! 🎯
@@ -162,14 +164,15 @@ void setup() {
 
 There's a BETTER way! Instead of sleeping, Arduino can LOOK AT A CLOCK! ⏰
 
-<GifStep
-  stepNumber={3}
+<P5SketchEmbed
+  id="clock-method-animation"
+  sketchId="p3-c1-l4-clock-method"
+  stepNumber={4}
   title="The Clock Method"
-  gifUrl="https://placehold.co/600x400/22c55e/white?text=Clock+Method"
   alt="millis() clock concept"
 >
   Instead of sleeping, Arduino keeps checking the clock: "Has 1 second passed yet? No? OK, I'll check the button. Has 1 second passed? Yes! Time to blink!"
-</GifStep>
+</P5SketchEmbed>
 
 ### The Idea (Don't Worry About Code Yet!)
 

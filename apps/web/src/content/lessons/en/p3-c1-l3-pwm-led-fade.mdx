@@ -51,23 +51,14 @@ Before, we only had two choices:
 - `LOW` = ALL THE WAY OFF (0%)
 
 <P5SketchEmbed
-  id="led-brightness-animation"
-  sketchId="p3-c1-l3-led-brightness"
+  id="brightness-scale-animation"
+  sketchId="p3-c1-l3-brightness-scale"
   stepNumber={2}
-  title="Control the Brightness!"
-  alt="LED brightness slider"
->
-  👀 **Try it!** Move the slider to see all the different brightness levels! From completely OFF to SUPER BRIGHT! It's like a dimmer switch for your light! 💡
-</P5SketchEmbed>
-
-<GifStep
-  stepNumber={1}
   title="Now We Have 256 Levels!"
-  gifUrl="https://placehold.co/600x400/f59e0b/white?text=0+to+255+Brightness"
   alt="Brightness scale from 0 to 255"
 >
-  Now we can pick ANY brightness from **0** (off) to **255** (super bright)! That's like having 256 different light settings!
-</GifStep>
+  Now we can pick ANY brightness from **0** (off) to **255** (super bright)! Drag the slider to see all 256 different light settings!
+</P5SketchEmbed>
 
 ### The Magic Number Scale 🔢
 
@@ -117,14 +108,15 @@ analogWrite(9, 255);  // Light is SUPER BRIGHT!
 
 Let's make the light fade in and fade out - like it's breathing!
 
-<GifStep
-  stepNumber={2}
+<P5SketchEmbed
+  id="breathing-light-animation"
+  sketchId="p3-c1-l3-breathing-light"
+  stepNumber={3}
   title="Watch It Breathe!"
-  gifUrl="https://placehold.co/600x400/8b5cf6/white?text=Breathing+Light"
   alt="LED breathing animation"
 >
   The light slowly gets brighter... then slowly gets dimmer... over and over! It's like the light is taking slow breaths! 😮‍💨
-</GifStep>
+</P5SketchEmbed>
 
 ### Fade IN (0 → 255) - Getting Brighter! ☀️
 

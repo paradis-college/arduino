@@ -46,14 +46,15 @@ Today you will:
 
 <LessonChapter title="The Arduino Has a Built-in Light!" id="built-in-led">
 
-<GifStep
+<P5SketchEmbed
+  id="arduino-board-animation"
+  sketchId="p3-c1-l1-arduino-board"
   stepNumber={1}
   title="Find the Tiny Light"
-  gifUrl="https://placehold.co/600x400/22c55e/white?text=LED+on+Arduino+Board"
   alt="LED on the Arduino board"
 >
   Look at your Arduino board. See that tiny orange or green light near pin 13? That's our LED! We don't need to connect anything - it's already there! 🎯
-</GifStep>
+</P5SketchEmbed>
 
 ### What's an LED? 
 
@@ -74,23 +75,15 @@ An **LED** is a tiny light - like a mini flashlight!
 
 Every Arduino program has **two special boxes** where we put our instructions:
 
-<GifStep
+<P5SketchEmbed
+  id="setup-loop-boxes-animation"
+  sketchId="p3-c1-l1-setup-loop-boxes"
   stepNumber={2}
-  title="Box 1: setup() - Getting Ready!"
-  gifUrl="https://placehold.co/600x400/3b82f6/white?text=setup%28%29+Box"
-  alt="The setup box"
+  title="setup() and loop() - The Two Magic Boxes!"
+  alt="The setup and loop boxes visualization"
 >
-  The **setup()** box runs **ONE TIME** when you turn on Arduino. It's like getting your crayons ready before drawing! 🖍️
-</GifStep>
-
-<GifStep
-  stepNumber={3}
-  title="Box 2: loop() - Do It Again and Again!"
-  gifUrl="https://placehold.co/600x400/8b5cf6/white?text=loop%28%29+Box"
-  alt="The loop box"
->
-  The **loop()** box runs **FOREVER** - over and over! It's like a merry-go-round that never stops! 🎠
-</GifStep>
+  Watch how **setup()** runs ONE TIME (getting ready!) and then **loop()** runs FOREVER - over and over like a merry-go-round! 🎠
+</P5SketchEmbed>
 
 <InfoBox type="tip">
   **Think of it this way:**
@@ -171,14 +164,15 @@ void loop() {
 }
 ```
 
-<GifStep
-  stepNumber={4}
+<P5SketchEmbed
+  id="upload-button-animation"
+  sketchId="p3-c1-l1-upload-button"
+  stepNumber={3}
   title="Upload Your Code!"
-  gifUrl="https://placehold.co/600x400/22c55e/white?text=Click+Upload+Button"
   alt="Upload button"
 >
-  Click the **Upload** button (the arrow →). Watch the lights blink as your code goes to Arduino. Then... YOUR LED STARTS BLINKING! 🎊
-</GifStep>
+  Click the **Upload** button (the green arrow →). Watch the lights blink as your code goes to Arduino. Then... YOUR LED STARTS BLINKING! 🎊
+</P5SketchEmbed>
 
 <InfoBox type="tip">
   **Yay!** 🎉 You just made your first Arduino program! The light will keep blinking forever until you unplug it!
