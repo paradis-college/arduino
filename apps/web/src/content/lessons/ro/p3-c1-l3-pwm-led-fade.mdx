@@ -1,310 +1,226 @@
 ---
 id: p3-c1-l3-pwm-led-fade
-title: "PWM - Estompare LED (analogWrite)"
+title: "Fă Luminile să Strălucească ca prin Magie! ✨"
 course: "embedded-programming-basics"
 difficulty: "beginner"
-tags: ["PWM", "analogWrite", "estompare", "luminozitate", "LED"]
-estimatedMinutes: 25
+tags: ["PWM", "analogWrite", "fade", "luminozitate"]
+estimatedMinutes: 15
 hasInteractiveExercises: true
 videoId: "dQw4w9WgXcQ"
 ---
 
-# PWM - Estompare LED (analogWrite)
+# Fă Luminile să Strălucească ca prin Magie! ✨
 
-În această lecție, vei învăța cum PWM (Pulse Width Modulation - Modularea Lățimii Pulsului) îți permite să controlezi luminozitatea LED-ului în mod gradual, nu doar ON sau OFF! 🌟✨
+În loc de doar APRINS și STINS, acum vom face luminile să devină mai strălucitoare și mai slabe - ca un răsărit de soare! 🌅
 
-<LessonChapter title="Ce Vei Învăța" id="ce-vei-invata">
+<LessonChapter title="Ce Vom Face Azi" id="ce-vom-face">
 
-- Ce este PWM și cum funcționează
-- Cum folosești `analogWrite()` pentru valori de la 0 la 255
-- Cum creezi efecte de estompare (fade in/out)
-- Care pini de pe Arduino suportă PWM
+Azi vei:
+- 🌟 Să faci o lumină să devină **mai strălucitoare** încet
+- 🌙 Să faci o lumină să devină **mai slabă** încet
+- 💫 Să creezi un efect de **lumină care respiră**!
 
 <InfoBox type="info">
-  PWM creează iluzia unui semnal analog folosind comutări digitale foarte rapide. Ochiul tău vede luminozitatea medie! Este ca și cum ai clipi foarte repede - în funcție de cât timp ții ochii deschiși, vezi mai multă sau mai puțină lumină! 👁️✨
+  **Hei copii!** Imaginează-ți că lumina ta e ca o pisicuță somnoroasă - își deschide ochii încet (devine strălucitoare), apoi îi închide încet (devine slabă)! 😺
 </InfoBox>
 
 </LessonChapter>
 
-<LessonChapter title="Bazele PWM" id="bazele-pwm">
+<LessonChapter title="Urmărește Strălucirea! 🌈" id="urmareste-stralucirea">
 
 <P5SketchEmbed
   id="pwm-fade-animation"
   sketchId="p3-c1-l3-pwm-fade"
   stepNumber={1}
-  title="Controlul Ciclului de Lucru PWM"
-  alt="Animație cu bara ciclului de lucru și slider 0-255"
+  title="Lumina Strălucitoare!"
+  alt="LED aprinzându-se și stingându-se"
 >
-  Folosește slider-ul pentru a ajusta ciclul de lucru de la 0 la 255. Urmărește cum bara crește și scade, și vezi cum luminozitatea LED-ului se schimbă lin ca răspuns.
+  👀 **Privește!** Urmărește cum lumina devine încet mai strălucitoare, apoi încet mai slabă. E ca și cum lumina respiră! Mută glisorul pentru diferite nivele de luminozitate!
 </P5SketchEmbed>
 
-<P5SketchEmbed
-  id="led-brightness-animation"
-  sketchId="p3-c1-l3-led-brightness"
-  stepNumber={2}
-  title="Controlul Luminozității LED"
-  alt="Luminozitatea LED-ului crește și scade lin"
->
-  Urmărește cum luminozitatea LED-ului crește și scade lin pe măsură ce valoarea PWM ciclează automat. Aceasta demonstrează efectul de estompare în acțiune!
-</P5SketchEmbed>
-
-<P5SketchEmbed
-  id="rgb-mixing-animation"
-  sketchId="p3-c1-l3-rgb-mixing"
-  stepNumber={3}
-  title="Mixarea Culorilor RGB"
-  alt="LED RGB amestecând culori cu 3 slider-uri PWM independente"
->
-  Folosește trei slider-uri independente pentru a controla canalele roșu, verde și albastru. Amestecă orice culoare ajustând valorile PWM pentru fiecare componentă de culoare!
-</P5SketchEmbed>
-
-<GifStep
-  stepNumber={4}
-  title="Conectează LED-ul la un Pin PWM"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Conectare+PWM+GIF"
-  alt="Conectarea LED-ului la pinul PWM"
->
-  Conectează anodul LED-ului printr-un rezistor de 220Ω la pinul **9** (sau orice pin PWM marcat cu ~). Conectează catodul la GND.
-</GifStep>
-
-<GifStep
-  stepNumber={5}
-  title="Înțelege Valorile PWM"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Valori+PWM+GIF"
-  alt="Gama de valori PWM"
->
-  analogWrite acceptă valori de la **0** (oprit) până la **255** (luminozitate maximă). 127 oferă 50% luminozitate.
-</GifStep>
-
-<GifStep
-  stepNumber={6}
-  title="Creează Bucla de Estompare"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Estompare+PWM+GIF"
-  alt="Crearea efectului de estompare"
->
-  Încarcă codul de estompare și urmărește LED-ul trecând lin de la slab la strălucitor și înapoi într-o buclă continuă!
-</GifStep>
+<InfoBox type="tip">
+  **Încearcă!** Mută glisorul la stânga pentru STINS, la dreapta pentru SUPER STRĂLUCITOR, sau undeva la mijloc pentru o strălucire confortabilă! 💡
+</InfoBox>
 
 </LessonChapter>
 
-<LessonChapter title="Ce Este PWM?" id="ce-este-pwm">
+<LessonChapter title="Nu Doar APRINS și STINS! 🎚️" id="nu-doar-aprins-stins">
 
-### Modularea Lățimii Pulsului - Explicație Simplă
+Înainte, aveam doar două alegeri:
+- `HIGH` = COMPLET APRINS (100%)
+- `LOW` = COMPLET STINS (0%)
 
-PWM comută rapid între HIGH și LOW:
-- **Ciclul de lucru** (Duty Cycle): Procentul de timp în care semnalul este HIGH
-- 0% = întotdeauna LOW (LED oprit ⚫)
-- 50% = jumătate HIGH, jumătate LOW (luminozitate medie 🔆)
-- 100% = întotdeauna HIGH (luminozitate maximă 💡)
+<GifStep
+  stepNumber={1}
+  title="Acum Avem 256 de Nivele!"
+  gifUrl="https://placehold.co/600x400/f59e0b/white?text=0+pana+la+255+Luminozitate"
+  alt="Scară de luminozitate de la 0 la 255"
+>
+  Acum putem alege ORICE luminozitate de la **0** (stins) la **255** (super strălucitor)! Asta e ca și cum ai avea 256 de setări diferite!
+</GifStep>
+
+### Scala Magică de Numere 🔢
+
+| Număr | Cât de Strălucitor? | Ca... |
+|-------|---------------------|-------|
+| **0** | Stins! | 🌑 Noapte |
+| **50** | Puțin | 🌒 Lumină de lună |
+| **127** | Pe jumătate | 🌓 Zi înnorată |
+| **200** | Destul de strălucitor | 🌤️ Însorit |
+| **255** | SUPER STRĂLUCITOR! | ☀️ Te uiți la soare! |
 
 <InfoBox type="tip">
-  **Pentru copii:** Imaginează-ți că ai o lanternă și o aprinzi și o stingi FOARTE repede. Dacă o ții aprinsă mai mult timp decât stinsă, pare mai strălucitoare! Dacă o ții stinsă mai mult, pare mai slabă. PWM face exact acest lucru, dar de mii de ori pe secundă! 🔦⚡
+  **Gândește-te ca la:** Butonul de volum de la radio! Poți să-l faci încet, mediu sau TARE! 🔊
 </InfoBox>
 
-### Cum Funcționează?
+<Checkpoint id="checkpoint-1" lessonKey="ro/p3-c1-l3-pwm-led-fade" label="Pot alege orice luminozitate de la 0 la 255! 🔢" />
 
+</LessonChapter>
+
+<LessonChapter title="Noul Cuvânt Magic: analogWrite! ✨" id="analogwrite">
+
+În loc de `digitalWrite`, folosim `analogWrite`!
+
+```cpp
+analogWrite(pin, luminozitate);
 ```
-100% (HIGH tot timpul):   ████████████████████
- 75% (3/4 HIGH):          ████████████████░░░░
- 50% (jumătate HIGH):     ████████████░░░░░░░░
- 25% (1/4 HIGH):          ██████░░░░░░░░░░░░░░
-  0% (LOW tot timpul):    ░░░░░░░░░░░░░░░░░░░░
 
-█ = HIGH (5V)   ░ = LOW (0V)
+- **pin** = Care lumină (folosește pinii cu simbolul ~: 3, 5, 6, 9, 10, 11)
+- **luminozitate** = Alege un număr de la 0 la 255
+
+### Încearcă Acestea!
+
+```cpp
+analogWrite(9, 0);    // Lumina e STINSĂ
+analogWrite(9, 50);   // Lumina e SLABĂ (ca o lumină de noapte)
+analogWrite(9, 127);  // Lumina e MEDIE
+analogWrite(9, 255);  // Lumina e SUPER STRĂLUCITOARE!
 ```
-
-### Pinii PWM pe Arduino Uno
-
-Doar anumiți pini suportă PWM (sunt marcați cu ~):
-- **Pinii 3, 5, 6, 9, 10, 11**
-
-Caută simbolul **~** (tildă) lângă numărul pinului pe placa Arduino!
 
 <InfoBox type="warning">
-  Pinul 13 NU suportă PWM! Dacă vrei să controlezi luminozitatea, folosește pinii 3, 5, 6, 9, 10 sau 11 pentru analogWrite().
+  **Important!** Doar unii pini funcționează cu `analogWrite`. Caută simbolul ~ pe Arduino lângă pinii **3, 5, 6, 9, 10 și 11**!
 </InfoBox>
-
-<Checkpoint id="checkpoint-1" lessonKey="ro/p3-c1-l3-pwm-led-fade" label="Înțeleg bazele PWM" />
 
 </LessonChapter>
 
-<LessonChapter title="Funcția analogWrite()" id="functia-analogwrite">
+<LessonChapter title="Fă o Lumină care Respiră! 💫" id="lumina-respira">
 
-### Sintaxa
+Hai să facem lumina să se aprindă și să se stingă încet - ca și cum respiră!
 
-```cpp
-analogWrite(pin, valoare);
-```
+<GifStep
+  stepNumber={2}
+  title="Privește Cum Respiră!"
+  gifUrl="https://placehold.co/600x400/8b5cf6/white?text=Lumina+Respira"
+  alt="LED animație de respirație"
+>
+  Lumina devine încet mai strălucitoare... apoi încet mai slabă... iar și iar! E ca și cum lumina ia respirații lente! 😮‍💨
+</GifStep>
 
-- `pin`: Un pin capabil de PWM (marcat cu ~)
-- `valoare`: De la 0 la 255
-  - **0** = 0% ciclu de lucru (oprit complet)
-  - **127** = ~50% ciclu de lucru (luminozitate medie)
-  - **255** = 100% ciclu de lucru (luminozitate maximă)
-
-### Tabel de Referință Valori
-
-| Valoare | Ciclu de Lucru | Luminozitate |
-|---------|----------------|--------------|
-| 0 | 0% | Oprit ⚫ |
-| 64 | 25% | Slab 🌑 |
-| 127 | 50% | Mediu 🔆 |
-| 191 | 75% | Strălucitor 💡 |
-| 255 | 100% | Maxim ☀️ |
-
-### Exemplu
+### Fade IN (0 → 255) - Devine Mai Strălucitoare! ☀️
 
 ```cpp
-const int PIN_LED = 9;  // Trebuie să fie un pin PWM
-
-void setup() {
-  pinMode(PIN_LED, OUTPUT);
-}
-
-void loop() {
-  analogWrite(PIN_LED, 64);   // 25% luminozitate - ca o lumină de noapte
-  delay(1000);
-  analogWrite(PIN_LED, 127);  // 50% luminozitate - mediu
-  delay(1000);
-  analogWrite(PIN_LED, 255);  // 100% luminozitate - strălucitor!
-  delay(1000);
+for (int i = 0; i <= 255; i = i + 5) {
+  analogWrite(9, i);
+  delay(30);
 }
 ```
+
+Asta face `i` să meargă de la 0 la 255, pas cu pas, făcând lumina mai strălucitoare!
+
+### Fade OUT (255 → 0) - Devine Mai Slabă! 🌙
+
+```cpp
+for (int i = 255; i >= 0; i = i - 5) {
+  analogWrite(9, i);
+  delay(30);
+}
+```
+
+Asta face `i` să meargă de la 255 înapoi la 0, făcând lumina mai slabă!
 
 <InfoBox type="tip">
-  **Pentru copii:** Gândește-te la valorile 0-255 ca la un dimmer (reglaj de lumină) ca acela pe care îl au unii oameni acasă. Poți roti butonul pentru a face lumina mai slabă sau mai puternică! 🎛️
+  **Nu-ți face griji pentru bucla `for` încă!** Doar să știi că face numerele să crească (fade in) sau să scadă (fade out) automat! 🔄
 </InfoBox>
 
-<Checkpoint id="checkpoint-2" lessonKey="ro/p3-c1-l3-pwm-led-fade" label="Înțeleg analogWrite" />
+<Checkpoint id="checkpoint-2" lessonKey="ro/p3-c1-l3-pwm-led-fade" label="Pot să fac o lumină care respiră! 💫" />
 
 </LessonChapter>
 
-<LessonChapter title="Efecte de Estompare" id="efecte-estompare">
+<LessonChapter title="Programul Complet! 🎉" id="programul-complet">
 
-### Fade In și Fade Out - Lumina Care "Respiră"
-
-Acest cod face LED-ul să crească și să scadă în luminozitate, ca și cum ar respira:
+Iată totul împreună:
 
 ```cpp
-const int PIN_LED = 9;
-
 void setup() {
-  pinMode(PIN_LED, OUTPUT);
+  pinMode(9, OUTPUT);
 }
 
 void loop() {
-  // Fade In - luminozitatea crește treptat
-  for (int luminozitate = 0; luminozitate <= 255; luminozitate += 5) {
-    analogWrite(PIN_LED, luminozitate);
-    delay(30);  // Mică pauză între schimbări
+  // Fade IN - devine mai strălucitor!
+  for (int i = 0; i <= 255; i = i + 5) {
+    analogWrite(9, i);
+    delay(30);
   }
   
-  // Fade Out - luminozitatea scade treptat
-  for (int luminozitate = 255; luminozitate >= 0; luminozitate -= 5) {
-    analogWrite(PIN_LED, luminozitate);
-    delay(30);  // Mică pauză între schimbări
+  // Fade OUT - devine mai slab!
+  for (int i = 255; i >= 0; i = i - 5) {
+    analogWrite(9, i);
+    delay(30);
   }
 }
 ```
 
-<InfoBox type="info">
-  **Cum funcționează:** Bucla `for` crește valoarea `luminozitate` de la 0 la 255 în pași de 5. La fiecare pas, actualizează LED-ul cu noua valoare. Pauzele de 30ms fac tranziția vizibilă și lină!
+<InfoBox type="tip">
+  **Încarcă-l!** Privește cum LED-ul tău respiră încet! 😮‍💨✨
 </InfoBox>
 
-### Ajustarea Vitezei
+</LessonChapter>
 
-- **delay() mai mic** = estompare mai rapidă
-- **pas mai mare** (ex: `+= 10`) = tranziție mai puțin lină, dar mai rapidă
-- **pas mai mic** (ex: `+= 1`) = tranziție foarte lină, dar mai lentă
+<LessonChapter title="Experimente Distractive! 🧪" id="experimente">
 
-### Exemple de Variații
+### Respiră MAI REPEDE! 🏃
 
+Schimbă `delay(30)` cu `delay(10)`:
 ```cpp
-// Estompare RAPIDĂ
-for (int b = 0; b <= 255; b += 10) {
-  analogWrite(PIN_LED, b);
-  delay(10);  // Pauze foarte scurte
-}
+delay(10);
+```
+Acum respiră repede ca după alergare!
 
-// Estompare LENTĂ și LINĂ
-for (int b = 0; b <= 255; b += 1) {
-  analogWrite(PIN_LED, b);
-  delay(50);  // Pauze mai lungi
+### Respiră MAI ÎNCET! 🧘
+
+Schimbă `delay(30)` cu `delay(50)`:
+```cpp
+delay(50);
+```
+Frumos și relaxat, ca respirația de yoga!
+
+### Fă o LUMÂNARE să Pâlpâie! 🕯️
+
+Luminozitate aleatorie pentru un efect de lumânare spooksy:
+```cpp
+void loop() {
+  analogWrite(9, random(100, 255));
+  delay(100);
 }
 ```
 
 <InfoBox type="tip">
-  **Pentru copii:** Este ca și cum ai umple o cană cu apă - poți turna mult și repede, sau puțin câte puțin. LED-ul "se umple" cu lumină în același fel! 🥛💡
+  **Provocare:** Poți să faci un pattern de bătaie de inimă? (rapid strălucitor, rapid slab, pauză, repetă!) ❤️
 </InfoBox>
 
 </LessonChapter>
 
-<LessonChapter title="LED RGB - Amestecă Culori!" id="led-rgb">
-
-### Creează Orice Culoare!
-
-Un LED RGB conține de fapt 3 LED-uri în unul: Roșu, Verde și Albastru. Controlând luminozitatea fiecăruia cu PWM, poți crea milioane de culori!
-
-```cpp
-const int PIN_ROSU = 9;
-const int PIN_VERDE = 10;
-const int PIN_ALBASTRU = 11;
-
-void setup() {
-  pinMode(PIN_ROSU, OUTPUT);
-  pinMode(PIN_VERDE, OUTPUT);
-  pinMode(PIN_ALBASTRU, OUTPUT);
-}
-
-void setareCuloare(int r, int g, int b) {
-  analogWrite(PIN_ROSU, r);
-  analogWrite(PIN_VERDE, g);
-  analogWrite(PIN_ALBASTRU, b);
-}
-
-void loop() {
-  setareCuloare(255, 0, 0);     // Roșu pur 🔴
-  delay(1000);
-  setareCuloare(0, 255, 0);     // Verde pur 🟢
-  delay(1000);
-  setareCuloare(0, 0, 255);     // Albastru pur 🔵
-  delay(1000);
-  setareCuloare(255, 255, 0);   // Galben (Roșu + Verde) 🟡
-  delay(1000);
-  setareCuloare(255, 0, 255);   // Magenta (Roșu + Albastru) 🟣
-  delay(1000);
-  setareCuloare(0, 255, 255);   // Cyan (Verde + Albastru) 🩵
-  delay(1000);
-  setareCuloare(255, 255, 255); // Alb (toate culorile) ⚪
-  delay(1000);
-}
-```
-
-<InfoBox type="info">
-  **Pentru copii:** Este ca atunci când amesteci vopsele! Roșu + Galben = Portocaliu. Cu LED-uri RGB, poți face același lucru cu lumină! 🎨
-</InfoBox>
-
-</LessonChapter>
-
-<LessonChapter title="Simulare Interactivă" id="simulare-interactiva">
-
-<InfoBox type="info">
-  Simularea interactivă arată o bară de ciclu de lucru cu porțiuni ON/OFF. Folosește slider-ul 0-255 pentru a controla valoarea și urmărește cum se schimbă luminozitatea LED-ului. Bara arată vizual cât din ciclu este HIGH vs LOW! 🎮
-</InfoBox>
-
-</LessonChapter>
-
-<LessonChapter title="Testează-ți Cunoștințele" id="testeaza-cunostintele">
+<LessonChapter title="Test! 🎯" id="testeaza-cunostintele">
 
 <ExerciseMultipleChoice
   id="quiz-1"
   lessonKey="ro/p3-c1-l3-pwm-led-fade"
-  question="Care este gama de valori pentru analogWrite()?"
+  question="Ce face analogWrite(9, 127)?"
   options={[
-    { id: "a", text: "0-100 (ca procentele)" },
-    { id: "b", text: "0-255 (8 biți)" },
-    { id: "c", text: "0-1023 (10 biți)" },
-    { id: "d", text: "0-5 (volți)" }
+    { id: "a", text: "Stinge complet lumina" },
+    { id: "b", text: "Face lumina MEDIE ca luminozitate (circa jumătate)" },
+    { id: "c", text: "Face lumina SUPER STRĂLUCITOARE" },
+    { id: "d", text: "Face lumina să clipească" }
   ]}
   correctIndex={1}
 />
@@ -312,12 +228,12 @@ void loop() {
 <ExerciseMultipleChoice
   id="quiz-2"
   lessonKey="ro/p3-c1-l3-pwm-led-fade"
-  question="Care pin NU suportă PWM pe Arduino Uno?"
+  question="Care e numărul cel mai STRĂLUCITOR pe care îl putem folosi?"
   options={[
-    { id: "a", text: "Pinul 9 (~9)" },
-    { id: "b", text: "Pinul 10 (~10)" },
-    { id: "c", text: "Pinul 13 (fără ~)" },
-    { id: "d", text: "Pinul 11 (~11)" }
+    { id: "a", text: "100 - e mult!" },
+    { id: "b", text: "1000 - mai mare e mai bine!" },
+    { id: "c", text: "255 - maximul!" },
+    { id: "d", text: "50 - e destul" }
   ]}
   correctIndex={2}
 />
@@ -325,32 +241,32 @@ void loop() {
 <ExerciseMultipleChoice
   id="quiz-3"
   lessonKey="ro/p3-c1-l3-pwm-led-fade"
-  question="Ce valoare analogWrite() ar oferi aproximativ 50% luminozitate?"
+  question="Care pini pot folosi analogWrite? (Indiciu: caută ~)"
   options={[
-    { id: "a", text: "50" },
-    { id: "b", text: "127 sau 128" },
-    { id: "c", text: "200" },
-    { id: "d", text: "255" }
+    { id: "a", text: "Doar pinul 13" },
+    { id: "b", text: "Pinii 3, 5, 6, 9, 10, 11 (cei cu ~)" },
+    { id: "c", text: "Toți pinii funcționează la fel" },
+    { id: "d", text: "Doar pinii 1 și 2" }
   ]}
   correctIndex={1}
 />
 
 </LessonChapter>
 
-<LessonChapter title="Rezumat" id="rezumat">
+<LessonChapter title="Ai Reușit! 🏆" id="rezumat">
 
-În această lecție ai învățat: 🎓
+### Ce ai învățat azi:
 
-- ✅ **PWM** simulează ieșire analogică cu comutare digitală rapidă
-- ✅ `analogWrite()` acceptă valori de la **0** (oprit) la **255** (maxim)
-- ✅ Doar pinii marcați cu **~** suportă PWM (3, 5, 6, 9, 10, 11)
-- ✅ Buclele creează efecte de **fade** (estompare) lină
-- ✅ LED-urile **RGB** pot crea milioane de culori combinând 3 canale PWM
+- ✅ **analogWrite** ne lasă să controlăm luminozitatea (nu doar APRINS/STINS!)
+- ✅ Numerele merg de la **0** (stins) la **255** (super strălucitor)
+- ✅ Folosește pinii cu simbolul **~** (3, 5, 6, 9, 10, 11)
+- ✅ Putem face luminile să aibă **fade in** și **fade out**
+- ✅ Schimbând **delay** le face mai rapide sau mai lente
 
 <InfoBox type="tip">
-  **Felicitări!** 🎉 Acum poți controla nu doar DACĂ un LED este aprins, ci și CÂT de strălucitor este! Poți crea efecte de lumină frumoase și chiar să amesteci culori cu LED-uri RGB!
+  **Bravo!** 🌟 Ai învățat cum să controlezi luminozitatea ca un profesionist! În lecția următoare, vom învăța despre timing și de ce uneori NU vrem să folosim delay! ⏰
 </InfoBox>
 
-<Checkpoint id="checkpoint-3" lessonKey="ro/p3-c1-l3-pwm-led-fade" label="Am completat lecția!" />
+<Checkpoint id="checkpoint-3" lessonKey="ro/p3-c1-l3-pwm-led-fade" label="Pot să fac luminile să strălucească și să respire! ✨" />
 
 </LessonChapter>

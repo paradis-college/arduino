@@ -1,385 +1,283 @@
 ---
 id: p3-c1-l2-multi-led-blink
-title: "Clipire Multi-LED (Pinii 9, 10, 11)"
+title: "Fă 3 Lumini să Danseze! 💃🕺✨"
 course: "embedded-programming-basics"
 difficulty: "beginner"
-tags: ["LED", "array", "tipar", "ieșiri multiple"]
-estimatedMinutes: 25
+tags: ["LED", "array", "pattern", "multiple"]
+estimatedMinutes: 20
 hasInteractiveExercises: true
 videoId: "dQw4w9WgXcQ"
 ---
 
-# Clipire Multi-LED (Pinii 9, 10, 11)
+# Fă 3 Lumini să Danseze! 💃🕺✨
 
-În această lecție, vei controla mai multe LED-uri și vei crea modele de clipire interesante folosind array-uri! Este ca și cum ai avea trei becuri și le controlezi pe toate dintr-un singur loc! 🚦
+Acum hai să controlăm TREI lumini deodată! Pot să clipească împreună, pe rând, sau să creeze un pattern de dans! 🎵
 
-<LessonChapter title="Ce Vei Învăța" id="ce-vei-invata">
+<LessonChapter title="Ce Vom Face Azi" id="ce-vom-face">
 
-- Cum controlezi mai multe LED-uri simultan
-- Ce sunt array-urile și cum te ajută
-- Cum creezi modele de clipire (chase, alternativ)
-- Cum folosești buclele `for` pentru LED-uri multiple
+Azi vei:
+- 💡💡💡 Controla 3 LED-uri în același timp
+- 🔄 Să le faci să clipească în LINIE (ca o omidă!)
+- 🎭 Să faci diferite pattern-uri de clipire
 
 <InfoBox type="info">
-  Controlul mai multor LED-uri te învață despre array-uri și bucle - concepte foarte importante în programare! Acestea îți permit să faci lucruri repetitive fără să scrii același cod de mai multe ori. 🎯
+  **Hei copii!** Imaginează-ți că ești dirijorul unei orchestre, și fiecare lumină e un muzician. Tu le spui când să cânte! 🎼
 </InfoBox>
 
 </LessonChapter>
 
-<LessonChapter title="Pregătirea LED-urilor" id="pregatire-leduri">
+<LessonChapter title="Urmărește Spectacolul de Lumini! 🌈" id="urmareste-spectacolul">
 
 <P5SketchEmbed
   id="multi-led-animation"
   sketchId="p3-c1-l2-multi-led"
   stepNumber={1}
-  title="Animație Urmărire 3 LED-uri"
-  alt="Animație cu 3 LED-uri în model de urmărire"
+  title="3 Lumini Dansatoare!"
+  alt="Trei LED-uri clipind în pattern-uri"
 >
-  Privește animația cu 3 LED-uri - ele se aprind pe rând, creând un efect de "urmărire" ca la luminile de pe mașinile de poliție! Click pentru a schimba între modul de urmărire și clipirea simultană.
+  👀 **Privește!** Vezi cele trei lumini făcând diferite dansuri! Încearcă diferitele pattern-uri: TOATE ÎMPREUNĂ, UNUL CÂTE UNUL, sau ÎNAINTE ȘI ÎNAPOI!
 </P5SketchEmbed>
 
-<P5SketchEmbed
-  id="simultaneous-blink-animation"
-  sketchId="p3-c1-l2-simultaneous-blink"
-  stepNumber={2}
-  title="Model de Clipire Simultană"
-  alt="Animație cu model de clipire simultană"
->
-  Schimbă între diferite modele: toate LED-urile clipesc împreună sau în modele alternative. Click pentru a trece de la un mod la altul.
-</P5SketchEmbed>
-
-<GifStep
-  stepNumber={3}
-  title="Conectează Trei LED-uri"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Conectare+3+LED+GIF"
-  alt="Conectarea a trei LED-uri"
->
-  Pune trei LED-uri pe breadboard. Conectează piciorul lung (anodul, partea +) al fiecărui LED la pinii **9, 10 și 11** prin rezistoare de 220Ω. 
-</GifStep>
-
-<GifStep
-  stepNumber={4}
-  title="Completează Circuitul cu Masă"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=LED+Masa+GIF"
-  alt="Conectarea masei LED-urilor"
->
-  Conectează toate picioarele scurte ale LED-urilor (catodii, partea -) la șina de masă. Apoi conectează șina de masă la **GND** pe Arduino.
-</GifStep>
-
 <InfoBox type="tip">
-  **Pentru copii:** LED-ul are două picioare diferite - unul lung și unul scurt. Piciorul LUNG merge spre curent (pinii 9, 10, 11), iar piciorul SCURT merge spre masă (GND). Este ca apa care curge dintr-un loc înalt spre unul jos! 💧
+  **Care pattern îți place cel mai mult?** Cel unde toate clipesc împreună ca o bătaie de inimă? Sau cel de urmărire ca o omidă care se târăște? 🐛
 </InfoBox>
-
-<GifStep
-  stepNumber={5}
-  title="Încarcă și Testează Modelele"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Test+Modele+LED+GIF"
-  alt="Testarea modelelor LED"
->
-  Încarcă codul și urmărește cum LED-urile clipesc în diferite modele: toate împreună, în secvență de urmărire sau alternativ!
-</GifStep>
 
 </LessonChapter>
 
-<LessonChapter title="Controlul Mai Multor LED-uri" id="control-multiple">
+<LessonChapter title="Întâlnește-ți Cele 3 LED-uri! 👋" id="intalneste-ledurile">
 
-### Metoda Lungă (Fără Array)
+<GifStep
+  stepNumber={1}
+  title="Pregătește 3 LED-uri"
+  gifUrl="https://placehold.co/600x400/22c55e/white?text=3+LEDs+Setup"
+  alt="Trei LED-uri conectate la Arduino"
+>
+  Vom folosi pinii **9**, **10** și **11** pentru cele trei lumini. Gândește-te la ele ca trei prieteni numiți Nouă, Zece și Unsprezece! 🧒🧒🧒
+</GifStep>
 
-Poți controla fiecare LED individual:
+### Mai întâi, spune-i Arduino-ului despre toți cei 3 pini
 
 ```cpp
 void setup() {
-  pinMode(9, OUTPUT);   // Primul LED
-  pinMode(10, OUTPUT);  // Al doilea LED
-  pinMode(11, OUTPUT);  // Al treilea LED
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(11, OUTPUT);
 }
 ```
 
-Dar ce se întâmplă dacă ai 10 LED-uri? Sau 100? Ar trebui să scrii foarte multe linii! 😓
-
-### Metoda Inteligentă - Cu Array-uri! 🧠
-
-Un **array** este ca o cutie cu mai multe compartimente, fiecare având un număr:
-
-```cpp
-int piniiLED[] = {9, 10, 11};  // Array cu 3 numere de pini
-int numarLED = 3;               // Câte LED-uri avem
-
-void setup() {
-  // Folosim o buclă pentru a configura TOATE LED-urile
-  for (int i = 0; i < numarLED; i++) {
-    pinMode(piniiLED[i], OUTPUT);
-  }
-}
-```
+Asta îi spune Arduino-ului: *"Hei! Pinii 9, 10 și 11 vor controla toți lumini!"*
 
 <InfoBox type="info">
-  **Pentru copii:** Imaginează-ți că ai un dulap cu 3 sertare numerotate 0, 1 și 2. În fiecare sertar ai pus un număr (9, 10, 11). Când vrei să folosești numărul din sertarul 0, spui `piniiLED[0]` și primești 9! 🗄️
+  **Pentru părinți:** Această lecție introduce conceptul de control a mai multor ieșiri, ceea ce pregătește pentru array-uri în lecțiile viitoare. Deocamdată, păstrăm simplu cu trei pini individuali.
 </InfoBox>
 
-### Cum Funcționează Bucla `for`?
-
-```cpp
-for (int i = 0; i < numarLED; i++) {
-  // Codul de aici se execută de 3 ori
-  // Prima dată: i = 0, deci piniiLED[0] = 9
-  // A doua oară: i = 1, deci piniiLED[1] = 10
-  // A treia oară: i = 2, deci piniiLED[2] = 11
-}
-```
-
-<InfoBox type="tip">
-  **Analogie pentru copii:** Bucla `for` este ca atunci când numeri: "unu, doi, trei". Faci același lucru de trei ori, dar de fiecare dată cu un număr diferit! 🔢
-</InfoBox>
-
-<Checkpoint id="checkpoint-1" lessonKey="ro/p3-c1-l2-multi-led-blink" label="Înțeleg array-urile pentru mai mulți pini" />
+<Checkpoint id="checkpoint-1" lessonKey="ro/p3-c1-l2-multi-led-blink" label="Am 3 LED-uri gata de acțiune! 💡💡💡" />
 
 </LessonChapter>
 
-<LessonChapter title="Model: Toate Clipesc Împreună" id="toate-clipesc">
+<LessonChapter title="Pattern 1: Toate Împreună! 🎇" id="pattern-toate-impreuna">
 
-### Clipirea Simultană - Toate LED-urile Împreună
-
-Acest model face toate LED-urile să se aprindă și să se stingă în același timp, ca la lumina de avertizare:
+Hai să facem toate cele trei lumini să clipească în același timp - ca artificii! 🎆
 
 ```cpp
-void toateClipesc() {
-  // Aprinde TOATE LED-urile
-  for (int i = 0; i < numarLED; i++) {
-    digitalWrite(piniiLED[i], HIGH);
-  }
-  delay(500);  // Așteaptă jumătate de secundă
-  
-  // Stinge TOATE LED-urile
-  for (int i = 0; i < numarLED; i++) {
-    digitalWrite(piniiLED[i], LOW);
-  }
-  delay(500);  // Așteaptă jumătate de secundă
-}
-```
-
-<InfoBox type="tip">
-  **Pentru copii:** Este ca și cum ai avea 3 lanterne și le aprinzi pe toate împreună, apoi le stingi pe toate împreună! 🔦🔦🔦
-</InfoBox>
-
-</LessonChapter>
-
-<LessonChapter title="Model: Urmărire (Chase)" id="model-urmarire">
-
-### Un LED pe Rând - Efect de Urmărire
-
-Acest model aprinde câte un LED pe rând, creând un efect de "alergare":
-
-```cpp
-void modelUrmarire() {
-  for (int i = 0; i < numarLED; i++) {
-    // Aprinde LED-ul curent
-    digitalWrite(piniiLED[i], HIGH);
-    delay(200);  // Așteaptă puțin
-    // Stinge LED-ul curent
-    digitalWrite(piniiLED[i], LOW);
-  }
-}
-```
-
-<InfoBox type="info">
-  **Pentru copii:** Este ca un joc de ștafetă! Primul LED se aprinde și "dă ștafeta" celui de-al doilea, apoi al doilea o dă celui de-al treilea. 🏃‍♂️➡️🏃‍♂️➡️🏃‍♂️
-</InfoBox>
-
-### Model Ping-Pong (Înainte și Înapoi)
-
-Acest model merge într-o direcție, apoi se întoarce:
-
-```cpp
-void modelPingPong() {
-  // Înainte: de la stânga la dreapta
-  for (int i = 0; i < numarLED; i++) {
-    digitalWrite(piniiLED[i], HIGH);
-    delay(150);
-    digitalWrite(piniiLED[i], LOW);
-  }
-  
-  // Înapoi: de la dreapta la stânga
-  // Începem de la penultimul LED pentru a nu repeta ultimul
-  for (int i = numarLED - 2; i > 0; i--) {
-    digitalWrite(piniiLED[i], HIGH);
-    delay(150);
-    digitalWrite(piniiLED[i], LOW);
-  }
-}
-```
-
-<InfoBox type="tip">
-  **Pentru copii:** Imaginează-ți o minge de ping-pong care sare de la un capăt la altul al mesei! 🏓
-</InfoBox>
-
-<Checkpoint id="checkpoint-2" lessonKey="ro/p3-c1-l2-multi-led-blink" label="Înțeleg modelele de LED" />
-
-</LessonChapter>
-
-<LessonChapter title="Model: Alternativ" id="model-alternativ">
-
-### LED-uri Care Se Schimbă - Unul DA, Unul NU
-
-Acest model aprinde LED-urile în poziții pare, apoi în poziții impare:
-
-```cpp
-void modelAlternativ() {
-  // LED-uri în poziții pare: 0 și 2 (adică pinii 9 și 11)
-  for (int i = 0; i < numarLED; i += 2) {
-    digitalWrite(piniiLED[i], HIGH);
-  }
-  for (int i = 1; i < numarLED; i += 2) {
-    digitalWrite(piniiLED[i], LOW);
-  }
-  delay(300);
-  
-  // Acum inversăm: LED-uri în poziții impare
-  for (int i = 0; i < numarLED; i += 2) {
-    digitalWrite(piniiLED[i], LOW);
-  }
-  for (int i = 1; i < numarLED; i += 2) {
-    digitalWrite(piniiLED[i], HIGH);
-  }
-  delay(300);
-}
-```
-
-<InfoBox type="info">
-  **Pentru copii:** Imaginează-ți că ești la un concert și publicul face "val" - o parte se ridică când cealaltă stă jos! 🌊
-</InfoBox>
-
-</LessonChapter>
-
-<LessonChapter title="Programul Complet" id="program-complet">
-
-### Codul Final cu Toate Modelele
-
-```cpp
-// Definim pinii și numărul de LED-uri
-int piniiLED[] = {9, 10, 11};
-int numarLED = 3;
-
-void setup() {
-  // Configurăm toți pinii ca OUTPUT
-  for (int i = 0; i < numarLED; i++) {
-    pinMode(piniiLED[i], OUTPUT);
-  }
-}
-
 void loop() {
-  // Poți schimba care model rulează!
-  // modelUrmarire();
-  // toateClipesc();
-  modelPingPong();
-}
-
-// Funcția pentru urmărire
-void modelUrmarire() {
-  for (int i = 0; i < numarLED; i++) {
-    digitalWrite(piniiLED[i], HIGH);
-    delay(200);
-    digitalWrite(piniiLED[i], LOW);
-  }
-}
-
-// Funcția pentru clipire simultană
-void toateClipesc() {
-  for (int i = 0; i < numarLED; i++) {
-    digitalWrite(piniiLED[i], HIGH);
-  }
+  // Aprinde TOATE luminile împreună!
+  digitalWrite(9, HIGH);
+  digitalWrite(10, HIGH);
+  digitalWrite(11, HIGH);
   delay(500);
-  for (int i = 0; i < numarLED; i++) {
-    digitalWrite(piniiLED[i], LOW);
-  }
+  
+  // Stinge TOATE luminile împreună!
+  digitalWrite(9, LOW);
+  digitalWrite(10, LOW);
+  digitalWrite(11, LOW);
   delay(500);
-}
-
-// Funcția pentru ping-pong
-void modelPingPong() {
-  for (int i = 0; i < numarLED; i++) {
-    digitalWrite(piniiLED[i], HIGH);
-    delay(150);
-    digitalWrite(piniiLED[i], LOW);
-  }
-  for (int i = numarLED - 2; i > 0; i--) {
-    digitalWrite(piniiLED[i], HIGH);
-    delay(150);
-    digitalWrite(piniiLED[i], LOW);
-  }
 }
 ```
 
-<InfoBox type="warning">
-  **Sfat:** Poți schimba modelul care rulează punând `//` în fața celorlalte modele din `loop()`. `//` înseamnă "ignoră această linie"!
+<InfoBox type="tip">
+  **Gândește-te așa:** Când zici "SARI!" toți prietenii tăi sar împreună! Când zici "STOP!" toți se opresc! 🤸
 </InfoBox>
 
 </LessonChapter>
 
-<LessonChapter title="Simulare Interactivă" id="simulare-interactiva">
+<LessonChapter title="Pattern 2: Unul Câte Unul! 🐛" id="pattern-urmarire">
 
-<InfoBox type="info">
-  Simularea interactivă arată trei LED-uri etichetate 9, 10 și 11. Folosește meniul pentru a selecta diferite modele: "Toate Clipesc", "Urmărire" sau "Alternativ". Observă cum LED-urile se animează conform modelului selectat! 🎮
+Acum hai să facem luminile să se aprindă una câte una - ca o omidă care se târăște! 🐛
+
+<GifStep
+  stepNumber={2}
+  title="Pattern-ul de Urmărire"
+  gifUrl="https://placehold.co/600x400/8b5cf6/white?text=Pattern+Urmarire"
+  alt="LED-urile se aprind unul câte unul"
+>
+  Privește cum fiecare lumină își ia rândul: Mai întâi **9**, apoi **10**, apoi **11**, apoi de la început! E ca și cum joacă urmărește liderul!
+</GifStep>
+
+```cpp
+void loop() {
+  // Lumina 1 clipește
+  digitalWrite(9, HIGH);
+  delay(200);
+  digitalWrite(9, LOW);
+  
+  // Lumina 2 clipește
+  digitalWrite(10, HIGH);
+  delay(200);
+  digitalWrite(10, LOW);
+  
+  // Lumina 3 clipește
+  digitalWrite(11, HIGH);
+  delay(200);
+  digitalWrite(11, LOW);
+}
+```
+
+<InfoBox type="tip">
+  **E ca o cursă de ștafetă!** 🏃 Lumina 1 aleargă, apoi dă ștafeta Luminii 2, apoi Luminii 3!
+</InfoBox>
+
+<Checkpoint id="checkpoint-2" lessonKey="ro/p3-c1-l2-multi-led-blink" label="Pot să fac luminile să se urmărească! 🐛" />
+
+</LessonChapter>
+
+<LessonChapter title="Pattern 3: Înainte și Înapoi! 🏓" id="pattern-ping-pong">
+
+Acum hai să facem luminile să meargă înainte și înapoi - ca o minge de ping-pong! 🏓
+
+```cpp
+void loop() {
+  // Mergi înainte: 9 → 10 → 11
+  digitalWrite(9, HIGH);
+  delay(150);
+  digitalWrite(9, LOW);
+  
+  digitalWrite(10, HIGH);
+  delay(150);
+  digitalWrite(10, LOW);
+  
+  digitalWrite(11, HIGH);
+  delay(150);
+  digitalWrite(11, LOW);
+  
+  // Mergi înapoi: 10 → 9
+  digitalWrite(10, HIGH);
+  delay(150);
+  digitalWrite(10, LOW);
+}
+```
+
+<InfoBox type="tip">
+  **Boing boing boing!** Lumina sare de la un capăt la altul și înapoi, exact ca o minge! 🎾
 </InfoBox>
 
 </LessonChapter>
 
-<LessonChapter title="Testează-ți Cunoștințele" id="testeaza-cunostintele">
+<LessonChapter title="Experimente Distractive! 🧪" id="experimente">
+
+### Fă-le MAI RAPIDE! 🚀
+
+Schimbă toate `delay(200)` cu `delay(50)`:
+```cpp
+delay(50);
+```
+Acum zboară super repede!
+
+### Fă-le MAI LENTE! 🐢
+
+Schimbă cu `delay(500)`:
+```cpp
+delay(500);
+```
+Frumos și încet, ca o omidă somnoroasă!
+
+### Fă o BĂTAIE DE INIMĂ! ❤️
+
+Încearcă acest pattern care arată ca o inimă care bate:
+```cpp
+// Bătaie rapidă dublă
+digitalWrite(9, HIGH);
+digitalWrite(10, HIGH);
+digitalWrite(11, HIGH);
+delay(100);
+digitalWrite(9, LOW);
+digitalWrite(10, LOW);
+digitalWrite(11, LOW);
+delay(100);
+
+digitalWrite(9, HIGH);
+digitalWrite(10, HIGH);
+digitalWrite(11, HIGH);
+delay(100);
+digitalWrite(9, LOW);
+digitalWrite(10, LOW);
+digitalWrite(11, LOW);
+delay(400);
+```
+
+<InfoBox type="tip">
+  **Provocare:** Poți să faci un pattern care arată ca valurile oceanului? 🌊 Încearcă să aprinzi și să stingi luminile la momente diferite!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test! 🎯" id="testeaza-cunostintele">
 
 <ExerciseMultipleChoice
   id="quiz-1"
   lessonKey="ro/p3-c1-l2-multi-led-blink"
-  question="Care este avantajul folosirii array-urilor pentru pinii LED?"
+  question="Ca să faci toate 3 luminile să clipească ÎMPREUNĂ, ce facem?"
   options={[
-    { id: "a", text: "LED-urile sunt mai strălucitoare" },
-    { id: "b", text: "Este mai ușor să adaugi/elimini LED-uri și să folosești bucle" },
-    { id: "c", text: "Consumă mai puțină energie" },
-    { id: "d", text: "LED-urile clipesc mai repede" }
+    { id: "a", text: "Le punem pe toate HIGH, așteptăm, apoi pe toate LOW" },
+    { id: "b", text: "Le aprindem una câte una" },
+    { id: "c", text: "Aprindem doar prima" },
+    { id: "d", text: "Folosim timpi diferiți de delay pentru fiecare" }
   ]}
-  correctIndex={1}
+  correctIndex={0}
 />
 
 <ExerciseMultipleChoice
   id="quiz-2"
   lessonKey="ro/p3-c1-l2-multi-led-blink"
-  question="În modelul de urmărire (chase), câte LED-uri sunt aprinse simultan?"
+  question="În pattern-ul de urmărire, ce se întâmplă după ce lumina 9 se stinge?"
   options={[
-    { id: "a", text: "Toate" },
-    { id: "b", text: "Jumătate din ele" },
-    { id: "c", text: "Doar unul pe rând" },
-    { id: "d", text: "Niciunul" }
+    { id: "a", text: "Toate luminile se aprind" },
+    { id: "b", text: "Lumina 10 se aprinde următoarea!" },
+    { id: "c", text: "Lumina 9 se aprinde din nou" },
+    { id: "d", text: "Totul se oprește" }
   ]}
-  correctIndex={2}
+  correctIndex={1}
 />
 
 <ExerciseMultipleChoice
   id="quiz-3"
   lessonKey="ro/p3-c1-l2-multi-led-blink"
-  question="Ce face `i += 2` într-o buclă for?"
+  question="Ce se întâmplă dacă facem delay() mai mic (ca 50 în loc de 200)?"
   options={[
-    { id: "a", text: "Adaugă 2 la i după fiecare iterație (sare din 2 în 2)" },
-    { id: "b", text: "Înmulțește i cu 2" },
-    { id: "c", text: "Împarte i la 2" },
-    { id: "d", text: "Face bucla să ruleze de 2 ori" }
+    { id: "a", text: "Luminile devin mai strălucitoare" },
+    { id: "b", text: "Luminile clipesc MAI REPEDE! 🚀" },
+    { id: "c", text: "Luminile se sting pentru totdeauna" },
+    { id: "d", text: "Nimic nu se schimbă" }
   ]}
-  correctIndex={0}
+  correctIndex={1}
 />
 
 </LessonChapter>
 
-<LessonChapter title="Rezumat" id="rezumat">
+<LessonChapter title="Ai Reușit! 🏆" id="rezumat">
 
-În această lecție ai învățat: 🎓
+### Ce ai învățat azi:
 
-- ✅ **Array-urile** stochează mai multe valori într-o singură variabilă
-- ✅ **Buclele `for`** fac ușor controlul mai multor LED-uri
-- ✅ Modele diferite: clipire simultană, urmărire, alternativ
-- ✅ Funcțiile separate fac codul mai organizat și ușor de citit
+- ✅ Controlezi **3 LED-uri** în același timp
+- ✅ Le faci să clipească **împreună** (ca artificii! 🎆)
+- ✅ Le faci să se urmărească **unul câte unul** (ca o omidă! 🐛)
+- ✅ Le faci să meargă **înainte și înapoi** (ca ping-pong! 🏓)
+- ✅ Schimbi viteza cu diferite numere **delay**
 
 <InfoBox type="tip">
-  **Felicitări!** 🎉 Acum știi să controlezi mai multe LED-uri și să creezi modele interesante! Încearcă să adaugi mai multe LED-uri la array și să creezi propriile tale modele de lumină!
+  **Bravo!** 🌟 Acum controlezi mai multe lumini! În lecția următoare, vom învăța cum să facem luminile să se aprindă și să se stingă lin - ca prin magie! ✨
 </InfoBox>
 
-<Checkpoint id="checkpoint-3" lessonKey="ro/p3-c1-l2-multi-led-blink" label="Am completat lecția!" />
+<Checkpoint id="checkpoint-3" lessonKey="ro/p3-c1-l2-multi-led-blink" label="Pot să fac 3 lumini să danseze! Sunt DJ de lumini! 🎧" />
 
 </LessonChapter>

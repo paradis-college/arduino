@@ -1,329 +1,190 @@
 ---
 id: p3-c1-l4-understanding-delay
-title: "Înțelegerea delay() și Temporizare"
+title: "De Ce Arduino Trage un Pui de Somn! 😴⏰"
 course: "embedded-programming-basics"
 difficulty: "beginner"
-tags: ["delay", "temporizare", "millis", "blocant", "non-blocant"]
-estimatedMinutes: 25
+tags: ["delay", "temporizare", "millis", "blocant"]
+estimatedMinutes: 15
 hasInteractiveExercises: true
 videoId: "dQw4w9WgXcQ"
 ---
 
-# Înțelegerea delay() și Temporizare
+# De Ce Arduino Trage un Pui de Somn! 😴⏰
 
-În această lecție, vei învăța cum funcționează `delay()`, impactul său asupra capacității de răspuns, și vei descoperi tehnici de temporizare mai avansate cu `millis()`! ⏱️
+Hai să învățăm despre `delay()` - când Arduino doarme și nu poate face nimic altceva! Și de ce uneori asta e o problemă! 💤
 
-<LessonChapter title="Ce Vei Învăța" id="ce-vei-invata">
+<LessonChapter title="Ce Vom Face Azi" id="ce-vom-face">
 
-- Cum `delay()` pune programul pe pauză
-- Impactul delay-urilor blocante asupra capacității de răspuns
-- Prezentare a temporizării non-blocante cu `millis()`
-- Când să folosești delay vs millis
+Azi vei:
+- 😴 Înțelege ce se întâmplă în timpul `delay()`
+- 🚫 Învăța de ce Arduino nu poate face două lucruri odată cu delay
+- 💡 Vedea când delay e OK și când NU e
 
 <InfoBox type="info">
-  Înțelegerea temporizării este crucială pentru proiecte Arduino responsive! delay() este simplu dar are limitări importante. Este ca diferența dintre a dormi și a aștepta activ - când dormi, nu poți face nimic altceva! 😴
+  **Hei copii!** Imaginează-ți că joci un joc, dar la fiecare câteva secunde trebuie să închizi ochii și să numeri până la 10. Nu poți prinde mingea în timp ce numeri! Asta face delay cu Arduino! 🙈
 </InfoBox>
 
 </LessonChapter>
 
-<LessonChapter title="Temporizare cu Delay" id="temporizare-delay">
+<LessonChapter title="Urmărește Ce Se Întâmplă! 🎬" id="urmareste-ce-se-intampla">
 
 <P5SketchEmbed
-  id="delay-timing-animation"
+  id="delay-animation"
   sketchId="p3-c1-l4-delay"
   stepNumber={1}
-  title="Linia de Timp CPU cu Blocare"
-  alt="Animație care arată linia de timp CPU cu segmente blocate în timpul delay"
+  title="Timpul de Somn al Arduino!"
+  alt="Vizualizarea blocării delay"
 >
-  Urmărește linia de timp CPU care arată cum delay() creează segmente "blocate". Observă cum un task secundar (cum ar fi citirea butonului) este complet înghețat în timpul delay-urilor lungi.
+  👀 **Privește!** Când delay() rulează, vezi cum Arduino "doarme" și nu poate face nimic altceva. Butonul nu funcționează până când Arduino nu se trezește!
 </P5SketchEmbed>
 
-<P5SketchEmbed
-  id="frozen-task-animation"
-  sketchId="p3-c1-l4-frozen-task"
-  stepNumber={2}
-  title="Task Secundar Înghețat"
-  alt="Animație care arată task-ul secundar înghețat în timpul delay-ului lung"
->
-  Vezi cum un task secundar (citirea butonului) este complet blocat în timpul delay(). Task-ul rămâne înghețat până când delay-ul se termină.
-</P5SketchEmbed>
-
-<GifStep
-  stepNumber={3}
-  title="Testează Comportamentul delay()"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Test+Delay+GIF"
-  alt="Testarea funcției delay"
->
-  Încarcă un program simplu de clipire cu **delay(1000)**. În timpul delay-ului, încearcă să apeși un buton - observă că Arduino-ul îl ignoră complet!
-</GifStep>
-
-<GifStep
-  stepNumber={4}
-  title="Vizualizează Blocarea"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Blocare+Delay+GIF"
-  alt="Vizualizarea blocării"
->
-  CPU-ul nu face NIMIC în timpul delay(). Aceasta blochează TOT celălalt cod de la rulare - butoane, senzori, totul așteaptă!
-</GifStep>
-
-<GifStep
-  stepNumber={5}
-  title="Previzualizare Soluție millis()"
-  gifUrl="https://placehold.co/600x400/2563eb/white?text=Previzualizare+Millis+GIF"
-  alt="previzualizare millis"
->
-  Cu **millis()**, poți urmări timpul fără blocare. Bucla continuă să ruleze, verificând dacă a trecut suficient timp.
-</GifStep>
+<InfoBox type="tip">
+  **Apasă butonul în timpul delay!** Observi cum Arduino nu răspunde? Trage un pui de somn! 😴
+</InfoBox>
 
 </LessonChapter>
 
-<LessonChapter title="Cum Funcționează delay()" id="cum-functioneaza-delay">
+<LessonChapter title="Ce Face de Fapt delay() 💤" id="ce-face-delay">
 
-### Comportament Blocant - Arduino Doarme!
+Când scrii `delay(1000)`, iată ce se întâmplă:
 
-Când `delay()` este apelat:
-1. Arduino **se oprește complet** din executarea codului
-2. **Așteaptă** timpul specificat
-3. **Apoi** continuă la linia următoare
+<GifStep
+  stepNumber={1}
+  title="Arduino Adoarme!"
+  gifUrl="https://placehold.co/600x400/3b82f6/white?text=Zzzzz...+1+secunda"
+  alt="Arduino doarme în timpul delay"
+>
+  Arduino OPREȘTE tot și numără: "un elefant... 🐘" Nu poate vedea butoane, nu poate citi senzori, nu poate face NIMIC până când nu se trezește!
+</GifStep>
 
-Este ca și cum ai adormit la birou - nu poți face nimic până nu te trezești!
+### E Ca și Cum Ți-ai Închide Ochii! 🙈
+
+```cpp
+digitalWrite(13, HIGH);  // Lumină APRINSĂ
+delay(2000);             // Închide ochii pentru 2 secunde...
+                         // Nu poate vedea nimic!
+                         // Nu poate face nimic!
+digitalWrite(13, LOW);   // Lumină STINSĂ (în sfârșit!)
+```
+
+<InfoBox type="warning">
+  **În timpul delay(2000):** Arduino doarme complet! Chiar dacă apeși un buton de 100 de ori, Arduino nu va observa! 😴
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="ro/p3-c1-l4-understanding-delay" label="Am înțeles că delay face Arduino să doarmă! 😴" />
+
+</LessonChapter>
+
+<LessonChapter title="Când Delay E o Problemă! 🚨" id="cand-delay-e-problema">
+
+### Problema cu Butonul 🔘
+
+Imaginează-ți asta: Vrei ca o lumină să clipească ȘI să răspundă la un buton.
+
+```cpp
+void loop() {
+  // Verifică butonul
+  if (digitalRead(2) == LOW) {
+    // Fă ceva când e apăsat!
+  }
+  
+  // Clipește lumina
+  digitalWrite(13, HIGH);
+  delay(2000);  // Doarme 2 secunde - RATEAZĂ BUTONUL!
+  digitalWrite(13, LOW);
+  delay(2000);  // Doarme din nou - RATEAZĂ BUTONUL!
+}
+```
+
+<GifStep
+  stepNumber={2}
+  title="Apăsare de Buton Ratată!"
+  gifUrl="https://placehold.co/600x400/ef4444/white?text=Buton+Ratat!"
+  alt="Apăsare de buton ratată în timpul delay"
+>
+  **Problemă:** În timp ce doarme în timpul delay, Arduino RATEAZĂ apăsările tale de buton! E ca și cum ai încerca să vorbești cu cineva care doarme! 😴
+</GifStep>
+
+<InfoBox type="tip">
+  **Gândește-te:** Dacă delay e 2 secunde, și tu apeși butonul pentru 0.1 secunde, Arduino probabil nu îl va prinde! 🎯
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Când Delay E OK! ✅" id="cand-delay-e-ok">
+
+Delay E bine pentru lucruri simple:
+
+### ✅ OK: Clipire simplă de lumină
 
 ```cpp
 void loop() {
   digitalWrite(13, HIGH);
-  delay(5000);  // BLOCAT timp de 5 secunde! 😴
+  delay(500);
   digitalWrite(13, LOW);
-  delay(5000);  // BLOCAT din nou! 😴
+  delay(500);
 }
 ```
+Asta e bine dacă nu ai nevoie de butoane sau senzori!
 
-### Ce Nu Poate Face Arduino În Timpul Delay-ului?
-
-În acele 5 secunde, Arduino **nu poate**:
-- ❌ Citi butoane
-- ❌ Actualiza senzori
-- ❌ Răspunde la comenzi seriale
-- ❌ Face absolut nimic altceva!
-
-<InfoBox type="tip">
-  **Pentru copii:** Imaginează-ți că joci un joc video și personajul tău trebuie să aștepte 5 secunde. În timpul ăsta, nu poți mișca, nu poți sări, nu poți face nimic! Doar stai acolo și aștepți. Asta face delay() - pune Arduino-ul pe pauză completă! 🎮⏸️
-</InfoBox>
-
-<Checkpoint id="checkpoint-1" lessonKey="ro/p3-c1-l4-understanding-delay" label="Înțeleg blocarea delay" />
-
-</LessonChapter>
-
-<LessonChapter title="Impactul Asupra Capacității de Răspuns" id="impact-raspuns">
-
-### Problema - Butoane Ignorate!
+### ✅ OK: Delay-uri scurte
 
 ```cpp
-void loop() {
-  // Verifică butonul - dar poate rata apăsări!
-  if (digitalRead(PIN_BUTON) == LOW) {
-    faCeva();
-  }
-  
-  delay(2000);  // Butonul nu răspunde timp de 2 secunde!
-}
+delay(10);  // Doar 10 milisecunde - super rapid!
 ```
+Delay-urile scurte sunt de obicei OK pentru că Arduino se trezește rapid!
 
-### Exemplu Vizual - Cronologie
-
-```
-Timp:    0s   1s   2s   3s   4s   5s
-         |----delay----|----delay----|
-Buton:      X    X         X
-         (ratat!)  (ratat!)   (detectat!)
-```
-
-<InfoBox type="warning">
-  Delay-urile lungi fac proiectul să pară lent și neresponziv. Utilizatorii se așteaptă la răspuns imediat la apăsările de buton! Dacă cineva apasă un buton și nimic nu se întâmplă, va crede că ceva este stricat.
-</InfoBox>
-
-### Situații Unde Delay Este Problematic
-
-| Situație | Problemă |
-|----------|----------|
-| 🎮 Jocuri | Personajul nu răspunde la controale |
-| 🚨 Alarme | Senzorul de mișcare este ignorat |
-| 🤖 Roboți | Robotul nu se oprește când lovește un obstacol |
-| 🎵 Muzică | Notele nu se schimbă când apeși butoane |
-
-<InfoBox type="tip">
-  **Pentru copii:** Imaginează-ți că ai o mașină teleghidată. Dacă mașina folosește delay(), când apeși butonul de oprire, mașina nu se oprește imediat - continuă până când delay-ul se termină! Ar putea să lovească peretele! 🚗💥
-</InfoBox>
-
-</LessonChapter>
-
-<LessonChapter title="Previzualizare: Temporizare Non-Blocantă" id="previzualizare-non-blocanta">
-
-### Funcția millis() - Timpul Fără Blocare!
-
-`millis()` returnează numărul de milisecunde de când Arduino a pornit:
+### ✅ OK: Mesaj de pornire
 
 ```cpp
-unsigned long timpCurent = millis();
-// Poate fi un număr foarte mare, de aceea folosim "unsigned long"
-```
-
-### Ideea de Bază
-
-În loc să spui "doarme 1 secundă", spui:
-- Memorează când ai început să aștepți
-- Verifică tot timpul cât timp a trecut
-- Când a trecut 1 secundă, fă acțiunea
-
-Este ca și cum te-ai uita la ceas în loc să închizi ochii și să numeri!
-
-### Exemplu: Clipire Fără Delay
-
-```cpp
-unsigned long millisPrecedent = 0;  // Când am schimbat ultima dată
-const long interval = 1000;          // Cât așteptăm (1 secundă)
-int stareLED = LOW;                  // Starea curentă a LED-ului
-
-void loop() {
-  unsigned long millisCurent = millis();  // Ce oră este acum?
-  
-  // A trecut suficient timp?
-  if (millisCurent - millisPrecedent >= interval) {
-    millisPrecedent = millisCurent;  // Memorează momentul actual
-    
-    // Schimbă starea LED-ului
-    stareLED = !stareLED;  // !LOW = HIGH, !HIGH = LOW
-    digitalWrite(13, stareLED);
-  }
-  
-  // Alt cod poate rula aici LIBER!
-  verificaButon();
-  citesteSenzori();
-}
-```
-
-<InfoBox type="info">
-  **Explicație simplă:** În loc să dormi, te uiți constant la ceas. "A trecut 1 secundă? Nu? OK, fac altceva. A trecut acum? Da! Fac acțiunea!" Astfel poți face multe lucruri în timp ce aștepți!
-</InfoBox>
-
-<Checkpoint id="checkpoint-2" lessonKey="ro/p3-c1-l4-understanding-delay" label="Înțeleg conceptul de temporizare non-blocantă" />
-
-</LessonChapter>
-
-<LessonChapter title="Când Să Folosești Fiecare Metodă" id="cand-folosesti">
-
-### Folosește delay() Când:
-
-✅ **Proiecte simple** cu un singur task
-✅ **Învățare și testare** - este mai ușor de înțeles
-✅ **Delay-uri scurte** (< 100ms) unde capacitatea de răspuns nu este critică
-✅ **Pauze de pornire** - la început, înainte de loop()
-
-### Folosește millis() Când:
-
-✅ **Mai multe lucruri** trebuie să se întâmple simultan
-✅ **Input responsiv** este necesar (butoane, senzori)
-✅ **Proiecte profesionale/de producție**
-✅ **Animații** care trebuie să fie line
-✅ **Comunicare** care nu poate fi întreruptă
-
-### Tabel Comparativ
-
-| Caracteristică | delay() | millis() |
-|---------------|---------|----------|
-| Dificultate | Ușor 😊 | Mediu 🤔 |
-| Blocare | Da ⏸️ | Nu ▶️ |
-| Multi-tasking | Nu ❌ | Da ✅ |
-| Responsive | Nu ❌ | Da ✅ |
-| Precizie | Bună | Foarte bună |
-
-<InfoBox type="tip">
-  **Pentru părinți:** Începeți cu delay() pentru că este mai ușor de înțeles. Odată ce copilul înțelege conceptul de bază al temporizării, puteți introduce millis() pentru proiecte mai complexe! 📚
-</InfoBox>
-
-</LessonChapter>
-
-<LessonChapter title="Exemplu Practic: Comparație" id="exemplu-practic">
-
-### Cu delay() - Buton Neresponsiv 😞
-
-```cpp
-const int PIN_LED = 13;
-const int PIN_BUTON = 2;
-
 void setup() {
-  pinMode(PIN_LED, OUTPUT);
-  pinMode(PIN_BUTON, INPUT_PULLUP);
-}
-
-void loop() {
-  // Butonul este verificat DOAR aici
-  if (digitalRead(PIN_BUTON) == LOW) {
-    Serial.println("Buton apasat!");
-  }
-  
-  // Apoi dormim 2 secunde - butonul este ignorat!
-  digitalWrite(PIN_LED, HIGH);
-  delay(2000);
-  digitalWrite(PIN_LED, LOW);
-  delay(2000);
+  Serial.begin(9600);
+  Serial.println("Pornesc...");
+  delay(2000);  // OK aici - doar o dată la început
 }
 ```
 
-### Cu millis() - Buton Responsiv 😊
+<Checkpoint id="checkpoint-2" lessonKey="ro/p3-c1-l4-understanding-delay" label="Știu când delay e OK și când nu e! 👍" />
 
-```cpp
-const int PIN_LED = 13;
-const int PIN_BUTON = 2;
-unsigned long millisPrecedent = 0;
-const long interval = 2000;
-int stareLED = LOW;
+</LessonChapter>
 
-void setup() {
-  pinMode(PIN_LED, OUTPUT);
-  pinMode(PIN_BUTON, INPUT_PULLUP);
-}
+<LessonChapter title="Un Preview: millis()! 🔮" id="preview-millis">
 
-void loop() {
-  // Verifică butonul LA FIECARE ciclu!
-  if (digitalRead(PIN_BUTON) == LOW) {
-    Serial.println("Buton apasat!");
-  }
-  
-  // Verifică dacă e timpul să schimbăm LED-ul
-  unsigned long millisCurent = millis();
-  if (millisCurent - millisPrecedent >= interval) {
-    millisPrecedent = millisCurent;
-    stareLED = !stareLED;
-    digitalWrite(PIN_LED, stareLED);
-  }
-}
-```
+Există o cale MAI BUNĂ! În loc să doarmă, Arduino poate SĂ SE UITE LA UN CEAS! ⏰
+
+<GifStep
+  stepNumber={3}
+  title="Metoda Ceasului"
+  gifUrl="https://placehold.co/600x400/22c55e/white?text=Metoda+Ceasului"
+  alt="Conceptul ceasului millis()"
+>
+  În loc să doarmă, Arduino tot verifică ceasul: "A trecut 1 secundă? Nu? OK, verific butonul. A trecut 1 secundă? Da! E timpul să clipesc!"
+</GifStep>
+
+### Ideea (Nu-ți Fă Griji de Cod Încă!)
+
+- **delay()** = Închide ochii și numără 🙈
+- **millis()** = Tot te uiți la un ceas ⏰👀
+
+Cu metoda ceasului, Arduino rămâne treaz și poate face MULTE lucruri!
 
 <InfoBox type="info">
-  În varianta cu millis(), bucla rulează de mii de ori pe secundă, verificând butonul de fiecare dată! Nu există momente în care butonul este ignorat.
+  **Vei învăța millis() mai târziu!** Deocamdată, doar ține minte: există o cale să temporizezi lucruri FĂRĂ să dormi! 🎉
 </InfoBox>
 
 </LessonChapter>
 
-<LessonChapter title="Simulare Interactivă" id="simulare-interactiva">
-
-<InfoBox type="info">
-  Simularea interactivă arată o linie de timp cu segmente "blocate" de CPU evidențiate în timpul delay-urilor lungi. Urmărește cum alte task-uri (verificare buton, citire senzor) sunt puse pe pauză în timpul perioadei de delay! 🎮
-</InfoBox>
-
-</LessonChapter>
-
-<LessonChapter title="Testează-ți Cunoștințele" id="testeaza-cunostintele">
+<LessonChapter title="Test! 🎯" id="testeaza-cunostintele">
 
 <ExerciseMultipleChoice
   id="quiz-1"
   lessonKey="ro/p3-c1-l4-understanding-delay"
-  question="Ce se întâmplă în timpul delay(5000)?"
+  question="Ce se întâmplă în timpul delay(3000)?"
   options={[
-    { id: "a", text: "Arduino rulează alt cod în timp ce așteaptă" },
-    { id: "b", text: "Arduino se oprește complet timp de 5 secunde" },
-    { id: "c", text: "Doar codul LED-ului se oprește" },
-    { id: "d", text: "Apăsările de buton sunt puse la coadă" }
+    { id: "a", text: "Arduino face alte lucruri în timp ce așteaptă" },
+    { id: "b", text: "Arduino doarme și nu poate face NIMIC pentru 3 secunde! 😴" },
+    { id: "c", text: "Lumina devine mai strălucitoare" },
+    { id: "d", text: "Arduino citește butoanele mai repede" }
   ]}
   correctIndex={1}
 />
@@ -331,12 +192,12 @@ void loop() {
 <ExerciseMultipleChoice
   id="quiz-2"
   lessonKey="ro/p3-c1-l4-understanding-delay"
-  question="Ce returnează millis()?"
+  question="De ce ar putea Arduino să rateze o apăsare de buton?"
   options={[
-    { id: "a", text: "Ora curentă de pe ceas" },
-    { id: "b", text: "Milisecunde de când Arduino a pornit" },
-    { id: "c", text: "Secunde de la ultimul delay" },
-    { id: "d", text: "Viteza CPU în MHz" }
+    { id: "a", text: "Butonul e stricat" },
+    { id: "b", text: "Arduino doarme în timpul delay și nu poate vedea butonul! 🙈" },
+    { id: "c", text: "Butoanele nu funcționează cu Arduino" },
+    { id: "d", text: "Trebuie să apeși mai tare" }
   ]}
   correctIndex={1}
 />
@@ -344,32 +205,32 @@ void loop() {
 <ExerciseMultipleChoice
   id="quiz-3"
   lessonKey="ro/p3-c1-l4-understanding-delay"
-  question="Când este delay() OK de folosit?"
+  question="Când e delay() de obicei OK de folosit?"
   options={[
-    { id: "a", text: "Când ai nevoie de răspuns rapid la butoane" },
-    { id: "b", text: "Pentru proiecte simple cu un singur task sau delay-uri scurte" },
-    { id: "c", text: "Pentru proiecte profesionale" },
-    { id: "d", text: "Când controlezi roboți" }
+    { id: "a", text: "Când trebuie să răspunzi la butoane rapid" },
+    { id: "b", text: "Pentru clipire simplă fără butoane, sau delay-uri foarte scurte" },
+    { id: "c", text: "Mereu - delay e mereu perfect!" },
+    { id: "d", text: "Niciodată - delay e mereu rău" }
   ]}
   correctIndex={1}
 />
 
 </LessonChapter>
 
-<LessonChapter title="Rezumat" id="rezumat">
+<LessonChapter title="Ai Reușit! 🏆" id="rezumat">
 
-În această lecție ai învățat: 🎓
+### Ce ai învățat azi:
 
-- ✅ `delay()` **blochează TOATĂ** execuția codului
-- ✅ Delay-urile lungi fac proiectele **neresponsive**
-- ✅ `millis()` permite temporizare **non-blocantă**
-- ✅ Folosește `delay()` pentru proiecte simple, `millis()` pentru cele complexe
-- ✅ `millis()` returnează milisecunde de când Arduino a pornit
+- ✅ **delay()** face Arduino să DOARMĂ și să nu facă nimic altceva
+- ✅ În timpul delay, Arduino poate **rata apăsări de buton**
+- ✅ **Delay-urile scurte** sunt de obicei OK
+- ✅ **Delay-urile lungi** pot fi o problemă dacă trebuie să răspunzi la lucruri
+- ✅ Există o cale mai bună numită **millis()** (vei învăța mai târziu!)
 
 <InfoBox type="tip">
-  **Felicitări!** 🎉 Acum înțelegi diferența crucială dintre delay() și millis()! Pe măsură ce creezi proiecte mai complexe, vei aprecia din ce în ce mai mult puterea temporizării non-blocante!
+  **Bravo!** 🌟 Acum înțelegi de ce Arduino uneori trebuie să rămână treaz! În lecția următoare, vom învăța despre setup() și loop() - cele două părți principale ale oricărui program Arduino! 🎉
 </InfoBox>
 
-<Checkpoint id="checkpoint-3" lessonKey="ro/p3-c1-l4-understanding-delay" label="Am completat lecția!" />
+<Checkpoint id="checkpoint-3" lessonKey="ro/p3-c1-l4-understanding-delay" label="Am înțeles somnul Arduino și temporizarea! ⏰" />
 
 </LessonChapter>
