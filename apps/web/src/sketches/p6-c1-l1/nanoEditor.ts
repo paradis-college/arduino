@@ -209,7 +209,7 @@ export const nanoEditorSketch = (p: p5) => {
   
   p.keyPressed = () => {
     if (editorOpen && fileContent.length < 50) {
-      if (p.keyCode === p.BACKSPACE) {
+      if (p.keyCode === p.BACKSPACE as unknown as number) {
         fileContent = fileContent.slice(0, -1);
       } else if (p.key.length === 1) {
         fileContent += p.key;

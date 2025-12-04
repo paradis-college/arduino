@@ -91,7 +91,6 @@ export const ledPolaritySketch = (p: p5): void => {
     p.endShape();
     
     // LED position
-    const ledX = x + w - 30;
     const ledY = y + 60;
     
     // Wire to LED
@@ -169,14 +168,6 @@ export const ledPolaritySketch = (p: p5): void => {
     if (correct) {
       // Flowing current
       p.fill(0, 255, 255);
-      const pathPoints = [
-        {x: x + 10, y: y + 20},
-        {x: x + w - 10, y: y + 20},
-        {x: x + w - 10, y: ledY},
-        {x: x + w - 10, y: y + h},
-        {x: x + 10, y: y + h},
-        {x: x + 10, y: y + 50}
-      ];
       
       // Calculate position along path
       const totalLength = 200;

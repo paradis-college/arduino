@@ -196,7 +196,7 @@ export const buttonsParallelSketch = (p: p5): void => {
   function drawLED(p: p5, x: number, y: number, on: boolean) {
     p.strokeWeight(2);
     p.stroke(150);
-    p.fill(on ? p.color(255, 220, 0) : 80);
+    p.fill(on ? p.color(255, 220, 0) : p.color(80));
     p.triangle(x - 10, y - 10, x + 10, y - 10, x, y + 10);
     p.line(x - 10, y + 10, x + 10, y + 10);
     

@@ -181,9 +181,9 @@ export const waterButtonSketch = (p: p5) => {
     // Threshold line
     p.stroke(255, 100, 100);
     p.strokeWeight(2);
-    p.setLineDash([5, 5]);
+    (p.drawingContext as CanvasRenderingContext2D).setLineDash([5, 5]);
     p.line(x - 25, y + 35, x + 25, y + 35); // 30% threshold
-    p.setLineDash([]);
+    (p.drawingContext as CanvasRenderingContext2D).setLineDash([]);
 
     p.fill(255, 100, 100);
     p.textSize(8);
@@ -204,8 +204,14 @@ export const waterButtonSketch = (p: p5) => {
     p.noStroke();
     p.beginShape();
     p.vertex(x, y + 10);
-    p.bezierVertex(x - 15, y + 30, x - 15, y + 45, x, y + 50);
-    p.bezierVertex(x + 15, y + 45, x + 15, y + 30, x, y + 10);
+    // First cubic Bezier curve (3 bezierVertex calls for order 3)
+    p.bezierVertex(x - 15, y + 30);
+    p.bezierVertex(x - 15, y + 45);
+    p.bezierVertex(x, y + 50);
+    // Second cubic Bezier curve
+    p.bezierVertex(x + 15, y + 45);
+    p.bezierVertex(x + 15, y + 30);
+    p.bezierVertex(x, y + 10);
     p.endShape();
 
     // Label
@@ -287,10 +293,5 @@ export const waterButtonSketch = (p: p5) => {
       lastWaterTime = p.frameCount;
       updatePlantHealth();
     }
-  };
-
-  // Polyfill for setLineDash
-  (p as any).setLineDash = (list: number[]) => {
-    (p.drawingContext as CanvasRenderingContext2D).setLineDash(list);
   };
 };

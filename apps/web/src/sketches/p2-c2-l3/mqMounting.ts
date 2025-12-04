@@ -59,7 +59,6 @@ export const mqMountingSketch = (p: p5) => {
 
   const drawMQSensor = () => {
     const x = 340;
-    const y = animationStep >= 1 ? 170 : 80;
     
     // Interpolate position
     const targetY = animationStep >= 1 ? 170 : 80;

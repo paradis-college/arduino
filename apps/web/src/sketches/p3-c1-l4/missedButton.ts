@@ -79,7 +79,7 @@ export const missedButtonSketch = (p: p5) => {
     p.ellipse(btnX, btnY, 60, 60);
 
     // Button top
-    p.fill(buttonPressed ? '#4CAF50' : (btnHover ? 180 : 150));
+    p.fill(buttonPressed ? '#4CAF50' : (btnHover ? '#b4b4b4' : '#969696'));
     p.ellipse(btnX, btnY - 3, 45, 45);
 
     p.fill(buttonPressed ? 255 : 50);

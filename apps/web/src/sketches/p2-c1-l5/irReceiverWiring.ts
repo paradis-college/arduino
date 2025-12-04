@@ -91,7 +91,10 @@ export const irReceiverWiringSketch = (p: p5) => {
     p.vertex(x - 25, y);
     p.vertex(x + 25, y);
     p.vertex(x + 25, y + 35);
-    p.bezierVertex(x + 25, y + 55, x - 25, y + 55, x - 25, y + 35);
+    // Cubic bezier (3 calls for order 3)
+    p.bezierVertex(x + 25, y + 55);
+    p.bezierVertex(x - 25, y + 55);
+    p.bezierVertex(x - 25, y + 35);
     p.endShape(p.CLOSE);
     
     // IR window

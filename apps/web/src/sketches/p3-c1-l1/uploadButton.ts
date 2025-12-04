@@ -9,7 +9,6 @@ export const uploadButtonSketch = (p: p5) => {
   let ledBlinking = false;
   let ledOn = false;
   let lastToggle = 0;
-  let clickCount = 0;
 
   p.setup = () => {
     p.createCanvas(400, 280);

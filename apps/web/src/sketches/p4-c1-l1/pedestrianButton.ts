@@ -68,12 +68,12 @@ export const pedestrianButtonSketch = (p: p5) => {
     // Road markings
     p.stroke(255, 200, 50);
     p.strokeWeight(2);
-    p.setLineDash([10, 10]);
+    (p.drawingContext as CanvasRenderingContext2D).setLineDash([10, 10]);
     p.line(200, 0, 200, 100);
     p.line(200, 200, 200, 350);
     p.line(0, 150, 150, 150);
     p.line(250, 150, 400, 150);
-    p.setLineDash([]);
+    (p.drawingContext as CanvasRenderingContext2D).setLineDash([]);
   };
 
   const drawTrafficLight = (x: number, y: number, state: string, label: string) => {
@@ -224,8 +224,5 @@ export const pedestrianButtonSketch = (p: p5) => {
     }
   };
 
-  // Polyfill for setLineDash
-  (p as any).setLineDash = (list: number[]) => {
-    (p.drawingContext as CanvasRenderingContext2D).setLineDash(list);
-  };
+  // Remove unused polyfill - we now use drawingContext directly
 };

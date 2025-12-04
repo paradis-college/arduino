@@ -93,7 +93,7 @@ export const inductorSpikeSketch = (p: p5): void => {
     
     // Inductor coil
     p.noFill();
-    p.stroke(current > 0.5 ? p.color(100, 200, 255) : 150);
+    p.stroke(current > 0.5 ? p.color(100, 200, 255) : p.color(150));
     p.strokeWeight(2);
     for (let i = 0; i < 5; i++) {
       p.arc(cx + 100, cy - 30 + i * 12, 20, 12, p.PI, 0);

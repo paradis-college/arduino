@@ -66,7 +66,7 @@ export const irCodeDisplaySketch = (p: p5) => {
       
       const isActive = activeButton === btn && p.millis() - flashTime < 200;
       
-      p.fill(isActive ? p.color(80, 150, 255) : 60);
+      p.fill(isActive ? p.color(80, 150, 255) : p.color(60));
       p.stroke(80);
       p.strokeWeight(1);
       p.rect(x, y, btnSize, btnSize - 5, 5);

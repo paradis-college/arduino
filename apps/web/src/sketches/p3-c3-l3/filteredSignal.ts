@@ -5,11 +5,10 @@
 import type p5 from 'p5';
 
 export const filteredSignalSketch = (p: p5) => {
-  let rawSignal: number[] = [];
-  let filteredSignal: number[] = [];
+  const rawSignal: number[] = [];
+  const filteredSignal: number[] = [];
   let time = 0;
   let buttonState = false;
-  let debounceTime = 50; // milliseconds
   
   p.setup = () => {
     p.createCanvas(400, 300);

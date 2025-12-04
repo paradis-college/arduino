@@ -39,10 +39,10 @@ export const humidityGaugeSketch = (p: p5) => {
     const fillLevel = p.map(displayHumidity, 0, 100, 50, -50);
     
     // Clip to droplet shape
-    p.drawingContext.save();
-    p.drawingContext.beginPath();
+    (p.drawingContext as CanvasRenderingContext2D).save();
+    (p.drawingContext as CanvasRenderingContext2D).beginPath();
     createDropletPath(p, 0, 0, dropScale);
-    p.drawingContext.clip();
+    (p.drawingContext as CanvasRenderingContext2D).clip();
     
     // Water fill
     const waterColor = p.lerpColor(
@@ -55,7 +55,7 @@ export const humidityGaugeSketch = (p: p5) => {
     p.rect(-40, fillLevel, 80, 100);
     
     // Water surface wave
-    p.fill(waterColor.levels[0] + 30, waterColor.levels[1] + 30, waterColor.levels[2] + 30);
+    p.fill(p.red(waterColor) + 30, p.green(waterColor) + 30, p.blue(waterColor) + 30);
     p.beginShape();
     for (let x = -40; x <= 40; x += 2) {
       const wave = p.sin((x + p.frameCount * 2) * 0.1) * 3;
@@ -65,7 +65,7 @@ export const humidityGaugeSketch = (p: p5) => {
     p.vertex(-40, fillLevel + 50);
     p.endShape(p.CLOSE);
     
-    p.drawingContext.restore();
+    (p.drawingContext as CanvasRenderingContext2D).restore();
     
     // Redraw droplet outline
     p.noFill();
@@ -157,16 +157,14 @@ export const humidityGaugeSketch = (p: p5) => {
   const drawDroplet = (p: p5, x: number, y: number, scale: number) => {
     p.beginShape();
     p.vertex(x, y - 30 * scale);
-    p.bezierVertex(
-      x + 20 * scale, y - 10 * scale,
-      x + 20 * scale, y + 20 * scale,
-      x, y + 25 * scale
-    );
-    p.bezierVertex(
-      x - 20 * scale, y + 20 * scale,
-      x - 20 * scale, y - 10 * scale,
-      x, y - 30 * scale
-    );
+    // First cubic bezier (3 calls for order 3)
+    p.bezierVertex(x + 20 * scale, y - 10 * scale);
+    p.bezierVertex(x + 20 * scale, y + 20 * scale);
+    p.bezierVertex(x, y + 25 * scale);
+    // Second cubic bezier
+    p.bezierVertex(x - 20 * scale, y + 20 * scale);
+    p.bezierVertex(x - 20 * scale, y - 10 * scale);
+    p.bezierVertex(x, y - 30 * scale);
     p.endShape(p.CLOSE);
   };
   

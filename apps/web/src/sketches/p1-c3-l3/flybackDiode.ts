@@ -60,7 +60,6 @@ export const flybackDiodeSketch = (p: p5): void => {
     p.text(withDiode ? 'WITH DIODE' : 'NO DIODE', 330, 55);
     
     // Draw circuit
-    const cx = 150;
     const cy = 150;
     
     // Power supply
@@ -103,7 +102,7 @@ export const flybackDiodeSketch = (p: p5): void => {
     
     // Solenoid/relay coil
     p.noFill();
-    p.stroke(current > 0.3 ? p.color(100, 200, 255) : 150);
+    p.stroke(current > 0.3 ? p.color(100, 200, 255) : p.color(150));
     p.strokeWeight(2);
     
     // Coil windings
@@ -130,7 +129,7 @@ export const flybackDiodeSketch = (p: p5): void => {
     // Flyback diode (if enabled)
     if (withDiode) {
       // Diode symbol parallel to coil
-      p.stroke(flybackCurrent > 0.1 ? p.color(0, 255, 100) : 150);
+      p.stroke(flybackCurrent > 0.1 ? p.color(0, 255, 100) : p.color(150));
       p.strokeWeight(2);
       
       // Connection wires
@@ -140,7 +139,7 @@ export const flybackDiodeSketch = (p: p5): void => {
       p.line(220, cy + 20, 220, cy);
       
       // Diode triangle (pointing up for flyback direction)
-      p.fill(flybackCurrent > 0.1 ? p.color(0, 255, 100) : 80);
+      p.fill(flybackCurrent > 0.1 ? p.color(0, 255, 100) : p.color(80));
       p.triangle(210, cy, 230, cy, 220, cy - 20);
       p.line(210, cy - 20, 230, cy - 20);
       

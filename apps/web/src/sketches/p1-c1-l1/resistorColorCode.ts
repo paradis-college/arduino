@@ -17,7 +17,6 @@ export const resistorColorCodeSketch = (p: p5): void => {
   let band2 = 2; // Red = 2
   let band3 = 1; // Brown = ×10
   let animPhase = 0;
-  let showValue = false;
   
   p.setup = () => {
     p.createCanvas(400, 280);
@@ -54,7 +53,6 @@ export const resistorColorCodeSketch = (p: p5): void => {
     
     // Draw bands with animation
     const bands = [band1, band2, band3, 5]; // Gold tolerance band (5 = green placeholder for gold)
-    const bandLabels = ['1st Digit', '2nd Digit', 'Multiplier', 'Tolerance'];
     
     for (let i = 0; i < 4; i++) {
       const bandX = bandPositions[i];

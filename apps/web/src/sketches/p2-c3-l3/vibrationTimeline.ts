@@ -6,9 +6,7 @@ import type p5 from 'p5';
 
 export const vibrationTimelineSketch = (p: p5) => {
   const vibrationEvents: { time: number; intensity: number }[] = [];
-  let lastVibration = 0;
   let shakeIntensity = 0;
-  const timelineWidth = 320;
   const timeWindow = 5000; // 5 seconds of history
   
   p.setup = () => {

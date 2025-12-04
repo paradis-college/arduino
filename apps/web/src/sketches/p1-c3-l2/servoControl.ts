@@ -193,8 +193,8 @@ export const servoControlSketch = (p: p5): void => {
       const by = 250;
       const isSelected = Math.abs(targetAngle - angle) < 5;
       
-      p.fill(isSelected ? p.color(0, 150, 255) : 60);
-      p.stroke(isSelected ? p.color(0, 200, 255) : 80);
+      p.fill(isSelected ? p.color(0, 150, 255) : p.color(60));
+      p.stroke(isSelected ? p.color(0, 200, 255) : p.color(80));
       p.strokeWeight(1);
       p.rect(bx - 15, by - 12, 30, 24, 4);
       

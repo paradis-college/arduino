@@ -89,7 +89,7 @@ export const voltageSliderSketch = (p: p5): void => {
     p.line(circuitX + 110, circuitY, circuitX + 150, circuitY);
     
     // LED (triangle + line)
-    p.fill(brightness > 50 ? p.color(255, brightness, 0) : 80);
+    p.fill(brightness > 50 ? p.color(255, brightness, 0) : p.color(80));
     p.stroke(150);
     p.triangle(circuitX + 150, circuitY - 15, circuitX + 150, circuitY + 15, circuitX + 175, circuitY);
     p.line(circuitX + 175, circuitY - 15, circuitX + 175, circuitY + 15);

@@ -104,9 +104,9 @@ export const binaryCounterSketch = (p: p5) => {
   };
   
   p.keyPressed = () => {
-    if (p.keyCode === p.UP_ARROW) {
+    if (p.keyCode === p.UP_ARROW as unknown as number) {
       speed = Math.max(1, speed - 2);
-    } else if (p.keyCode === p.DOWN_ARROW) {
+    } else if (p.keyCode === p.DOWN_ARROW as unknown as number) {
       speed = Math.min(20, speed + 2);
     } else if (p.key === ' ') {
       counter = 0;

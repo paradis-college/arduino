@@ -50,13 +50,13 @@ export const threeLedSetupSketch = (p: p5) => {
       const isHighlighted = highlightPin === i + 1;
       
       // Pin
-      p.fill(isHighlighted ? '#4CAF50' : 40);
-      p.stroke(isHighlighted ? '#66bb6a' : 60);
+      p.fill(isHighlighted ? '#4CAF50' : '#282828');
+      p.stroke(isHighlighted ? '#66bb6a' : '#3c3c3c');
       p.strokeWeight(isHighlighted ? 2 : 1);
       p.rect(boardX + boardW - 5, pinY[i], 15, 10, 2);
       
       // Pin label
-      p.fill(isHighlighted ? '#4CAF50' : 150);
+      p.fill(isHighlighted ? '#4CAF50' : '#969696');
       p.noStroke();
       p.textAlign(p.LEFT, p.CENTER);
       p.text(`Pin ${pins[i]}`, boardX + 10, pinY[i] + 5);

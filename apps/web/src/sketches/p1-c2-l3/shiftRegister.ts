@@ -80,7 +80,7 @@ export const shiftRegisterSketch = (p: p5): void => {
     });
     
     // Clock signal animation
-    p.fill(clockPulse > 0.5 ? p.color(0, 255, 255) : 80);
+    p.fill(clockPulse > 0.5 ? p.color(0, 255, 255) : p.color(80));
     p.noStroke();
     p.ellipse(chipX + chipW + 25, chipY + 30 + 4 * 14, 8, 8);
     
@@ -98,8 +98,8 @@ export const shiftRegisterSketch = (p: p5): void => {
       const isOn = (shiftData >> i) & 1;
       
       // LED
-      p.fill(isOn ? p.color(255, 50, 50) : 50);
-      p.stroke(isOn ? p.color(255, 100, 100) : 80);
+      p.fill(isOn ? p.color(255, 50, 50) : p.color(50));
+      p.stroke(isOn ? p.color(255, 100, 100) : p.color(80));
       p.strokeWeight(1);
       p.ellipse(x, ledY, 15, 15);
       
@@ -146,8 +146,8 @@ export const shiftRegisterSketch = (p: p5): void => {
       const by = 200;
       const isSelected = pat === pattern;
       
-      p.fill(isSelected ? p.color(0, 100, 200) : 60);
-      p.stroke(isSelected ? p.color(0, 150, 255) : 80);
+      p.fill(isSelected ? p.color(0, 100, 200) : p.color(60));
+      p.stroke(isSelected ? p.color(0, 150, 255) : p.color(80));
       p.strokeWeight(1);
       p.rect(bx - 18, by - 10, 36, 20, 3);
       

@@ -44,9 +44,9 @@ export const distanceBarSketch = (p: p5) => {
     // Draw distance line
     p.stroke(100, 200, 255, 150);
     p.strokeWeight(2);
-    p.drawingContext.setLineDash([5, 5]);
+    (p.drawingContext as CanvasRenderingContext2D).setLineDash([5, 5]);
     p.line(sensorX + 15, 100, objectX - 20, 100);
-    p.drawingContext.setLineDash([]);
+    (p.drawingContext as CanvasRenderingContext2D).setLineDash([]);
     
     // Distance bar background
     p.noStroke();

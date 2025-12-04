@@ -7,7 +7,6 @@ export const clockMethodSketch = (p: p5) => {
   let lastCheckTime = 0;
   let ledOn = false;
   let currentMillis = 0;
-  let buttonReady = true;
 
   p.setup = () => {
     p.createCanvas(400, 280);
@@ -99,7 +98,7 @@ export const clockMethodSketch = (p: p5) => {
     const btnY = 100;
     const btnHover = p.dist(p.mouseX, p.mouseY, btnX, btnY) < 25;
 
-    p.fill(btnHover ? '#4CAF50' : 100);
+    p.fill(btnHover ? '#4CAF50' : '#646464');
     p.stroke('#4CAF50');
     p.strokeWeight(2);
     p.ellipse(btnX, btnY, 50, 50);
