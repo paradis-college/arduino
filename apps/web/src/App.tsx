@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom
 import { SiteLayout } from './components/layout';
 import { LanguageContext, getTranslation, getBrowserLanguage } from './i18n';
 import { getInitialTheme, saveTheme, applyTheme, toggleTheme, onSystemThemeChange } from './lib/themeStore';
-import { getInitialLanguage, saveLanguage, getStoredLanguage } from './lib/languageStore';
+import { getInitialLanguage, saveLanguage, getStoredLanguage, initializeLanguageFromIP } from './lib/languageStore';
 import type { Language, Theme } from './lib/types';
 
 // Import pages
@@ -74,6 +74,15 @@ function App() {
       applyTheme(newTheme);
     });
     return cleanup;
+  }, []);
+
+  // Initialize language from IP on first visit (async)
+  useEffect(() => {
+    initializeLanguageFromIP().then((detectedLang) => {
+      if (detectedLang) {
+        setLanguage(detectedLang);
+      }
+    });
   }, []);
 
   const handleToggleTheme = () => {
