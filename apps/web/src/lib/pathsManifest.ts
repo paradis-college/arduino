@@ -6,6 +6,7 @@
  */
 
 import type { PathMeta, Language } from './types';
+import { getCoursesByPath } from './lessonsManifest';
 
 /** All available paths */
 export const pathsManifest: PathMeta[] = [
@@ -129,9 +130,10 @@ const pathTranslations: Record<string, { ro: { title: string; description: strin
   },
 };
 
-/** Get all paths with localized content */
+/** Get all paths with localized content (only paths with available courses) */
 export function getPaths(language: Language): PathMeta[] {
   return pathsManifest
+    .filter((path) => getCoursesByPath(path.id, language).length > 0)
     .map((path) => {
       const translations = pathTranslations[path.id];
       if (translations && translations[language]) {

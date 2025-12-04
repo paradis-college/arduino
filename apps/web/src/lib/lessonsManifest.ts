@@ -511,10 +511,15 @@ export function getAdjacentLessons(
   };
 }
 
-/** Get courses for a specific path with localized content */
+/** Get courses for a specific path with localized content (only courses with available lessons) */
 export function getCoursesByPath(pathId: string, language: Language): CourseMeta[] {
+  // Get all lessons for the language once and build a set of course IDs that have lessons
+  const lessonsForLanguage = getLessonsByLanguage(language);
+  const courseIdsWithLessons = new Set(lessonsForLanguage.map((l) => l.course));
+  
   return coursesManifest
     .filter((course) => course.pathId === pathId)
+    .filter((course) => courseIdsWithLessons.has(course.id))
     .map((course) => {
       const translations = courseTranslations[course.id];
       if (translations && translations[language]) {
@@ -529,9 +534,14 @@ export function getCoursesByPath(pathId: string, language: Language): CourseMeta
     .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 }
 
-/** Get all courses with localized content */
+/** Get all courses with localized content (only courses with available lessons) */
 export function getAllCourses(language: Language): CourseMeta[] {
+  // Get all lessons for the language once and build a set of course IDs that have lessons
+  const lessonsForLanguage = getLessonsByLanguage(language);
+  const courseIdsWithLessons = new Set(lessonsForLanguage.map((l) => l.course));
+  
   return coursesManifest
+    .filter((course) => courseIdsWithLessons.has(course.id))
     .map((course) => {
       const translations = courseTranslations[course.id];
       if (translations && translations[language]) {
