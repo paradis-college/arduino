@@ -41,16 +41,29 @@ export function isBrowserLanguageRomanian(): boolean {
  * Falls back to null if detection fails
  */
 export async function detectLanguageFromIP(): Promise<Language | null> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout
+  
   try {
     // Use a free IP geolocation API to detect country
     const response = await fetch('https://ipapi.co/json/', {
-      signal: AbortSignal.timeout(3000), // 3 second timeout
+      signal: controller.signal,
     });
+    
+    clearTimeout(timeoutId);
     
     if (!response.ok) return null;
     
     const data = await response.json();
-    const countryCode = data.country_code?.toUpperCase();
+    
+    // Validate response structure
+    if (!data || typeof data !== 'object') return null;
+    
+    const countryCode = typeof data.country_code === 'string' 
+      ? data.country_code.toUpperCase() 
+      : null;
+    
+    if (!countryCode) return null;
     
     // If user is from Romania, return 'ro'
     if (countryCode === 'RO') {
@@ -59,6 +72,7 @@ export async function detectLanguageFromIP(): Promise<Language | null> {
     
     return 'en';
   } catch {
+    clearTimeout(timeoutId);
     // If geolocation fails (network error, timeout, etc.), return null
     return null;
   }

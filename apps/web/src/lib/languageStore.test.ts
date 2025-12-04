@@ -141,6 +141,28 @@ describe('languageStore', () => {
       
       expect(result).toBeNull();
     });
+
+    it('returns null when API returns malformed response', async () => {
+      global.fetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve(null),
+      });
+      
+      const result = await detectLanguageFromIP();
+      
+      expect(result).toBeNull();
+    });
+
+    it('returns null when country_code is not a string', async () => {
+      global.fetch = vi.fn().mockResolvedValue({
+        ok: true,
+        json: () => Promise.resolve({ country_code: 123 }),
+      });
+      
+      const result = await detectLanguageFromIP();
+      
+      expect(result).toBeNull();
+    });
   });
 
   describe('initializeLanguageFromIP', () => {

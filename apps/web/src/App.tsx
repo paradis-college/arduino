@@ -78,11 +78,16 @@ function App() {
 
   // Initialize language from IP on first visit (async)
   useEffect(() => {
-    initializeLanguageFromIP().then((detectedLang) => {
-      if (detectedLang) {
-        setLanguage(detectedLang);
-      }
-    });
+    initializeLanguageFromIP()
+      .then((detectedLang) => {
+        if (detectedLang) {
+          setLanguage(detectedLang);
+        }
+      })
+      .catch(() => {
+        // Silently ignore errors - language detection is best-effort
+        // The app will use the default language (Romanian)
+      });
   }, []);
 
   const handleToggleTheme = () => {
