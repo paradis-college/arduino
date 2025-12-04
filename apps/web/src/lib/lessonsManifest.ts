@@ -511,10 +511,11 @@ export function getAdjacentLessons(
   };
 }
 
-/** Get courses for a specific path with localized content */
+/** Get courses for a specific path with localized content (only courses with available lessons) */
 export function getCoursesByPath(pathId: string, language: Language): CourseMeta[] {
   return coursesManifest
     .filter((course) => course.pathId === pathId)
+    .filter((course) => getLessonsByCourse(course.id, language).length > 0)
     .map((course) => {
       const translations = courseTranslations[course.id];
       if (translations && translations[language]) {
@@ -529,9 +530,10 @@ export function getCoursesByPath(pathId: string, language: Language): CourseMeta
     .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 }
 
-/** Get all courses with localized content */
+/** Get all courses with localized content (only courses with available lessons) */
 export function getAllCourses(language: Language): CourseMeta[] {
   return coursesManifest
+    .filter((course) => getLessonsByCourse(course.id, language).length > 0)
     .map((course) => {
       const translations = courseTranslations[course.id];
       if (translations && translations[language]) {
