@@ -103,7 +103,7 @@ describe('languageStore', () => {
 
   describe('detectLanguageFromIP', () => {
     it('returns ro when user is from Romania', async () => {
-      global.fetch = vi.fn().mockResolvedValue({
+      globalThis.fetch = vi.fn().mockResolvedValue({
         ok: true,
         json: () => Promise.resolve({ country_code: 'RO' }),
       });
@@ -114,7 +114,7 @@ describe('languageStore', () => {
     });
 
     it('returns en when user is not from Romania', async () => {
-      global.fetch = vi.fn().mockResolvedValue({
+      globalThis.fetch = vi.fn().mockResolvedValue({
         ok: true,
         json: () => Promise.resolve({ country_code: 'US' }),
       });
@@ -125,7 +125,7 @@ describe('languageStore', () => {
     });
 
     it('returns null when API fails', async () => {
-      global.fetch = vi.fn().mockRejectedValue(new Error('Network error'));
+      globalThis.fetch = vi.fn().mockRejectedValue(new Error('Network error'));
       
       const result = await detectLanguageFromIP();
       
@@ -133,7 +133,7 @@ describe('languageStore', () => {
     });
 
     it('returns null when API returns non-ok response', async () => {
-      global.fetch = vi.fn().mockResolvedValue({
+      globalThis.fetch = vi.fn().mockResolvedValue({
         ok: false,
       });
       
@@ -143,7 +143,7 @@ describe('languageStore', () => {
     });
 
     it('returns null when API returns malformed response', async () => {
-      global.fetch = vi.fn().mockResolvedValue({
+      globalThis.fetch = vi.fn().mockResolvedValue({
         ok: true,
         json: () => Promise.resolve(null),
       });
@@ -154,7 +154,7 @@ describe('languageStore', () => {
     });
 
     it('returns null when country_code is not a string', async () => {
-      global.fetch = vi.fn().mockResolvedValue({
+      globalThis.fetch = vi.fn().mockResolvedValue({
         ok: true,
         json: () => Promise.resolve({ country_code: 123 }),
       });
@@ -184,7 +184,7 @@ describe('languageStore', () => {
     });
 
     it('returns ro and saves when IP detection returns Romania', async () => {
-      global.fetch = vi.fn().mockResolvedValue({
+      globalThis.fetch = vi.fn().mockResolvedValue({
         ok: true,
         json: () => Promise.resolve({ country_code: 'RO' }),
       });
@@ -197,7 +197,7 @@ describe('languageStore', () => {
     });
 
     it('returns en and saves when IP detection returns non-Romania', async () => {
-      global.fetch = vi.fn().mockResolvedValue({
+      globalThis.fetch = vi.fn().mockResolvedValue({
         ok: true,
         json: () => Promise.resolve({ country_code: 'DE' }),
       });
@@ -210,7 +210,7 @@ describe('languageStore', () => {
     });
 
     it('defaults to ro when IP detection fails', async () => {
-      global.fetch = vi.fn().mockRejectedValue(new Error('Network error'));
+      globalThis.fetch = vi.fn().mockRejectedValue(new Error('Network error'));
       
       const result = await initializeLanguageFromIP();
       
@@ -234,7 +234,7 @@ describe('languageStore', () => {
 
     it('user can switch from auto-detected to different language', async () => {
       // First visit: auto-detect Romanian from IP
-      global.fetch = vi.fn().mockResolvedValue({
+      globalThis.fetch = vi.fn().mockResolvedValue({
         ok: true,
         json: () => Promise.resolve({ country_code: 'RO' }),
       });

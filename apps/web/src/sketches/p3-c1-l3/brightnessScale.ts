@@ -65,7 +65,7 @@ export const brightnessScaleSketch = (p: p5) => {
     // Handle
     const handleX = barX + (selectedValue / 255) * barW;
     p.fill(255);
-    p.stroke(dragging ? '#4CAF50' : 150);
+    p.stroke(dragging ? '#4CAF50' : '#969696');
     p.strokeWeight(dragging ? 3 : 2);
     p.ellipse(handleX, barY + barH / 2, 25, 35);
 

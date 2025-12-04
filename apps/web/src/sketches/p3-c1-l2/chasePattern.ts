@@ -106,7 +106,7 @@ export const chasePatternSketch = (p: p5) => {
     ];
 
     for (let i = 0; i < 3; i++) {
-      p.fill(i === currentLed ? '#4CAF50' : 100);
+      p.fill(i === currentLed ? '#4CAF50' : '#646464');
       p.text(codeLines[i], 40, 202 + i * 15);
     }
 

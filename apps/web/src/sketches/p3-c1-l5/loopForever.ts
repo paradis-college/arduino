@@ -47,10 +47,10 @@ export const loopForeverSketch = (p: p5) => {
     
     // Animated dashes around box
     const dashPhase = (p.millis() / 50) % 20;
-    p.drawingContext.setLineDash([10, 10]);
-    p.drawingContext.lineDashOffset = -dashPhase;
+    (p.drawingContext as CanvasRenderingContext2D).setLineDash([10, 10]);
+    (p.drawingContext as CanvasRenderingContext2D).lineDashOffset = -dashPhase;
     p.rect(boxX, boxY, boxW, boxH, 8);
-    p.drawingContext.setLineDash([]);
+    (p.drawingContext as CanvasRenderingContext2D).setLineDash([]);
 
     // Box fill
     p.fill(50, 60, 80);
@@ -73,7 +73,7 @@ export const loopForeverSketch = (p: p5) => {
         p.rect(boxX + 10, stepY - 10, boxW - 20, 20, 3);
       }
 
-      p.fill(isActive ? '#4CAF50' : 120);
+      p.fill(isActive ? '#4CAF50' : '#787878');
       p.textSize(11);
       p.textAlign(p.LEFT, p.CENTER);
       p.text((isActive ? '▶ ' : '  ') + steps[i], boxX + 20, stepY);

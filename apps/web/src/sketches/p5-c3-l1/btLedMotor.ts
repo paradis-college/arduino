@@ -192,7 +192,6 @@ export const btLedMotorSketch = (p: p5) => {
   
   p.mousePressed = () => {
     // Check phone buttons
-    const btnLabels = ['LED ON', 'LED OFF', 'SPD+', 'SPD-'];
     const commands = ['1', '0', 'F', 'B'];
     
     for (let i = 0; i < 4; i++) {

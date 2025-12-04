@@ -46,7 +46,7 @@ export const eventLogSketch = (p: p5) => {
     
     // Button input
     p.fill(50);
-    p.stroke(buttonState ? p.color(100, 255, 100) : 80);
+    p.stroke(buttonState ? p.color(100, 255, 100) : p.color(80));
     p.strokeWeight(2);
     p.rect(25, 55, 70, 35, 5);
     
@@ -168,12 +168,12 @@ export const eventLogSketch = (p: p5) => {
     p.fill(200);
     p.text('Python: Running', 225, 70);
     
-    p.fill(buttonState ? p.color(100, 255, 100) : 100);
+    p.fill(buttonState ? p.color(100, 255, 100) : p.color(100));
     p.ellipse(215, 95, 8, 8);
     p.fill(200);
     p.text('Button: ' + (buttonState ? 'Pressed' : 'Released'), 225, 90);
     
-    p.fill(ledState ? p.color(100, 255, 100) : 100);
+    p.fill(ledState ? p.color(100, 255, 100) : p.color(100));
     p.ellipse(215, 115, 8, 8);
     p.fill(200);
     p.text('LED: ' + (ledState ? 'ON' : 'OFF'), 225, 110);

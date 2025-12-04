@@ -44,7 +44,7 @@ export const airQualityZonesSketch = (p: p5) => {
     }
     
     // Main display panel
-    p.fill(zoneColor.levels[0] * 0.2, zoneColor.levels[1] * 0.2, zoneColor.levels[2] * 0.2);
+    p.fill(p.red(zoneColor) * 0.2, p.green(zoneColor) * 0.2, p.blue(zoneColor) * 0.2);
     p.stroke(zoneColor);
     p.strokeWeight(3);
     p.rect(20, 20, 180, 100, 15);

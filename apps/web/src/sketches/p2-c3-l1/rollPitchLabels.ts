@@ -8,7 +8,6 @@ export const rollPitchLabelsSketch = (p: p5) => {
   let roll = 0;
   let pitch = 0;
   let dragging = false;
-  let dragStart = { x: 0, y: 0 };
   
   p.setup = () => {
     p.createCanvas(400, 220);
@@ -170,7 +169,6 @@ export const rollPitchLabelsSketch = (p: p5) => {
   p.mousePressed = () => {
     if (p.mouseX > 100 && p.mouseX < 300 && p.mouseY > 50 && p.mouseY < 150) {
       dragging = true;
-      dragStart = { x: p.mouseX, y: p.mouseY };
     }
   };
   

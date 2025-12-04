@@ -7,7 +7,6 @@ import type p5 from 'p5';
 export const ledRCTimingSketch = (p: p5): void => {
   let voltage = 0;
   let isCharging = true;
-  let lastToggle = 0;
   const R = 10000; // 10kΩ
   const C = 100e-6; // 100µF
   const tau = R * C; // Time constant = 1 second

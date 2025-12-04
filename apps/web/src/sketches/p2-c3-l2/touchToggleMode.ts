@@ -6,7 +6,6 @@ import type p5 from 'p5';
 
 export const touchToggleModeSketch = (p: p5) => {
   let touchState = false;
-  let lastTouchTime = 0;
   let outputState = false;
   let mode: 'momentary' | 'toggle' = 'momentary';
 

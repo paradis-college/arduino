@@ -170,7 +170,6 @@ export const ultrasonicWiringPowerSketch = (p: p5) => {
     
     const endX = p.lerp(x1, x2, progress);
     const endY = p.lerp(y1, y2, progress);
-    const ctrlY = midY + (y1 - midY) * (1 - progress);
     
     p.beginShape();
     for (let t = 0; t <= progress; t += 0.02) {

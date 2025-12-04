@@ -40,7 +40,7 @@ export const breadboardLedsSketch = (p: p5) => {
       const y = 75 + i * 32;
       
       // Button
-      p.fill(gpio.state ? p.color(gpio.color[0], gpio.color[1], gpio.color[2]) : 60);
+      p.fill(gpio.state ? p.color(gpio.color[0], gpio.color[1], gpio.color[2]) : p.color(60));
       p.stroke(100);
       p.strokeWeight(1);
       p.rect(30, y, 100, 25, 3);

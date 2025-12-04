@@ -5,8 +5,7 @@ import type p5 from 'p5';
  */
 export const setupOnceSketch = (p: p5) => {
   let setupCompleted = false;
-  let setupProgress = 0;
-  let checkmarks: { text: string; done: boolean }[] = [
+  const checkmarks: { text: string; done: boolean }[] = [
     { text: 'pinMode(13, OUTPUT)', done: false },
     { text: 'Serial.begin(9600)', done: false },
     { text: 'Ready to go!', done: false }
@@ -70,8 +69,8 @@ export const setupOnceSketch = (p: p5) => {
       const itemY = boxY + 55 + i * 25;
       
       // Checkbox
-      p.fill(checkmarks[i].done ? '#4CAF50' : 60);
-      p.stroke(checkmarks[i].done ? '#4CAF50' : 100);
+      p.fill(checkmarks[i].done ? '#4CAF50' : '#3c3c3c');
+      p.stroke(checkmarks[i].done ? '#4CAF50' : '#646464');
       p.strokeWeight(2);
       p.rect(boxX + 30, itemY - 8, 16, 16, 3);
       

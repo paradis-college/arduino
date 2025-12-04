@@ -46,8 +46,8 @@ export const truthTableSketch = (p: p5): void => {
       const by = 50;
       const isSelected = gate === gateType;
       
-      p.fill(isSelected ? p.color(0, 100, 200) : 60);
-      p.stroke(isSelected ? p.color(0, 150, 255) : 100);
+      p.fill(isSelected ? p.color(0, 100, 200) : p.color(60));
+      p.stroke(isSelected ? p.color(0, 150, 255) : p.color(100));
       p.strokeWeight(isSelected ? 2 : 1);
       p.rect(bx - 30, by - 12, 60, 24, 5);
       
@@ -146,7 +146,7 @@ export const truthTableSketch = (p: p5): void => {
       p.text(row.a ? '1' : '0', tableX + cellW/2, ry + cellH/2);
       p.text(row.b ? '1' : '0', tableX + cellW + cellW/2, ry + cellH/2);
       
-      p.fill(rowOutput ? (isCurrentRow ? p.color(255, 255, 0) : p.color(100, 255, 100)) : (isCurrentRow ? 255 : 150));
+      p.fill(rowOutput ? (isCurrentRow ? p.color(255, 255, 0) : p.color(100, 255, 100)) : p.color(isCurrentRow ? 255 : 150));
       p.text(rowOutput ? '1' : '0', tableX + cellW * 2 + cellW/2, ry + cellH/2);
     });
     
@@ -174,11 +174,11 @@ export const truthTableSketch = (p: p5): void => {
   
   function drawGateSymbol(p: p5, x: number, y: number, gate: string, a: boolean, b: boolean, out: boolean) {
     // Input lines
-    p.stroke(a ? p.color(100, 255, 100) : 100);
+    p.stroke(a ? p.color(100, 255, 100) : p.color(100));
     p.strokeWeight(2);
     p.line(x - 40, y - 15, x - 20, y - 15);
     
-    p.stroke(b ? p.color(100, 255, 100) : 100);
+    p.stroke(b ? p.color(100, 255, 100) : p.color(100));
     p.line(x - 40, y + 15, x - 20, y + 15);
     
     // Gate shape
@@ -192,15 +192,27 @@ export const truthTableSketch = (p: p5): void => {
       p.vertex(x - 20, y - 25);
       p.vertex(x - 20, y + 25);
       p.vertex(x + 5, y + 25);
-      p.bezierVertex(x + 30, y + 25, x + 30, y - 25, x + 5, y - 25);
+      // Cubic bezier: 3 calls for each curve segment
+      p.bezierVertex(x + 30, y + 25);
+      p.bezierVertex(x + 30, y - 25);
+      p.bezierVertex(x + 5, y - 25);
       p.endShape(p.CLOSE);
     } else {
       // OR/XOR shape
       p.beginShape();
       p.vertex(x - 20, y - 25);
-      p.bezierVertex(x - 5, y - 25, x + 20, y - 15, x + 30, y);
-      p.bezierVertex(x + 20, y + 15, x - 5, y + 25, x - 20, y + 25);
-      p.bezierVertex(x - 10, y, x - 10, y, x - 20, y - 25);
+      // First bezier
+      p.bezierVertex(x - 5, y - 25);
+      p.bezierVertex(x + 20, y - 15);
+      p.bezierVertex(x + 30, y);
+      // Second bezier
+      p.bezierVertex(x + 20, y + 15);
+      p.bezierVertex(x - 5, y + 25);
+      p.bezierVertex(x - 20, y + 25);
+      // Third bezier
+      p.bezierVertex(x - 10, y);
+      p.bezierVertex(x - 10, y);
+      p.bezierVertex(x - 20, y - 25);
       p.endShape(p.CLOSE);
       
       if (gate === 'XOR') {
@@ -208,7 +220,9 @@ export const truthTableSketch = (p: p5): void => {
         p.noFill();
         p.beginShape();
         p.vertex(x - 28, y - 25);
-        p.bezierVertex(x - 18, y, x - 18, y, x - 28, y + 25);
+        p.bezierVertex(x - 18, y);
+        p.bezierVertex(x - 18, y);
+        p.bezierVertex(x - 28, y + 25);
         p.endShape();
       }
     }
@@ -221,13 +235,13 @@ export const truthTableSketch = (p: p5): void => {
     }
     
     // Output line
-    p.stroke(out ? p.color(255, 200, 0) : 100);
+    p.stroke(out ? p.color(255, 200, 0) : p.color(100));
     p.strokeWeight(2);
     const outX = gate === 'NAND' ? x + 40 : x + 30;
     p.line(outX, y, outX + 30, y);
     
     // Output indicator
-    p.fill(out ? p.color(255, 200, 0) : 60);
+    p.fill(out ? p.color(255, 200, 0) : p.color(60));
     p.noStroke();
     p.ellipse(outX + 35, y, 12, 12);
   }

@@ -36,9 +36,9 @@ export const proximityThresholdSketch = (p: p5) => {
     // Threshold line (draggable)
     p.stroke(255, 200, 100);
     p.strokeWeight(2);
-    p.drawingContext.setLineDash([10, 5]);
+    (p.drawingContext as CanvasRenderingContext2D).setLineDash([10, 5]);
     p.line(50, threshold, 350, threshold);
-    p.drawingContext.setLineDash([]);
+    (p.drawingContext as CanvasRenderingContext2D).setLineDash([]);
     
     // Threshold handle
     p.fill(draggingThreshold ? p.color(255, 255, 150) : p.color(255, 200, 100));
@@ -49,14 +49,14 @@ export const proximityThresholdSketch = (p: p5) => {
     // Distance measurement line
     p.stroke(100, 200, 255, 150);
     p.strokeWeight(1);
-    p.drawingContext.setLineDash([3, 3]);
+    (p.drawingContext as CanvasRenderingContext2D).setLineDash([3, 3]);
     p.line(200, 40, 200, objectY - 15);
-    p.drawingContext.setLineDash([]);
+    (p.drawingContext as CanvasRenderingContext2D).setLineDash([]);
     
     // Object (draggable)
     const objColor = draggingObject ? p.color(150, 200, 255) : (isNear ? p.color(255, 100, 100) : p.color(100, 255, 100));
     p.fill(objColor);
-    p.stroke(objColor.levels[0] * 0.7, objColor.levels[1] * 0.7, objColor.levels[2] * 0.7);
+    p.stroke(p.red(objColor) * 0.7, p.green(objColor) * 0.7, p.blue(objColor) * 0.7);
     p.strokeWeight(2);
     p.ellipse(200, objectY, 30, 30);
     

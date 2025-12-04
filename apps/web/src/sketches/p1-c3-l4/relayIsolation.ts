@@ -33,9 +33,9 @@ export const relayIsolationSketch = (p: p5): void => {
     // Isolation line (visual separator)
     p.stroke(100, 100, 255);
     p.strokeWeight(2);
-    p.drawingContext.setLineDash([5, 5]);
+    (p.drawingContext as CanvasRenderingContext2D).setLineDash([5, 5]);
     p.line(200, 50, 200, 250);
-    p.drawingContext.setLineDash([]);
+    (p.drawingContext as CanvasRenderingContext2D).setLineDash([]);
     
     p.fill(100, 100, 255);
     p.noStroke();
@@ -92,7 +92,7 @@ export const relayIsolationSketch = (p: p5): void => {
     
     // Relay coil
     p.noFill();
-    p.stroke(coilEnergized ? p.color(100, 200, 255) : 150);
+    p.stroke(coilEnergized ? p.color(100, 200, 255) : p.color(150));
     p.strokeWeight(2);
     for (let i = 0; i < 3; i++) {
       p.arc(155, 110 - i * 12, 20, 12, p.PI, 0);
@@ -144,7 +144,7 @@ export const relayIsolationSketch = (p: p5): void => {
     p.text('120V', 360, 165);
     
     // Wire from AC to relay contact
-    p.stroke(contactClosed ? p.color(255, 200, 50) : 150);
+    p.stroke(contactClosed ? p.color(255, 200, 50) : p.color(150));
     p.strokeWeight(2);
     p.line(345, 140, 280, 140);
     p.line(280, 140, 280, 110);
@@ -156,7 +156,7 @@ export const relayIsolationSketch = (p: p5): void => {
     p.point(240, 90);
     
     // Armature
-    p.stroke(contactClosed ? p.color(100, 255, 100) : 150);
+    p.stroke(contactClosed ? p.color(100, 255, 100) : p.color(150));
     p.strokeWeight(2);
     const armAngle = p.lerp(-0.3, 0, armaturePos);
     p.push();
@@ -166,7 +166,7 @@ export const relayIsolationSketch = (p: p5): void => {
     p.pop();
     
     // Wire from contact to lamp
-    p.stroke(contactClosed ? p.color(255, 200, 50) : 150);
+    p.stroke(contactClosed ? p.color(255, 200, 50) : p.color(150));
     p.strokeWeight(2);
     p.line(240, 90, 240, 100);
     p.line(240, 100, 260, 100);
@@ -195,7 +195,7 @@ export const relayIsolationSketch = (p: p5): void => {
     }
     
     // Wire from lamp to AC return
-    p.stroke(contactClosed ? p.color(255, 200, 50) : 150);
+    p.stroke(contactClosed ? p.color(255, 200, 50) : p.color(150));
     p.strokeWeight(2);
     p.line(260, 202, 260, 220);
     p.line(260, 220, 360, 220);

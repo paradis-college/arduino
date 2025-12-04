@@ -136,9 +136,9 @@ export const arduinoNapSketch = (p: p5) => {
     
     p.fill(150);
     p.text('digitalWrite(LED, ' + (ledOn ? 'HIGH' : 'LOW') + ');', 60, 245);
-    p.fill(isAwake ? 150 : '#f44336');
+    p.fill(isAwake ? '#969696' : '#f44336');
     p.text('delay(' + napDuration + '); // ← ', 60, 260);
-    p.fill(isAwake ? 150 : '#ff9800');
+    p.fill(isAwake ? '#969696' : '#ff9800');
     p.text(isAwake ? '' : 'SLEEPING!', 185, 260);
 
     // Instruction

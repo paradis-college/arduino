@@ -53,7 +53,7 @@ export const rgbMixingSketch = (p: p5) => {
       { y: 240, value: blueValue, color: [50, 50, 255], label: 'Blue' },
     ];
 
-    sliders.forEach((slider, index) => {
+    sliders.forEach((slider) => {
       // Slider track
       p.fill(60);
       p.noStroke();
@@ -97,9 +97,6 @@ export const rgbMixingSketch = (p: p5) => {
   };
 
   p.mousePressed = () => {
-    const sliderX = 60;
-    const sliderW = 280;
-
     if (p.mouseY >= 167 && p.mouseY <= 188) dragging = 'red';
     else if (p.mouseY >= 202 && p.mouseY <= 223) dragging = 'green';
     else if (p.mouseY >= 237 && p.mouseY <= 258) dragging = 'blue';
