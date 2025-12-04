@@ -85,15 +85,28 @@ import { vibrationWiringSketch } from './p2-c3-l3/vibrationWiring';
 import { basicBlinkSketch } from './p3-c1-l1/basicBlink';
 import { delaySliderSketch } from './p3-c1-l1/delaySlider';
 import { ledSyncSketch } from './p3-c1-l1/ledSync';
+import { arduinoBoardSketch } from './p3-c1-l1/arduinoBoard';
+import { setupLoopBoxesSketch } from './p3-c1-l1/setupLoopBoxes';
+import { uploadButtonSketch } from './p3-c1-l1/uploadButton';
 import { multiLedChaseSketch } from './p3-c1-l2/multiLedChase';
 import { simultaneousBlinkSketch } from './p3-c1-l2/simultaneousBlink';
+import { threeLedSetupSketch } from './p3-c1-l2/threeLedSetup';
+import { chasePatternSketch } from './p3-c1-l2/chasePattern';
 import { pwmFadeSketch } from './p3-c1-l3/pwmFade';
 import { ledBrightnessSketch } from './p3-c1-l3/ledBrightness';
 import { rgbMixingSketch } from './p3-c1-l3/rgbMixing';
+import { brightnessScaleSketch } from './p3-c1-l3/brightnessScale';
+import { breathingLightSketch } from './p3-c1-l3/breathingLight';
 import { delayTimingSketch } from './p3-c1-l4/delayTiming';
 import { frozenTaskSketch } from './p3-c1-l4/frozenTask';
+import { arduinoNapSketch } from './p3-c1-l4/arduinoNap';
+import { missedButtonSketch } from './p3-c1-l4/missedButton';
+import { clockMethodSketch } from './p3-c1-l4/clockMethod';
 import { setupVsLoopSketch } from './p3-c1-l5/setupVsLoop';
 import { codeHighlightSketch } from './p3-c1-l5/codeHighlight';
+import { setupOnceSketch } from './p3-c1-l5/setupOnce';
+import { loopForeverSketch } from './p3-c1-l5/loopForever';
+import { programFlowSketch } from './p3-c1-l5/programFlow';
 import { pushButtonSketch } from './p3-c3-l1/pushButton';
 import { ledButtonStateSketch } from './p3-c3-l1/ledButtonState';
 import { potentiometerSketch } from './p3-c3-l2/potentiometer';
@@ -229,15 +242,28 @@ export const sketchRegistry: Record<string, SketchFunction> = {
   'p3-c1-l1-basic-blink': basicBlinkSketch,
   'p3-c1-l1-delay-slider': delaySliderSketch,
   'p3-c1-l1-led-sync': ledSyncSketch,
+  'p3-c1-l1-arduino-board': arduinoBoardSketch,
+  'p3-c1-l1-setup-loop-boxes': setupLoopBoxesSketch,
+  'p3-c1-l1-upload-button': uploadButtonSketch,
   'p3-c1-l2-multi-led': multiLedChaseSketch,
   'p3-c1-l2-simultaneous-blink': simultaneousBlinkSketch,
+  'p3-c1-l2-three-led-setup': threeLedSetupSketch,
+  'p3-c1-l2-chase-pattern': chasePatternSketch,
   'p3-c1-l3-pwm-fade': pwmFadeSketch,
   'p3-c1-l3-led-brightness': ledBrightnessSketch,
   'p3-c1-l3-rgb-mixing': rgbMixingSketch,
+  'p3-c1-l3-brightness-scale': brightnessScaleSketch,
+  'p3-c1-l3-breathing-light': breathingLightSketch,
   'p3-c1-l4-delay': delayTimingSketch,
   'p3-c1-l4-frozen-task': frozenTaskSketch,
+  'p3-c1-l4-arduino-nap': arduinoNapSketch,
+  'p3-c1-l4-missed-button': missedButtonSketch,
+  'p3-c1-l4-clock-method': clockMethodSketch,
   'p3-c1-l5-setup-loop': setupVsLoopSketch,
   'p3-c1-l5-code-highlight': codeHighlightSketch,
+  'p3-c1-l5-setup-once': setupOnceSketch,
+  'p3-c1-l5-loop-forever': loopForeverSketch,
+  'p3-c1-l5-program-flow': programFlowSketch,
   'p3-c3-l1-push-button': pushButtonSketch,
   'p3-c3-l1-led-button-state': ledButtonStateSketch,
   'p3-c3-l2-potentiometer': potentiometerSketch,

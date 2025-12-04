@@ -1,0 +1,284 @@
+---
+id: p3-c1-l3-pwm-led-fade
+title: "Fă Luminile să Strălucească ca prin Magie! ✨"
+course: "embedded-programming-basics"
+difficulty: "beginner"
+tags: ["PWM", "analogWrite", "fade", "luminozitate"]
+estimatedMinutes: 15
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Fă Luminile să Strălucească ca prin Magie! ✨
+
+În loc de doar APRINS și STINS, acum vom face luminile să devină mai strălucitoare și mai slabe - ca un răsărit de soare! 🌅
+
+<LessonChapter title="Ce Vom Face Azi" id="ce-vom-face">
+
+Azi vei:
+- 🌟 Să faci o lumină să devină **mai strălucitoare** încet
+- 🌙 Să faci o lumină să devină **mai slabă** încet
+- 💫 Să creezi un efect de **lumină care respiră**!
+
+<InfoBox type="info">
+  **Hei copii!** Imaginează-ți că lumina ta e ca o pisicuță somnoroasă - își deschide ochii încet (devine strălucitoare), apoi îi închide încet (devine slabă)! 😺
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Urmărește Strălucirea! 🌈" id="urmareste-stralucirea">
+
+<P5SketchEmbed
+  id="pwm-fade-animation"
+  sketchId="p3-c1-l3-pwm-fade"
+  stepNumber={1}
+  title="Lumina Strălucitoare!"
+  alt="LED aprinzându-se și stingându-se"
+>
+  👀 **Privește!** Urmărește cum lumina devine încet mai strălucitoare, apoi încet mai slabă. E ca și cum lumina respiră! Mută glisorul pentru diferite nivele de luminozitate!
+</P5SketchEmbed>
+
+<InfoBox type="tip">
+  **Încearcă!** Mută glisorul la stânga pentru STINS, la dreapta pentru SUPER STRĂLUCITOR, sau undeva la mijloc pentru o strălucire confortabilă! 💡
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Nu Doar APRINS și STINS! 🎚️" id="nu-doar-aprins-stins">
+
+Înainte, aveam doar două alegeri:
+- `HIGH` = COMPLET APRINS (100%)
+- `LOW` = COMPLET STINS (0%)
+
+<P5SketchEmbed
+  id="brightness-scale-animation"
+  sketchId="p3-c1-l3-brightness-scale"
+  stepNumber={2}
+  title="Acum Avem 256 de Nivele!"
+  alt="Scară de luminozitate de la 0 la 255"
+>
+  Acum putem alege ORICE luminozitate de la **0** (stins) la **255** (super strălucitor)! Trage glisorul ca să vezi toate cele 256 de setări diferite!
+</P5SketchEmbed>
+
+### Scala Magică de Numere 🔢
+
+| Număr | Cât de Strălucitor? | Ca... |
+|-------|---------------------|-------|
+| **0** | Stins! | 🌑 Noapte |
+| **50** | Puțin | 🌒 Lumină de lună |
+| **127** | Pe jumătate | 🌓 Zi înnorată |
+| **200** | Destul de strălucitor | 🌤️ Însorit |
+| **255** | SUPER STRĂLUCITOR! | ☀️ Te uiți la soare! |
+
+<InfoBox type="tip">
+  **Gândește-te ca la:** Butonul de volum de la radio! Poți să-l faci încet, mediu sau TARE! 🔊
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="ro/p3-c1-l3-pwm-led-fade" label="Pot alege orice luminozitate de la 0 la 255! 🔢" />
+
+</LessonChapter>
+
+<LessonChapter title="Noul Cuvânt Magic: analogWrite! ✨" id="analogwrite">
+
+În loc de `digitalWrite`, folosim `analogWrite`!
+
+```cpp
+analogWrite(pin, luminozitate);
+```
+
+- **pin** = Care lumină (folosește pinii cu simbolul ~: 3, 5, 6, 9, 10, 11)
+- **luminozitate** = Alege un număr de la 0 la 255
+
+### Încearcă Acestea!
+
+```cpp
+analogWrite(9, 0);    // Lumina e STINSĂ
+analogWrite(9, 50);   // Lumina e SLABĂ (ca o lumină de noapte)
+analogWrite(9, 127);  // Lumina e MEDIE
+analogWrite(9, 255);  // Lumina e SUPER STRĂLUCITOARE!
+```
+
+<InfoBox type="warning">
+  **Important!** Doar unii pini funcționează cu `analogWrite`. Caută simbolul ~ pe Arduino lângă pinii **3, 5, 6, 9, 10 și 11**!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Fă o Lumină care Respiră! 💫" id="lumina-respira">
+
+Hai să facem lumina să se aprindă și să se stingă încet - ca și cum respiră!
+
+<P5SketchEmbed
+  id="breathing-light-animation"
+  sketchId="p3-c1-l3-breathing-light"
+  stepNumber={3}
+  title="Privește Cum Respiră!"
+  alt="LED animație de respirație"
+>
+  Lumina devine încet mai strălucitoare... apoi încet mai slabă... iar și iar! E ca și cum lumina ia respirații lente! 😮‍💨
+</P5SketchEmbed>
+
+### Fade IN (0 → 255) - Devine Mai Strălucitoare! ☀️
+
+```cpp
+for (int i = 0; i <= 255; i = i + 5) {
+  analogWrite(9, i);
+  delay(30);
+}
+```
+
+Asta face `i` să meargă de la 0 la 255, pas cu pas, făcând lumina mai strălucitoare!
+
+### Fade OUT (255 → 0) - Devine Mai Slabă! 🌙
+
+```cpp
+for (int i = 255; i >= 0; i = i - 5) {
+  analogWrite(9, i);
+  delay(30);
+}
+```
+
+Asta face `i` să meargă de la 255 înapoi la 0, făcând lumina mai slabă!
+
+<InfoBox type="tip">
+  **Nu-ți face griji pentru bucla `for` încă!** Doar să știi că face numerele să crească (fade in) sau să scadă (fade out) automat! 🔄
+</InfoBox>
+
+<Checkpoint id="checkpoint-2" lessonKey="ro/p3-c1-l3-pwm-led-fade" label="Pot să fac o lumină care respiră! 💫" />
+
+</LessonChapter>
+
+<LessonChapter title="Programul Complet! 🎉" id="programul-complet">
+
+Iată totul împreună:
+
+```cpp
+void setup() {
+  pinMode(9, OUTPUT);
+}
+
+void loop() {
+  // Fade IN - devine mai strălucitor!
+  for (int i = 0; i <= 255; i = i + 5) {
+    analogWrite(9, i);
+    delay(30);
+  }
+  
+  // Fade OUT - devine mai slab!
+  for (int i = 255; i >= 0; i = i - 5) {
+    analogWrite(9, i);
+    delay(30);
+  }
+}
+```
+
+<InfoBox type="tip">
+  **Încarcă-l!** Privește cum LED-ul tău respiră încet! 😮‍💨✨
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Experimente Distractive! 🧪" id="experimente">
+
+<P5SketchEmbed
+  id="rgb-mixing-animation"
+  sketchId="p3-c1-l3-rgb-mixing"
+  stepNumber={3}
+  title="Amestecă-ți Propriile Culori! 🎨"
+  alt="Glisor pentru amestecarea culorilor RGB"
+>
+  👀 **Fii un artist!** Mută glisoarele de ROȘU, VERDE și ALBASTRU ca să amesteci ORICE culoare vrei! Poți face mov? Portocaliu? Roz? 🌈
+</P5SketchEmbed>
+
+### Respiră MAI REPEDE! 🏃
+
+Schimbă `delay(30)` cu `delay(10)`:
+```cpp
+delay(10);
+```
+Acum respiră repede ca după alergare!
+
+### Respiră MAI ÎNCET! 🧘
+
+Schimbă `delay(30)` cu `delay(50)`:
+```cpp
+delay(50);
+```
+Frumos și relaxat, ca respirația de yoga!
+
+### Fă o LUMÂNARE să Pâlpâie! 🕯️
+
+Luminozitate aleatorie pentru un efect de lumânare spooksy:
+```cpp
+void loop() {
+  analogWrite(9, random(100, 255));
+  delay(100);
+}
+```
+
+<InfoBox type="tip">
+  **Provocare:** Poți să faci un pattern de bătaie de inimă? (rapid strălucitor, rapid slab, pauză, repetă!) ❤️
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test! 🎯" id="testeaza-cunostintele">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="ro/p3-c1-l3-pwm-led-fade"
+  question="Ce face analogWrite(9, 127)?"
+  options={[
+    { id: "a", text: "Stinge complet lumina" },
+    { id: "b", text: "Face lumina MEDIE ca luminozitate (circa jumătate)" },
+    { id: "c", text: "Face lumina SUPER STRĂLUCITOARE" },
+    { id: "d", text: "Face lumina să clipească" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="ro/p3-c1-l3-pwm-led-fade"
+  question="Care e numărul cel mai STRĂLUCITOR pe care îl putem folosi?"
+  options={[
+    { id: "a", text: "100 - e mult!" },
+    { id: "b", text: "1000 - mai mare e mai bine!" },
+    { id: "c", text: "255 - maximul!" },
+    { id: "d", text: "50 - e destul" }
+  ]}
+  correctIndex={2}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-3"
+  lessonKey="ro/p3-c1-l3-pwm-led-fade"
+  question="Care pini pot folosi analogWrite? (Indiciu: caută ~)"
+  options={[
+    { id: "a", text: "Doar pinul 13" },
+    { id: "b", text: "Pinii 3, 5, 6, 9, 10, 11 (cei cu ~)" },
+    { id: "c", text: "Toți pinii funcționează la fel" },
+    { id: "d", text: "Doar pinii 1 și 2" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Ai Reușit! 🏆" id="rezumat">
+
+### Ce ai învățat azi:
+
+- ✅ **analogWrite** ne lasă să controlăm luminozitatea (nu doar APRINS/STINS!)
+- ✅ Numerele merg de la **0** (stins) la **255** (super strălucitor)
+- ✅ Folosește pinii cu simbolul **~** (3, 5, 6, 9, 10, 11)
+- ✅ Putem face luminile să aibă **fade in** și **fade out**
+- ✅ Schimbând **delay** le face mai rapide sau mai lente
+
+<InfoBox type="tip">
+  **Bravo!** 🌟 Ai învățat cum să controlezi luminozitatea ca un profesionist! În lecția următoare, vom învăța despre timing și de ce uneori NU vrem să folosim delay! ⏰
+</InfoBox>
+
+<Checkpoint id="checkpoint-3" lessonKey="ro/p3-c1-l3-pwm-led-fade" label="Pot să fac luminile să strălucească și să respire! ✨" />
+
+</LessonChapter>

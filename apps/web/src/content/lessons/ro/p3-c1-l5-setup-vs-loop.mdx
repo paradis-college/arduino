@@ -1,0 +1,286 @@
+---
+id: p3-c1-l5-setup-vs-loop
+title: "Cele Două Cutii Magice! 📦📦"
+course: "embedded-programming-basics"
+difficulty: "beginner"
+tags: ["setup", "loop", "structură", "baze"]
+estimatedMinutes: 15
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Cele Două Cutii Magice! 📦📦
+
+Fiecare program Arduino are DOUĂ cutii speciale - una pentru "pregătire" și una pentru "fă-o iar și iar!" Hai să le învățăm!
+
+<LessonChapter title="Ce Vom Face Azi" id="ce-vom-face">
+
+Azi vei:
+- 📦 Învăța despre cutia **setup()** (rulează O DATĂ!)
+- 🔄 Învăța despre cutia **loop()** (rulează MEREU!)
+- ✨ Înțelege unde să pui codul tău
+
+<InfoBox type="info">
+  **Hei copii!** Imaginează-ți că ești un robot. Mai întâi te trezești și te întinzi (asta e setup). Apoi îți faci mișcările de dans iar și iar (asta e loop)! 🤖💃
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Urmărește Cum Funcționează! 🎬" id="urmareste-cum-functioneaza">
+
+<P5SketchEmbed
+  id="setup-loop-animation"
+  sketchId="p3-c1-l5-setup-loop"
+  stepNumber={1}
+  title="setup() apoi loop() mereu!"
+  alt="Animație arătând setup rulează o dată apoi loop se repetă"
+>
+  👀 **Privește!** Vezi cum codul trece prin setup() O DATĂ, apoi prin loop() iar și iar și iar! Ca o pistă de curse care nu se termină niciodată! 🏎️
+</P5SketchEmbed>
+
+<InfoBox type="tip">
+  **Numără cu mine!** setup() rulează: O DATĂ! loop() rulează: 1, 2, 3, 4, 5... mereu! ♾️
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Cutia 1: setup() - Pregătirea! 🎬" id="cutia-setup">
+
+<P5SketchEmbed
+  id="setup-once-animation"
+  sketchId="p3-c1-l5-setup-once"
+  stepNumber={1}
+  title="setup() Rulează O DATĂ!"
+  alt="Funcția setup() rulând o dată"
+>
+  **setup()** e ca pregătirea de dimineață - o faci O SINGURĂ DATĂ! Îți pui pantofii, iei ghiozdanul, mănânci micul dejun - dar doar o dată! Apasă pentru a relua!
+</P5SketchEmbed>
+
+### Ce punem în setup()?
+
+Lucruri pe care trebuie să le faci **O SINGURĂ DATĂ**:
+
+```cpp
+void setup() {
+  pinMode(13, OUTPUT);     // Spune-i pinului 13 că e output - O DATĂ!
+  Serial.begin(9600);      // Începe să vorbești cu computerul - O DATĂ!
+  digitalWrite(13, HIGH);  // Aprinde lumina la start - O DATĂ!
+}
+```
+
+### Exemple din Viața Reală 🏠
+
+| În Viața Reală | În Arduino |
+|----------------|------------|
+| 👟 Îți pui pantofii (o dată) | pinMode(13, OUTPUT) |
+| 📱 Pornești telefonul (o dată) | Serial.begin(9600) |
+| 🎒 Îți faci ghiozdanul (o dată) | Setează valorile de start |
+
+<InfoBox type="tip">
+  **Ține minte:** setup() e ca trezitul și pregătitul. O faci doar O DATĂ înainte să înceapă ziua! ☀️
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="ro/p3-c1-l5-setup-vs-loop" label="Am înțeles că setup() rulează O DATĂ! 1️⃣" />
+
+</LessonChapter>
+
+<LessonChapter title="Cutia 2: loop() - Iar și Iar! 🔄" id="cutia-loop">
+
+<P5SketchEmbed
+  id="loop-forever-animation"
+  sketchId="p3-c1-l5-loop-forever"
+  stepNumber={2}
+  title="loop() Rulează MEREU!"
+  alt="Funcția loop() rulând mereu"
+>
+  **loop()** e ca respiratul - o faci iar și iar fără să te oprești! Înăuntru, afară, înăuntru, afară... mereu!
+</P5SketchEmbed>
+
+### Ce punem în loop()?
+
+Lucruri care trebuie să se întâmple **IAR ȘI IAR**:
+
+```cpp
+void loop() {
+  digitalWrite(13, HIGH);  // Lumină APRINSĂ
+  delay(500);              // Așteaptă
+  digitalWrite(13, LOW);   // Lumină STINSĂ
+  delay(500);              // Așteaptă
+  // Apoi începe din nou de sus! 🔄
+}
+```
+
+### Exemple din Viața Reală 🔄
+
+| În Viața Reală | În Arduino |
+|----------------|------------|
+| 💨 Respirat (iar și iar) | Clipește o lumină |
+| ❤️ Bătaia inimii (iar și iar) | Verifică un buton |
+| 🚶 Pași când mergi (iar și iar) | Citește un senzor |
+
+<InfoBox type="tip">
+  **Ține minte:** loop() e ca respiratul sau bătaia inimii - se întâmplă iar și iar fără să te gândești! 💓
+</InfoBox>
+
+<Checkpoint id="checkpoint-2" lessonKey="ro/p3-c1-l5-setup-vs-loop" label="Am înțeles că loop() rulează MEREU! 🔄" />
+
+</LessonChapter>
+
+<LessonChapter title="Imaginea Completă! 🎨" id="imaginea-completa">
+
+<P5SketchEmbed
+  id="code-highlight-animation"
+  sketchId="p3-c1-l5-code-highlight"
+  stepNumber={2}
+  title="Privește Cum Rulează Codul! 💻"
+  alt="Evidențierea codului arătând fluxul de execuție"
+>
+  👀 **Urmărește linia galbenă!** Vezi cum computerul citește codul tău linie cu linie. Mai întâi face setup(), apoi trece prin loop() iar și iar și iar! 🔄
+</P5SketchEmbed>
+
+Iată cum funcționează FIECARE program Arduino:
+
+```
+1. Arduino pornește! ⚡
+2. setup() rulează O DATĂ 📦
+3. loop() începe să ruleze... 🔄
+   ↓ face lucruri
+   ↓ face lucruri
+   ↓ face lucruri
+   ← se întoarce la începutul loop()
+4. loop() rulează MEREU! ♾️
+```
+
+### Un Program Complet:
+
+```cpp
+void setup() {
+  // Asta rulează O DATĂ la start!
+  pinMode(13, OUTPUT);
+  Serial.begin(9600);
+  Serial.println("Arduino s-a trezit!");
+}
+
+void loop() {
+  // Asta rulează MEREU!
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+  delay(1000);
+  // Acum ne întoarcem la începutul loop()!
+}
+```
+
+<P5SketchEmbed
+  id="program-flow-animation"
+  sketchId="p3-c1-l5-program-flow"
+  stepNumber={3}
+  title="Urmărește Fluxul!"
+  alt="Vizualizarea fluxului programului"
+>
+  Pornire → setup() rulează → loop() rulează → loop() rulează → loop() rulează → loop() rulează... MEREU! 🔄🔄🔄
+</P5SketchEmbed>
+
+</LessonChapter>
+
+<LessonChapter title="Greșeli Comune! ❌→✅" id="greseli-comune">
+
+### Greșeala 1: pinMode în loop() ❌
+
+```cpp
+// GREȘIT! ❌
+void loop() {
+  pinMode(13, OUTPUT);  // NU! Asta rulează iar și iar!
+  digitalWrite(13, HIGH);
+}
+
+// CORECT! ✅
+void setup() {
+  pinMode(13, OUTPUT);  // DA! Doar o dată!
+}
+void loop() {
+  digitalWrite(13, HIGH);
+}
+```
+
+### Greșeala 2: Mesaje de o singură dată în loop() ❌
+
+```cpp
+// GREȘIT! ❌ - Asta printează "Pornesc..." MEREU!
+void loop() {
+  Serial.println("Pornesc...");
+}
+
+// CORECT! ✅ - Printează o dată în setup!
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Pornesc...");
+}
+```
+
+<InfoBox type="warning">
+  **Întreabă-te:** "Trebuie asta să se întâmple o dată sau iar și iar?" Asta îți spune ce cutie să folosești! 🤔
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test! 🎯" id="testeaza-cunostintele">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="ro/p3-c1-l5-setup-vs-loop"
+  question="De câte ori rulează setup()?"
+  options={[
+    { id: "a", text: "Mereu și mereu!" },
+    { id: "b", text: "Doar O DATĂ când Arduino pornește! 1️⃣" },
+    { id: "c", text: "De două ori - o dată pentru fiecare pin" },
+    { id: "d", text: "Nu rulează niciodată" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="ro/p3-c1-l5-setup-vs-loop"
+  question="Unde ar trebui să fie pinMode()?"
+  options={[
+    { id: "a", text: "În loop() ca să ruleze de multe ori" },
+    { id: "b", text: "În setup() pentru că trebuie să o facem doar O DATĂ!" },
+    { id: "c", text: "Înainte de setup() chiar sus" },
+    { id: "d", text: "Nu contează unde" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-3"
+  lessonKey="ro/p3-c1-l5-setup-vs-loop"
+  question="Cu ce seamănă loop() în viața reală?"
+  options={[
+    { id: "a", text: "Îți pui pantofii (o dată)" },
+    { id: "b", text: "Respiratul - înăuntru, afară, înăuntru, afară, mereu! 💨" },
+    { id: "c", text: "Te trezești dimineața" },
+    { id: "d", text: "Mănânci micul dejun" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Ai Reușit! 🏆" id="rezumat">
+
+### Ce ai învățat azi:
+
+- ✅ **setup()** rulează **O DATĂ** - pentru pregătire!
+- ✅ **loop()** rulează **MEREU** - pentru acțiunea principală!
+- ✅ Pune **pinMode()** în setup (se face doar o dată!)
+- ✅ Pune **codul de clipire** în loop (trebuie să se repete!)
+- ✅ Întreabă-te: "O dată sau mereu?" 🤔
+
+<InfoBox type="tip">
+  **UIMITOR!** 🌟 Acum înțelegi inima fiecărui program Arduino! Ai terminat cursul de baze Arduino! Acum poți clipi lumini, controla luminozitatea, înțelege temporizarea, și știi cum sunt structurate programele! Ești oficial un programator Arduino! 🎉👨‍💻👩‍💻
+</InfoBox>
+
+<Checkpoint id="checkpoint-3" lessonKey="ro/p3-c1-l5-setup-vs-loop" label="Am terminat cursul de baze Arduino! 🎓🎉" />
+
+</LessonChapter>

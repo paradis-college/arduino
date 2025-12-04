@@ -36,12 +36,6 @@ export async function loadMDX(slug: string, language: Language): Promise<MDXModu
     // 2. Generating this mapping at build time via a Vite plugin
     // 3. Using a manifest file that's auto-generated from the content directory
     const modules: Record<string, () => Promise<MDXModule>> = {
-      // Existing lessons
-      'ro/basics-blink': () => import('@/content/lessons/ro/basics-blink.mdx'),
-      'ro/pwm-led': () => import('@/content/lessons/ro/pwm-led.mdx'),
-      'en/basics-blink': () => import('@/content/lessons/en/basics-blink.mdx'),
-      'en/pwm-led': () => import('@/content/lessons/en/pwm-led.mdx'),
-
       // Path 1: Electronic Engineering - English
       'en/p1-c1-l1-leds-resistors': () => import('@/content/lessons/en/p1-c1-l1-leds-resistors.mdx'),
       'en/p1-c1-l2-buttons-switches': () => import('@/content/lessons/en/p1-c1-l2-buttons-switches.mdx'),
@@ -81,6 +75,13 @@ export async function loadMDX(slug: string, language: Language): Promise<MDXModu
       'en/p3-c4-l2-buzzer-tones': () => import('@/content/lessons/en/p3-c4-l2-buzzer-tones.mdx'),
       'en/p3-c4-l3-dc-motor-transistor': () => import('@/content/lessons/en/p3-c4-l3-dc-motor-transistor.mdx'),
       'en/p3-c4-l4-servo-motor-control': () => import('@/content/lessons/en/p3-c4-l4-servo-motor-control.mdx'),
+
+      // Path 3: Arduino Basics - Romanian
+      'ro/p3-c1-l1-basic-led-blink': () => import('@/content/lessons/ro/p3-c1-l1-basic-led-blink.mdx'),
+      'ro/p3-c1-l2-multi-led-blink': () => import('@/content/lessons/ro/p3-c1-l2-multi-led-blink.mdx'),
+      'ro/p3-c1-l3-pwm-led-fade': () => import('@/content/lessons/ro/p3-c1-l3-pwm-led-fade.mdx'),
+      'ro/p3-c1-l4-understanding-delay': () => import('@/content/lessons/ro/p3-c1-l4-understanding-delay.mdx'),
+      'ro/p3-c1-l5-setup-vs-loop': () => import('@/content/lessons/ro/p3-c1-l5-setup-vs-loop.mdx'),
 
       // Path 4: Arduino Advanced Projects - English
       'en/p4-c1-l1-traffic-light-controller': () => import('@/content/lessons/en/p4-c1-l1-traffic-light-controller.mdx'),
