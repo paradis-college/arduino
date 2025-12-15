@@ -37,7 +37,7 @@ When you build the application with `npm run build` (from the `apps/web` directo
    npm run build
    ```
 
-2. Upload the contents of `apps/web/dist/` to your Apache web server's document root (e.g., `/var/www/html/` or `/home/yourdomain/public_html/`)
+2. Upload the contents of `dist/` to your Apache web server's document root (e.g., `/var/www/html/` or `/home/yourdomain/public_html/`)
 
 3. Verify that `.htaccess` is in the root directory alongside `index.html`
 
