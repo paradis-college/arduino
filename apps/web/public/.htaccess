@@ -6,9 +6,9 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   
-  # If deploying to a subdirectory, uncomment and adjust the line below
+  # If deploying to a subdirectory, uncomment and set the line below to your subdirectory path
   # For example, if deployed to /arduino/, use: RewriteBase /arduino/
-  # RewriteBase /
+  # RewriteBase /your-subdirectory/
   
   # Handle Authorization header for API requests (if needed in the future)
   RewriteCond %{HTTP:Authorization} .
