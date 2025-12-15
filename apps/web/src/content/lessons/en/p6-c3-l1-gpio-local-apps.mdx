@@ -127,7 +127,7 @@ sensor = MCP3008(channel=0)
 with open("sensor_data.csv", "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(["timestamp", "value"])
-    
+
     while True:
         timestamp = datetime.now().isoformat()
         value = sensor.value

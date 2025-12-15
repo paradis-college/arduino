@@ -9,37 +9,37 @@ export const diodeDirectionSketch = (p: p5): void => {
   let dotPos = 0;
   let ledGlow = 0;
   let lastToggle = 0;
-  
+
   p.setup = () => {
     p.createCanvas(400, 250);
     p.textAlign(p.CENTER, p.CENTER);
   };
-  
+
   p.draw = () => {
     p.background(30, 30, 40);
-    
+
     // Auto-toggle direction every 3 seconds
     if (p.millis() - lastToggle > 3000) {
       isForward = !isForward;
       lastToggle = p.millis();
       dotPos = 0;
     }
-    
+
     // Draw title
     p.fill(200);
     p.textSize(14);
     p.text(isForward ? 'FORWARD BIAS - Current Flows' : 'REVERSE BIAS - Current Blocked', p.width / 2, 20);
-    
+
     // Draw circuit wire
     p.stroke(100);
     p.strokeWeight(3);
     p.line(50, 125, 150, 125);
     p.line(250, 125, 350, 125);
-    
+
     // Draw diode symbol
     p.strokeWeight(2);
     p.stroke(150);
-    
+
     // Triangle (anode side)
     p.fill(60);
     if (isForward) {
@@ -59,7 +59,7 @@ export const diodeDirectionSketch = (p: p5): void => {
       p.noFill();
       p.arc(200, 125, 60, 60, p.HALF_PI, -p.HALF_PI);
     }
-    
+
     // Draw LED light rays when forward
     if (isForward) {
       ledGlow = p.min(ledGlow + 5, 255);
@@ -73,7 +73,7 @@ export const diodeDirectionSketch = (p: p5): void => {
         const y2 = 125 + p.sin(angle) * 35;
         p.line(x1, y1, x2, y2);
       }
-      
+
       // LED glow effect
       p.noStroke();
       p.fill(255, 200, 0, ledGlow * 0.3);
@@ -81,7 +81,7 @@ export const diodeDirectionSketch = (p: p5): void => {
     } else {
       ledGlow = p.max(ledGlow - 10, 0);
     }
-    
+
     // Draw moving current dots
     p.noStroke();
     if (isForward) {
@@ -104,7 +104,7 @@ export const diodeDirectionSketch = (p: p5): void => {
         p.fill(0, 255, 255);
         p.ellipse(bounceX, 125, 8, 8);
       }
-      
+
       // Show blocked symbol
       p.fill(255, 50, 50);
       p.textSize(20);
@@ -112,19 +112,19 @@ export const diodeDirectionSketch = (p: p5): void => {
       p.textSize(12);
       p.text('BLOCKED', 200, 190);
     }
-    
+
     // Labels
     p.fill(150);
     p.textSize(11);
     p.text('Anode (+)', isForward ? 150 : 250, 170);
     p.text('Cathode (-)', isForward ? 250 : 150, 170);
-    
+
     // Click instruction
     p.fill(100);
     p.textSize(10);
     p.text('Click to toggle direction', p.width / 2, p.height - 15);
   };
-  
+
   p.mousePressed = () => {
     if (p.mouseX > 0 && p.mouseX < p.width && p.mouseY > 0 && p.mouseY < p.height) {
       isForward = !isForward;

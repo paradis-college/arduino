@@ -121,12 +121,12 @@ const int WET_THRESHOLD = 400;
 ```cpp
 void loop() {
   int moisture = analogRead(MOISTURE_PIN);
-  
+
   // Turn off all LEDs first
   digitalWrite(LED_RED, LOW);
   digitalWrite(LED_YELLOW, LOW);
   digitalWrite(LED_GREEN, LOW);
-  
+
   if (moisture > DRY_THRESHOLD) {
     // Too dry - needs water!
     digitalWrite(LED_RED, HIGH);
@@ -140,10 +140,10 @@ void loop() {
     digitalWrite(LED_YELLOW, HIGH);
     Serial.println("😊 Moisture OK");
   }
-  
+
   Serial.print("Raw value: ");
   Serial.println(moisture);
-  
+
   delay(5000);  // Check every 5 seconds
 }
 ```
@@ -157,7 +157,7 @@ void waterPlant() {
   digitalWrite(PUMP_PIN, HIGH);
   delay(3000);  // Water for 3 seconds
   digitalWrite(PUMP_PIN, LOW);
-  
+
   // Wait for water to soak in before next reading
   delay(10000);
 }

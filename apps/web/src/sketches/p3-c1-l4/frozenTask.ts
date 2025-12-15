@@ -32,7 +32,7 @@ export const frozenTaskSketch = (p: p5) => {
     if (!inDelay) {
       task1Progress += 0.5;
       task2Progress += 0.3;
-      
+
       if (task1Progress > 100) {
         inDelay = true;
         delayStart = time;

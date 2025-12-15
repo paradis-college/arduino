@@ -58,13 +58,13 @@ interface ArduinoHomeCardProps {
 export const ArduinoHomeCard: FC<ArduinoHomeCardProps> = ({ language }) => {
   const content = CONTENT[language];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  
+
   // Get lessons from manifest
   const allLessons = getLessonsByLanguage(language);
-  
+
   // Filter beginner-friendly lessons
   const beginnerLessons = allLessons.filter(lesson => lesson.difficulty === 'beginner');
-  
+
   // Popular lessons (for now, just take first lessons - TODO: implement actual popularity tracking)
   const popularLessons = allLessons.slice(0, 2);
 
@@ -143,7 +143,7 @@ export const ArduinoHomeCard: FC<ArduinoHomeCardProps> = ({ language }) => {
           <h2 className="text-2xl font-bold text-text">
             {content.beginnerFriendly}
           </h2>
-          <Link 
+          <Link
             to={`/${language}/courses`}
             className="text-primary hover:text-primary-hover font-medium transition-colors"
           >
@@ -198,7 +198,7 @@ export const ArduinoHomeCard: FC<ArduinoHomeCardProps> = ({ language }) => {
           <h2 className="text-2xl font-bold text-text">
             {content.popularLessons}
           </h2>
-          <Link 
+          <Link
             to={`/${language}/courses`}
             className="text-primary hover:text-primary-hover font-medium transition-colors"
           >
@@ -217,7 +217,7 @@ export const ArduinoHomeCard: FC<ArduinoHomeCardProps> = ({ language }) => {
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
                     <Badge variant="default" size="sm">
-                      {lesson.difficulty === 'beginner' 
+                      {lesson.difficulty === 'beginner'
                         ? (language === 'en' ? 'Beginner' : 'Începător')
                         : lesson.difficulty === 'intermediate'
                         ? (language === 'en' ? 'Intermediate' : 'Intermediar')

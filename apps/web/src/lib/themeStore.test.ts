@@ -15,7 +15,7 @@ describe('themeStore', () => {
   describe('getInitialTheme', () => {
     it('returns stored theme from localStorage', () => {
       localStorage.setItem('arduino-theme', 'dark');
-      
+
       expect(getInitialTheme()).toBe('dark');
     });
 
@@ -27,7 +27,7 @@ describe('themeStore', () => {
   describe('saveTheme', () => {
     it('saves theme to localStorage', () => {
       saveTheme('dark');
-      
+
       expect(localStorage.getItem('arduino-theme')).toBe('dark');
     });
   });
@@ -35,14 +35,14 @@ describe('themeStore', () => {
   describe('applyTheme', () => {
     it('applies light theme class', () => {
       applyTheme('light');
-      
+
       expect(document.documentElement.classList.contains('theme-light')).toBe(true);
       expect(document.documentElement.classList.contains('theme-dark')).toBe(false);
     });
 
     it('applies dark theme class', () => {
       applyTheme('dark');
-      
+
       expect(document.documentElement.classList.contains('theme-dark')).toBe(true);
       expect(document.documentElement.classList.contains('theme-light')).toBe(false);
     });
@@ -50,7 +50,7 @@ describe('themeStore', () => {
     it('removes old theme class when switching', () => {
       applyTheme('dark');
       applyTheme('light');
-      
+
       expect(document.documentElement.classList.contains('theme-light')).toBe(true);
       expect(document.documentElement.classList.contains('theme-dark')).toBe(false);
     });

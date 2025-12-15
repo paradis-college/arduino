@@ -82,7 +82,7 @@ export const rgbMixingSketch = (p: p5) => {
 
     // Hex color code
     p.textAlign(p.CENTER, p.CENTER);
-    const hexColor = '#' + 
+    const hexColor = '#' +
       Math.round(redValue).toString(16).padStart(2, '0') +
       Math.round(greenValue).toString(16).padStart(2, '0') +
       Math.round(blueValue).toString(16).padStart(2, '0');

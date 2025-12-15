@@ -44,13 +44,13 @@ export const controlPanelSketch = (p: p5) => {
     p.stroke(80);
     p.strokeWeight(2);
     p.rect(50, 100, 220, 200, 10);
-    
+
     p.fill(200);
     p.noStroke();
     p.textSize(14);
     p.textAlign(p.CENTER, p.CENTER);
     p.text('INPUTS', 160, 85);
-    
+
     // Button 1
     p.fill(button1 ? p.color(100, 200, 100) : p.color(200, 80, 80));
     p.stroke(100);
@@ -60,7 +60,7 @@ export const controlPanelSketch = (p: p5) => {
     p.noStroke();
     p.textSize(10);
     p.text('BTN 1', 100, 180);
-    
+
     // Button 2
     p.fill(button2 ? p.color(100, 200, 100) : p.color(200, 80, 80));
     p.stroke(100);
@@ -69,14 +69,14 @@ export const controlPanelSketch = (p: p5) => {
     p.fill(255);
     p.noStroke();
     p.text('BTN 2', 100, 260);
-    
+
     // Knob
     p.fill(60, 60, 70);
     p.stroke(100);
     p.ellipse(220, 220, 80, 80);
     p.fill(80, 80, 90);
     p.ellipse(220, 220, 60, 60);
-    
+
     const knobAngle = p.map(knobValue, 0, 255, -135, 135);
     p.push();
     p.translate(220, 220);
@@ -85,7 +85,7 @@ export const controlPanelSketch = (p: p5) => {
     p.strokeWeight(3);
     p.line(0, 0, 0, -25);
     p.pop();
-    
+
     p.fill(200);
     p.noStroke();
     p.textSize(10);
@@ -98,13 +98,13 @@ export const controlPanelSketch = (p: p5) => {
     p.stroke(80);
     p.strokeWeight(2);
     p.rect(330, 100, 220, 200, 10);
-    
+
     p.fill(200);
     p.noStroke();
     p.textSize(14);
     p.textAlign(p.CENTER, p.CENTER);
     p.text('OUTPUTS', 440, 85);
-    
+
     // LED 1 (controlled by button 1)
     const led1On = button1;
     if (led1On) {
@@ -122,7 +122,7 @@ export const controlPanelSketch = (p: p5) => {
     p.noStroke();
     p.textSize(10);
     p.text('LED 1', 380, 215);
-    
+
     // LED 2 (controlled by button 2)
     const led2On = button2;
     if (led2On) {
@@ -139,7 +139,7 @@ export const controlPanelSketch = (p: p5) => {
     p.fill(200);
     p.noStroke();
     p.text('LED 2', 380, 295);
-    
+
     // PWM LED (controlled by knob)
     const brightness = knobValue / 255;
     if (brightness > 0.1) {
@@ -165,7 +165,7 @@ export const controlPanelSketch = (p: p5) => {
     p.textSize(12);
     p.textAlign(p.LEFT, p.CENTER);
     p.text('Combined Inputs & Outputs', 50, 50);
-    
+
     p.fill(150);
     p.textSize(10);
     p.textAlign(p.CENTER, p.CENTER);

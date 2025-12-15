@@ -115,7 +115,7 @@ void setup() {
 
 void loop() {
   int touched = digitalRead(TOUCH_PIN);
-  
+
   if (touched == HIGH) {
     digitalWrite(LED_PIN, HIGH);
     Serial.println("Touched!");
@@ -136,13 +136,13 @@ bool lastTouchState = LOW;
 
 void loop() {
   bool currentTouch = digitalRead(TOUCH_PIN);
-  
+
   if (currentTouch == HIGH && lastTouchState == LOW) {
     ledState = !ledState;
     digitalWrite(LED_PIN, ledState);
     delay(50);  // Simple debounce
   }
-  
+
   lastTouchState = currentTouch;
 }
 ```

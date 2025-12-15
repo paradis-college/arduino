@@ -98,7 +98,7 @@ export const PathPage: FC = () => {
         <div className="space-y-4">
           {courses.map((course, index) => {
             const lessons = getLessonsByCourse(course.id, currentLang);
-            
+
             return (
               <Link
                 key={course.id}

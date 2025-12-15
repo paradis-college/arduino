@@ -47,7 +47,7 @@ export const missedButtonSketch = (p: p5) => {
     // LED
     const ledX = 100;
     const ledY = 100;
-    
+
     if (ledOn) {
       p.noStroke();
       for (let i = 4; i > 0; i--) {
@@ -61,7 +61,7 @@ export const missedButtonSketch = (p: p5) => {
     p.stroke(100);
     p.strokeWeight(2);
     p.ellipse(ledX, ledY, 40, 40);
-    
+
     p.fill(200);
     p.noStroke();
     p.textSize(10);
@@ -96,7 +96,7 @@ export const missedButtonSketch = (p: p5) => {
       p.fill(255, 100, 100);
       p.textSize(14);
       p.text('❌ MISSED!', btnX, btnY - 50);
-      
+
       // X mark effect
       p.stroke(255, 100, 100);
       p.strokeWeight(3);
@@ -142,15 +142,15 @@ export const missedButtonSketch = (p: p5) => {
   p.mousePressed = () => {
     const btnX = 300;
     const btnY = 100;
-    
+
     if (p.dist(p.mouseX, p.mouseY, btnX, btnY) < 30) {
       buttonPressed = true;
-      
+
       if (isBlocked) {
         buttonMissed = true;
         missCount++;
       }
-      
+
       setTimeout(() => {
         buttonPressed = false;
       }, 150);

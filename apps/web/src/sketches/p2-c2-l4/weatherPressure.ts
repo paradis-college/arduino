@@ -10,7 +10,7 @@ export const weatherPressureSketch = (p: p5) => {
   let dragging = false;
   const pressureHistory: number[] = [];
   const maxHistory = 50;
-  
+
   p.setup = () => {
     p.createCanvas(400, 220);
     p.textFont('monospace');
@@ -19,24 +19,24 @@ export const weatherPressureSketch = (p: p5) => {
       pressureHistory.push(1013);
     }
   };
-  
+
   p.draw = () => {
     p.background(30, 35, 45);
-    
+
     // Smooth transition
     displayPressure = p.lerp(displayPressure, pressure, 0.05);
-    
+
     // Update history
     if (p.frameCount % 3 === 0) {
       pressureHistory.shift();
       pressureHistory.push(displayPressure);
     }
-    
+
     // Determine weather based on pressure
     let weather: string;
     let icon: string;
     let iconColor: p5.Color;
-    
+
     if (displayPressure < 1000) {
       weather = 'Stormy';
       icon = 'Storm';
@@ -58,13 +58,13 @@ export const weatherPressureSketch = (p: p5) => {
       icon = 'Sun';
       iconColor = p.color(255, 220, 100);
     }
-    
+
     // Calculate trend
     const oldPressure = pressureHistory[0];
     const trend = displayPressure - oldPressure;
     let trendText: string;
     let trendArrow: string;
-    
+
     if (trend > 2) {
       trendText = 'Rising';
       trendArrow = '^';
@@ -75,52 +75,52 @@ export const weatherPressureSketch = (p: p5) => {
       trendText = 'Steady';
       trendArrow = '-';
     }
-    
+
     // Weather display panel
     p.fill(40, 45, 55);
     p.stroke(iconColor);
     p.strokeWeight(3);
     p.rect(20, 20, 140, 100, 15);
-    
+
     // Draw weather icon
     drawWeatherIcon(p, 90, 55, icon, iconColor);
-    
+
     // Weather label
     p.fill(iconColor);
     p.noStroke();
     p.textSize(14);
     p.textAlign(p.CENTER, p.CENTER);
     p.text(weather, 90, 100);
-    
+
     // Pressure value
     p.fill(50, 55, 65);
     p.stroke(100);
     p.strokeWeight(1);
     p.rect(20, 130, 140, 35, 5);
-    
+
     p.fill(255);
     p.noStroke();
     p.textSize(16);
     p.text(`${displayPressure.toFixed(1)} hPa`, 90, 148);
-    
+
     // Trend indicator
     p.fill(trend > 0 ? p.color(100, 255, 100) : (trend < 0 ? p.color(255, 100, 100) : p.color(200)));
     p.textSize(12);
     p.text(`${trendArrow} ${trendText}`, 90, 162);
-    
+
     // Trend graph
     p.fill(40, 45, 55);
     p.stroke(80);
     p.strokeWeight(1);
     p.rect(180, 20, 200, 100, 5);
-    
+
     // Graph title
     p.fill(150);
     p.noStroke();
     p.textSize(10);
     p.textAlign(p.LEFT, p.TOP);
     p.text('Pressure Trend', 190, 25);
-    
+
     // Graph grid
     p.stroke(50);
     p.strokeWeight(1);
@@ -128,7 +128,7 @@ export const weatherPressureSketch = (p: p5) => {
       const y = 40 + i * 18;
       p.line(185, y, 375, y);
     }
-    
+
     // Graph axis labels
     p.fill(100);
     p.noStroke();
@@ -138,7 +138,7 @@ export const weatherPressureSketch = (p: p5) => {
     p.text('1020', 183, 58);
     p.text('1000', 183, 76);
     p.text('980', 183, 94);
-    
+
     // Draw trend line
     p.stroke(100, 200, 255);
     p.strokeWeight(2);
@@ -150,29 +150,29 @@ export const weatherPressureSketch = (p: p5) => {
       p.vertex(x, p.constrain(y, 40, 110));
     }
     p.endShape();
-    
+
     // Current point
     const currentY = p.map(displayPressure, 970, 1050, 110, 35);
     p.fill(255, 200, 100);
     p.noStroke();
     p.ellipse(370, p.constrain(currentY, 40, 110), 8, 8);
-    
+
     // Pressure zone legend
     p.fill(150);
     p.textSize(9);
     p.textAlign(p.CENTER, p.CENTER);
     p.text('Low <1010 | Med 1010-1020 | High >1020', 280, 135);
-    
+
     // Slider
     p.fill(50, 55, 65);
     p.rect(20, 180, 360, 20, 5);
-    
+
     const sliderX = p.map(pressure, 970, 1050, 25, 375);
     p.fill(dragging ? 255 : 220);
     p.stroke(100);
     p.strokeWeight(2);
     p.ellipse(sliderX, 190, 18, 18);
-    
+
     // Slider labels
     p.fill(120);
     p.noStroke();
@@ -181,11 +181,11 @@ export const weatherPressureSketch = (p: p5) => {
     p.text('970 hPa', 40, 210);
     p.text('1050 hPa', 360, 210);
   };
-  
+
   const drawWeatherIcon = (p: p5, x: number, y: number, type: string, color: p5.Color) => {
     p.push();
     p.translate(x, y);
-    
+
     if (type === 'Sun') {
       // Sun
       p.fill(color);
@@ -244,34 +244,34 @@ export const weatherPressureSketch = (p: p5) => {
       p.strokeWeight(2);
       p.line(-8, -25, -8, -18);
       p.line(-25, -8, -18, -8);
-      
+
       p.fill(color);
       p.noStroke();
       p.ellipse(0, 8, 25, 20);
       p.ellipse(12, 3, 25, 22);
       p.ellipse(20, 8, 18, 16);
     }
-    
+
     p.pop();
   };
-  
+
   p.mousePressed = () => {
     if (p.mouseY > 175 && p.mouseY < 205 && p.mouseX > 15 && p.mouseX < 385) {
       dragging = true;
       updatePressure();
     }
   };
-  
+
   p.mouseDragged = () => {
     if (dragging) {
       updatePressure();
     }
   };
-  
+
   p.mouseReleased = () => {
     dragging = false;
   };
-  
+
   const updatePressure = () => {
     pressure = p.constrain(p.map(p.mouseX, 25, 375, 970, 1050), 970, 1050);
   };

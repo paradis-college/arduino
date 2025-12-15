@@ -30,18 +30,18 @@ export const servoSketch = (p: p5) => {
     const x = 350;
     const y = 320;
     const w = 200;
-    
+
     p.fill(60);
     p.stroke(80);
     p.strokeWeight(2);
     p.rect(x, y - 8, w, 16, 8);
-    
+
     const handleX = p.map(targetAngle, 0, 180, x, x + w);
     p.fill(255, 150, 100);
     p.stroke(255);
     p.strokeWeight(2);
     p.ellipse(handleX, y, 22, 22);
-    
+
     p.fill(200);
     p.noStroke();
     p.textSize(12);
@@ -50,7 +50,7 @@ export const servoSketch = (p: p5) => {
     p.fill(255, 150, 100);
     p.textSize(20);
     p.text(`${Math.round(currentAngle)}°`, x + w / 2, y + 35);
-    
+
     p.fill(150);
     p.textSize(10);
     p.text('0°', x - 15, y);
@@ -60,55 +60,55 @@ export const servoSketch = (p: p5) => {
   const drawServo = () => {
     const cx = 200;
     const cy = 200;
-    
+
     // Servo body
     p.fill(50, 50, 60);
     p.stroke(80);
     p.strokeWeight(2);
     p.rect(cx - 50, cy - 30, 100, 60, 5);
-    
+
     // Mounting tabs
     p.fill(60, 60, 70);
     p.rect(cx - 60, cy - 10, 15, 20, 2);
     p.rect(cx + 45, cy - 10, 15, 20, 2);
-    
+
     // Rotation hub
     p.fill(40, 40, 50);
     p.stroke(100);
     p.ellipse(cx, cy, 40, 40);
-    
+
     // Servo arm
     const armAngle = p.radians(currentAngle - 90);
     p.push();
     p.translate(cx, cy);
     p.rotate(armAngle);
-    
+
     p.fill(200, 150, 100);
     p.stroke(180, 130, 80);
     p.strokeWeight(2);
     p.rect(-8, -80, 16, 80, 3);
-    
+
     // Arm holes
     p.fill(150, 100, 60);
     p.noStroke();
     for (let i = 1; i <= 3; i++) {
       p.ellipse(0, -20 - i * 15, 6, 6);
     }
-    
+
     p.pop();
-    
+
     // Center screw
     p.fill(100);
     p.stroke(80);
     p.strokeWeight(1);
     p.ellipse(cx, cy, 15, 15);
-    
+
     // Angle arc indicator
     p.noFill();
     p.stroke(100, 200, 255, 150);
     p.strokeWeight(3);
     p.arc(cx, cy, 100, 100, p.radians(-90), p.radians(currentAngle - 90));
-    
+
     // Scale marks
     p.stroke(150);
     p.strokeWeight(1);
@@ -117,7 +117,7 @@ export const servoSketch = (p: p5) => {
       const r1 = 55;
       const r2 = 65;
       p.line(cx + p.cos(rad) * r1, cy + p.sin(rad) * r1, cx + p.cos(rad) * r2, cy + p.sin(rad) * r2);
-      
+
       p.fill(150);
       p.noStroke();
       p.textSize(9);
@@ -126,7 +126,7 @@ export const servoSketch = (p: p5) => {
       p.stroke(150);
       p.strokeWeight(1);
     }
-    
+
     p.fill(200);
     p.noStroke();
     p.textSize(12);
@@ -141,7 +141,7 @@ export const servoSketch = (p: p5) => {
     p.textAlign(p.LEFT, p.CENTER);
     p.text('Servo Motor: Precise angle control', 50, 50);
     p.text('→ Rotates to exact position (0-180°)', 60, 70);
-    
+
     p.fill(150);
     p.textSize(10);
     p.textAlign(p.CENTER, p.CENTER);

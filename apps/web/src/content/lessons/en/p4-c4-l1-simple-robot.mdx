@@ -145,7 +145,7 @@ void stop() {
 void lineFollow() {
   bool leftOnLine = digitalRead(LEFT_SENSOR) == LOW;
   bool rightOnLine = digitalRead(RIGHT_SENSOR) == LOW;
-  
+
   if (leftOnLine && rightOnLine) {
     moveForward();
   } else if (!leftOnLine && rightOnLine) {
@@ -170,23 +170,23 @@ const int OBSTACLE_DISTANCE = 20;  // cm
 
 void obstacleAvoid() {
   int distance = readUltrasonic();
-  
+
   if (distance > OBSTACLE_DISTANCE) {
     moveForward();
   } else {
     stop();
     delay(200);
-    
+
     // Check left
     turnLeft();
     delay(300);
     int leftDistance = readUltrasonic();
-    
+
     // Check right
     turnRight();
     delay(600);
     int rightDistance = readUltrasonic();
-    
+
     // Turn toward more open direction
     if (leftDistance > rightDistance) {
       turnLeft();

@@ -25,7 +25,7 @@ export const Chapter: FC<ChapterProps> = ({ id, title, number, children }) => {
           {title}
         </h2>
       </div>
-      
+
       {/* Chapter content */}
       <div className="space-y-4">
         {children}

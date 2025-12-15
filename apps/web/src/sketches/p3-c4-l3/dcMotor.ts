@@ -15,11 +15,11 @@ export const dcMotorSketch = (p: p5) => {
 
   p.draw = () => {
     p.background(30, 35, 45);
-    
+
     const targetSpeed = (pwmValue / 255) * 0.25;
     motorSpeed = p.lerp(motorSpeed, targetSpeed, 0.05);
     motorAngle += motorSpeed;
-    
+
     drawSlider();
     drawMotor();
     drawLabels();
@@ -36,22 +36,22 @@ export const dcMotorSketch = (p: p5) => {
     const x = 350;
     const y = 300;
     const w = 200;
-    
+
     p.fill(60);
     p.stroke(80);
     p.strokeWeight(2);
     p.rect(x, y - 8, w, 16, 8);
-    
+
     p.fill(100, 200, 100);
     p.noStroke();
     p.rect(x, y - 8, w * (pwmValue / 255), 16, 8, 0, 0, 8);
-    
+
     const handleX = p.map(pwmValue, 0, 255, x, x + w);
     p.fill(200);
     p.stroke(255);
     p.strokeWeight(2);
     p.ellipse(handleX, y, 22, 22);
-    
+
     p.fill(200);
     p.noStroke();
     p.textSize(12);
@@ -66,19 +66,19 @@ export const dcMotorSketch = (p: p5) => {
     const cx = 200;
     const cy = 200;
     const radius = 80;
-    
+
     p.fill(60, 60, 70);
     p.stroke(100);
     p.strokeWeight(3);
     p.ellipse(cx, cy, radius * 2, radius * 2);
-    
+
     p.fill(80, 80, 90);
     p.ellipse(cx, cy, radius * 1.5, radius * 1.5);
-    
+
     p.push();
     p.translate(cx, cy);
     p.rotate(motorAngle);
-    
+
     p.fill(150, 100, 50);
     p.stroke(100);
     p.strokeWeight(2);
@@ -94,11 +94,11 @@ export const dcMotorSketch = (p: p5) => {
       p.endShape(p.CLOSE);
       p.pop();
     }
-    
+
     p.fill(100);
     p.ellipse(0, 0, 25, 25);
     p.pop();
-    
+
     if (motorSpeed > 0.1) {
       p.noFill();
       p.stroke(255, 255, 255, motorSpeed * 200);
@@ -107,7 +107,7 @@ export const dcMotorSketch = (p: p5) => {
         p.ellipse(cx, cy, radius * 1.3 + i * 5, radius * 1.3 + i * 5);
       }
     }
-    
+
     const rpm = Math.round(motorSpeed * 3000);
     p.fill(200);
     p.noStroke();
@@ -124,7 +124,7 @@ export const dcMotorSketch = (p: p5) => {
     p.textAlign(p.LEFT, p.CENTER);
     p.text('DC Motor with PWM Control', 50, 50);
     p.text('→ Higher PWM = faster rotation', 60, 70);
-    
+
     p.fill(150);
     p.textSize(10);
     p.textAlign(p.CENTER, p.CENTER);

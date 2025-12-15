@@ -28,10 +28,10 @@ export const ledButtonStateSketch = (p: p5) => {
     const btnH = 50;
 
     // Check if mouse is over button
-    const overButton = 
-      p.mouseX >= btnX - btnW / 2 && 
-      p.mouseX <= btnX + btnW / 2 && 
-      p.mouseY >= btnY - btnH / 2 && 
+    const overButton =
+      p.mouseX >= btnX - btnW / 2 &&
+      p.mouseX <= btnX + btnW / 2 &&
+      p.mouseY >= btnY - btnH / 2 &&
       p.mouseY <= btnY + btnH / 2;
 
     // Button base
@@ -77,12 +77,12 @@ export const ledButtonStateSketch = (p: p5) => {
 
     // State displays
     p.noStroke();
-    
+
     // Button state
     p.fill(buttonPressed ? '#4CAF50' : '#f44336');
     p.textSize(12);
     p.text(buttonPressed ? 'PRESSED' : 'RELEASED', btnX, btnY + 50);
-    
+
     // LED state
     p.fill(buttonPressed ? '#4CAF50' : '#f44336');
     p.text(buttonPressed ? 'ON' : 'OFF', ledX, ledY + 45);
@@ -118,9 +118,9 @@ export const ledButtonStateSketch = (p: p5) => {
     const btnH = 50;
 
     if (
-      p.mouseX >= btnX - btnW / 2 && 
-      p.mouseX <= btnX + btnW / 2 && 
-      p.mouseY >= btnY - btnH / 2 && 
+      p.mouseX >= btnX - btnW / 2 &&
+      p.mouseX <= btnX + btnW / 2 &&
+      p.mouseY >= btnY - btnH / 2 &&
       p.mouseY <= btnY + btnH / 2
     ) {
       buttonPressed = true;

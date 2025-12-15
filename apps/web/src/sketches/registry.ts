@@ -169,7 +169,7 @@ export const sketchRegistry: Record<string, SketchFunction> = {
   'p1-c1-l2-buttons-series': buttonsSeriesSketch,
   'p1-c1-l2-buttons-parallel': buttonsParallelSketch,
   'p1-c1-l2-truth-table': truthTableSketch,
-  
+
   // Path 1: Course 2: Active Components
   'p1-c2-l1-transistor': transistorSliderSketch,
   'p1-c2-l1-transistor-load': transistorLoadSketch,
@@ -177,7 +177,7 @@ export const sketchRegistry: Record<string, SketchFunction> = {
   'p1-c2-l2-led-rc-timing': ledRCTimingSketch,
   'p1-c2-l3-555-timer': timer555Sketch,
   'p1-c2-l3-shift-register': shiftRegisterSketch,
-  
+
   // Path 1: Course 3: Electromechanical Components
   'p1-c3-l1-inductor': inductorFieldSketch,
   'p1-c3-l1-inductor-spike': inductorSpikeSketch,
@@ -187,7 +187,7 @@ export const sketchRegistry: Record<string, SketchFunction> = {
   'p1-c3-l3-flyback-diode': flybackDiodeSketch,
   'p1-c3-l4-relay': relaySketch,
   'p1-c3-l4-relay-isolation': relayIsolationSketch,
-  
+
   // Path 2: Electronic Sensors
   'p2-c1-l1-ultrasonic': ultrasonicSketch,
   'p2-c1-l1-distance-bar': distanceBarSketch,
@@ -237,7 +237,7 @@ export const sketchRegistry: Record<string, SketchFunction> = {
   'p2-c3-l3-vibration-timeline': vibrationTimelineSketch,
   'p2-c3-l3-vibration-mounting': vibrationMountingSketch,
   'p2-c3-l3-vibration-wiring': vibrationWiringSketch,
-  
+
   // Path 3: Arduino Basics
   'p3-c1-l1-basic-blink': basicBlinkSketch,
   'p3-c1-l1-delay-slider': delaySliderSketch,
@@ -280,7 +280,7 @@ export const sketchRegistry: Record<string, SketchFunction> = {
   'p3-c4-l3-transistor-flow': transistorFlowSketch,
   'p3-c4-l4-servo': servoSketch,
   'p3-c4-l4-angle-text': angleTextSketch,
-  
+
   // Path 4: Advanced Projects
   'p4-c1-l1-traffic-light': trafficLightSketch,
   'p4-c1-l1-pedestrian-button': pedestrianButtonSketch,
@@ -290,7 +290,7 @@ export const sketchRegistry: Record<string, SketchFunction> = {
   'p4-c3-l1-armed-state': armedStateSketch,
   'p4-c4-l1-simple-robot': simpleRobotSketch,
   'p4-c4-l1-obstacle-avoidance': obstacleAvoidanceSketch,
-  
+
   // Path 5: Networking
   'p5-c1-l1-serial': serialSketch,
   'p5-c1-l1-serial-monitor': serialMonitorSketch,
@@ -300,7 +300,7 @@ export const sketchRegistry: Record<string, SketchFunction> = {
   'p5-c3-l1-bt-led-motor': btLedMotorSketch,
   'p5-c4-l1-wifi': wifiSketch,
   'p5-c4-l1-esp-response': espResponseSketch,
-  
+
   // Path 6: Raspberry Pi
   'p6-c1-l1-linux-basics': linuxBasicsSketch,
   'p6-c1-l1-nano-editor': nanoEditorSketch,

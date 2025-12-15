@@ -102,7 +102,7 @@ void loop() {
   bool btn1Pressed = digitalRead(BTN_1) == LOW;
   bool btn2Pressed = digitalRead(BTN_2) == LOW;
   int potValue = analogRead(POT_PIN);
-  
+
   // React to inputs...
 }
 ```
@@ -120,13 +120,13 @@ void loop() {
   bool btn1 = digitalRead(BTN_1) == LOW;
   bool btn2 = digitalRead(BTN_2) == LOW;
   int pot = analogRead(POT_PIN);
-  
+
   // Rule 1: Button 1 turns on LED 1
   digitalWrite(LED_1, btn1 ? HIGH : LOW);
-  
+
   // Rule 2: Button 2 turns on LED 2
   digitalWrite(LED_2, btn2 ? HIGH : LOW);
-  
+
   // Rule 3: Both buttons turn on LED 3
   digitalWrite(LED_3, (btn1 && btn2) ? HIGH : LOW);
 }
@@ -138,7 +138,7 @@ void loop() {
 void loop() {
   bool powerOn = digitalRead(BTN_1) == LOW;
   int brightness = map(analogRead(POT_PIN), 0, 1023, 0, 255);
-  
+
   if (powerOn) {
     analogWrite(LED_1, brightness);  // Pot controls brightness when on
   } else {
@@ -159,12 +159,12 @@ void loop() {
 void loop() {
   int pot = analogRead(POT_PIN);
   int mode = pot / 342;  // Divide 1023 into 3 zones (0, 1, 2)
-  
+
   // Turn off all LEDs first
   digitalWrite(LED_1, LOW);
   digitalWrite(LED_2, LOW);
   digitalWrite(LED_3, LOW);
-  
+
   // Light LED based on mode
   switch (mode) {
     case 0:
@@ -215,7 +215,7 @@ void loop() {
     mode = (mode + 1) % 3;
   }
   int brightness = map(analogRead(POT_BRIGHTNESS), 0, 1023, 0, 255);
-  
+
   // Apply outputs
   if (!powerOn) {
     allLedsOff();

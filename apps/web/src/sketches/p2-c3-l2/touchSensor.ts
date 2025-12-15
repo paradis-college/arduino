@@ -16,7 +16,7 @@ export const touchSensorSketch = (p: p5) => {
 
   p.draw = () => {
     p.background(30, 35, 45);
-    
+
     updateRipples();
     drawTouchPad();
     drawRipples();
@@ -29,14 +29,14 @@ export const touchSensorSketch = (p: p5) => {
     const padCx = 200;
     const padCy = 200;
     const padSize = 150;
-    
+
     // Check if touching the pad
     if (p.mouseX > padCx - padSize / 2 && p.mouseX < padCx + padSize / 2 &&
         p.mouseY > padCy - padSize / 2 && p.mouseY < padCy + padSize / 2) {
       isTouching = true;
       touchX = p.mouseX;
       touchY = p.mouseY;
-      
+
       // Create ripple
       ripples.push({
         x: touchX,
@@ -55,13 +55,13 @@ export const touchSensorSketch = (p: p5) => {
     const padCx = 200;
     const padCy = 200;
     const padSize = 150;
-    
+
     if (p.mouseX > padCx - padSize / 2 && p.mouseX < padCx + padSize / 2 &&
         p.mouseY > padCy - padSize / 2 && p.mouseY < padCy + padSize / 2) {
       isTouching = true;
       touchX = p.mouseX;
       touchY = p.mouseY;
-      
+
       // Occasional ripples while dragging
       if (p.frameCount % 10 === 0) {
         ripples.push({
@@ -80,7 +80,7 @@ export const touchSensorSketch = (p: p5) => {
     for (let i = ripples.length - 1; i >= 0; i--) {
       ripples[i].radius += 3;
       ripples[i].alpha -= 5;
-      
+
       if (ripples[i].alpha <= 0) {
         ripples.splice(i, 1);
       }
@@ -91,7 +91,7 @@ export const touchSensorSketch = (p: p5) => {
     const cx = 200;
     const cy = 200;
     const size = 150;
-    
+
     // Glow effect when touching
     if (isTouching) {
       p.noStroke();
@@ -100,14 +100,14 @@ export const touchSensorSketch = (p: p5) => {
         p.rect(cx - r / 2, cy - r / 2, r, r, 15);
       }
     }
-    
+
     // Pad background
     const padColor = isTouching ? p.color(60, 80, 100) : p.color(50, 55, 65);
     p.fill(padColor);
     p.stroke(isTouching ? p.color(100, 200, 255) : p.color(100));
     p.strokeWeight(3);
     p.rect(cx - size / 2, cy - size / 2, size, size, 12);
-    
+
     // Capacitive grid pattern
     p.stroke(isTouching ? p.color(80, 120, 150) : p.color(70, 75, 85));
     p.strokeWeight(1);
@@ -117,14 +117,14 @@ export const touchSensorSketch = (p: p5) => {
     for (let y = cy - size / 2 + 15; y < cy + size / 2; y += 20) {
       p.line(cx - size / 2 + 10, y, cx + size / 2 - 10, y);
     }
-    
+
     // Touch point indicator
     if (isTouching) {
       p.fill(100, 200, 255, 150);
       p.noStroke();
       p.ellipse(touchX, touchY, 30, 30);
     }
-    
+
     // Label
     p.fill(200);
     p.noStroke();
@@ -146,18 +146,18 @@ export const touchSensorSketch = (p: p5) => {
 
   const drawFinger = () => {
     if (!isTouching) return;
-    
+
     // Finger shadow
     p.fill(0, 0, 0, 50);
     p.noStroke();
     p.ellipse(touchX + 3, touchY + 3, 25, 20);
-    
+
     // Finger tip
     p.fill(220, 180, 160);
     p.stroke(180, 150, 130);
     p.strokeWeight(2);
     p.ellipse(touchX, touchY - 5, 25, 35);
-    
+
     // Fingernail
     p.fill(240, 220, 210);
     p.noStroke();
@@ -169,13 +169,13 @@ export const touchSensorSketch = (p: p5) => {
     const y = 200;
     const w = 120;
     const h = 100;
-    
+
     // Indicator box
     p.fill(40, 45, 55);
     p.stroke(100);
     p.strokeWeight(2);
     p.rect(x - w / 2, y - h / 2, w, h, 10);
-    
+
     // Status LED
     if (isTouching) {
       // Glow
@@ -185,19 +185,19 @@ export const touchSensorSketch = (p: p5) => {
         p.ellipse(x, y - 15, r, r);
       }
     }
-    
+
     p.fill(isTouching ? p.color(100, 255, 100) : p.color(100, 100, 100));
     p.stroke(isTouching ? p.color(150, 255, 150) : p.color(80));
     p.strokeWeight(2);
     p.ellipse(x, y - 15, 30, 30);
-    
+
     // Text
     p.fill(isTouching ? p.color(100, 255, 100) : p.color(150));
     p.noStroke();
     p.textSize(16);
     p.textAlign(p.CENTER, p.CENTER);
     p.text(isTouching ? 'TOUCHED' : 'Ready', x, y + 25);
-    
+
     // Digital value
     p.fill(200);
     p.textSize(12);
@@ -212,7 +212,7 @@ export const touchSensorSketch = (p: p5) => {
     p.text('Capacitive Touch Sensor', 50, 50);
     p.text('→ Detects touch via capacitance change', 60, 70);
     p.text('→ No pressure needed, just touch!', 60, 90);
-    
+
     p.fill(150);
     p.textSize(11);
     p.textAlign(p.CENTER, p.CENTER);

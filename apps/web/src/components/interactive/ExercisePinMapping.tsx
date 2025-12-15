@@ -15,7 +15,7 @@ export interface ExercisePinMappingProps {
 /**
  * Pin mapping exercise component (stub)
  * Allows users to match pins to components
- * 
+ *
  * TODO: Implement drag-and-drop functionality for richer interaction
  * For now, uses simple dropdown selectors
  */
@@ -41,7 +41,7 @@ export const ExercisePinMapping: FC<ExercisePinMappingProps> = ({
 
   const handleSubmit = () => {
     const newResults: Record<string, boolean> = {};
-    
+
     for (const pin of pins) {
       const correct = correctMappings.find((m) => m.pinLabel === pin);
       newResults[pin] = mappings[pin] === correct?.componentLabel;

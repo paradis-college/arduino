@@ -114,7 +114,7 @@ void setup() {
 
 void loop() {
   int vibration = digitalRead(VIBRATION_PIN);
-  
+
   if (vibration == HIGH) {
     digitalWrite(LED_PIN, HIGH);
     Serial.println("Vibration detected!");
@@ -140,7 +140,7 @@ void loop() {
       lastPulse = millis();
     }
   }
-  
+
   // Reset count after 1 second of no vibration
   if (millis() - lastPulse > 1000) {
     if (pulseCount > 0) {

@@ -134,7 +134,7 @@ void loop() {
     Serial.println(c);
     processCommand(c);
   }
-  
+
   // From Arduino to phone
   if (Serial.available()) {
     BTSerial.write(Serial.read());

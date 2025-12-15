@@ -48,7 +48,7 @@ export const LessonPage: FC = () => {
   const lesson = getLesson(lessonSlug, currentLang);
   const { prev, next } = getAdjacentLessons(lessonSlug, currentLang);
   const relatedProjects = getProjectsForLesson(lessonSlug);
-  
+
   // Get course and path info for breadcrumbs
   const course = lesson ? getCourse(lesson.course, currentLang) : undefined;
   const path = course?.pathId ? getPath(course.pathId, currentLang) : undefined;
@@ -103,21 +103,21 @@ export const LessonPage: FC = () => {
     { label: t('common.home'), href: `/${currentLang}` },
     { label: t('paths.title'), href: `/${currentLang}/paths` },
   ];
-  
+
   if (path) {
-    breadcrumbItems.push({ 
-      label: path.title, 
-      href: `/${currentLang}/paths/${path.slug}` 
+    breadcrumbItems.push({
+      label: path.title,
+      href: `/${currentLang}/paths/${path.slug}`
     });
   }
-  
+
   if (course) {
-    breadcrumbItems.push({ 
-      label: course.title, 
-      href: `/${currentLang}/courses/${course.slug}` 
+    breadcrumbItems.push({
+      label: course.title,
+      href: `/${currentLang}/courses/${course.slug}`
     });
   }
-  
+
   breadcrumbItems.push({ label: lesson.title });
 
   return (

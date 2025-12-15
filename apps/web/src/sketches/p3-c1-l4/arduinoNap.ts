@@ -58,12 +58,12 @@ export const arduinoNapSketch = (p: p5) => {
       p.noStroke();
       p.ellipse(arduinoX - 20, arduinoY - 10, 25, 25);
       p.ellipse(arduinoX + 20, arduinoY - 10, 25, 25);
-      
+
       // Pupils
       p.fill(30);
       p.ellipse(arduinoX - 20, arduinoY - 10, 12, 12);
       p.ellipse(arduinoX + 20, arduinoY - 10, 12, 12);
-      
+
       // Happy mouth
       p.noFill();
       p.stroke(255);
@@ -75,11 +75,11 @@ export const arduinoNapSketch = (p: p5) => {
       p.strokeWeight(3);
       p.line(arduinoX - 30, arduinoY - 10, arduinoX - 10, arduinoY - 10);
       p.line(arduinoX + 10, arduinoY - 10, arduinoX + 30, arduinoY - 10);
-      
+
       // Sleeping mouth (small 'o')
       p.noFill();
       p.ellipse(arduinoX, arduinoY + 15, 15, 20);
-      
+
       // Z's for sleeping
       p.fill(200, 200, 255);
       p.noStroke();
@@ -95,7 +95,7 @@ export const arduinoNapSketch = (p: p5) => {
     // LED indicator
     const ledX = arduinoX + 45;
     const ledY = arduinoY + 25;
-    
+
     if (ledOn) {
       p.noStroke();
       for (let i = 3; i > 0; i--) {
@@ -120,7 +120,7 @@ export const arduinoNapSketch = (p: p5) => {
       p.fill('#f44336');
       p.textSize(14);
       p.text('😴 Arduino is NAPPING! delay(' + napDuration + ')', p.width / 2, 195);
-      
+
       // Nap countdown
       p.fill(255);
       p.textSize(12);
@@ -130,10 +130,10 @@ export const arduinoNapSketch = (p: p5) => {
     // Code display at bottom
     p.fill(40);
     p.rect(50, 235, 300, 35, 5);
-    
+
     p.textSize(11);
     p.textAlign(p.LEFT, p.CENTER);
-    
+
     p.fill(150);
     p.text('digitalWrite(LED, ' + (ledOn ? 'HIGH' : 'LOW') + ');', 60, 245);
     p.fill(isAwake ? '#969696' : '#f44336');

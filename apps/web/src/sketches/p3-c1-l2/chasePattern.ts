@@ -71,7 +71,7 @@ export const chasePatternSketch = (p: p5) => {
     p.strokeWeight(3);
     const arrowY = ledY - 50;
     p.line(ledStartX, arrowY, ledStartX + 2 * ledSpacing, arrowY);
-    
+
     // Arrow head
     p.fill(100, 200, 255);
     p.noStroke();
@@ -98,7 +98,7 @@ export const chasePatternSketch = (p: p5) => {
 
     p.textSize(10);
     p.textAlign(p.LEFT, p.TOP);
-    
+
     const codeLines = [
       'digitalWrite(9, HIGH); delay(200); digitalWrite(9, LOW);',
       'digitalWrite(10, HIGH); delay(200); digitalWrite(10, LOW);',

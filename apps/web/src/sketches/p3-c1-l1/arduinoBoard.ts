@@ -72,7 +72,7 @@ export const arduinoBoardSketch = (p: p5) => {
     // Pin 13 highlight
     const pin13X = boardX + 25 + 13 * 11;
     const pin13Y = boardY + 27;
-    
+
     // Highlight circle around pin 13
     p.noFill();
     p.stroke(255, 200, 0);
