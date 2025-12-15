@@ -66,7 +66,7 @@ export const LessonPage: FC = () => {
         if (mdxModule) {
           setMDXContent(() => mdxModule.default);
         } else {
-          setError('Lesson content not found');
+          setError('Lesson file could not be loaded');
         }
       } catch (err) {
         console.error('Error loading MDX:', err);

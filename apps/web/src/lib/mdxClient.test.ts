@@ -66,20 +66,20 @@ describe('mdxClient', () => {
 
   describe('clearMDXCache', () => {
     it('clears the cache', async () => {
-      // Load a module
+      // Load a module to populate cache
       const module1 = await loadMDX('p3-c1-l1-basic-led-blink', 'en');
       expect(module1).not.toBeNull();
       
       // Clear cache
       clearMDXCache();
       
-      // Load again - should reload, not use cache
+      // Load again - module system will still return the same module,
+      // but we verify clearMDXCache executes without errors
       const module2 = await loadMDX('p3-c1-l1-basic-led-blink', 'en');
       expect(module2).not.toBeNull();
       
-      // Note: In this test environment, they might still be the same object
-      // because the dynamic import itself is cached by the module system
-      // The important thing is that clearMDXCache doesn't throw an error
+      // Both should be the same module object from the module system
+      expect(module1).toBe(module2);
     });
   });
 });
