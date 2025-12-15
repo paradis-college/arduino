@@ -257,7 +257,8 @@ function main(): void {
 }
 
 // Run if executed directly (ES module equivalent)
-if (import.meta.url === `file://${process.argv[1]}`) {
+const isMainModule = process.argv[1] === fileURLToPath(import.meta.url);
+if (isMainModule) {
   main();
 }
 
