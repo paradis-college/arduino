@@ -49,12 +49,42 @@ function isValidLanguage(lang: string): lang is Language {
 }
 
 /**
- * Basic URL validation
+ * Basic URL validation with protocol check
  */
 function isValidUrl(url: string): boolean {
+  if (!url || url.trim() === '') return false;
   try {
-    new URL(url);
-    return true;
+    const parsed = new URL(url);
+    return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Validate Tinkercad URL
+ */
+function isValidTinkercadUrl(url: string): boolean {
+  if (!isValidUrl(url)) return false;
+  try {
+    const parsed = new URL(url);
+    return parsed.hostname === 'www.tinkercad.com' || parsed.hostname === 'tinkercad.com';
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Validate YouTube URL
+ */
+function isValidYouTubeUrl(url: string): boolean {
+  if (!isValidUrl(url)) return false;
+  try {
+    const parsed = new URL(url);
+    return parsed.hostname === 'www.youtube.com' || 
+           parsed.hostname === 'youtube.com' || 
+           parsed.hostname === 'youtu.be' ||
+           parsed.hostname === 'm.youtube.com';
   } catch {
     return false;
   }
@@ -122,12 +152,12 @@ function validateFrontmatter(
     throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'order' must be a number if provided`);
   }
 
-  if (data.tinkercadUrl !== undefined && !isValidUrl(data.tinkercadUrl)) {
-    throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'tinkercadUrl' must be a valid URL`);
+  if (data.tinkercadUrl !== undefined && data.tinkercadUrl !== '' && !isValidTinkercadUrl(data.tinkercadUrl)) {
+    throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'tinkercadUrl' must be a valid Tinkercad URL (https://tinkercad.com/...)`);
   }
 
-  if (data.youtubeUrl !== undefined && !isValidUrl(data.youtubeUrl)) {
-    throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'youtubeUrl' must be a valid URL`);
+  if (data.youtubeUrl !== undefined && data.youtubeUrl !== '' && !isValidYouTubeUrl(data.youtubeUrl)) {
+    throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'youtubeUrl' must be a valid YouTube URL (https://youtube.com/... or https://youtu.be/...)`);
   }
 
   if (data.keyPoints !== undefined) {

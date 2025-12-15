@@ -4,11 +4,11 @@
  */
 
 import type { LessonMeta, CourseMeta, Language } from './types';
-import { lessonsManifest as generatedLessonsManifest } from './generated/lessonsManifest';
+import { lessonsManifest } from './generated/lessonsManifest';
 
 // Re-export the auto-generated manifest
 // NOTE: Run `npm run generate:manifest` before using this file
-export { lessonsManifest } from './generated/lessonsManifest';
+export { lessonsManifest };
 
 /** All available courses organized by learning paths */
 export const coursesManifest: CourseMeta[] = [
@@ -385,7 +385,7 @@ export function getCourse(courseId: string, language: Language): CourseMeta | un
 
 /** Get lessons for a specific language */
 export function getLessonsByLanguage(language: Language): LessonMeta[] {
-  return generatedLessonsManifest
+  return lessonsManifest
     .filter((lesson) => lesson.language === language)
     .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 }
@@ -398,7 +398,7 @@ export function getLessonsByCourse(courseId: string, language: Language): Lesson
 
 /** Get a specific lesson by slug and language */
 export function getLesson(slug: string, language: Language): LessonMeta | undefined {
-  return generatedLessonsManifest.find(
+  return lessonsManifest.find(
     (lesson) => lesson.slug === slug && lesson.language === language
   );
 }
