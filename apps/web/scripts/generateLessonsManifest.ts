@@ -137,6 +137,12 @@ function validateFrontmatter(
   if (!data.tags.every(tag => typeof tag === 'string')) {
     throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'tags' must be an array of strings`);
   }
+  if (data.tags.length === 0) {
+    throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'tags' must be a non-empty array`);
+  }
+  if (!data.tags.every(tag => typeof tag === 'string')) {
+    throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'tags' must be an array of strings`);
+  }
   if (typeof data.estimatedMinutes !== 'number') {
     throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'estimatedMinutes' must be a number`);
   }
