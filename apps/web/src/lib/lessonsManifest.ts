@@ -4,9 +4,10 @@
  */
 
 import type { LessonMeta, CourseMeta, Language } from './types';
-
-// Import and re-export the auto-generated manifest
 import { lessonsManifest as generatedLessonsManifest } from './generated/lessonsManifest';
+
+// Re-export the auto-generated manifest
+// NOTE: Run `npm run generate:manifest` before using this file
 export { lessonsManifest } from './generated/lessonsManifest';
 
 /** All available courses organized by learning paths */

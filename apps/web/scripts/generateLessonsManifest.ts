@@ -42,6 +42,25 @@ const LESSONS_DIR = path.join(__dirname, '../src/content/lessons');
 const OUTPUT_FILE = path.join(__dirname, '../src/lib/generated/lessonsManifest.ts');
 
 /**
+ * Type guard to check if a string is a valid Language
+ */
+function isValidLanguage(lang: string): lang is Language {
+  return lang === 'en' || lang === 'ro';
+}
+
+/**
+ * Basic URL validation
+ */
+function isValidUrl(url: string): boolean {
+  try {
+    new URL(url);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
  * Validates that all required frontmatter fields are present
  */
 function validateFrontmatter(
@@ -82,11 +101,51 @@ function validateFrontmatter(
   if (!Array.isArray(data.tags)) {
     throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'tags' must be an array`);
   }
+  if (data.tags.length === 0) {
+    throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'tags' must be a non-empty array`);
+  }
+  if (!data.tags.every(tag => typeof tag === 'string')) {
+    throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'tags' must be an array of strings`);
+  }
   if (typeof data.estimatedMinutes !== 'number') {
     throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'estimatedMinutes' must be a number`);
   }
+  if (data.estimatedMinutes <= 0) {
+    throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'estimatedMinutes' must be greater than zero`);
+  }
   if (typeof data.hasInteractiveExercises !== 'boolean') {
     throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'hasInteractiveExercises' must be a boolean`);
+  }
+
+  // Validate optional fields
+  if (data.order !== undefined && typeof data.order !== 'number') {
+    throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'order' must be a number if provided`);
+  }
+
+  if (data.tinkercadUrl !== undefined && !isValidUrl(data.tinkercadUrl)) {
+    throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'tinkercadUrl' must be a valid URL`);
+  }
+
+  if (data.youtubeUrl !== undefined && !isValidUrl(data.youtubeUrl)) {
+    throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'youtubeUrl' must be a valid URL`);
+  }
+
+  if (data.keyPoints !== undefined) {
+    if (!Array.isArray(data.keyPoints)) {
+      throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'keyPoints' must be an array if provided`);
+    }
+    for (let i = 0; i < data.keyPoints.length; i++) {
+      const kp = data.keyPoints[i];
+      if (typeof kp !== 'object' || kp === null) {
+        throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'keyPoints[${i}]' must be an object`);
+      }
+      if (typeof kp.title !== 'string') {
+        throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'keyPoints[${i}].title' is required and must be a string`);
+      }
+      if (kp.description !== undefined && typeof kp.description !== 'string') {
+        throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'keyPoints[${i}].description' must be a string if provided`);
+      }
+    }
   }
 }
 
@@ -109,7 +168,7 @@ function parseLessonFile(filepath: string, language: Language): LessonMeta {
     id: data.id,
     slug,
     title: data.title,
-    description: data.description,
+    description: data.description ?? `Learn about ${data.title}`,
     course: data.course,
     difficulty: data.difficulty,
     tags: data.tags,
@@ -143,6 +202,8 @@ function parseLessonFile(filepath: string, language: Language): LessonMeta {
  */
 function generateManifest(): LessonMeta[] {
   const lessons: LessonMeta[] = [];
+  const seenIds = new Set<string>();
+  const seenSlugs = new Map<string, string>(); // slug -> language+file for better error messages
 
   // Get all language directories
   const langDirs = fs.readdirSync(LESSONS_DIR).filter(name => {
@@ -153,7 +214,7 @@ function generateManifest(): LessonMeta[] {
   console.log(`📂 Found language directories: ${langDirs.join(', ')}`);
 
   for (const lang of langDirs) {
-    if (lang !== 'en' && lang !== 'ro') {
+    if (!isValidLanguage(lang)) {
       console.warn(`⚠️  Skipping unknown language directory: ${lang}`);
       continue;
     }
@@ -166,7 +227,23 @@ function generateManifest(): LessonMeta[] {
     for (const file of files) {
       const filepath = path.join(langDir, file);
       try {
-        const lesson = parseLessonFile(filepath, lang as Language);
+        const lesson = parseLessonFile(filepath, lang);
+        
+        // Check for duplicate IDs
+        if (seenIds.has(lesson.id)) {
+          throw new Error(`❌ DUPLICATE ID ERROR: Lesson ID '${lesson.id}' is already used. Each lesson must have a unique ID.`);
+        }
+        seenIds.add(lesson.id);
+
+        // Check for duplicate slugs within the same language
+        const slugKey = `${lesson.language}:${lesson.slug}`;
+        if (seenSlugs.has(slugKey)) {
+          throw new Error(
+            `❌ DUPLICATE SLUG ERROR: Slug '${lesson.slug}' for language '${lesson.language}' is already used in ${seenSlugs.get(slugKey)}. Each lesson within a language must have a unique slug (filename).`
+          );
+        }
+        seenSlugs.set(slugKey, file);
+
         lessons.push(lesson);
         console.log(`  ✓ ${file} -> ${lesson.id}`);
       } catch (error) {
@@ -231,10 +308,7 @@ function main(): void {
 
     // Ensure output directory exists
     const outputDir = path.dirname(OUTPUT_FILE);
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir, { recursive: true });
-      console.log(`📁 Created directory: ${outputDir}`);
-    }
+    fs.mkdirSync(outputDir, { recursive: true });
 
     // Generate TypeScript file
     const content = generateTypeScriptFile(lessons);

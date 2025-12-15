@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "lint": "tsc --noEmit",
+    "lint": "npm run generate:manifest && tsc --noEmit",
     "lint:test": "tsc --noEmit --project tsconfig.test.json"
   },
   "keywords": [
