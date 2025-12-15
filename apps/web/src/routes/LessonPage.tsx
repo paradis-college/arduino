@@ -1,6 +1,6 @@
 import type { FC, ComponentType } from 'react';
 import { useState, useEffect, Suspense } from 'react';
-import { useParams, Navigate, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { MDXProvider } from '@mdx-js/react';
 import { useLanguage } from '@/i18n';
 import { getLesson, getAdjacentLessons, getCourse } from '@/lib/lessonsManifest';
@@ -66,7 +66,7 @@ export const LessonPage: FC = () => {
         if (mdxModule) {
           setMDXContent(() => mdxModule.default);
         } else {
-          setError('Failed to load lesson content');
+          setError('Lesson content not found');
         }
       } catch (err) {
         console.error('Error loading MDX:', err);
@@ -79,9 +79,43 @@ export const LessonPage: FC = () => {
     loadContent();
   }, [lessonSlug, currentLang, lesson]);
 
-  // Redirect if lesson not found
+  // Show friendly not-found UI if lesson metadata not found
   if (!lesson) {
-    return <Navigate to={`/${currentLang}/courses`} replace />;
+    return (
+      <div className="max-w-2xl mx-auto py-12">
+        <Card padding="lg" className="text-center">
+          <div className="mb-6">
+            <svg
+              className="w-24 h-24 mx-auto text-muted"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <h1 className="text-2xl font-bold mb-3">
+            {currentLang === 'ro' ? 'Lecție Negăsită' : 'Lesson Not Found'}
+          </h1>
+          <p className="text-muted mb-6">
+            {currentLang === 'ro'
+              ? 'Ne pare rău, nu am găsit lecția pe care o căutați.'
+              : "Sorry, we couldn't find the lesson you're looking for."}
+          </p>
+          <Link to={`/${currentLang}/courses`}>
+            <Button variant="primary">
+              {currentLang === 'ro' ? 'Înapoi la Cursuri' : 'Back to Courses'}
+            </Button>
+          </Link>
+        </Card>
+      </div>
+    );
   }
 
   // Static outline for now
