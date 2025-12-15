@@ -1,0 +1,72 @@
+# .pre-commit-config.yaml
+# Place this file at the repository root (same level as package.json)
+
+ci:
+  autofix_prs: true
+  autoupdate_schedule: monthly
+  skip: [] # keep empty unless you want to skip hooks on pre-commit.ci
+
+exclude: >
+  (?x)^(
+    node_modules/|
+    dist/|
+    build/|
+    coverage/|
+    \.next/|
+    out/|
+    \.turbo/|
+    \.cache/|
+    \.vercel/|
+    public/(?:generated|build)/|
+    .*\.min\.(js|css)$
+  )
+
+repos:
+  # Generic hygiene (whitespace, merge markers, basic safety checks)
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-json
+      - id: detect-private-key
+      # - id: check-added-large-files
+        # args: ["--maxkb=10240"] # 10 MB, adjust if you commit large assets intentionally
+
+  # Format: JS/TS/React + JSON/YAML/MD/MDX/CSS
+  # - repo: https://github.com/pre-commit/mirrors-prettier
+  #   rev: v3.3.3
+  #   hooks:
+  #     - id: prettier
+  #       # pre-commit.ci will install these alongside prettier so it can format MDX correctly
+  #       additional_dependencies:
+  #         - prettier@3.3.3
+  #         - prettier-plugin-mdx@3.3.1
+  #       files: \.(js|jsx|ts|tsx|json|yml|yaml|md|mdx|css|scss)$
+
+  # Lint: React/Next/TS (uses your repo’s eslint config)
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v9.10.0
+    hooks:
+      - id: eslint
+        files: \.(js|jsx|ts|tsx)$
+        # Ensures the hook has the parser/plugins it needs in CI.
+        # If you already have these in package.json, keeping them here is still fine.
+        additional_dependencies:
+          - eslint@9.10.0
+          - eslint-config-next@14.2.7
+          - "@typescript-eslint/parser@8.6.0"
+          - "@typescript-eslint/eslint-plugin@8.6.0"
+          - eslint-plugin-react@7.37.1
+          - eslint-plugin-react-hooks@5.1.0
+          - eslint-plugin-import@2.31.0
+
+  # Optional but useful for lesson repos: Markdown linting (keeps docs consistent)
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.41.0
+    hooks:
+      - id: markdownlint
+        files: \.(md|mdx)$
+        args: ["--disable", "MD013"] # allow long lines (common in links/code)
