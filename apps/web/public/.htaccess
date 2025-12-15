@@ -10,9 +10,6 @@
   # For example, if deployed to /arduino/, use: RewriteBase /arduino/
   # RewriteBase /your-subdirectory/
   
-  # Handle Authorization header for API requests (if needed in the future)
-  RewriteCond %{HTTP:Authorization} .
-  RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
   
   # Don't rewrite if the request is for an actual file
   RewriteCond %{REQUEST_FILENAME} -f
