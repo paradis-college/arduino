@@ -73,7 +73,7 @@ export const clockMethodSketch = (p: p5) => {
     // LED indicator
     const ledX = 80;
     const ledY = 100;
-    
+
     if (ledOn) {
       p.noStroke();
       for (let i = 3; i > 0; i--) {

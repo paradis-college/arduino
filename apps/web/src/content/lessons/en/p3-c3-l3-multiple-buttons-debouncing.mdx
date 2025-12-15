@@ -151,7 +151,7 @@ void loop() {
     handleButtonPress();  // Your action
     delay(50);  // Wait for bouncing to settle
   }
-  
+
   if (digitalRead(BUTTON_PIN) == HIGH) {
     buttonPressed = false;
   }
@@ -168,11 +168,11 @@ int buttonState;
 
 void loop() {
   int reading = digitalRead(BUTTON_PIN);
-  
+
   if (reading != lastButtonState) {
     lastDebounceTime = millis();
   }
-  
+
   if ((millis() - lastDebounceTime) > debounceDelay) {
     if (reading != buttonState) {
       buttonState = reading;

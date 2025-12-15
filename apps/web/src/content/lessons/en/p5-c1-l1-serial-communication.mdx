@@ -124,7 +124,7 @@ void loop() {
     String message = Serial.readStringUntil('\n');
     Serial.print("Got: ");
     Serial.println(message);
-    
+
     // React to commands
     if (message == "ON") {
       digitalWrite(LED_PIN, HIGH);
@@ -151,7 +151,7 @@ void processCommand(String cmd) {
   if (colonPos > 0) {
     String command = cmd.substring(0, colonPos);
     String value = cmd.substring(colonPos + 1);
-    
+
     if (command == "LED") {
       int brightness = value.toInt();
       analogWrite(LED_PIN, brightness);

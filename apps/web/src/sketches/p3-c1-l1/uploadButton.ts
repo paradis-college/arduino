@@ -168,7 +168,7 @@ export const uploadButtonSketch = (p: p5) => {
   p.mousePressed = () => {
     const btnX = 30 + 60;
     const btnY = 50 + 15;
-    
+
     if (p.mouseX > btnX - 15 && p.mouseX < btnX + 15 && p.mouseY > btnY - 12 && p.mouseY < btnY + 12) {
       if (uploadState === 'ready') {
         uploadState = 'uploading';

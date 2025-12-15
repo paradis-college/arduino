@@ -115,7 +115,7 @@ void setup() {
 void loop() {
   int lightLevel = analogRead(LDR_PIN);
   Serial.println(lightLevel);
-  
+
   if (lightLevel < DARK_THRESHOLD) {
     digitalWrite(LED_PIN, HIGH);  // Turn on LED when dark
   } else {

@@ -1,7 +1,7 @@
 /**
  * Mock projects data
  * Simulates community projects for Phase 1
- * 
+ *
  * TODO: Replace with real API calls when backend is ready
  */
 

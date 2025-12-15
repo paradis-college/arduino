@@ -23,7 +23,7 @@ export const TinkercadEmbed: FC<TinkercadEmbedProps> = ({ url, title }) => {
     if (originalUrl.includes('/embed/')) {
       return originalUrl;
     }
-    
+
     // Convert /things/xxx to /embed/xxx
     return originalUrl.replace('/things/', '/embed/');
   };

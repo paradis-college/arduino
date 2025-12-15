@@ -111,13 +111,13 @@ export const P5SketchEmbed: FC<P5SketchEmbedProps> = ({
 
       {/* p5.js Sketch Container */}
       <div className="bg-background-alt p-4">
-        <div 
+        <div
           className="rounded-lg overflow-hidden border border-border/50 max-w-2xl mx-auto"
           role="img"
           aria-label={alt || title || 'Interactive p5.js sketch'}
         >
           {error ? (
-            <div 
+            <div
               className="flex items-center justify-center text-error text-sm p-4"
               style={{ minHeight: height }}
             >

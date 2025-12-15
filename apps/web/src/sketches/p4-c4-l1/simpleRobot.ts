@@ -49,14 +49,14 @@ export const simpleRobotSketch = (p: p5) => {
       {x: 400, y: 280}, {x: 300, y: 250}, {x: 200, y: 280},
       {x: 100, y: 280}, {x: 100, y: 200}
     ];
-    
+
     const targetIndex = Math.floor((p.frameCount / 30) % targets.length);
     const target = targets[targetIndex];
-    
+
     const dx = target.x - robotX;
     const dy = target.y - robotY;
     const dist = Math.sqrt(dx * dx + dy * dy);
-    
+
     if (dist > 5) {
       robotX += (dx / dist) * 2;
       robotY += (dy / dist) * 2;
@@ -68,25 +68,25 @@ export const simpleRobotSketch = (p: p5) => {
     p.push();
     p.translate(robotX, robotY);
     p.rotate(robotAngle);
-    
+
     // Body
     p.fill(100, 150, 200);
     p.stroke(80, 130, 180);
     p.strokeWeight(2);
     p.rect(-20, -15, 40, 30, 5);
-    
+
     // Wheels
     p.fill(50);
     p.rect(-22, -18, 6, 10);
     p.rect(-22, 8, 6, 10);
     p.rect(16, -18, 6, 10);
     p.rect(16, 8, 6, 10);
-    
+
     // Line sensors
     p.fill(255, 100, 100);
     p.ellipse(20, -8, 6, 6);
     p.ellipse(20, 8, 6, 6);
-    
+
     // Eyes
     p.fill(255);
     p.ellipse(-5, -5, 8, 8);
@@ -94,7 +94,7 @@ export const simpleRobotSketch = (p: p5) => {
     p.fill(0);
     p.ellipse(-3, -5, 3, 3);
     p.ellipse(-3, 5, 3, 3);
-    
+
     p.pop();
   };
 
@@ -105,7 +105,7 @@ export const simpleRobotSketch = (p: p5) => {
     p.textAlign(p.LEFT, p.CENTER);
     p.text('Line Following Robot', 50, 50);
     p.text('→ IR sensors detect black line', 60, 70);
-    
+
     p.fill(100);
     p.textSize(10);
     p.textAlign(p.CENTER, p.CENTER);

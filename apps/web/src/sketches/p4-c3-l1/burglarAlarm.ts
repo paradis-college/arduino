@@ -15,13 +15,13 @@ export const burglarAlarmSketch = (p: p5) => {
 
   p.draw = () => {
     p.background(30, 35, 45);
-    
+
     intruderX += 1.5;
     if (intruderX > 550) intruderX = 50;
-    
+
     alarmTriggered = intruderX > 200 && intruderX < 400;
     if (alarmTriggered) sirenFlash = p.frameCount % 10 < 5;
-    
+
     drawDetectionZone();
     drawPIR();
     drawIntruder();
@@ -32,7 +32,7 @@ export const burglarAlarmSketch = (p: p5) => {
   const drawDetectionZone = () => {
     const cx = 300;
     const y = 80;
-    
+
     p.noStroke();
     for (let r = 200; r > 0; r -= 20) {
       const alpha = alarmTriggered ? 60 + (200 - r) * 0.3 : 20 + (200 - r) * 0.1;
@@ -46,10 +46,10 @@ export const burglarAlarmSketch = (p: p5) => {
     p.stroke(100);
     p.strokeWeight(2);
     p.rect(275, 50, 50, 35, 5);
-    
+
     p.fill(alarmTriggered ? p.color(200, 100, 80) : p.color(80, 80, 90));
     p.arc(300, 85, 35, 25, 0, p.PI);
-    
+
     p.fill(200);
     p.noStroke();
     p.textSize(10);
@@ -59,13 +59,13 @@ export const burglarAlarmSketch = (p: p5) => {
 
   const drawIntruder = () => {
     const y = 250;
-    
+
     // Person
     p.fill(200, 180, 160);
     p.stroke(150, 130, 110);
     p.strokeWeight(2);
     p.ellipse(intruderX, y - 40, 25, 25);
-    
+
     p.stroke(100, 100, 150);
     p.strokeWeight(4);
     p.line(intruderX, y - 27, intruderX, y + 15);
@@ -73,7 +73,7 @@ export const burglarAlarmSketch = (p: p5) => {
     p.line(intruderX, y - 15, intruderX + 15, y);
     p.line(intruderX, y + 15, intruderX - 10, y + 40);
     p.line(intruderX, y + 15, intruderX + 10, y + 40);
-    
+
     p.fill(200);
     p.noStroke();
     p.textSize(10);
@@ -84,13 +84,13 @@ export const burglarAlarmSketch = (p: p5) => {
   const drawAlarm = () => {
     const x = 500;
     const y = 150;
-    
+
     // Alarm box
     p.fill(alarmTriggered && sirenFlash ? p.color(255, 100, 100) : p.color(60, 60, 70));
     p.stroke(100);
     p.strokeWeight(2);
     p.rect(x - 40, y - 40, 80, 80, 10);
-    
+
     // Speaker grille
     p.fill(40);
     p.ellipse(x, y, 40, 40);
@@ -100,7 +100,7 @@ export const burglarAlarmSketch = (p: p5) => {
       p.noFill();
       p.ellipse(x, y, r, r);
     }
-    
+
     // Sound waves when active
     if (alarmTriggered) {
       p.noFill();
@@ -111,7 +111,7 @@ export const burglarAlarmSketch = (p: p5) => {
         p.arc(x + 40, y, 30 + offset, 60 + offset, -p.QUARTER_PI, p.QUARTER_PI);
       }
     }
-    
+
     // Status
     p.fill(alarmTriggered ? p.color(255, 100, 100) : p.color(100, 200, 100));
     p.noStroke();
@@ -127,7 +127,7 @@ export const burglarAlarmSketch = (p: p5) => {
     p.textAlign(p.LEFT, p.CENTER);
     p.text('PIR-Based Burglar Alarm', 50, 330);
     p.text('→ Detects motion in zone, triggers alarm', 60, 350);
-    
+
     p.fill(150);
     p.textSize(10);
     p.textAlign(p.CENTER, p.CENTER);

@@ -45,16 +45,16 @@ export const codeHighlightSketch = (p: p5) => {
     // Update highlight position
     if (p.millis() - lastUpdate > updateInterval) {
       highlightIndex++;
-      
+
       if (!setupDone && highlightIndex >= 3) {
         setupDone = true;
       }
-      
+
       if (highlightIndex >= lineHighlights.length) {
         highlightIndex = 4; // Jump back to loop start
         loopCount++;
       }
-      
+
       currentLine = lineHighlights[highlightIndex];
       lastUpdate = p.millis();
     }
@@ -76,7 +76,7 @@ export const codeHighlightSketch = (p: p5) => {
         p.fill(255, 255, 0, 40);
         p.noStroke();
         p.rect(codeX - 5, y - 2, 320, lineHeight - 2);
-        
+
         // Arrow indicator
         p.fill(255, 200, 0);
         p.triangle(codeX - 25, y + 7, codeX - 10, y + 7, codeX - 17, y + 2);
@@ -109,8 +109,8 @@ export const codeHighlightSketch = (p: p5) => {
     p.textAlign(p.CENTER, p.CENTER);
     p.fill(setupDone ? '#4CAF50' : '#ff9800');
     p.textSize(11);
-    const status = setupDone 
-      ? `loop() iteration #${loopCount + 1}` 
+    const status = setupDone
+      ? `loop() iteration #${loopCount + 1}`
       : 'Running setup()...';
     p.text(status, p.width / 2, 285);
   };

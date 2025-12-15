@@ -21,7 +21,7 @@ const mdxCache = new Map<string, MDXModule>();
  */
 export async function loadMDX(slug: string, language: Language): Promise<MDXModule | null> {
   const cacheKey = `${language}/${slug}`;
-  
+
   if (mdxCache.has(cacheKey)) {
     return mdxCache.get(cacheKey)!;
   }
@@ -29,7 +29,7 @@ export async function loadMDX(slug: string, language: Language): Promise<MDXModu
   try {
     // Dynamic import based on language and slug
     // Vite will handle code-splitting automatically
-    // 
+    //
     // TODO: This hard-coded module mapping doesn't scale well. Each new lesson
     // requires manual code changes. Consider:
     // 1. Using import.meta.glob to dynamically discover MDX files

@@ -47,7 +47,7 @@ describe('ExerciseMultipleChoice', () => {
         correctIndex={1}
       />
     );
-    
+
     expect(screen.getByText('What is the answer?')).toBeInTheDocument();
     expect(screen.getByText('Option A')).toBeInTheDocument();
     expect(screen.getByText('Option B')).toBeInTheDocument();
@@ -64,10 +64,10 @@ describe('ExerciseMultipleChoice', () => {
         correctIndex={1}
       />
     );
-    
+
     const checkButton = screen.getByRole('button', { name: /check answer/i });
     expect(checkButton).toBeDisabled();
-    
+
     fireEvent.click(screen.getByText('Option A'));
     expect(checkButton).not.toBeDisabled();
   });
@@ -82,10 +82,10 @@ describe('ExerciseMultipleChoice', () => {
         correctIndex={1}
       />
     );
-    
+
     fireEvent.click(screen.getByText('Option B')); // correct answer
     fireEvent.click(screen.getByRole('button', { name: /check answer/i }));
-    
+
     expect(screen.getByText(/correct/i)).toBeInTheDocument();
   });
 
@@ -99,10 +99,10 @@ describe('ExerciseMultipleChoice', () => {
         correctIndex={1}
       />
     );
-    
+
     fireEvent.click(screen.getByText('Option A')); // wrong answer
     fireEvent.click(screen.getByRole('button', { name: /check answer/i }));
-    
+
     expect(screen.getByText(/incorrect/i)).toBeInTheDocument();
   });
 
@@ -116,10 +116,10 @@ describe('ExerciseMultipleChoice', () => {
         correctIndex={1}
       />
     );
-    
+
     fireEvent.click(screen.getByText('Option A'));
     fireEvent.click(screen.getByRole('button', { name: /check answer/i }));
-    
+
     expect(screen.getByRole('button', { name: /try again/i })).toBeInTheDocument();
   });
 });

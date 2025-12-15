@@ -15,7 +15,7 @@ export const deviceCommSketch = (p: p5) => {
 
   p.draw = () => {
     p.background(30, 35, 45);
-    
+
     // Periodically send packets
     if (p.frameCount % 60 === 0) {
       sendPacket('UART', 160);
@@ -26,7 +26,7 @@ export const deviceCommSketch = (p: p5) => {
     if (p.frameCount % 120 === 0) {
       sendPacket('SPI', 240);
     }
-    
+
     updatePackets();
     drawRaspberryPi();
     drawArduino();
@@ -46,7 +46,7 @@ export const deviceCommSketch = (p: p5) => {
   const updatePackets = () => {
     for (let i = packets.length - 1; i >= 0; i--) {
       packets[i].x += 4 * packets[i].direction;
-      
+
       if ((packets[i].direction > 0 && packets[i].x > 420) ||
           (packets[i].direction < 0 && packets[i].x < 180)) {
         receivedCount++;
@@ -60,19 +60,19 @@ export const deviceCommSketch = (p: p5) => {
     p.stroke(40, 100, 60);
     p.strokeWeight(2);
     p.rect(50, 130, 130, 140, 8);
-    
+
     // CPU
     p.fill(50, 50, 60);
     p.stroke(70);
     p.rect(90, 170, 50, 50, 3);
-    
+
     p.fill(200);
     p.noStroke();
     p.textSize(10);
     p.textAlign(p.CENTER, p.CENTER);
     p.text('Raspberry', 115, 300);
     p.text('Pi', 115, 315);
-    
+
     // GPIO pins
     p.fill(60, 60, 70);
     p.rect(175, 150, 10, 100, 2);
@@ -83,19 +83,19 @@ export const deviceCommSketch = (p: p5) => {
     p.stroke(50, 80, 120);
     p.strokeWeight(2);
     p.rect(420, 130, 130, 140, 8);
-    
+
     // Chip
     p.fill(30, 30, 40);
     p.stroke(50);
     p.rect(450, 170, 60, 50, 2);
-    
+
     p.fill(200);
     p.noStroke();
     p.textSize(10);
     p.textAlign(p.CENTER, p.CENTER);
     p.text('Arduino', 485, 300);
     p.text('Uno', 485, 315);
-    
+
     // Pins
     p.fill(60, 60, 70);
     p.rect(415, 150, 10, 100, 2);
@@ -107,13 +107,13 @@ export const deviceCommSketch = (p: p5) => {
       { name: 'I2C', y: 200, color: p.color(100, 200, 255) },
       { name: 'SPI', y: 240, color: p.color(200, 150, 255) }
     ];
-    
+
     for (const proto of protocols) {
       // Connection line
       p.stroke(proto.color);
       p.strokeWeight(3);
       p.line(185, proto.y, 415, proto.y);
-      
+
       // Protocol label
       p.fill(proto.color);
       p.noStroke();
@@ -129,13 +129,13 @@ export const deviceCommSketch = (p: p5) => {
       if (packet.protocol === 'UART') color = p.color(255, 150, 100);
       else if (packet.protocol === 'I2C') color = p.color(100, 200, 255);
       else color = p.color(200, 150, 255);
-      
+
       // Packet
       p.fill(color);
       p.stroke(255);
       p.strokeWeight(1);
       p.rect(packet.x - 15, packet.y - 8, 30, 16, 4);
-      
+
       // Arrow
       p.fill(color);
       p.noStroke();
@@ -149,13 +149,13 @@ export const deviceCommSketch = (p: p5) => {
     p.stroke(80);
     p.strokeWeight(2);
     p.rect(250, 280, 100, 70, 8);
-    
+
     p.fill(200);
     p.noStroke();
     p.textSize(10);
     p.textAlign(p.CENTER, p.CENTER);
     p.text('Statistics', 300, 275);
-    
+
     p.fill(100, 255, 150);
     p.textSize(11);
     p.text(`Sent: ${sentCount}`, 300, 305);
@@ -169,7 +169,7 @@ export const deviceCommSketch = (p: p5) => {
     p.textAlign(p.LEFT, p.CENTER);
     p.text('Pi ↔ Arduino Communication', 50, 50);
     p.text('→ UART, I2C, SPI protocols', 60, 70);
-    
+
     p.fill(150);
     p.textSize(10);
     p.textAlign(p.CENTER, p.CENTER);

@@ -15,12 +15,12 @@ export const dcMotorPWMSketch = (p: p5) => {
 
   p.draw = () => {
     p.background(30, 35, 45);
-    
+
     // Calculate motor speed from PWM
     const targetSpeed = (pwmValue / 255) * 0.3;
     motorSpeed = p.lerp(motorSpeed, targetSpeed, 0.05);
     motorAngle += motorSpeed;
-    
+
     drawPWMSlider();
     drawPWMWaveform();
     drawMotor();
@@ -38,25 +38,25 @@ export const dcMotorPWMSketch = (p: p5) => {
     const x = 50;
     const y = 320;
     const w = 200;
-    
+
     // Track
     p.fill(60);
     p.stroke(100);
     p.strokeWeight(2);
     p.rect(x, y - 5, w, 10, 5);
-    
+
     // Fill
     p.fill(100, 200, 100);
     p.noStroke();
     p.rect(x, y - 5, w * (pwmValue / 255), 10, 5, 0, 0, 5);
-    
+
     // Handle
     const handleX = x + w * (pwmValue / 255);
     p.fill(200);
     p.stroke(255);
     p.strokeWeight(2);
     p.ellipse(handleX, y, 20, 20);
-    
+
     // Labels
     p.fill(200);
     p.noStroke();
@@ -66,7 +66,7 @@ export const dcMotorPWMSketch = (p: p5) => {
     p.textSize(10);
     p.text('0', x - 10, y);
     p.text('255', x + w + 15, y);
-    
+
     // Value display
     p.fill(100, 200, 255);
     p.textSize(14);
@@ -79,34 +79,34 @@ export const dcMotorPWMSketch = (p: p5) => {
     const w = 200;
     const h = 80;
     const dutyCycle = pwmValue / 255;
-    
+
     // Background
     p.fill(40, 45, 55);
     p.stroke(80);
     p.strokeWeight(1);
     p.rect(x, y, w, h);
-    
+
     // Draw PWM waveform
     p.stroke(100, 255, 100);
     p.strokeWeight(2);
     p.noFill();
-    
+
     const period = w / 4; // 4 cycles visible
     p.beginShape();
     for (let i = 0; i < 4; i++) {
       const startX = x + i * period;
       const highWidth = period * dutyCycle;
-      
+
       // High portion
       p.vertex(startX, y + 10);
       p.vertex(startX + highWidth, y + 10);
-      
+
       // Low portion
       p.vertex(startX + highWidth, y + h - 10);
       p.vertex(startX + period, y + h - 10);
     }
     p.endShape();
-    
+
     // Labels
     p.fill(150);
     p.noStroke();
@@ -121,22 +121,22 @@ export const dcMotorPWMSketch = (p: p5) => {
     const cx = 450;
     const cy = 200;
     const motorRadius = 70;
-    
+
     // Motor housing
     p.fill(60, 60, 70);
     p.stroke(100);
     p.strokeWeight(3);
     p.ellipse(cx, cy, motorRadius * 2, motorRadius * 2);
-    
+
     // Inner ring
     p.fill(80, 80, 90);
     p.ellipse(cx, cy, motorRadius * 1.4, motorRadius * 1.4);
-    
+
     // Rotating shaft/blade
     p.push();
     p.translate(cx, cy);
     p.rotate(motorAngle);
-    
+
     // Motor blades/rotor
     p.fill(150, 100, 50);
     p.stroke(100);
@@ -153,13 +153,13 @@ export const dcMotorPWMSketch = (p: p5) => {
       p.endShape(p.CLOSE);
       p.pop();
     }
-    
+
     // Center hub
     p.fill(100);
     p.ellipse(0, 0, 20, 20);
-    
+
     p.pop();
-    
+
     // Speed blur effect
     if (motorSpeed > 0.1) {
       p.noFill();
@@ -169,7 +169,7 @@ export const dcMotorPWMSketch = (p: p5) => {
         p.ellipse(cx, cy, motorRadius * 1.2 + i * 5, motorRadius * 1.2 + i * 5);
       }
     }
-    
+
     // Motor terminals
     p.fill(180, 50, 50);
     p.stroke(100);
@@ -177,7 +177,7 @@ export const dcMotorPWMSketch = (p: p5) => {
     p.rect(cx - 80, cy - 10, 15, 8, 2);
     p.fill(50, 50, 180);
     p.rect(cx - 80, cy + 2, 15, 8, 2);
-    
+
     // Speed display
     p.fill(200);
     p.noStroke();
@@ -195,7 +195,7 @@ export const dcMotorPWMSketch = (p: p5) => {
     p.textAlign(p.LEFT, p.CENTER);
     p.text('Higher PWM duty cycle = More power to motor', 50, 50);
     p.text('→ Motor spins faster!', 60, 70);
-    
+
     p.fill(150);
     p.textSize(11);
     p.textAlign(p.CENTER, p.CENTER);
