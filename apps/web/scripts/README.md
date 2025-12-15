@@ -8,7 +8,7 @@ Auto-generates `src/lib/generated/lessonsManifest.ts` from MDX lesson frontmatte
 
 This script **must** be run before:
 - `npm run dev` - automatically runs via npm script
-- `npm run build` - automatically runs via npm script  
+- `npm run build` - automatically runs via npm script
 - `npm run lint` - automatically runs via npm script
 - Any TypeScript compilation (`tsc`)
 

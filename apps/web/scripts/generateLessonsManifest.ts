@@ -81,8 +81,8 @@ function isValidYouTubeUrl(url: string): boolean {
   if (!isValidUrl(url)) return false;
   try {
     const parsed = new URL(url);
-    return parsed.hostname === 'www.youtube.com' || 
-           parsed.hostname === 'youtube.com' || 
+    return parsed.hostname === 'www.youtube.com' ||
+           parsed.hostname === 'youtube.com' ||
            parsed.hostname === 'youtu.be' ||
            parsed.hostname === 'm.youtube.com';
   } catch {
@@ -261,7 +261,7 @@ function generateManifest(): LessonMeta[] {
       const filepath = path.join(langDir, file);
       try {
         const lesson = parseLessonFile(filepath, lang);
-        
+
         // Check for duplicate IDs
         if (seenIds.has(lesson.id)) {
           throw new Error(`❌ DUPLICATE ID ERROR: Lesson ID '${lesson.id}' is already used. Each lesson must have a unique ID.`);
