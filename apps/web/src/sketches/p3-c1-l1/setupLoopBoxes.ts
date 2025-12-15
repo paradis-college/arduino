@@ -121,7 +121,7 @@ export const setupLoopBoxesSketch = (p: p5) => {
       p.strokeWeight(2);
       p.noFill();
       p.arc(loopX + boxW / 2, loopY + boxH + 15, boxW - 20, 30, 0, p.PI);
-      
+
       // Arrow head
       p.fill(150, 100, 200);
       p.noStroke();

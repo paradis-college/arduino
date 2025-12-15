@@ -66,7 +66,7 @@ export function onSystemThemeChange(callback: (theme: Theme) => void): () => voi
   }
 
   const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-  
+
   const handler = (e: MediaQueryListEvent) => {
     // Only apply if user hasn't set a manual preference
     const stored = localStorage.getItem(THEME_STORAGE_KEY);

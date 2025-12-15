@@ -136,12 +136,12 @@ void loop() {
       case 0x45:  // Power - toggle LED
         digitalWrite(LED_PIN, !digitalRead(LED_PIN));
         break;
-        
+
       case 0x46:  // Up - increase brightness
         brightness = min(255, brightness + 25);
         analogWrite(LED_PIN, brightness);
         break;
-        
+
       case 0x47:  // Down - decrease brightness
         brightness = max(0, brightness - 25);
         analogWrite(LED_PIN, brightness);

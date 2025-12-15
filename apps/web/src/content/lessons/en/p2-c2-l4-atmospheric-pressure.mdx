@@ -110,7 +110,7 @@ Adafruit_BME280 bme;
 
 void setup() {
   Serial.begin(9600);
-  
+
   if (!bme.begin(0x76)) {
     Serial.println("BME280 not found!");
     while (1);
@@ -121,11 +121,11 @@ void loop() {
   float pressure = bme.readPressure() / 100.0F;  // hPa
   float temp = bme.readTemperature();
   float humidity = bme.readHumidity();
-  
+
   Serial.print("Pressure: ");
   Serial.print(pressure);
   Serial.println(" hPa");
-  
+
   delay(2000);
 }
 ```
@@ -168,7 +168,7 @@ String getTrend() {
   float oldest = pressureHistory[(historyIndex + 1) % 6];
   float newest = pressureHistory[historyIndex];
   float diff = newest - oldest;
-  
+
   if (diff > 2) return "Rising ↑";
   if (diff < -2) return "Falling ↓";
   return "Stable →";

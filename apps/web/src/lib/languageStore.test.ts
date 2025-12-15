@@ -20,14 +20,14 @@ describe('languageStore', () => {
     it('returns stored language when user has explicitly set it', () => {
       localStorage.setItem('arduino-language', 'en');
       localStorage.setItem('arduino-language-user-set', 'true');
-      
+
       expect(getInitialLanguage()).toBe('en');
     });
 
     it('returns detected language from previous IP detection', () => {
       localStorage.setItem('arduino-language-detected', 'ro');
       localStorage.setItem('arduino-language', 'ro');
-      
+
       expect(getInitialLanguage()).toBe('ro');
     });
 
@@ -40,13 +40,13 @@ describe('languageStore', () => {
   describe('saveLanguage', () => {
     it('saves language to localStorage', () => {
       saveLanguage('ro');
-      
+
       expect(localStorage.getItem('arduino-language')).toBe('ro');
     });
 
     it('marks language as user-set', () => {
       saveLanguage('en');
-      
+
       expect(localStorage.getItem('arduino-language-user-set')).toBe('true');
     });
   });
@@ -58,13 +58,13 @@ describe('languageStore', () => {
 
     it('returns stored language when present', () => {
       localStorage.setItem('arduino-language', 'ro');
-      
+
       expect(getStoredLanguage()).toBe('ro');
     });
 
     it('returns null for invalid language', () => {
       localStorage.setItem('arduino-language', 'invalid');
-      
+
       expect(getStoredLanguage()).toBeNull();
     });
   });
@@ -76,7 +76,7 @@ describe('languageStore', () => {
 
     it('returns true when user has set language', () => {
       localStorage.setItem('arduino-language-user-set', 'true');
-      
+
       expect(hasUserSetLanguage()).toBe(true);
     });
   });
@@ -86,9 +86,9 @@ describe('languageStore', () => {
       localStorage.setItem('arduino-language', 'en');
       localStorage.setItem('arduino-language-user-set', 'true');
       localStorage.setItem('arduino-language-detected', 'ro');
-      
+
       clearLanguagePreferences();
-      
+
       expect(localStorage.getItem('arduino-language')).toBeNull();
       expect(localStorage.getItem('arduino-language-user-set')).toBeNull();
       expect(localStorage.getItem('arduino-language-detected')).toBeNull();
@@ -107,9 +107,9 @@ describe('languageStore', () => {
         ok: true,
         json: () => Promise.resolve({ country_code: 'RO' }),
       });
-      
+
       const result = await detectLanguageFromIP();
-      
+
       expect(result).toBe('ro');
     });
 
@@ -118,17 +118,17 @@ describe('languageStore', () => {
         ok: true,
         json: () => Promise.resolve({ country_code: 'US' }),
       });
-      
+
       const result = await detectLanguageFromIP();
-      
+
       expect(result).toBe('en');
     });
 
     it('returns null when API fails', async () => {
       globalThis.fetch = vi.fn().mockRejectedValue(new Error('Network error'));
-      
+
       const result = await detectLanguageFromIP();
-      
+
       expect(result).toBeNull();
     });
 
@@ -136,9 +136,9 @@ describe('languageStore', () => {
       globalThis.fetch = vi.fn().mockResolvedValue({
         ok: false,
       });
-      
+
       const result = await detectLanguageFromIP();
-      
+
       expect(result).toBeNull();
     });
 
@@ -147,9 +147,9 @@ describe('languageStore', () => {
         ok: true,
         json: () => Promise.resolve(null),
       });
-      
+
       const result = await detectLanguageFromIP();
-      
+
       expect(result).toBeNull();
     });
 
@@ -158,9 +158,9 @@ describe('languageStore', () => {
         ok: true,
         json: () => Promise.resolve({ country_code: 123 }),
       });
-      
+
       const result = await detectLanguageFromIP();
-      
+
       expect(result).toBeNull();
     });
   });
@@ -169,17 +169,17 @@ describe('languageStore', () => {
     it('returns null when user has explicitly set language', async () => {
       localStorage.setItem('arduino-language-user-set', 'true');
       localStorage.setItem('arduino-language', 'en');
-      
+
       const result = await initializeLanguageFromIP();
-      
+
       expect(result).toBeNull();
     });
 
     it('returns null when language already detected', async () => {
       localStorage.setItem('arduino-language-detected', 'ro');
-      
+
       const result = await initializeLanguageFromIP();
-      
+
       expect(result).toBeNull();
     });
 
@@ -188,9 +188,9 @@ describe('languageStore', () => {
         ok: true,
         json: () => Promise.resolve({ country_code: 'RO' }),
       });
-      
+
       const result = await initializeLanguageFromIP();
-      
+
       expect(result).toBe('ro');
       expect(localStorage.getItem('arduino-language')).toBe('ro');
       expect(localStorage.getItem('arduino-language-detected')).toBe('ro');
@@ -201,9 +201,9 @@ describe('languageStore', () => {
         ok: true,
         json: () => Promise.resolve({ country_code: 'DE' }),
       });
-      
+
       const result = await initializeLanguageFromIP();
-      
+
       expect(result).toBe('en');
       expect(localStorage.getItem('arduino-language')).toBe('en');
       expect(localStorage.getItem('arduino-language-detected')).toBe('en');
@@ -211,9 +211,9 @@ describe('languageStore', () => {
 
     it('defaults to ro when IP detection fails', async () => {
       globalThis.fetch = vi.fn().mockRejectedValue(new Error('Network error'));
-      
+
       const result = await initializeLanguageFromIP();
-      
+
       expect(result).toBe('ro');
       expect(localStorage.getItem('arduino-language')).toBe('ro');
       expect(localStorage.getItem('arduino-language-detected')).toBe('ro');
@@ -224,10 +224,10 @@ describe('languageStore', () => {
     it('respects user choice over IP detection', async () => {
       // User explicitly sets language to English
       saveLanguage('en');
-      
+
       // IP detection should be skipped
       const result = await initializeLanguageFromIP();
-      
+
       expect(result).toBeNull();
       expect(getInitialLanguage()).toBe('en');
     });
@@ -238,13 +238,13 @@ describe('languageStore', () => {
         ok: true,
         json: () => Promise.resolve({ country_code: 'RO' }),
       });
-      
+
       await initializeLanguageFromIP();
       expect(getInitialLanguage()).toBe('ro');
-      
+
       // User intentionally switches to English
       saveLanguage('en');
-      
+
       // Future visits should use English
       expect(getInitialLanguage()).toBe('en');
       expect(hasUserSetLanguage()).toBe(true);

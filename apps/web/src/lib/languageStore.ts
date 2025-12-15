@@ -1,7 +1,7 @@
 /**
  * Language Store
  * Manages language preferences using localStorage
- * 
+ *
  * Language detection priority:
  * 1. User's explicit choice (stored in localStorage with user-set flag)
  * 2. IP-based geolocation (if user is from Romania, default to Romanian)
@@ -21,17 +21,17 @@ const LANGUAGE_DETECTED_KEY = 'arduino-language-detected';
  */
 export function isBrowserLanguageRomanian(): boolean {
   if (typeof navigator === 'undefined') return false;
-  
+
   // Check navigator.language (primary language)
   const primaryLang = navigator.language?.toLowerCase() || '';
   if (primaryLang.startsWith('ro')) return true;
-  
+
   // Check navigator.languages (all preferred languages)
   const languages = navigator.languages || [];
   for (const lang of languages) {
     if (lang.toLowerCase().startsWith('ro')) return true;
   }
-  
+
   return false;
 }
 
@@ -43,33 +43,33 @@ export function isBrowserLanguageRomanian(): boolean {
 export async function detectLanguageFromIP(): Promise<Language | null> {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout
-  
+
   try {
     // Use a free IP geolocation API to detect country
     const response = await fetch('https://ipapi.co/json/', {
       signal: controller.signal,
     });
-    
+
     clearTimeout(timeoutId);
-    
+
     if (!response.ok) return null;
-    
+
     const data = await response.json();
-    
+
     // Validate response structure
     if (!data || typeof data !== 'object') return null;
-    
-    const countryCode = typeof data.country_code === 'string' 
-      ? data.country_code.toUpperCase() 
+
+    const countryCode = typeof data.country_code === 'string'
+      ? data.country_code.toUpperCase()
       : null;
-    
+
     if (!countryCode) return null;
-    
+
     // If user is from Romania, return 'ro'
     if (countryCode === 'RO') {
       return 'ro';
     }
-    
+
     return 'en';
   } catch {
     clearTimeout(timeoutId);
@@ -81,7 +81,7 @@ export async function detectLanguageFromIP(): Promise<Language | null> {
 /**
  * Get the initial language synchronously
  * This is used for initial render - async detection happens afterward
- * 
+ *
  * Priority:
  * 1. User's explicit choice (stored with user-set flag)
  * 2. Previously detected language from IP
@@ -93,12 +93,12 @@ export function getInitialLanguage(): Language {
     // Check if user has explicitly set a language preference
     const userSet = localStorage.getItem(LANGUAGE_USER_SET_KEY);
     const stored = localStorage.getItem(LANGUAGE_STORAGE_KEY);
-    
+
     if (userSet === 'true' && stored && isValidLanguage(stored)) {
       // User has explicitly chosen a language - respect that choice
       return stored;
     }
-    
+
     // Check if we've previously detected language from IP
     const detected = localStorage.getItem(LANGUAGE_DETECTED_KEY);
     if (detected && isValidLanguage(detected)) {
@@ -116,40 +116,40 @@ export function getInitialLanguage(): Language {
  * Initialize language detection from IP
  * This runs asynchronously after initial render
  * Only runs once for first-time visitors (no stored preference)
- * 
+ *
  * Returns the detected language, or null if detection was skipped
  */
 export async function initializeLanguageFromIP(): Promise<Language | null> {
   if (typeof window === 'undefined') return null;
-  
+
   // If user has explicitly set a language, don't override it
   const userSet = localStorage.getItem(LANGUAGE_USER_SET_KEY);
   if (userSet === 'true') {
     return null;
   }
-  
+
   // If we've already detected language from IP, don't detect again
   const detected = localStorage.getItem(LANGUAGE_DETECTED_KEY);
   if (detected && isValidLanguage(detected)) {
     return null;
   }
-  
+
   // Check browser language first - if Romanian, no need for IP detection
   if (isBrowserLanguageRomanian()) {
     localStorage.setItem(LANGUAGE_DETECTED_KEY, 'ro');
     localStorage.setItem(LANGUAGE_STORAGE_KEY, 'ro');
     return 'ro';
   }
-  
+
   // Try IP-based detection
   const ipLanguage = await detectLanguageFromIP();
-  
+
   if (ipLanguage) {
     localStorage.setItem(LANGUAGE_DETECTED_KEY, ipLanguage);
     localStorage.setItem(LANGUAGE_STORAGE_KEY, ipLanguage);
     return ipLanguage;
   }
-  
+
   // If IP detection fails, default to Romanian (since most users are likely Romanian)
   localStorage.setItem(LANGUAGE_DETECTED_KEY, 'ro');
   localStorage.setItem(LANGUAGE_STORAGE_KEY, 'ro');

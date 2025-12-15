@@ -13,7 +13,7 @@ export const temperatureSketch = (p: p5) => {
 
   p.draw = () => {
     p.background(30, 35, 45);
-    
+
     drawThermometer();
     drawSlider();
     drawTemperatureValue();
@@ -34,23 +34,23 @@ export const temperatureSketch = (p: p5) => {
     const tubeHeight = 200;
     const tubeWidth = 30;
     const bulbRadius = 35;
-    
+
     // Thermometer tube
     p.fill(240);
     p.stroke(200);
     p.strokeWeight(3);
     p.rect(x - tubeWidth / 2, y - tubeHeight / 2, tubeWidth, tubeHeight, tubeWidth / 2);
-    
+
     // Bulb
     p.fill(240);
     p.ellipse(x, y + tubeHeight / 2 + bulbRadius - 15, bulbRadius * 2, bulbRadius * 2);
-    
+
     // Mercury/liquid level
     const minY = y + tubeHeight / 2 - 10;
     const maxY = y - tubeHeight / 2 + 20;
     const tempNormalized = (temperature + 20) / 70; // -20 to 50 normalized
     const mercuryTop = p.lerp(minY, maxY, tempNormalized);
-    
+
     // Mercury color based on temperature
     let mercuryColor;
     if (temperature < 0) {
@@ -60,28 +60,28 @@ export const temperatureSketch = (p: p5) => {
     } else {
       mercuryColor = p.color(255, 80, 80); // Hot red
     }
-    
+
     // Mercury column
     p.fill(mercuryColor);
     p.noStroke();
     p.rect(x - tubeWidth / 2 + 5, mercuryTop, tubeWidth - 10, minY - mercuryTop + 10);
-    
+
     // Mercury bulb
     p.ellipse(x, y + tubeHeight / 2 + bulbRadius - 15, bulbRadius * 1.5, bulbRadius * 1.5);
-    
+
     // Scale marks
     p.stroke(150);
     p.strokeWeight(1);
     p.fill(150);
     p.textSize(10);
     p.textAlign(p.LEFT, p.CENTER);
-    
+
     for (let t = -20; t <= 50; t += 10) {
       const markY = p.map(t, -20, 50, minY, maxY);
       p.line(x + tubeWidth / 2 + 5, markY, x + tubeWidth / 2 + 15, markY);
       p.text(`${t}°`, x + tubeWidth / 2 + 20, markY);
     }
-    
+
     // Thermometer cap
     p.fill(200);
     p.stroke(150);
@@ -93,7 +93,7 @@ export const temperatureSketch = (p: p5) => {
     const x = 350;
     const y = 320;
     const w = 200;
-    
+
     // Gradient background (cold to hot)
     for (let i = 0; i < w; i++) {
       const t = i / w;
@@ -106,20 +106,20 @@ export const temperatureSketch = (p: p5) => {
       p.stroke(c);
       p.line(x + i, y - 8, x + i, y + 8);
     }
-    
+
     // Border
     p.noFill();
     p.stroke(100);
     p.strokeWeight(2);
     p.rect(x, y - 8, w, 16, 8);
-    
+
     // Handle
     const handleX = p.map(temperature, -20, 50, x, x + w);
     p.fill(200);
     p.stroke(255);
     p.strokeWeight(2);
     p.ellipse(handleX, y, 24, 24);
-    
+
     // Labels
     p.fill(200);
     p.noStroke();
@@ -137,13 +137,13 @@ export const temperatureSketch = (p: p5) => {
     const y = 150;
     const w = 130;
     const h = 100;
-    
+
     // Display background
     p.fill(40, 45, 55);
     p.stroke(100);
     p.strokeWeight(2);
     p.rect(x - w / 2, y - h / 2, w, h, 10);
-    
+
     // Temperature value
     let valueColor;
     if (temperature < 10) {
@@ -153,17 +153,17 @@ export const temperatureSketch = (p: p5) => {
     } else {
       valueColor = p.color(255, 150, 100);
     }
-    
+
     p.fill(valueColor);
     p.noStroke();
     p.textSize(32);
     p.textAlign(p.CENTER, p.CENTER);
     p.text(`${temperature.toFixed(1)}°`, x, y - 10);
-    
+
     p.fill(200);
     p.textSize(14);
     p.text('Celsius', x, y + 25);
-    
+
     // Status icon
     let icon;
     if (temperature < 5) {
@@ -187,7 +187,7 @@ export const temperatureSketch = (p: p5) => {
     p.text('DHT Temperature Sensor', 50, 50);
     p.text('→ Measures ambient temperature', 60, 70);
     p.text('→ Returns value in Celsius or Fahrenheit', 60, 90);
-    
+
     p.fill(150);
     p.textSize(11);
     p.textAlign(p.CENTER, p.CENTER);

@@ -89,7 +89,7 @@ analogWrite(pin, brightness);
 - **pin** = Which light (use pins with a ~ symbol: 3, 5, 6, 9, 10, 11)
 - **brightness** = Pick a number from 0 to 255
 
-### Try These! 
+### Try These!
 
 ```cpp
 analogWrite(9, 0);    // Light is OFF
@@ -163,7 +163,7 @@ void loop() {
     analogWrite(9, i);
     delay(30);
   }
-  
+
   // Fade OUT - get dimmer!
   for (int i = 255; i >= 0; i = i - 5) {
     analogWrite(9, i);

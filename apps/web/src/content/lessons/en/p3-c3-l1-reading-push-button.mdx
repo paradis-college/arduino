@@ -151,7 +151,7 @@ void setup() {
 
 void loop() {
   int buttonState = digitalRead(BUTTON_PIN);
-  
+
   if (buttonState == LOW) {  // LOW = pressed with INPUT_PULLUP
     digitalWrite(LED_PIN, HIGH);
   } else {

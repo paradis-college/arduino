@@ -12,19 +12,19 @@ export interface StepWithGifProps {
  * Step with GIF component for visual step-by-step instructions
  * Shows a GIF/image on one side and detailed explanation on the other
  */
-export const StepWithGif: FC<StepWithGifProps> = ({ 
-  stepNumber, 
-  title, 
-  gifUrl, 
+export const StepWithGif: FC<StepWithGifProps> = ({
+  stepNumber,
+  title,
+  gifUrl,
   gifAlt,
-  children 
+  children
 }) => {
   const hasGif = Boolean(gifUrl);
-  const containerClasses = hasGif 
-    ? 'grid grid-cols-1 md:grid-cols-2 gap-4 items-start' 
+  const containerClasses = hasGif
+    ? 'grid grid-cols-1 md:grid-cols-2 gap-4 items-start'
     : '';
-  const textClasses = hasGif 
-    ? 'text-text-secondary text-sm leading-relaxed' 
+  const textClasses = hasGif
+    ? 'text-text-secondary text-sm leading-relaxed'
     : 'text-text-secondary text-sm leading-relaxed w-full';
 
   return (
@@ -50,7 +50,7 @@ export const StepWithGif: FC<StepWithGifProps> = ({
             />
           </div>
         )}
-        
+
         {/* Detailed explanation */}
         <div className={textClasses}>
           {children}

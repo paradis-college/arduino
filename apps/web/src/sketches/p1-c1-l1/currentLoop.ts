@@ -9,7 +9,7 @@ export const currentLoopSketch = (p: p5) => {
   let particles: { x: number; y: number; speed: number; inResistor: boolean }[] = [];
   let ledBrightness = 0;
   const numParticles = 15;
-  
+
   // Circuit path points
   const batteryX = 80;
   const batteryY = 200;
@@ -21,7 +21,7 @@ export const currentLoopSketch = (p: p5) => {
 
   p.setup = () => {
     p.createCanvas(600, 400);
-    
+
     // Initialize particles along the circuit
     for (let i = 0; i < numParticles; i++) {
       particles.push({
@@ -35,16 +35,16 @@ export const currentLoopSketch = (p: p5) => {
 
   p.draw = () => {
     p.background(30, 35, 45);
-    
+
     // Draw circuit elements
     drawBattery();
     drawWires();
     drawResistor();
     drawLED();
-    
+
     // Update and draw particles
     updateParticles();
-    
+
     // Draw labels
     drawLabels();
   };
@@ -55,13 +55,13 @@ export const currentLoopSketch = (p: p5) => {
     p.stroke(100);
     p.strokeWeight(2);
     p.rect(batteryX - 30, batteryY - 60, 40, 120, 5);
-    
+
     // Battery terminals
     p.fill(180, 50, 50);
     p.rect(batteryX - 20, batteryY - 75, 20, 15); // + terminal
     p.fill(50, 50, 180);
     p.rect(batteryX - 20, batteryY + 60, 20, 15); // - terminal
-    
+
     // Labels
     p.fill(255);
     p.noStroke();
@@ -76,15 +76,15 @@ export const currentLoopSketch = (p: p5) => {
     p.stroke(100, 150, 200);
     p.strokeWeight(3);
     p.noFill();
-    
+
     // Top wire: battery+ to resistor to LED anode
     p.line(batteryX - 10, batteryY - 75, batteryX - 10, wireY1);
     p.line(batteryX - 10, wireY1, resistorStartX, wireY1);
     p.line(resistorEndX, wireY1, ledX, wireY1);
-    
+
     // LED to bottom wire
     p.line(ledX, wireY1 + 80, ledX, wireY2);
-    
+
     // Bottom wire: LED cathode back to battery-
     p.line(ledX, wireY2, batteryX - 10, wireY2);
     p.line(batteryX - 10, wireY2, batteryX - 10, batteryY + 75);
@@ -94,31 +94,31 @@ export const currentLoopSketch = (p: p5) => {
     const x = resistorStartX;
     const y = wireY1;
     const width = resistorEndX - resistorStartX;
-    
+
     // Resistor body (with color bands)
     p.fill(210, 180, 140);
     p.stroke(100);
     p.strokeWeight(1);
     p.rect(x, y - 15, width, 30, 3);
-    
+
     // Color bands (220Ω = Red, Red, Brown, Gold)
     const bandWidth = 10;
     const bandGap = 18;
     const bandX = x + 20;
-    
+
     // Red band
     p.fill(220, 50, 50);
     p.noStroke();
     p.rect(bandX, y - 12, bandWidth, 24);
-    
+
     // Red band
     p.fill(220, 50, 50);
     p.rect(bandX + bandGap, y - 12, bandWidth, 24);
-    
+
     // Brown band
     p.fill(139, 90, 43);
     p.rect(bandX + bandGap * 2, y - 12, bandWidth, 24);
-    
+
     // Gold tolerance band
     p.fill(212, 175, 55);
     p.rect(bandX + bandGap * 3, y - 12, bandWidth, 24);
@@ -127,7 +127,7 @@ export const currentLoopSketch = (p: p5) => {
   const drawLED = () => {
     const x = ledX;
     const y = wireY1 + 40;
-    
+
     // LED glow effect when bright
     if (ledBrightness > 0) {
       p.noStroke();
@@ -136,22 +136,22 @@ export const currentLoopSketch = (p: p5) => {
         p.ellipse(x, y, r * 2, r * 2);
       }
     }
-    
+
     // LED body (triangle/lens shape)
     p.fill(ledBrightness > 50 ? p.color(255, 100 + ledBrightness * 0.6, 100) : p.color(180, 60, 60));
     p.stroke(100);
     p.strokeWeight(2);
-    
+
     // Draw LED as a semi-circle with flat bottom
     p.arc(x, y - 10, 40, 40, p.PI, 0);
     p.rect(x - 20, y - 10, 40, 30, 0, 0, 5, 5);
-    
+
     // LED legs
     p.stroke(150);
     p.strokeWeight(2);
     p.line(x - 8, y + 20, x - 8, wireY1); // Anode (longer on real LED)
     p.line(x + 8, y + 20, x + 8, wireY1 + 80); // Cathode
-    
+
     // Anode/Cathode labels
     p.fill(200);
     p.noStroke();
@@ -162,15 +162,15 @@ export const currentLoopSketch = (p: p5) => {
 
   const updateParticles = () => {
     let activeLedParticles = 0;
-    
+
     for (const particle of particles) {
       // Move particle along circuit path (0 to 1 represents full circuit)
       const baseSpeed = particle.speed;
-      
+
       // Determine if in resistor zone (slows down)
       const resistorZone = particle.x > 0.2 && particle.x < 0.35;
       const ledZone = particle.x > 0.5 && particle.x < 0.65;
-      
+
       if (resistorZone) {
         particle.speed = baseSpeed * 0.4; // Slow down in resistor
         particle.inResistor = true;
@@ -181,22 +181,22 @@ export const currentLoopSketch = (p: p5) => {
         particle.speed = baseSpeed;
         particle.inResistor = false;
       }
-      
+
       particle.x += particle.speed;
       if (particle.x > 1) {
         particle.x = 0;
         particle.speed = p.random(0.003, 0.005);
       }
-      
+
       // Calculate screen position based on circuit path
       const pos = getCircuitPosition(particle.x);
-      
+
       // Draw particle (electron)
       p.noStroke();
       p.fill(particle.inResistor ? p.color(255, 200, 100) : p.color(100, 200, 255));
       p.ellipse(pos.x, pos.y, 8, 8);
     }
-    
+
     // Update LED brightness based on particles passing through
     ledBrightness = p.lerp(ledBrightness, activeLedParticles * 30, 0.1);
     ledBrightness = p.constrain(ledBrightness, 0, 200);
@@ -268,16 +268,16 @@ export const currentLoopSketch = (p: p5) => {
     p.noStroke();
     p.textSize(14);
     p.textAlign(p.CENTER, p.CENTER);
-    
+
     p.text('Battery', batteryX - 10, batteryY + 100);
     p.text('220Ω Resistor', (resistorStartX + resistorEndX) / 2, wireY1 - 30);
     p.text('LED', ledX, wireY1 + 100);
-    
+
     // Current direction arrows
     p.fill(100, 200, 255);
     p.textSize(12);
     p.text('→ Current Flow →', 350, wireY1 - 50);
-    
+
     // Info text
     p.fill(150);
     p.textSize(11);

@@ -46,25 +46,25 @@ export const gpioAppsSketch = (p: p5) => {
     p.stroke(80);
     p.strokeWeight(2);
     p.rect(70, 130, 100, 140, 10);
-    
+
     // Physical button
     p.fill(buttonPressed ? p.color(100, 200, 100) : p.color(200, 80, 80));
     p.stroke(buttonPressed ? p.color(80, 180, 80) : p.color(180, 60, 60));
     p.strokeWeight(3);
     p.ellipse(120, 200, 60, 60);
-    
+
     p.fill(255);
     p.noStroke();
     p.textSize(10);
     p.textAlign(p.CENTER, p.CENTER);
     p.text('GPIO', 120, 195);
     p.text('Button', 120, 210);
-    
+
     // Connection wire
     p.stroke(100, 150, 200);
     p.strokeWeight(3);
     p.line(170, 200, 250, 200);
-    
+
     // Label
     p.fill(200);
     p.textSize(11);
@@ -77,11 +77,11 @@ export const gpioAppsSketch = (p: p5) => {
     p.stroke(80);
     p.strokeWeight(2);
     p.rect(260, 100, 200, 180, 8);
-    
+
     // Title bar
     p.fill(60, 65, 75);
     p.rect(260, 100, 200, 25, 8, 8, 0, 0);
-    
+
     // Window buttons
     p.fill(255, 100, 100);
     p.noStroke();
@@ -90,19 +90,19 @@ export const gpioAppsSketch = (p: p5) => {
     p.ellipse(290, 112, 10, 10);
     p.fill(100, 255, 100);
     p.ellipse(305, 112, 10, 10);
-    
+
     p.fill(200);
     p.textSize(10);
     p.textAlign(p.CENTER, p.CENTER);
     p.text('GPIO Monitor App', 360, 112);
-    
+
     // App content
     p.fill(40, 45, 55);
     p.rect(270, 135, 180, 135, 5);
-    
+
     // Status indicator
     const statusColor = buttonPressed ? p.color(100, 255, 100) : p.color(255, 100, 100);
-    
+
     if (buttonPressed) {
       p.noStroke();
       for (let r = 40; r > 0; r -= 8) {
@@ -110,22 +110,22 @@ export const gpioAppsSketch = (p: p5) => {
         p.ellipse(360, 180, r * 2, r * 2);
       }
     }
-    
+
     p.fill(statusColor);
     p.stroke(80);
     p.strokeWeight(2);
     p.ellipse(360, 180, 50, 50);
-    
+
     p.fill(255);
     p.noStroke();
     p.textSize(12);
     p.text(buttonPressed ? 'PRESSED' : 'IDLE', 360, 180);
-    
+
     // Status text
     p.fill(statusColor);
     p.textSize(14);
     p.text(`GPIO State: ${buttonPressed ? 'HIGH' : 'LOW'}`, 360, 235);
-    
+
     // Label
     p.fill(200);
     p.textSize(11);
@@ -138,13 +138,13 @@ export const gpioAppsSketch = (p: p5) => {
     p.stroke(80);
     p.strokeWeight(2);
     p.rect(480, 100, 100, 180, 8);
-    
+
     p.fill(200);
     p.noStroke();
     p.textSize(10);
     p.textAlign(p.CENTER, p.CENTER);
     p.text('Event Log', 530, 88);
-    
+
     // Log entries
     p.textSize(8);
     p.textAlign(p.LEFT, p.CENTER);
@@ -161,7 +161,7 @@ export const gpioAppsSketch = (p: p5) => {
     p.textAlign(p.LEFT, p.CENTER);
     p.text('GPIO + Desktop Application', 50, 50);
     p.text('→ Hardware events trigger software UI updates', 60, 70);
-    
+
     p.fill(150);
     p.textSize(10);
     p.textAlign(p.CENTER, p.CENTER);

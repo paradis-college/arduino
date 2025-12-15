@@ -12,10 +12,10 @@ export interface LessonIntroProps {
  * Displays video on the right and key points/overview on the left
  * Responsive: stacks on mobile, side-by-side on desktop
  */
-export const LessonIntro: FC<LessonIntroProps> = ({ 
-  videoId, 
+export const LessonIntro: FC<LessonIntroProps> = ({
+  videoId,
   videoTitle = 'Lesson Video',
-  children 
+  children
 }) => {
   // If no video, just render children normally
   if (!videoId) {
@@ -28,7 +28,7 @@ export const LessonIntro: FC<LessonIntroProps> = ({
       <div className="order-2 lg:order-1">
         {children}
       </div>
-      
+
       {/* Right side: YouTube video */}
       <div className="order-1 lg:order-2 lg:sticky lg:top-20">
         <YouTubeEmbed url={videoId} title={videoTitle} />

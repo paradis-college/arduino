@@ -79,15 +79,15 @@ export const brightnessScaleSketch = (p: p5) => {
     p.fill(200);
     p.textSize(11);
     p.noStroke();
-    
+
     p.textAlign(p.LEFT, p.CENTER);
     p.text('0', barX, barY + barH + 20);
     p.text('OFF', barX, barY + barH + 35);
-    
+
     p.textAlign(p.CENTER, p.CENTER);
     p.text('127', barX + barW / 2, barY + barH + 20);
     p.text('HALF', barX + barW / 2, barY + barH + 35);
-    
+
     p.textAlign(p.RIGHT, p.CENTER);
     p.text('255', barX + barW, barY + barH + 20);
     p.text('MAX!', barX + barW, barY + barH + 35);
