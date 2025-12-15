@@ -40,10 +40,10 @@ export async function loadMDX(slug: string, language: Language): Promise<MDXModu
   try {
     // Construct the expected file path
     const modulePath = `/src/content/lessons/${language}/${slug}.mdx`;
-    
+
     // Get the loader function for this module
     const loader = mdxModules[modulePath];
-    
+
     if (!loader) {
       // Friendly handling - lesson not found, return null instead of crashing
       // Only log in development to avoid production log noise
