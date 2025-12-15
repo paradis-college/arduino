@@ -42,19 +42,19 @@ export const threeLedSetupSketch = (p: p5) => {
     p.fill(200);
     p.textSize(10);
     p.noStroke();
-    
+
     const pins = [9, 10, 11];
     const pinY = [90, 110, 130];
-    
+
     for (let i = 0; i < 3; i++) {
       const isHighlighted = highlightPin === i + 1;
-      
+
       // Pin
       p.fill(isHighlighted ? '#4CAF50' : '#282828');
       p.stroke(isHighlighted ? '#66bb6a' : '#3c3c3c');
       p.strokeWeight(isHighlighted ? 2 : 1);
       p.rect(boardX + boardW - 5, pinY[i], 15, 10, 2);
-      
+
       // Pin label
       p.fill(isHighlighted ? '#4CAF50' : '#969696');
       p.noStroke();
@@ -128,7 +128,7 @@ export const threeLedSetupSketch = (p: p5) => {
     for (let i = 0; i < 3; i++) {
       const isHighlighted = highlightPin === i + 1;
       const ledX = breadX + 45 + i * 50 - 4;
-      
+
       p.stroke(isHighlighted ? '#4CAF50' : '#666');
       p.strokeWeight(isHighlighted ? 3 : 2);
       p.noFill();
@@ -144,7 +144,7 @@ export const threeLedSetupSketch = (p: p5) => {
     p.fill(40);
     p.noStroke();
     p.rect(30, 235, 340, 35, 5);
-    
+
     p.fill(150);
     p.textSize(10);
     p.textAlign(p.LEFT, p.CENTER);

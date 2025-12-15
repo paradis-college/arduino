@@ -102,7 +102,7 @@ ser = serial.Serial('/dev/ttyS0', 9600, timeout=1)
 while True:
     ser.write(b'Hello Arduino\n')
     sleep(1)
-    
+
     if ser.in_waiting > 0:
         response = ser.readline().decode('utf-8').strip()
         print(f"Arduino says: {response}")

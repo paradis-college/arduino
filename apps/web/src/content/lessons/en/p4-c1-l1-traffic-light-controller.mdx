@@ -144,19 +144,19 @@ const unsigned long STATE_TIMES[] = {
 ```cpp
 void loop() {
   checkPedestrianButton();
-  
+
   unsigned long elapsed = millis() - stateStartTime;
   unsigned long stateTime = STATE_TIMES[currentState];
-  
+
   // Shorten green if pedestrian waiting
   if (pedestrianWaiting && (currentState == 1 || currentState == 4)) {
     stateTime = min(stateTime, 2000UL);
   }
-  
+
   if (elapsed >= stateTime) {
     nextState();
   }
-  
+
   updateLights();
 }
 ```

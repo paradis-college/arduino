@@ -58,7 +58,7 @@ export const Navbar: FC<NavbarProps> = ({ theme, onToggleTheme }) => {
           <div className="flex items-center gap-2">
             <LanguageSwitcher />
             <ThemeToggle theme={theme} onToggle={onToggleTheme} />
-            
+
             {/* Login button placeholder */}
             {/* TODO: Replace with actual auth when backend is ready */}
             <button

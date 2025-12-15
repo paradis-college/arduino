@@ -45,13 +45,13 @@ export const debouncingSketch = (p: p5) => {
     } else {
       rawValue = buttonPressed ? 1 : 0;
     }
-    
+
     rawSignal.push(rawValue);
     if (rawSignal.length > maxPoints) rawSignal.shift();
-    
+
     const stableCount = rawSignal.slice(-10).filter(v => v === rawValue).length;
     const debouncedValue = stableCount >= 8 ? rawValue : (debouncedSignal[debouncedSignal.length - 1] || 0);
-    
+
     debouncedSignal.push(debouncedValue);
     if (debouncedSignal.length > maxPoints) debouncedSignal.shift();
   };
@@ -59,7 +59,7 @@ export const debouncingSketch = (p: p5) => {
   const drawSignals = () => {
     // Raw signal
     drawWaveform(50, 80, 400, 80, rawSignal, p.color(255, 100, 100), 'Raw Signal (with bounce)');
-    
+
     // Debounced signal
     drawWaveform(50, 200, 400, 80, debouncedSignal, p.color(100, 255, 100), 'Debounced Signal (clean)');
   };
@@ -69,7 +69,7 @@ export const debouncingSketch = (p: p5) => {
     p.stroke(80);
     p.strokeWeight(1);
     p.rect(x, y, w, h);
-    
+
     if (data.length > 1) {
       p.stroke(color);
       p.strokeWeight(2);
@@ -82,7 +82,7 @@ export const debouncingSketch = (p: p5) => {
       }
       p.endShape();
     }
-    
+
     p.fill(color);
     p.noStroke();
     p.textSize(11);
@@ -93,18 +93,18 @@ export const debouncingSketch = (p: p5) => {
   const drawButton = () => {
     const x = 520;
     const y = 150;
-    
+
     p.fill(buttonPressed ? p.color(100, 200, 100) : p.color(80, 80, 90));
     p.stroke(100);
     p.strokeWeight(2);
     p.ellipse(x, y, 70, 70);
-    
+
     p.fill(255);
     p.noStroke();
     p.textSize(11);
     p.textAlign(p.CENTER, p.CENTER);
     p.text('CLICK', x, y);
-    
+
     p.fill(200);
     p.textSize(10);
     p.text('Button', x, y + 50);
@@ -116,12 +116,12 @@ export const debouncingSketch = (p: p5) => {
     p.textSize(12);
     p.textAlign(p.LEFT, p.CENTER);
     p.text('Button Debouncing', 50, 50);
-    
+
     p.fill(255, 100, 100);
     p.text('→ Raw: Noisy "bounce" when pressed/released', 60, 310);
     p.fill(100, 255, 100);
     p.text('→ Debounced: Clean, stable signal', 60, 330);
-    
+
     p.fill(150);
     p.textSize(10);
     p.textAlign(p.CENTER, p.CENTER);

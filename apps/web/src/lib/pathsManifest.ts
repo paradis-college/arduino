@@ -1,7 +1,7 @@
 /**
  * Paths Manifest
  * Defines learning paths, courses, and lesson structure
- * 
+ *
  * A path is a collection of related courses forming a complete learning track
  */
 

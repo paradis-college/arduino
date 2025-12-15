@@ -126,7 +126,7 @@ AlarmState currentState = IDLE;
 void loop() {
   bool buttonPressed = checkButton();
   bool motionDetected = digitalRead(PIR_PIN) == HIGH;
-  
+
   switch (currentState) {
     case IDLE:
       setLeds(true, false, false);  // Green only
@@ -136,7 +136,7 @@ void loop() {
         delay(5000);  // Delay before arming
       }
       break;
-      
+
     case ARMED:
       setLeds(false, true, false);  // Yellow only
       if (buttonPressed) {
@@ -145,7 +145,7 @@ void loop() {
         currentState = TRIGGERED;
       }
       break;
-      
+
     case TRIGGERED:
       setLeds(false, false, true);  // Red only
       soundAlarm();

@@ -1,7 +1,7 @@
 /**
  * Lessons Manifest
  * Lists all available lessons with their metadata
- * 
+ *
  * TODO: Auto-generate this from MDX files at build time
  * For now, manually maintained
  */
@@ -516,7 +516,7 @@ export function getCoursesByPath(pathId: string, language: Language): CourseMeta
   // Get all lessons for the language once and build a set of course IDs that have lessons
   const lessonsForLanguage = getLessonsByLanguage(language);
   const courseIdsWithLessons = new Set(lessonsForLanguage.map((l) => l.course));
-  
+
   return coursesManifest
     .filter((course) => course.pathId === pathId)
     .filter((course) => courseIdsWithLessons.has(course.id))
@@ -539,7 +539,7 @@ export function getAllCourses(language: Language): CourseMeta[] {
   // Get all lessons for the language once and build a set of course IDs that have lessons
   const lessonsForLanguage = getLessonsByLanguage(language);
   const courseIdsWithLessons = new Set(lessonsForLanguage.map((l) => l.course));
-  
+
   return coursesManifest
     .filter((course) => courseIdsWithLessons.has(course.id))
     .map((course) => {

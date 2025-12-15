@@ -101,7 +101,7 @@ export function updateCheckpoint(
   completed: boolean
 ): void {
   const store = getStore();
-  
+
   if (!store.lessons[lessonKey]) {
     store.lessons[lessonKey] = createEmptyLessonProgress(lessonKey);
   }

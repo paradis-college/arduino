@@ -33,7 +33,7 @@ describe('Checkpoint', () => {
     renderWithContext(
       <Checkpoint id="test-cp" lessonKey="test-lesson" label="Test Checkpoint" />
     );
-    
+
     expect(screen.getByText('Test Checkpoint')).toBeInTheDocument();
   });
 
@@ -41,7 +41,7 @@ describe('Checkpoint', () => {
     renderWithContext(
       <Checkpoint id="test-cp" lessonKey="test-lesson" />
     );
-    
+
     // Get the checkbox button (the first one with aria-pressed)
     const buttons = screen.getAllByRole('button');
     const checkboxButton = buttons.find(btn => btn.hasAttribute('aria-pressed'));
@@ -52,12 +52,12 @@ describe('Checkpoint', () => {
     renderWithContext(
       <Checkpoint id="test-cp" lessonKey="test-lesson" />
     );
-    
+
     // Get the checkbox button (the one with aria-pressed)
     const buttons = screen.getAllByRole('button');
     const checkboxButton = buttons.find(btn => btn.hasAttribute('aria-pressed'));
     fireEvent.click(checkboxButton!);
-    
+
     expect(checkboxButton).toHaveAttribute('aria-pressed', 'true');
   });
 
@@ -65,12 +65,12 @@ describe('Checkpoint', () => {
     renderWithContext(
       <Checkpoint id="test-cp" lessonKey="test-lesson" />
     );
-    
+
     // Get the checkbox button (the one with aria-pressed)
     const buttons = screen.getAllByRole('button');
     const checkboxButton = buttons.find(btn => btn.hasAttribute('aria-pressed'));
     fireEvent.click(checkboxButton!);
-    
+
     // Should have at least one element with the completed text
     const completedElements = screen.getAllByText(/checkpoint completed/i);
     expect(completedElements.length).toBeGreaterThan(0);

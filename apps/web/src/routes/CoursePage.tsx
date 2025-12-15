@@ -32,14 +32,14 @@ export const CoursePage: FC = () => {
     { label: t('common.home'), href: `/${currentLang}` },
     { label: t('paths.title'), href: `/${currentLang}/paths` },
   ];
-  
+
   if (path) {
-    breadcrumbItems.push({ 
-      label: path.title, 
-      href: `/${currentLang}/paths/${path.slug}` 
+    breadcrumbItems.push({
+      label: path.title,
+      href: `/${currentLang}/paths/${path.slug}`
     });
   }
-  
+
   breadcrumbItems.push({ label: course.title });
 
   return (

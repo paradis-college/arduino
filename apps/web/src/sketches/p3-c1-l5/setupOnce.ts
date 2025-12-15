@@ -67,13 +67,13 @@ export const setupOnceSketch = (p: p5) => {
     // Checklist items
     for (let i = 0; i < checkmarks.length; i++) {
       const itemY = boxY + 55 + i * 25;
-      
+
       // Checkbox
       p.fill(checkmarks[i].done ? '#4CAF50' : '#3c3c3c');
       p.stroke(checkmarks[i].done ? '#4CAF50' : '#646464');
       p.strokeWeight(2);
       p.rect(boxX + 30, itemY - 8, 16, 16, 3);
-      
+
       if (checkmarks[i].done) {
         p.fill(255);
         p.noStroke();
@@ -99,7 +99,7 @@ export const setupOnceSketch = (p: p5) => {
     p.fill(200);
     p.textSize(12);
     p.text('📦 Like getting ready in the morning:', p.width / 2, 210);
-    
+
     p.fill(150);
     p.textSize(11);
     p.text('👟 Put on shoes ONCE', p.width / 2, 230);

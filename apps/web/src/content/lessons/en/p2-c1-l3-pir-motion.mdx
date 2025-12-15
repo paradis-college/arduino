@@ -106,14 +106,14 @@ void setup() {
   pinMode(PIR_PIN, INPUT);
   pinMode(LED_PIN, OUTPUT);
   Serial.begin(9600);
-  
+
   // Allow PIR to stabilize (30-60 seconds)
   delay(30000);
 }
 
 void loop() {
   int motion = digitalRead(PIR_PIN);
-  
+
   if (motion == HIGH) {
     Serial.println("Motion detected!");
     digitalWrite(LED_PIN, HIGH);

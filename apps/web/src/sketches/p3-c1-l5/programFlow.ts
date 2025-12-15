@@ -19,7 +19,7 @@ export const programFlowSketch = (p: p5) => {
 
     // Phase transitions
     phaseTimer += p.deltaTime;
-    
+
     if (phase === 'power' && phaseTimer > 1500) {
       phase = 'setup';
       phaseTimer = 0;
@@ -85,7 +85,7 @@ export const programFlowSketch = (p: p5) => {
     p.stroke(phase === 'loop' ? p.color(100, 255, 150) : p.color(80));
     p.strokeWeight(phase === 'loop' ? 3 : 2);
     p.noFill();
-    
+
     // Curved arrow going back
     p.line(loopX + boxW / 2, y + boxH, loopX + boxW / 2, loopBackY);
     p.line(loopX + boxW / 2, loopBackY, loopX - 20, loopBackY);
@@ -143,7 +143,7 @@ export const programFlowSketch = (p: p5) => {
     p.noStroke();
     p.textSize(10);
     p.text('loop() count:', 330, 185);
-    
+
     p.fill(100, 255, 150);
     p.textSize(24);
     p.text(loopCount.toString(), 330, 210);

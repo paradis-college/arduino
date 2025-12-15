@@ -188,7 +188,7 @@ const int SPEED_POT = A0;
 void loop() {
   int potValue = analogRead(SPEED_POT);
   int delayTime = map(potValue, 0, 1023, 20, 500);
-  
+
   chasePattern(delayTime);
 }
 ```
@@ -200,7 +200,7 @@ int currentPattern = 0;
 
 void loop() {
   int speed = map(analogRead(SPEED_POT), 0, 1023, 20, 300);
-  
+
   switch (currentPattern) {
     case 0: chasePattern(speed); break;
     case 1: pingPongPattern(speed); break;

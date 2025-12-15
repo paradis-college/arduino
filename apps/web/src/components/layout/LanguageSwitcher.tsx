@@ -24,7 +24,7 @@ export const LanguageSwitcher: FC = () => {
     const currentPath = location.pathname;
     const pathWithoutLang = currentPath.replace(/^\/(ro|en)/, '');
     const newPath = `/${newLang}${pathWithoutLang || '/'}`;
-    
+
     navigate(newPath, { replace: true });
   };
 

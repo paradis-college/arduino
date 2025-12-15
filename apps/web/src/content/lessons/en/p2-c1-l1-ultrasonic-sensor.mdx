@@ -108,10 +108,10 @@ long readDistance() {
   digitalWrite(TRIG_PIN, HIGH);
   delayMicroseconds(10);
   digitalWrite(TRIG_PIN, LOW);
-  
+
   // Read echo duration
   long duration = pulseIn(ECHO_PIN, HIGH);
-  
+
   // Calculate distance in cm
   return duration * 0.0343 / 2;
 }

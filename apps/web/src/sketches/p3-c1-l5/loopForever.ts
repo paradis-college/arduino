@@ -44,7 +44,7 @@ export const loopForeverSketch = (p: p5) => {
     p.stroke(100, 150, 255);
     p.strokeWeight(3);
     p.noFill();
-    
+
     // Animated dashes around box
     const dashPhase = (p.millis() / 50) % 20;
     (p.drawingContext as CanvasRenderingContext2D).setLineDash([10, 10]);
@@ -66,7 +66,7 @@ export const loopForeverSketch = (p: p5) => {
     for (let i = 0; i < steps.length; i++) {
       const stepY = boxY + 50 + i * 22;
       const isActive = i === currentStep;
-      
+
       if (isActive) {
         p.fill(100, 150, 255, 50);
         p.noStroke();
@@ -118,7 +118,7 @@ export const loopForeverSketch = (p: p5) => {
     p.fill(200);
     p.textSize(12);
     p.text('🔄 Like breathing:', p.width / 2, 210);
-    
+
     p.fill(150);
     p.textSize(11);
     p.text('💨 Breathe in, breathe out', p.width / 2, 230);

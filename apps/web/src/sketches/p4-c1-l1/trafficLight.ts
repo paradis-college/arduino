@@ -15,13 +15,13 @@ export const trafficLightSketch = (p: p5) => {
 
   p.draw = () => {
     p.background(60, 70, 80);
-    
+
     timer += p.deltaTime;
     if (timer >= phaseDurations[phase]) {
       timer = 0;
       phase = phase === 'red' ? 'green' : phase === 'green' ? 'yellow' : 'red';
     }
-    
+
     drawRoad();
     drawTrafficLight(150, 100);
     drawTrafficLight(450, 100);
@@ -34,10 +34,10 @@ export const trafficLightSketch = (p: p5) => {
     p.fill(50);
     p.noStroke();
     p.rect(250, 0, 100, 400);
-    
+
     // Horizontal road
     p.rect(0, 150, 600, 100);
-    
+
     // Center lines
     p.stroke(255, 200, 0);
     p.strokeWeight(3);
@@ -55,11 +55,11 @@ export const trafficLightSketch = (p: p5) => {
     p.stroke(60);
     p.strokeWeight(2);
     p.rect(x - 10, y, 20, 150);
-    
+
     // Light housing
     p.fill(40);
     p.rect(x - 25, y - 90, 50, 100, 10);
-    
+
     // Red
     const redOn = phase === 'red';
     if (redOn) {
@@ -73,7 +73,7 @@ export const trafficLightSketch = (p: p5) => {
     p.stroke(50);
     p.strokeWeight(2);
     p.ellipse(x, y - 65, 25, 25);
-    
+
     // Yellow
     const yellowOn = phase === 'yellow';
     if (yellowOn) {
@@ -87,7 +87,7 @@ export const trafficLightSketch = (p: p5) => {
     p.stroke(50);
     p.strokeWeight(2);
     p.ellipse(x, y - 40, 25, 25);
-    
+
     // Green
     const greenOn = phase === 'green';
     if (greenOn) {
@@ -106,14 +106,14 @@ export const trafficLightSketch = (p: p5) => {
   const drawCars = () => {
     const speed = phase === 'green' ? 3 : phase === 'yellow' ? 1 : 0;
     const carX = (p.frameCount * speed) % 700 - 50;
-    
+
     // Car body
     p.fill(100, 150, 200);
     p.stroke(80, 130, 180);
     p.strokeWeight(2);
     p.rect(carX, 175, 50, 20, 5);
     p.rect(carX + 8, 165, 30, 15, 3);
-    
+
     // Wheels
     p.fill(40);
     p.ellipse(carX + 12, 197, 12, 12);
@@ -125,12 +125,12 @@ export const trafficLightSketch = (p: p5) => {
     p.noStroke();
     p.textSize(14);
     p.textAlign(p.CENTER, p.CENTER);
-    
+
     const phaseText = phase.toUpperCase();
     const phaseColor = phase === 'red' ? p.color(255, 100, 100) : phase === 'yellow' ? p.color(255, 200, 100) : p.color(100, 255, 100);
     p.fill(phaseColor);
     p.text(`Phase: ${phaseText}`, 300, 350);
-    
+
     p.fill(150);
     p.textSize(11);
     p.text('Traffic light cycles: RED → GREEN → YELLOW → RED...', 300, 380);
