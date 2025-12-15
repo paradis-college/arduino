@@ -46,21 +46,21 @@ When you build the application with `npm run build` (from the `apps/web` directo
 If you're deploying the application to a subdirectory (e.g., `https://example.com/arduino/` instead of `https://example.com/`), you need to adjust the configuration:
 
 1. **Update .htaccess:**
-   
+
    In `apps/web/public/.htaccess`, uncomment and modify the `RewriteBase` line:
-   
+
    ```apache
    # Change from:
    # RewriteBase /
-   
+
    # To (example for /arduino/ subdirectory):
    RewriteBase /arduino/
    ```
 
 2. **Update Vite configuration:**
-   
+
    In `apps/web/vite.config.ts`, set the `base` option:
-   
+
    ```typescript
    export default defineConfig({
      base: '/arduino/',  // Add this line
@@ -69,9 +69,9 @@ If you're deploying the application to a subdirectory (e.g., `https://example.co
    ```
 
 3. **Update BrowserRouter:**
-   
+
    In `apps/web/src/App.tsx`, add the `basename` prop to `BrowserRouter`:
-   
+
    ```tsx
    <BrowserRouter basename="/arduino">
      {/* routes */}
