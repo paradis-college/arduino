@@ -133,7 +133,7 @@ sudo a2enmod mime
 sudo systemctl restart apache2
 ```
 
-**Note:** The deflate, expires, and mime modules are optional for performance optimization. Only `mod_rewrite` is strictly required for routing.
+**Note:** The `mod_deflate`, `mod_expires`, and `mod_mime` modules are optional for performance optimization. Only `mod_rewrite` is strictly required for routing.
 
 ### Still Getting 404 Errors
 
