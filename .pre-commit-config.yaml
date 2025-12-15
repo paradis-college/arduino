@@ -36,15 +36,15 @@ repos:
         # args: ["--maxkb=10240"] # 10 MB, adjust if you commit large assets intentionally
 
   # Format: JS/TS/React + JSON/YAML/MD/MDX/CSS
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.3.3
-    hooks:
-      - id: prettier
-        # pre-commit.ci will install these alongside prettier so it can format MDX correctly
-        additional_dependencies:
-          - prettier@3.3.3
-          - prettier-plugin-mdx@3.3.1
-        files: \.(js|jsx|ts|tsx|json|yml|yaml|md|mdx|css|scss)$
+  # - repo: https://github.com/pre-commit/mirrors-prettier
+  #   rev: v3.3.3
+  #   hooks:
+  #     - id: prettier
+  #       # pre-commit.ci will install these alongside prettier so it can format MDX correctly
+  #       additional_dependencies:
+  #         - prettier@3.3.3
+  #         - prettier-plugin-mdx@3.3.1
+  #       files: \.(js|jsx|ts|tsx|json|yml|yaml|md|mdx|css|scss)$
 
   # Lint: React/Next/TS (uses your repo’s eslint config)
   - repo: https://github.com/pre-commit/mirrors-eslint
