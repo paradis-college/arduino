@@ -139,7 +139,7 @@ sudo systemctl restart apache2
 
 **Cause 1:** `.htaccess` files may be disabled in Apache configuration.
 
-**Solution:** Check that `AllowOverride` is set to `All` (or at least includes `FileInfo`) in your Apache virtual host configuration:
+**Solution:** Check that `AllowOverride` is set to `All` in your Apache virtual host configuration:
 
 ```apache
 <Directory /var/www/html>
