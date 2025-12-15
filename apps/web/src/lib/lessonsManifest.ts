@@ -5,7 +5,8 @@
 
 import type { LessonMeta, CourseMeta, Language } from './types';
 
-// Import the auto-generated manifest
+// Import and re-export the auto-generated manifest
+import { lessonsManifest as generatedLessonsManifest } from './generated/lessonsManifest';
 export { lessonsManifest } from './generated/lessonsManifest';
 
 /** All available courses organized by learning paths */
@@ -364,9 +365,6 @@ const courseTranslations: Record<string, { ro: { title: string; description: str
   },
 };
 
-// Re-import the generated manifest to use in helper functions
-import { lessonsManifest } from './generated/lessonsManifest';
-
 /** Get course metadata with localized title */
 export function getCourse(courseId: string, language: Language): CourseMeta | undefined {
   const course = coursesManifest.find((c) => c.id === courseId);
@@ -386,7 +384,7 @@ export function getCourse(courseId: string, language: Language): CourseMeta | un
 
 /** Get lessons for a specific language */
 export function getLessonsByLanguage(language: Language): LessonMeta[] {
-  return lessonsManifest
+  return generatedLessonsManifest
     .filter((lesson) => lesson.language === language)
     .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 }
@@ -399,7 +397,7 @@ export function getLessonsByCourse(courseId: string, language: Language): Lesson
 
 /** Get a specific lesson by slug and language */
 export function getLesson(slug: string, language: Language): LessonMeta | undefined {
-  return lessonsManifest.find(
+  return generatedLessonsManifest.find(
     (lesson) => lesson.slug === slug && lesson.language === language
   );
 }
