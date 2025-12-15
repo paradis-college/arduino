@@ -143,6 +143,9 @@ function validateFrontmatter(
   if (data.estimatedMinutes <= 0) {
     throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'estimatedMinutes' must be greater than zero`);
   }
+  if (data.estimatedMinutes <= 0) {
+    throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'estimatedMinutes' must be greater than zero`);
+  }
   if (typeof data.hasInteractiveExercises !== 'boolean') {
     throw new Error(`❌ VALIDATION ERROR in ${filepath}: 'hasInteractiveExercises' must be a boolean`);
   }
