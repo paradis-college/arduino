@@ -9,7 +9,7 @@ This document provides a quickstart guide for implementing the critical fixes id
 The Architecture Review identified 5 critical issues that must be fixed before backend integration:
 
 1. ✅ Auto-generate lesson manifest
-2. ✅ Dynamic MDX loading  
+2. ✅ Dynamic MDX loading
 3. ✅ API abstraction layer
 4. ✅ Fix TypeScript build
 5. ✅ Fix theme bug
@@ -83,7 +83,7 @@ const mdxModules = import.meta.glob<MDXModule>(
  */
 export async function loadMDX(slug: string, language: Language): Promise<MDXModule | null> {
   const cacheKey = `${language}/${slug}`;
-  
+
   if (mdxCache.has(cacheKey)) {
     return mdxCache.get(cacheKey)!;
   }
@@ -91,7 +91,7 @@ export async function loadMDX(slug: string, language: Language): Promise<MDXModu
   try {
     const modulePath = `/src/content/lessons/${language}/${slug}.mdx`;
     const loader = mdxModules[modulePath];
-    
+
     if (!loader) {
       console.error(`MDX module not found: ${modulePath}`);
       return null;
@@ -113,7 +113,7 @@ Add helper for debugging:
  * Get list of all available MDX files
  */
 export function getAvailableMDXFiles(): string[] {
-  return Object.keys(mdxModules).map(path => 
+  return Object.keys(mdxModules).map(path =>
     path.replace('/src/content/lessons/', '').replace('.mdx', '')
   );
 }
@@ -149,7 +149,7 @@ async function apiFetch<T>(endpoint: string, options?: RequestInit) {
   const url = `${config.baseUrl}${endpoint}`;
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), config.timeout);
-  
+
   try {
     const response = await fetch(url, {
       ...options,
@@ -159,13 +159,13 @@ async function apiFetch<T>(endpoint: string, options?: RequestInit) {
         ...options?.headers,
       },
     });
-    
+
     clearTimeout(timeoutId);
-    
+
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
-    
+
     return await response.json();
   } catch (err: any) {
     clearTimeout(timeoutId);
@@ -188,9 +188,9 @@ Create `apps/web/src/api/lessons.ts`:
 ```typescript
 import type { LessonMeta, Language } from '@/lib/types';
 import { api } from './client';
-import { 
+import {
   getLesson as getLocalLesson,
-  getLessonsByCourse as getLocalLessonsByCourse 
+  getLessonsByCourse as getLocalLessonsByCourse
 } from '@/lib/lessonsManifest';
 
 const USE_API = import.meta.env.VITE_USE_API === 'true';
@@ -202,7 +202,7 @@ export async function fetchLesson(
   if (!USE_API) {
     return getLocalLesson(slug, language) || null;
   }
-  
+
   try {
     return await api.get<LessonMeta>(`/lessons/${slug}?lang=${language}`);
   } catch (error) {
@@ -218,7 +218,7 @@ export async function fetchLessonsByCourse(
   if (!USE_API) {
     return getLocalLessonsByCourse(courseId, language);
   }
-  
+
   try {
     return await api.get<LessonMeta[]>(`/courses/${courseId}/lessons?lang=${language}`);
   } catch (error) {
@@ -352,17 +352,17 @@ export function generateManifestPlugin(): Plugin {
     buildStart() {
       const lessonsDir = path.resolve(__dirname, '../src/content/lessons');
       const lessons: any[] = [];
-      
+
       ['en', 'ro'].forEach(lang => {
         const langDir = path.join(lessonsDir, lang);
         if (!fs.existsSync(langDir)) return;
-        
+
         fs.readdirSync(langDir)
           .filter(f => f.endsWith('.mdx'))
           .forEach(file => {
             const content = fs.readFileSync(path.join(langDir, file), 'utf-8');
             const { data } = matter(content);
-            
+
             lessons.push({
               ...data,
               slug: file.replace('.mdx', ''),
@@ -370,19 +370,19 @@ export function generateManifestPlugin(): Plugin {
             });
           });
       });
-      
+
       const outputPath = path.resolve(__dirname, '../src/lib/generated/lessonsManifest.ts');
       const outputDir = path.dirname(outputPath);
-      
+
       if (!fs.existsSync(outputDir)) {
         fs.mkdirSync(outputDir, { recursive: true });
       }
-      
+
       fs.writeFileSync(
         outputPath,
         `export const lessonsManifest = ${JSON.stringify(lessons, null, 2)};`
       );
-      
+
       console.log(`✅ Generated manifest with ${lessons.length} lessons`);
     },
   };
@@ -513,6 +513,6 @@ If you encounter issues:
 
 ---
 
-**Document Version:** 1.0  
-**Last Updated:** December 15, 2025  
+**Document Version:** 1.0
+**Last Updated:** December 15, 2025
 **Estimated Implementation Time:** 9-15 hours total
