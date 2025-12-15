@@ -18,9 +18,11 @@ const mdxCache = new Map<string, MDXModule>();
 /**
  * Dynamically discover all MDX files using Vite's import.meta.glob
  * This creates a mapping of lesson paths to their lazy loaders
+ * Using lazy loading (eager: false) for better code-splitting and initial load performance
  */
 const mdxModules = import.meta.glob<MDXModule>(
-  '/src/content/lessons/**/*.mdx'
+  '/src/content/lessons/**/*.mdx',
+  { eager: false }
 );
 
 /**
@@ -44,7 +46,10 @@ export async function loadMDX(slug: string, language: Language): Promise<MDXModu
     
     if (!loader) {
       // Friendly handling - lesson not found, return null instead of crashing
-      console.warn(`MDX module not found: ${modulePath}`);
+      // Only log in development to avoid production log noise
+      if (import.meta.env.DEV) {
+        console.warn(`MDX module not found: ${modulePath}`);
+      }
       return null;
     }
 
