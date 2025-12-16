@@ -47,7 +47,8 @@ function parseManifestEntries(): Array<{ id: string; slug: string; language: str
   const content = fs.readFileSync(MANIFEST_FILE, 'utf-8');
   
   // Extract the JSON array from the TypeScript file
-  const match = content.match(/export const lessonsManifest: LessonMeta\[\] = (\[[\s\S]*?\]);/);
+  // More flexible regex to handle various formatting styles
+  const match = content.match(/export\s+const\s+lessonsManifest:\s*LessonMeta\[\]\s*=\s*(\[[\s\S]*?\]);/);
   
   if (!match || !match[1]) {
     throw new Error(
@@ -63,11 +64,30 @@ function parseManifestEntries(): Array<{ id: string; slug: string; language: str
       throw new Error('Manifest does not contain an array of lessons');
     }
 
-    return lessons.map((lesson: any) => ({
-      id: lesson.id,
-      slug: lesson.slug,
-      language: lesson.language,
-    }));
+    // Validate and extract required fields with proper type checking
+    return lessons.map((lesson: unknown) => {
+      if (typeof lesson !== 'object' || lesson === null) {
+        throw new Error('Lesson entry is not an object');
+      }
+      
+      const lessonObj = lesson as Record<string, unknown>;
+      
+      if (typeof lessonObj.id !== 'string') {
+        throw new Error('Lesson entry missing required string field: id');
+      }
+      if (typeof lessonObj.slug !== 'string') {
+        throw new Error('Lesson entry missing required string field: slug');
+      }
+      if (typeof lessonObj.language !== 'string') {
+        throw new Error('Lesson entry missing required string field: language');
+      }
+      
+      return {
+        id: lessonObj.id,
+        slug: lessonObj.slug,
+        language: lessonObj.language,
+      };
+    });
   } catch (error) {
     throw new Error(
       `❌ VALIDATION ERROR: Failed to parse manifest JSON\n` +
