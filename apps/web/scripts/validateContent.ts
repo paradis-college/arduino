@@ -1,11 +1,11 @@
 /**
  * Content Validation Script
- * 
+ *
  * This script validates the content structure and ensures:
  * 1. All MDX files have valid frontmatter with required fields
  * 2. Generated manifest entries correspond to real MDX files
  * 3. All validations from generateLessonsManifest.ts pass
- * 
+ *
  * This is intended to run in CI to catch content issues early.
  */
 
@@ -45,11 +45,11 @@ function validateManifestExists(): void {
  */
 function parseManifestEntries(): Array<{ id: string; slug: string; language: string }> {
   const content = fs.readFileSync(MANIFEST_FILE, 'utf-8');
-  
+
   // Extract the JSON array from the TypeScript file
   // More flexible regex to handle various formatting styles
   const match = content.match(/export\s+const\s+lessonsManifest:\s*LessonMeta\[\]\s*=\s*(\[[\s\S]*?\]);/);
-  
+
   if (!match || !match[1]) {
     throw new Error(
       `❌ VALIDATION ERROR: Could not parse manifest file at ${MANIFEST_FILE}\n` +
@@ -59,7 +59,7 @@ function parseManifestEntries(): Array<{ id: string; slug: string; language: str
 
   try {
     const lessons = JSON.parse(match[1]);
-    
+
     if (!Array.isArray(lessons)) {
       throw new Error('Manifest does not contain an array of lessons');
     }
@@ -69,9 +69,9 @@ function parseManifestEntries(): Array<{ id: string; slug: string; language: str
       if (typeof lesson !== 'object' || lesson === null) {
         throw new Error('Lesson entry is not an object');
       }
-      
+
       const lessonObj = lesson as Record<string, unknown>;
-      
+
       if (typeof lessonObj.id !== 'string') {
         throw new Error('Lesson entry missing required string field: id');
       }
@@ -81,7 +81,7 @@ function parseManifestEntries(): Array<{ id: string; slug: string; language: str
       if (typeof lessonObj.language !== 'string') {
         throw new Error('Lesson entry missing required string field: language');
       }
-      
+
       return {
         id: lessonObj.id,
         slug: lessonObj.slug,
@@ -106,7 +106,7 @@ function validateManifestEntriesHaveFiles(
 
   for (const entry of entries) {
     const expectedFile = path.join(LESSONS_DIR, entry.language, `${entry.slug}.mdx`);
-    
+
     if (!fs.existsSync(expectedFile)) {
       errors.push(
         `❌ Manifest entry '${entry.id}' (${entry.language}) references non-existent file:\n` +
@@ -230,13 +230,13 @@ function main(): void {
 
   } catch (error) {
     console.error('\n❌ CONTENT VALIDATION FAILED\n');
-    
+
     if (error instanceof Error) {
       console.error(error.message);
     } else {
       console.error(String(error));
     }
-    
+
     console.error('\n💡 Please fix the errors above and try again.\n');
     process.exit(1);
   }

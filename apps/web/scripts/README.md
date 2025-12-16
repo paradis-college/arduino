@@ -145,4 +145,3 @@ Example output on success:
    - 51 manifest entries validated
    - All checks passed ✅
 ```
-

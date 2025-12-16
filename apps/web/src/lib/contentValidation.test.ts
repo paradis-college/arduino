@@ -1,6 +1,6 @@
 /**
  * Tests for content validation
- * 
+ *
  * These tests verify that:
  * 1. Manifest generation properly validates frontmatter
  * 2. Content validation catches orphaned manifest entries
