@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "generate:manifest": "tsx scripts/generateLessonsManifest.ts",
+    "dev": "npm run generate:manifest && vite",
+    "build": "npm run generate:manifest && tsc && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "lint": "tsc --noEmit",
+    "lint": "npm run generate:manifest && tsc --noEmit",
     "lint:test": "tsc --noEmit --project tsconfig.test.json"
   },
   "keywords": [
@@ -31,6 +32,7 @@
     "@tailwindcss/postcss": "^4.1.17",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
+    "@types/node": "^25.0.2",
     "@types/p5": "^1.7.6",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
@@ -42,6 +44,7 @@
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^5.2.0",
     "tailwindcss": "^4.1.17",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "vite": "^7.2.4",
     "vitest": "^4.0.14"
