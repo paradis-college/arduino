@@ -193,8 +193,6 @@ function validateAllFilesInManifest(
 function main(): void {
   console.log('🔍 Starting content validation...\n');
 
-  let errorCount = 0;
-
   try {
     // Step 1: Check manifest exists
     console.log('📋 Validating manifest file exists...');
