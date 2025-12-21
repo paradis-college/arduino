@@ -76,3 +76,72 @@ The script provides clear error messages for validation failures:
 ❌ DUPLICATE ID ERROR: Lesson ID 'p3-c1-l1-basic-led-blink' is already used.
    Each lesson must have a unique ID.
 ```
+
+## validateContent.ts
+
+Validates content structure and ensures data integrity between MDX files and the generated manifest.
+
+### Purpose
+
+This script provides comprehensive content validation that:
+1. Verifies all MDX files have valid frontmatter by regenerating the manifest (using `generateLessonsManifest.ts`)
+2. Ensures manifest entries correspond to real MDX files
+3. Detects orphaned MDX files not included in the manifest
+4. Runs in CI to catch content issues before deployment
+
+### Usage
+
+```bash
+npm run validate:content
+```
+
+This command:
+1. Regenerates the manifest (running all frontmatter validations)
+2. Validates manifest-to-file correspondence
+3. Exits with code 1 if any validation fails
+
+### Validation Checks
+
+#### 1. Manifest File Exists
+Ensures the generated manifest file is present and readable.
+
+#### 2. Manifest Entries Have Files
+Verifies each entry in the manifest has a corresponding MDX file:
+```
+❌ Manifest entry 'test-lesson-en' (en) references non-existent file:
+   Expected: /path/to/src/content/lessons/en/test-lesson.mdx
+```
+
+#### 3. All Files in Manifest
+Ensures no orphaned MDX files exist:
+```
+❌ MDX file exists but is not in manifest:
+   File: /path/to/src/content/lessons/en/orphaned-lesson.mdx
+   Language: en
+   Slug: orphaned-lesson
+```
+
+### CI Integration
+
+This validation runs automatically in GitHub Actions on:
+- Push to `main` branch (when content or scripts change)
+- Pull requests to `main` branch (when content or scripts change)
+
+See `.github/workflows/validate-content.yml` for the CI configuration.
+
+### Error Messages
+
+All validation errors include:
+- Clear description of the problem
+- File paths and identifiers
+- Suggested fixes
+
+Example output on success:
+```
+✨ Content validation passed!
+
+📊 Summary:
+   - 51 MDX files validated
+   - 51 manifest entries validated
+   - All checks passed ✅
+```

@@ -1,0 +1,44 @@
+name: Validate Content
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'apps/web/src/content/**/*.mdx'
+      - 'apps/web/scripts/**'
+      - '.github/workflows/validate-content.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'apps/web/src/content/**/*.mdx'
+      - 'apps/web/scripts/**'
+      - '.github/workflows/validate-content.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate MDX Content
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: apps/web/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd apps/web
+          npm ci
+
+      - name: Validate content
+        run: |
+          cd apps/web
+          npm run validate:content
