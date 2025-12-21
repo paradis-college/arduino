@@ -146,7 +146,16 @@ function getAllMdxFiles(): Array<{ filepath: string; language: string; filename:
 
   for (const lang of langDirs) {
     const langDir = path.join(LESSONS_DIR, lang);
-    const mdxFiles = fs.readdirSync(langDir).filter(f => f.endsWith('.mdx'));
+    let mdxFiles: string[];
+    try {
+      mdxFiles = fs.readdirSync(langDir).filter(f => f.endsWith('.mdx'));
+    } catch (error) {
+      throw new Error(
+        `❌ VALIDATION ERROR: Cannot read lessons directory for language '${lang}'\n` +
+        `   Path: ${langDir}\n` +
+        `   ${error instanceof Error ? error.message : String(error)}`
+      );
+    }
 
     for (const file of mdxFiles) {
       files.push({
