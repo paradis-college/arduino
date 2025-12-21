@@ -140,8 +140,17 @@ function getAllMdxFiles(): Array<{ filepath: string; language: string; filename:
   }
 
   const langDirs = fs.readdirSync(LESSONS_DIR).filter(name => {
-    const stat = fs.statSync(path.join(LESSONS_DIR, name));
-    return stat.isDirectory();
+    const fullPath = path.join(LESSONS_DIR, name);
+    try {
+      const stat = fs.statSync(fullPath);
+      return stat.isDirectory();
+    } catch (error) {
+      console.error(
+        `⚠️ VALIDATION WARNING: Unable to stat path ${fullPath}\n` +
+        `   ${error instanceof Error ? error.message : String(error)}`
+      );
+      return false;
+    }
   });
 
   for (const lang of langDirs) {
