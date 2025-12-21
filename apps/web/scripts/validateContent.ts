@@ -67,7 +67,9 @@ function validateManifestExists(): void {
 async function parseManifestEntries(): Promise<Array<{ id: string; slug: string; language: string }>> {
   try {
     // Use dynamic import to load the manifest module
-    const manifestModule = await import(MANIFEST_FILE);
+    // Convert file path to file:// URL for proper module resolution
+    const manifestUrl = `file://${MANIFEST_FILE}`;
+    const manifestModule = await import(manifestUrl);
     const lessons = manifestModule.lessonsManifest;
 
     if (!Array.isArray(lessons)) {
@@ -280,7 +282,10 @@ async function main(): Promise<void> {
 // Run if executed directly
 const isMainModule = process.argv[1] === fileURLToPath(import.meta.url);
 if (isMainModule) {
-  main();
+  main().catch((error) => {
+    console.error('Unexpected error:', error);
+    process.exit(1);
+  });
 }
 
 export {

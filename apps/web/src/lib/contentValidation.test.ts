@@ -109,7 +109,7 @@ describe('Content Validation', () => {
     it('should have GitHub Actions workflow', () => {
       // Find repository root by looking for .git directory
       let currentDir = __dirname;
-      let repoRoot = currentDir;
+      let repoRoot: string | null = null;
       
       // Walk up the directory tree to find .git
       while (currentDir !== path.dirname(currentDir)) {
@@ -120,7 +120,10 @@ describe('Content Validation', () => {
         currentDir = path.dirname(currentDir);
       }
       
-      const workflowPath = path.join(repoRoot, '.github/workflows/validate-content.yml');
+      // Ensure we found the repository root
+      expect(repoRoot).not.toBeNull();
+      
+      const workflowPath = path.join(repoRoot!, '.github/workflows/validate-content.yml');
 
       expect(fs.existsSync(workflowPath)).toBe(true);
 
