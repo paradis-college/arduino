@@ -33,10 +33,10 @@ describe('Content Validation', () => {
   describe('parseManifestEntries', () => {
     it('should parse manifest and return array of entries', () => {
       const entries = parseManifestEntries();
-      
+
       expect(Array.isArray(entries)).toBe(true);
       expect(entries.length).toBeGreaterThan(0);
-      
+
       // Check structure of first entry
       const firstEntry = entries[0];
       expect(firstEntry).toHaveProperty('id');
@@ -51,10 +51,10 @@ describe('Content Validation', () => {
   describe('getAllMdxFiles', () => {
     it('should return array of MDX files', () => {
       const files = getAllMdxFiles();
-      
+
       expect(Array.isArray(files)).toBe(true);
       expect(files.length).toBeGreaterThan(0);
-      
+
       // Check structure of first file
       const firstFile = files[0];
       expect(firstFile).toHaveProperty('filepath');
@@ -65,7 +65,7 @@ describe('Content Validation', () => {
 
     it('should only include MDX files', () => {
       const files = getAllMdxFiles();
-      
+
       files.forEach(file => {
         expect(file.filename.endsWith('.mdx')).toBe(true);
       });
@@ -75,7 +75,7 @@ describe('Content Validation', () => {
   describe('validateManifestEntriesHaveFiles', () => {
     it('should not throw when all manifest entries have corresponding files', () => {
       const entries = parseManifestEntries();
-      
+
       expect(() => validateManifestEntriesHaveFiles(entries)).not.toThrow();
     });
   });
@@ -84,7 +84,7 @@ describe('Content Validation', () => {
     it('should not throw when all MDX files are in manifest', () => {
       const mdxFiles = getAllMdxFiles();
       const manifestEntries = parseManifestEntries();
-      
+
       expect(() => validateAllFilesInManifest(mdxFiles, manifestEntries)).not.toThrow();
     });
   });
@@ -93,23 +93,23 @@ describe('Content Validation', () => {
     it('should have matching counts between files and manifest entries', () => {
       const mdxFiles = getAllMdxFiles();
       const manifestEntries = parseManifestEntries();
-      
+
       expect(mdxFiles.length).toBe(manifestEntries.length);
     });
 
     it('should have npm validate:content script', () => {
       const packageJsonPath = path.join(__dirname, '../../package.json');
       const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
-      
+
       expect(packageJson.scripts).toHaveProperty('validate:content');
       expect(packageJson.scripts['validate:content']).toContain('validateContent.ts');
     });
 
     it('should have GitHub Actions workflow', () => {
       const workflowPath = path.join(__dirname, '../../../../.github/workflows/validate-content.yml');
-      
+
       expect(fs.existsSync(workflowPath)).toBe(true);
-      
+
       const workflowContent = fs.readFileSync(workflowPath, 'utf-8');
       expect(workflowContent).toContain('npm run validate:content');
     });
