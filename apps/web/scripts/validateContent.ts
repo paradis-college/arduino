@@ -102,7 +102,7 @@ async function parseManifestEntries(): Promise<Array<{ id: string; slug: string;
     });
   } catch (error) {
     throw new Error(
-      `❌ VALIDATION ERROR: Failed to parse manifest\n` +
+      `❌ VALIDATION ERROR: Failed to load or parse manifest module\n` +
       `   ${error instanceof Error ? error.message : String(error)}`
     );
   }

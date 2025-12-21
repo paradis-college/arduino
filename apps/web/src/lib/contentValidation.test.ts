@@ -22,6 +22,9 @@ import {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Maximum depth to search for repository root
+const MAX_REPO_ROOT_SEARCH_DEPTH = 20;
+
 describe('Content Validation', () => {
   describe('validateManifestExists', () => {
     it('should not throw when manifest file exists', () => {
@@ -111,10 +114,9 @@ describe('Content Validation', () => {
       let currentDir = __dirname;
       let repoRoot: string | null = null;
       let depth = 0;
-      const maxDepth = 20; // Prevent excessive filesystem traversal
       
       // Walk up the directory tree to find .git
-      while (currentDir !== path.dirname(currentDir) && depth < maxDepth) {
+      while (currentDir !== path.dirname(currentDir) && depth < MAX_REPO_ROOT_SEARCH_DEPTH) {
         if (fs.existsSync(path.join(currentDir, '.git'))) {
           repoRoot = currentDir;
           break;
