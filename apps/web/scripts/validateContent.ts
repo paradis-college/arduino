@@ -130,6 +130,15 @@ function validateManifestEntriesHaveFiles(
 function getAllMdxFiles(): Array<{ filepath: string; language: string; filename: string }> {
   const files: Array<{ filepath: string; language: string; filename: string }> = [];
 
+  // Check if lessons directory exists
+  if (!fs.existsSync(LESSONS_DIR)) {
+    throw new Error(
+      `❌ VALIDATION ERROR: Lessons directory not found\n` +
+      `   Expected: ${LESSONS_DIR}\n` +
+      `   💡 Fix: Ensure the content directory structure is correct`
+    );
+  }
+
   const langDirs = fs.readdirSync(LESSONS_DIR).filter(name => {
     const stat = fs.statSync(path.join(LESSONS_DIR, name));
     return stat.isDirectory();
