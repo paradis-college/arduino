@@ -235,11 +235,11 @@ async function validateDomainRelationships(): Promise<void> {
   const manifestModule = await import(lessonsManifestUrl);
   const lessons = manifestModule.lessonsManifest;
 
-  // Import coursesManifest and pathsManifest
-  const coursesManifestPath = path.join(__dirname, '../src/lib/lessonsManifest.ts');
-  const coursesManifestUrl = pathToFileURL(coursesManifestPath).href;
-  const coursesModule = await import(coursesManifestUrl);
-  const courses = coursesModule.coursesManifest;
+  // Import coursesManifest (exported from lessonsManifest.ts) and pathsManifest
+  const lessonsManifestLibPath = path.join(__dirname, '../src/lib/lessonsManifest.ts');
+  const lessonsManifestLibUrl = pathToFileURL(lessonsManifestLibPath).href;
+  const lessonsManifestLibModule = await import(lessonsManifestLibUrl);
+  const courses = lessonsManifestLibModule.coursesManifest;
 
   const pathsManifestPath = path.join(__dirname, '../src/lib/pathsManifest.ts');
   const pathsManifestUrl = pathToFileURL(pathsManifestPath).href;
@@ -292,10 +292,11 @@ async function validateNoDuplicates(): Promise<void> {
   const manifestModule = await import(lessonsManifestUrl);
   const lessons = manifestModule.lessonsManifest;
 
-  const coursesManifestPath = path.join(__dirname, '../src/lib/lessonsManifest.ts');
-  const coursesManifestUrl = pathToFileURL(coursesManifestPath).href;
-  const coursesModule = await import(coursesManifestUrl);
-  const courses = coursesModule.coursesManifest;
+  // Import coursesManifest (exported from lessonsManifest.ts) and pathsManifest
+  const lessonsManifestLibPath = path.join(__dirname, '../src/lib/lessonsManifest.ts');
+  const lessonsManifestLibUrl = pathToFileURL(lessonsManifestLibPath).href;
+  const lessonsManifestLibModule = await import(lessonsManifestLibUrl);
+  const courses = lessonsManifestLibModule.coursesManifest;
 
   const pathsManifestPath = path.join(__dirname, '../src/lib/pathsManifest.ts');
   const pathsManifestUrl = pathToFileURL(pathsManifestPath).href;
