@@ -62,23 +62,13 @@ function validateManifestExists(): void {
 
 /**
  * Parse the generated manifest to extract lesson entries
+ * Uses dynamic import for more robust parsing instead of regex
  */
-function parseManifestEntries(): Array<{ id: string; slug: string; language: string }> {
-  const content = fs.readFileSync(MANIFEST_FILE, 'utf-8');
-
-  // Extract the JSON array from the TypeScript file
-  // More flexible regex to handle various formatting styles
-  const match = content.match(/export\s+const\s+lessonsManifest:\s*LessonMeta\[\]\s*=\s*(\[[\s\S]*?\]);/);
-
-  if (!match || !match[1]) {
-    throw new Error(
-      `❌ VALIDATION ERROR: Could not parse manifest file at ${MANIFEST_FILE}\n` +
-      `   The file may be corrupted or have an unexpected format.`
-    );
-  }
-
+async function parseManifestEntries(): Promise<Array<{ id: string; slug: string; language: string }>> {
   try {
-    const lessons = JSON.parse(match[1]);
+    // Use dynamic import to load the manifest module
+    const manifestModule = await import(MANIFEST_FILE);
+    const lessons = manifestModule.lessonsManifest;
 
     if (!Array.isArray(lessons)) {
       throw new Error('Manifest does not contain an array of lessons');
@@ -110,7 +100,7 @@ function parseManifestEntries(): Array<{ id: string; slug: string; language: str
     });
   } catch (error) {
     throw new Error(
-      `❌ VALIDATION ERROR: Failed to parse manifest JSON\n` +
+      `❌ VALIDATION ERROR: Failed to parse manifest\n` +
       `   ${error instanceof Error ? error.message : String(error)}`
     );
   }
@@ -237,7 +227,7 @@ function validateAllFilesInManifest(
 /**
  * Main validation function
  */
-function main(): void {
+async function main(): Promise<void> {
   console.log('🔍 Starting content validation...\n');
 
   try {
@@ -248,7 +238,7 @@ function main(): void {
 
     // Step 2: Parse manifest entries
     console.log('📖 Parsing manifest entries...');
-    const manifestEntries = parseManifestEntries();
+    const manifestEntries = await parseManifestEntries();
     console.log(`✅ Found ${manifestEntries.length} entries in manifest\n`);
 
     // Step 3: Validate manifest entries have corresponding files

@@ -31,8 +31,8 @@ describe('Content Validation', () => {
   });
 
   describe('parseManifestEntries', () => {
-    it('should parse manifest and return array of entries', () => {
-      const entries = parseManifestEntries();
+    it('should parse manifest and return array of entries', async () => {
+      const entries = await parseManifestEntries();
 
       expect(Array.isArray(entries)).toBe(true);
       expect(entries.length).toBeGreaterThan(0);
@@ -73,26 +73,26 @@ describe('Content Validation', () => {
   });
 
   describe('validateManifestEntriesHaveFiles', () => {
-    it('should not throw when all manifest entries have corresponding files', () => {
-      const entries = parseManifestEntries();
+    it('should not throw when all manifest entries have corresponding files', async () => {
+      const entries = await parseManifestEntries();
 
       expect(() => validateManifestEntriesHaveFiles(entries)).not.toThrow();
     });
   });
 
   describe('validateAllFilesInManifest', () => {
-    it('should not throw when all MDX files are in manifest', () => {
+    it('should not throw when all MDX files are in manifest', async () => {
       const mdxFiles = getAllMdxFiles();
-      const manifestEntries = parseManifestEntries();
+      const manifestEntries = await parseManifestEntries();
 
       expect(() => validateAllFilesInManifest(mdxFiles, manifestEntries)).not.toThrow();
     });
   });
 
   describe('Integration', () => {
-    it('should have matching counts between files and manifest entries', () => {
+    it('should have matching counts between files and manifest entries', async () => {
       const mdxFiles = getAllMdxFiles();
-      const manifestEntries = parseManifestEntries();
+      const manifestEntries = await parseManifestEntries();
 
       expect(mdxFiles.length).toBe(manifestEntries.length);
     });
@@ -107,7 +107,20 @@ describe('Content Validation', () => {
     });
 
     it('should have GitHub Actions workflow', () => {
-      const workflowPath = path.resolve(__dirname, '../../../../.github/workflows/validate-content.yml');
+      // Find repository root by looking for .git directory
+      let currentDir = __dirname;
+      let repoRoot = currentDir;
+      
+      // Walk up the directory tree to find .git
+      while (currentDir !== path.dirname(currentDir)) {
+        if (fs.existsSync(path.join(currentDir, '.git'))) {
+          repoRoot = currentDir;
+          break;
+        }
+        currentDir = path.dirname(currentDir);
+      }
+      
+      const workflowPath = path.join(repoRoot, '.github/workflows/validate-content.yml');
 
       expect(fs.existsSync(workflowPath)).toBe(true);
 
