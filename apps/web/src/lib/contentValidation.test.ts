@@ -114,7 +114,7 @@ describe('Content Validation', () => {
       let currentDir = __dirname;
       let repoRoot: string | null = null;
       let depth = 0;
-      
+
       // Walk up the directory tree to find .git
       while (currentDir !== path.dirname(currentDir) && depth < MAX_REPO_ROOT_SEARCH_DEPTH) {
         if (fs.existsSync(path.join(currentDir, '.git'))) {
@@ -124,10 +124,10 @@ describe('Content Validation', () => {
         currentDir = path.dirname(currentDir);
         depth++;
       }
-      
+
       // Ensure we found the repository root
       expect(repoRoot).not.toBeNull();
-      
+
       const workflowPath = path.join(repoRoot!, '.github/workflows/validate-content.yml');
 
       expect(fs.existsSync(workflowPath)).toBe(true);
