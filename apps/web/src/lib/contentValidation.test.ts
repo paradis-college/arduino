@@ -98,16 +98,8 @@ describe('Content Validation', () => {
     });
 
     it('should have npm validate:content script', () => {
-      // Use require.resolve to find package.json more robustly
-      let packageJsonPath: string;
-      try {
-        // Try to resolve from the scripts directory
-        packageJsonPath = require.resolve('../../package.json');
-      } catch {
-        // Fallback to relative path if resolve fails
-        packageJsonPath = path.join(__dirname, '../../package.json');
-      }
-      
+      // Use path.resolve for more robust path resolution
+      const packageJsonPath = path.resolve(__dirname, '../../package.json');
       const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
 
       expect(packageJson.scripts).toHaveProperty('validate:content');
