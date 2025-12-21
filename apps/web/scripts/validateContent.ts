@@ -33,9 +33,29 @@ function validateManifestExists(): void {
   try {
     fs.readFileSync(MANIFEST_FILE, 'utf-8');
   } catch (error) {
+    const err = error as NodeJS.ErrnoException | Error | unknown;
+
+    let detailMessage: string;
+
+    if (err && typeof err === 'object' && 'code' in err && typeof (err as any).code === 'string') {
+      const code = (err as any).code as string;
+      const baseMessage =
+        err instanceof Error && err.message ? err.message : `Filesystem error with code ${code}`;
+
+      if (code === 'EACCES' || code === 'EPERM') {
+        detailMessage =
+          `${baseMessage}\n` +
+          `   This appears to be a permission issue. Ensure the manifest file is readable by the current user.`;
+      } else {
+        detailMessage = baseMessage;
+      }
+    } else {
+      detailMessage = err instanceof Error ? err.message : String(err);
+    }
+
     throw new Error(
       `❌ VALIDATION ERROR: Cannot read manifest file at ${MANIFEST_FILE}\n` +
-      `   ${error instanceof Error ? error.message : String(error)}`
+      `   ${detailMessage}`
     );
   }
 }
