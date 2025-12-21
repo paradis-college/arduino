@@ -84,7 +84,7 @@ Validates content structure and ensures data integrity between MDX files and the
 ### Purpose
 
 This script provides comprehensive content validation that:
-1. Verifies all MDX files have valid frontmatter (via `generateLessonsManifest.ts`)
+1. Verifies all MDX files have valid frontmatter by regenerating the manifest (using `generateLessonsManifest.ts`)
 2. Ensures manifest entries correspond to real MDX files
 3. Detects orphaned MDX files not included in the manifest
 4. Runs in CI to catch content issues before deployment
