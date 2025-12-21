@@ -17,6 +17,9 @@ import {
   validateManifestEntriesHaveFiles,
   getAllMdxFiles,
   validateAllFilesInManifest,
+  validateDomainRelationships,
+  validateNoDuplicates,
+  checkMissingTranslations,
 } from '../../scripts/validateContent';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -89,6 +92,24 @@ describe('Content Validation', () => {
       const manifestEntries = await parseManifestEntries();
 
       expect(() => validateAllFilesInManifest(mdxFiles, manifestEntries)).not.toThrow();
+    });
+  });
+
+  describe('validateNoDuplicates', () => {
+    it('should not throw when there are no duplicate IDs or slugs', async () => {
+      await expect(validateNoDuplicates()).resolves.not.toThrow();
+    });
+  });
+
+  describe('validateDomainRelationships', () => {
+    it('should not throw when all relationships are valid', async () => {
+      await expect(validateDomainRelationships()).resolves.not.toThrow();
+    });
+  });
+
+  describe('checkMissingTranslations', () => {
+    it('should not throw (warnings only)', async () => {
+      await expect(checkMissingTranslations()).resolves.not.toThrow();
     });
   });
 

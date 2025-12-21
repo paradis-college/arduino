@@ -6,12 +6,16 @@ on:
     paths:
       - 'apps/web/src/content/**/*.mdx'
       - 'apps/web/scripts/**'
+      - 'apps/web/src/lib/lessonsManifest.ts'
+      - 'apps/web/src/lib/pathsManifest.ts'
       - '.github/workflows/validate-content.yml'
   pull_request:
     branches: [ main ]
     paths:
       - 'apps/web/src/content/**/*.mdx'
       - 'apps/web/scripts/**'
+      - 'apps/web/src/lib/lessonsManifest.ts'
+      - 'apps/web/src/lib/pathsManifest.ts'
       - '.github/workflows/validate-content.yml'
 
 permissions:
