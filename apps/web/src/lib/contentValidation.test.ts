@@ -110,14 +110,17 @@ describe('Content Validation', () => {
       // Find repository root by looking for .git directory
       let currentDir = __dirname;
       let repoRoot: string | null = null;
+      let depth = 0;
+      const maxDepth = 20; // Prevent excessive filesystem traversal
       
       // Walk up the directory tree to find .git
-      while (currentDir !== path.dirname(currentDir)) {
+      while (currentDir !== path.dirname(currentDir) && depth < maxDepth) {
         if (fs.existsSync(path.join(currentDir, '.git'))) {
           repoRoot = currentDir;
           break;
         }
         currentDir = path.dirname(currentDir);
+        depth++;
       }
       
       // Ensure we found the repository root

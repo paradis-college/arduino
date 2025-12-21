@@ -11,7 +11,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -67,8 +67,8 @@ function validateManifestExists(): void {
 async function parseManifestEntries(): Promise<Array<{ id: string; slug: string; language: string }>> {
   try {
     // Use dynamic import to load the manifest module
-    // Convert file path to file:// URL for proper module resolution
-    const manifestUrl = `file://${MANIFEST_FILE}`;
+    // Convert file path to file:// URL for proper cross-platform module resolution
+    const manifestUrl = pathToFileURL(MANIFEST_FILE).href;
     const manifestModule = await import(manifestUrl);
     const lessons = manifestModule.lessonsManifest;
 
