@@ -107,7 +107,7 @@ describe('Content Validation', () => {
     });
 
     it('should have GitHub Actions workflow', () => {
-      const workflowPath = path.join(__dirname, '../../../../.github/workflows/validate-content.yml');
+      const workflowPath = path.resolve(__dirname, '../../../../.github/workflows/validate-content.yml');
 
       expect(fs.existsSync(workflowPath)).toBe(true);
 
