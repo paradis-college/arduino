@@ -98,15 +98,15 @@ describe('Content Validation', () => {
   describe('validateNoDuplicates', () => {
     it('should not throw when there are no duplicate IDs or slugs', async () => {
       const manifestEntries = await parseManifestEntries();
-      const lessons = manifestEntries.map(e => ({ 
-        id: e.id, 
-        slug: e.slug, 
+      const lessons = manifestEntries.map(e => ({
+        id: e.id,
+        slug: e.slug,
         language: e.language,
         course: 'test-course'
       }));
       const courses = [{ id: 'course1', slug: 'course-1' }];
       const paths = [{ id: 'path1', slug: 'path-1' }];
-      
+
       expect(() => validateNoDuplicates(lessons, courses, paths)).not.toThrow();
     });
 
@@ -117,7 +117,7 @@ describe('Content Validation', () => {
       ];
       const courses = [{ id: 'course1', slug: 'course-1' }];
       const paths = [{ id: 'path1', slug: 'path-1' }];
-      
+
       expect(() => validateNoDuplicates(lessons, courses, paths))
         .toThrow(/DUPLICATE LESSON ID.*dup-id/);
     });
@@ -129,7 +129,7 @@ describe('Content Validation', () => {
       ];
       const courses = [{ id: 'course1', slug: 'course-1' }];
       const paths = [{ id: 'path1', slug: 'path-1' }];
-      
+
       expect(() => validateNoDuplicates(lessons, courses, paths))
         .toThrow(/DUPLICATE LESSON SLUG.*dup-slug/);
     });
@@ -141,7 +141,7 @@ describe('Content Validation', () => {
         { id: 'dup-course', slug: 'course-2' }
       ];
       const paths = [{ id: 'path1', slug: 'path-1' }];
-      
+
       expect(() => validateNoDuplicates(lessons, courses, paths))
         .toThrow(/DUPLICATE COURSE ID.*dup-course/);
     });
@@ -153,7 +153,7 @@ describe('Content Validation', () => {
         { id: 'dup-path', slug: 'path-1' },
         { id: 'dup-path', slug: 'path-2' }
       ];
-      
+
       expect(() => validateNoDuplicates(lessons, courses, paths))
         .toThrow(/DUPLICATE PATH ID.*dup-path/);
     });
@@ -166,7 +166,7 @@ describe('Content Validation', () => {
       ];
       const courses = [{ id: 'course1', slug: 'course-1' }];
       const paths = [{ id: 'path1', slug: 'path-1' }];
-      
+
       try {
         validateNoDuplicates(lessons, courses, paths);
         fail('Should have thrown an error');
@@ -185,7 +185,7 @@ describe('Content Validation', () => {
       const lessons = [{ id: 'lesson-1', slug: 'lesson-1', language: 'en', course: 'course1' }];
       const courses = [{ id: 'course1', slug: 'course-1', pathId: 'path1' }];
       const paths = [{ id: 'path1', slug: 'path-1' }];
-      
+
       expect(() => validateDomainRelationships(lessons, courses, paths)).not.toThrow();
     });
 
@@ -193,7 +193,7 @@ describe('Content Validation', () => {
       const lessons = [{ id: 'lesson-1', slug: 'lesson-1', language: 'en', course: 'invalid-course' }];
       const courses = [{ id: 'course1', slug: 'course-1' }];
       const paths = [{ id: 'path1', slug: 'path-1' }];
-      
+
       expect(() => validateDomainRelationships(lessons, courses, paths))
         .toThrow(/ORPHANED LESSON.*invalid-course/);
     });
@@ -202,7 +202,7 @@ describe('Content Validation', () => {
       const lessons = [{ id: 'lesson-1', slug: 'lesson-1', language: 'en', course: 'course1' }];
       const courses = [{ id: 'course1', slug: 'course-1', pathId: 'invalid-path' }];
       const paths = [{ id: 'path1', slug: 'path-1' }];
-      
+
       expect(() => validateDomainRelationships(lessons, courses, paths))
         .toThrow(/ORPHANED COURSE.*invalid-path/);
     });
@@ -211,7 +211,7 @@ describe('Content Validation', () => {
       const lessons = [{ id: 'test-lesson', slug: 'test-slug', language: 'en', course: 'invalid' }];
       const courses = [{ id: 'course1', slug: 'course-1' }];
       const paths = [{ id: 'path1', slug: 'path-1' }];
-      
+
       try {
         validateDomainRelationships(lessons, courses, paths);
         fail('Should have thrown an error');
@@ -229,7 +229,7 @@ describe('Content Validation', () => {
         { id: 'lesson-1', slug: 'lesson-1', language: 'en', course: 'course1' },
         { id: 'lesson-2', slug: 'lesson-2', language: 'en', course: 'course1' }
       ];
-      
+
       expect(() => checkMissingTranslations(lessons)).not.toThrow();
     });
 
@@ -238,7 +238,7 @@ describe('Content Validation', () => {
         { id: 'lesson-1-en', slug: 'lesson-1', language: 'en', course: 'course1' }
         // Missing Romanian translation
       ];
-      
+
       // Should not throw even though translation is missing
       expect(() => checkMissingTranslations(lessons)).not.toThrow();
     });
