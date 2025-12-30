@@ -227,6 +227,260 @@ function validateAllFilesInManifest(
 }
 
 /**
+ * Validate domain relationships: lesson → course, course → path
+ */
+function validateDomainRelationships(lessons: any[], courses: any[], paths: any[]): void {
+  const errors: string[] = [];
+
+  // Build sets of valid IDs for efficient lookup
+  const validCourseIds = new Set(courses.map((c: any) => c.id));
+  const validPathIds = new Set(paths.map((p: any) => p.id));
+
+  // Validate lesson → course relationships
+  for (const lesson of lessons) {
+    if (!validCourseIds.has(lesson.course)) {
+      errors.push(
+        `❌ ORPHANED LESSON: Lesson '${lesson.id}' (${lesson.language}) references non-existent course '${lesson.course}'\n` +
+        `   File: ${path.join(LESSONS_DIR, lesson.language, lesson.slug + '.mdx')}\n` +
+        `   Fix: Update the 'course' field in frontmatter to a valid course ID`
+      );
+    }
+  }
+
+  // Validate course → path relationships
+  for (const course of courses) {
+    if (course.pathId && !validPathIds.has(course.pathId)) {
+      errors.push(
+        `❌ ORPHANED COURSE: Course '${course.id}' references non-existent path '${course.pathId}'\n` +
+        `   File: src/lib/lessonsManifest.ts\n` +
+        `   Fix: Update the 'pathId' field to a valid path ID or remove it`
+      );
+    }
+  }
+
+  if (errors.length > 0) {
+    throw new Error(
+      `❌ VALIDATION ERROR: Found ${errors.length} domain relationship issue(s):\n\n` +
+      errors.join('\n\n') +
+      `\n\n💡 Fix: Ensure all lessons reference valid courses and all courses reference valid paths.`
+    );
+  }
+}
+
+/**
+ * Detect duplicate IDs and slugs
+ */
+function validateNoDuplicates(lessons: any[], courses: any[], paths: any[]): void {
+  const errors: string[] = [];
+
+  // Check for duplicate lesson IDs (already done in generateLessonsManifest.ts, but double-check)
+  const seenLessonIds = new Map<string, string[]>();
+  for (const lesson of lessons) {
+    const lessonPath = path.join(LESSONS_DIR, lesson.language, lesson.slug + '.mdx');
+    const existing = seenLessonIds.get(lesson.id);
+    if (existing) {
+      existing.push(lessonPath);
+    } else {
+      seenLessonIds.set(lesson.id, [lessonPath]);
+    }
+  }
+
+  for (const [lessonId, lessonPaths] of seenLessonIds.entries()) {
+    if (lessonPaths.length > 1) {
+      const details = lessonPaths
+        .map((p, index) => `   ${index + 1}. ${p}`)
+        .join('\n');
+      errors.push(
+        `❌ DUPLICATE LESSON ID: '${lessonId}' is used by multiple lessons:\n` +
+        `${details}\n` +
+        `   Fix: Each lesson must have a unique 'id' field in frontmatter`
+      );
+    }
+  }
+
+  // Check for duplicate lesson slugs within the same language
+  const seenLessonSlugs = new Map<string, string[]>();
+  for (const lesson of lessons) {
+    const key = `${lesson.language}:${lesson.slug}`;
+    const lessonPath = path.join(LESSONS_DIR, lesson.language, lesson.slug + '.mdx');
+    const existing = seenLessonSlugs.get(key);
+    if (existing) {
+      existing.push(lessonPath);
+    } else {
+      seenLessonSlugs.set(key, [lessonPath]);
+    }
+  }
+
+  for (const [key, lessonPaths] of seenLessonSlugs.entries()) {
+    if (lessonPaths.length > 1) {
+      const [language, slug] = key.split(':', 2);
+      const details = lessonPaths
+        .map((p, index) => `   ${index + 1}. ${p}`)
+        .join('\n');
+      errors.push(
+        `❌ DUPLICATE LESSON SLUG: Slug '${slug}' is used by multiple lessons in language '${language}':\n` +
+        `${details}\n` +
+        `   Fix: Each lesson within a language must have a unique slug (filename)`
+      );
+    }
+  }
+
+  // Check for duplicate course IDs
+  const seenCourseIds = new Map<string, string[]>();
+  for (const course of courses) {
+    const existing = seenCourseIds.get(course.id);
+    if (existing) {
+      existing.push(course.slug);
+    } else {
+      seenCourseIds.set(course.id, [course.slug]);
+    }
+  }
+
+  for (const [courseId, courseSlugs] of seenCourseIds.entries()) {
+    if (courseSlugs.length > 1) {
+      const details = courseSlugs
+        .map((slug, index) => `   ${index + 1}. Course slug: ${slug}`)
+        .join('\n');
+      errors.push(
+        `❌ DUPLICATE COURSE ID: '${courseId}' is defined multiple times in coursesManifest\n` +
+        `${details}\n` +
+        `   File: src/lib/lessonsManifest.ts\n` +
+        `   Fix: Each course must have a unique 'id' field`
+      );
+    }
+  }
+
+  // Check for duplicate course slugs
+  const seenCourseSlugs = new Map<string, string[]>();
+  for (const course of courses) {
+    const existing = seenCourseSlugs.get(course.slug);
+    if (existing) {
+      existing.push(course.id);
+    } else {
+      seenCourseSlugs.set(course.slug, [course.id]);
+    }
+  }
+
+  for (const [courseSlug, courseIds] of seenCourseSlugs.entries()) {
+    if (courseIds.length > 1) {
+      const details = courseIds
+        .map((id, index) => `   ${index + 1}. Course ID: ${id}`)
+        .join('\n');
+      errors.push(
+        `❌ DUPLICATE COURSE SLUG: '${courseSlug}' is used by multiple courses:\n` +
+        `${details}\n` +
+        `   File: src/lib/lessonsManifest.ts\n` +
+        `   Fix: Each course must have a unique 'slug' field`
+      );
+    }
+  }
+
+  // Check for duplicate path IDs
+  const seenPathIds = new Map<string, string[]>();
+  for (const pathItem of paths) {
+    const existing = seenPathIds.get(pathItem.id);
+    if (existing) {
+      existing.push(pathItem.slug);
+    } else {
+      seenPathIds.set(pathItem.id, [pathItem.slug]);
+    }
+  }
+
+  for (const [pathId, pathSlugs] of seenPathIds.entries()) {
+    if (pathSlugs.length > 1) {
+      const details = pathSlugs
+        .map((slug, index) => `   ${index + 1}. Path slug: ${slug}`)
+        .join('\n');
+      errors.push(
+        `❌ DUPLICATE PATH ID: '${pathId}' is defined multiple times in pathsManifest\n` +
+        `${details}\n` +
+        `   File: src/lib/pathsManifest.ts\n` +
+        `   Fix: Each path must have a unique 'id' field`
+      );
+    }
+  }
+
+  // Check for duplicate path slugs
+  const seenPathSlugs = new Map<string, string[]>();
+  for (const pathItem of paths) {
+    const existing = seenPathSlugs.get(pathItem.slug);
+    if (existing) {
+      existing.push(pathItem.id);
+    } else {
+      seenPathSlugs.set(pathItem.slug, [pathItem.id]);
+    }
+  }
+
+  for (const [pathSlug, pathIds] of seenPathSlugs.entries()) {
+    if (pathIds.length > 1) {
+      const details = pathIds
+        .map((id, index) => `   ${index + 1}. Path ID: ${id}`)
+        .join('\n');
+      errors.push(
+        `❌ DUPLICATE PATH SLUG: '${pathSlug}' is used by multiple paths:\n` +
+        `${details}\n` +
+        `   File: src/lib/pathsManifest.ts\n` +
+        `   Fix: Each path must have a unique 'slug' field`
+      );
+    }
+  }
+
+  if (errors.length > 0) {
+    throw new Error(
+      `❌ VALIDATION ERROR: Found ${errors.length} duplicate ID/slug issue(s):\n\n` +
+      errors.join('\n\n')
+    );
+  }
+}
+
+/**
+ * Check for missing translations and report warnings (non-fatal)
+ */
+function checkMissingTranslations(lessons: any[]): void {
+  // Group lessons by slug
+  const lessonsBySlug = new Map<string, Set<string>>();
+  for (const lesson of lessons) {
+    if (!lessonsBySlug.has(lesson.slug)) {
+      lessonsBySlug.set(lesson.slug, new Set());
+    }
+    lessonsBySlug.get(lesson.slug)!.add(lesson.language);
+  }
+
+  const warnings: string[] = [];
+  const supportedLanguages = ['en', 'ro'];
+
+  // Check which lessons are missing translations
+  for (const [slug, languages] of lessonsBySlug.entries()) {
+    const missingLanguages = supportedLanguages.filter(lang => !languages.has(lang));
+    if (missingLanguages.length > 0) {
+      const availableLanguages = Array.from(languages).join(', ');
+      warnings.push(
+        `⚠️  Lesson '${slug}' is only available in [${availableLanguages}], missing translations: [${missingLanguages.join(', ')}]`
+      );
+    }
+  }
+
+  if (warnings.length > 0) {
+    console.log('⚠️  Translation Coverage Warnings:\n');
+    warnings.forEach(warning => console.log(`   ${warning}`));
+    console.log();
+
+    // Calculate and display translation coverage statistics
+    const totalLessons = lessonsBySlug.size;
+    const fullyTranslated = Array.from(lessonsBySlug.values()).filter(
+      langs => langs.size === supportedLanguages.length
+    ).length;
+    const coverage = ((fullyTranslated / totalLessons) * 100).toFixed(1);
+
+    console.log('📊 Translation Coverage:');
+    console.log(`   - Total unique lessons: ${totalLessons}`);
+    console.log(`   - Fully translated: ${fullyTranslated}/${totalLessons} (${coverage}%)`);
+    console.log(`   - Missing translations: ${totalLessons - fullyTranslated}`);
+    console.log();
+  }
+}
+
+/**
  * Main validation function
  */
 async function main(): Promise<void> {
@@ -258,11 +512,44 @@ async function main(): Promise<void> {
     validateAllFilesInManifest(mdxFiles, manifestEntries);
     console.log('✅ All MDX files are included in manifest\n');
 
+    // Step 6: Load all manifests once for remaining validations
+    console.log('📥 Loading manifests for validation...');
+    const lessonsManifestUrl = pathToFileURL(MANIFEST_FILE).href;
+    const manifestModule = await import(lessonsManifestUrl);
+    const lessons = manifestModule.lessonsManifest;
+
+    const lessonsManifestLibPath = path.join(__dirname, '../src/lib/lessonsManifest.ts');
+    const lessonsManifestLibUrl = pathToFileURL(lessonsManifestLibPath).href;
+    const lessonsManifestLibModule = await import(lessonsManifestLibUrl);
+    const courses = lessonsManifestLibModule.coursesManifest;
+
+    const pathsManifestPath = path.join(__dirname, '../src/lib/pathsManifest.ts');
+    const pathsManifestUrl = pathToFileURL(pathsManifestPath).href;
+    const pathsModule = await import(pathsManifestUrl);
+    const paths = pathsModule.pathsManifest;
+    console.log('✅ Manifests loaded\n');
+
+    // Step 7: Validate domain relationships (lesson → course → path)
+    console.log('🔗 Validating domain relationships (lesson → course → path)...');
+    validateDomainRelationships(lessons, courses, paths);
+    console.log('✅ All domain relationships are valid\n');
+
+    // Step 8: Check for duplicate IDs and slugs
+    console.log('🔍 Checking for duplicate IDs and slugs...');
+    validateNoDuplicates(lessons, courses, paths);
+    console.log('✅ No duplicate IDs or slugs found\n');
+
+    // Step 9: Check for missing translations (warnings only)
+    console.log('🌐 Checking translation coverage...');
+    checkMissingTranslations(lessons);
+
     // Success!
     console.log('✨ Content validation passed!\n');
     console.log('📊 Summary:');
     console.log(`   - ${mdxFiles.length} MDX files validated`);
     console.log(`   - ${manifestEntries.length} manifest entries validated`);
+    console.log(`   - Domain relationships validated`);
+    console.log(`   - No duplicates found`);
     console.log(`   - All checks passed ✅\n`);
 
   } catch (error) {
@@ -294,4 +581,7 @@ export {
   validateManifestEntriesHaveFiles,
   getAllMdxFiles,
   validateAllFilesInManifest,
+  validateDomainRelationships,
+  validateNoDuplicates,
+  checkMissingTranslations,
 };
