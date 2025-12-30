@@ -643,7 +643,7 @@ Conectați LED-ul cu picior mai lung la pozitiv!
 
 - **General Questions**: Open a [GitHub Discussion](https://github.com/paradis-college/arduino/discussions)
 - **Bug Reports**: Create an [Issue](https://github.com/paradis-college/arduino/issues)
-- **Security Issues**: Email security@paradis-college.org (if exists)
+- **Security Issues**: Report via [GitHub Security Advisories](https://github.com/paradis-college/arduino/security/advisories/new)
 
 ---
 

@@ -25,8 +25,9 @@ The Arduino Learning Platform is an educational web application designed to teac
 
 ### Prerequisites
 
-- **Node.js** 18+ and npm
-- **Git**
+- **Node.js** 18 or higher
+- **npm** 9 or higher
+- **Git** 2.30 or higher
 
 ### Installation
 
