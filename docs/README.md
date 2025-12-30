@@ -4,6 +4,20 @@ This directory contains comprehensive documentation for the Arduino learning pla
 
 ## 📚 Available Documents
 
+### [Project README](../README.md)
+**Project Overview** - Main documentation for the Arduino Learning Platform.
+
+**Best for:** Everyone - start here!
+
+**Contents:**
+- Project description and features
+- Quick start guide
+- Tech stack overview
+- Learning paths overview
+- Contribution guidelines
+
+---
+
 ### [Implementation Guide](./IMPLEMENTATION_GUIDE.md)
 **Quick Start Guide** - Practical, step-by-step instructions for implementing critical architectural fixes.
 
@@ -18,6 +32,51 @@ This directory contains comprehensive documentation for the Arduino learning pla
 - Testing strategies and rollback plans
 
 **Time Estimate:** 9-15 hours total
+
+---
+
+### [Web App README](../apps/web/README.md)
+**Developer Guide** - Comprehensive guide for frontend development.
+
+**Best for:** Frontend developers working on the web application.
+
+**Contents:**
+- Detailed setup instructions
+- Development workflow
+- Project structure
+- Content management
+- Architecture overview
+- Testing and deployment
+- Troubleshooting guide
+
+---
+
+### [Contributing Guide](../CONTRIBUTING.md)
+**Contribution Guidelines** - How to contribute to the project.
+
+**Best for:** Contributors (code, content, documentation).
+
+**Contents:**
+- Code of conduct
+- How to contribute
+- Development setup
+- Style guidelines
+- Commit message conventions
+- Pull request process
+- Content creation guide
+
+---
+
+### [Changelog](../CHANGELOG.md)
+**Version History** - Track all changes to the project.
+
+**Best for:** Keeping up with project updates and releases.
+
+**Contents:**
+- Version history
+- Recent changes
+- Upcoming features
+- Release notes
 
 ---
 
@@ -115,9 +174,13 @@ Week 13+:  Advanced Features (analytics, mobile, etc.)
 
 ## 🔗 Quick Links
 
-- [Main Architecture Review](../ARCHITECTURE_REVIEW.md) - Full 40KB analysis
+- [Main README](../README.md) - Project overview and quick start
+- [Web App README](../apps/web/README.md) - Frontend development guide
+- [Architecture Review](../ARCHITECTURE_REVIEW.md) - Full 40KB technical analysis
 - [Implementation Guide](./IMPLEMENTATION_GUIDE.md) - Step-by-step fixes
-- [Project README](../README.md) - Repository overview
+- [Contributing Guide](../CONTRIBUTING.md) - How to contribute
+- [Changelog](../CHANGELOG.md) - Version history
+- [License](../LICENSE) - MIT License
 
 ---
 
