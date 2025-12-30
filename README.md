@@ -94,8 +94,13 @@ arduino/
 
 ### For Developers
 - **[Web App README](apps/web/README.md)** - Detailed setup and development guide
+- **[Quick Reference](docs/QUICK_REFERENCE.md)** - Common commands and workflows
 - **[Implementation Guide](docs/IMPLEMENTATION_GUIDE.md)** - Step-by-step fixes for critical issues
 - **[Architecture Review](ARCHITECTURE_REVIEW.md)** - In-depth technical analysis
+
+### For Contributors
+- **[Contributing Guide](CONTRIBUTING.md)** - How to contribute to the project
+- **[Changelog](CHANGELOG.md)** - Version history and upcoming features
 
 ### Key Documentation Topics
 - Project setup and development workflow

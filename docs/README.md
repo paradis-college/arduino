@@ -18,6 +18,20 @@ This directory contains comprehensive documentation for the Arduino learning pla
 
 ---
 
+### [Quick Reference](./QUICK_REFERENCE.md)
+**Command Reference** - Quick access to common commands and workflows.
+
+**Best for:** Developers who need quick answers.
+
+**Contents:**
+- Common commands (dev, build, test)
+- Adding content workflows
+- Git workflows
+- Troubleshooting tips
+- Key files reference
+
+---
+
 ### [Implementation Guide](./IMPLEMENTATION_GUIDE.md)
 **Quick Start Guide** - Practical, step-by-step instructions for implementing critical architectural fixes.
 
@@ -175,6 +189,7 @@ Week 13+:  Advanced Features (analytics, mobile, etc.)
 ## 🔗 Quick Links
 
 - [Main README](../README.md) - Project overview and quick start
+- [Quick Reference](./QUICK_REFERENCE.md) - Common commands and workflows
 - [Web App README](../apps/web/README.md) - Frontend development guide
 - [Architecture Review](../ARCHITECTURE_REVIEW.md) - Full 40KB technical analysis
 - [Implementation Guide](./IMPLEMENTATION_GUIDE.md) - Step-by-step fixes
