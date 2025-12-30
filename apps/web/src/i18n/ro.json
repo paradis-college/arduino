@@ -1,0 +1,112 @@
+{
+  "common": {
+    "home": "Acasă",
+    "courses": "Cursuri",
+    "paths": "Trasee",
+    "projects": "Proiecte",
+    "community": "Comunitate",
+    "login": "Autentificare",
+    "logout": "Deconectare",
+    "search": "Caută",
+    "loading": "Se încarcă...",
+    "error": "Eroare",
+    "notFound": "Pagina nu a fost găsită",
+    "back": "Înapoi",
+    "next": "Următorul",
+    "previous": "Anterior",
+    "save": "Salvează",
+    "cancel": "Anulează",
+    "submit": "Trimite",
+    "close": "Închide"
+  },
+  "home": {
+    "title": "Învață Arduino",
+    "subtitle": "Platformă interactivă pentru învățarea electronicii și programării cu Arduino",
+    "startLearning": "Începe să înveți",
+    "exploreCourses": "Explorează cursurile",
+    "explorePaths": "Explorează traseele",
+    "featuredCourses": "Cursuri populare",
+    "whyArduino": "De ce Arduino?",
+    "whyArduinoDesc": "Arduino este platforma perfectă pentru a începe să înveți programare și electronică."
+  },
+  "paths": {
+    "title": "Trasee de Învățare",
+    "subtitle": "Alege un traseu complet de învățare",
+    "courses": "cursuri"
+  },
+  "courses": {
+    "title": "Cursuri",
+    "subtitle": "Explorează cursurile noastre de Arduino",
+    "allCourses": "Toate cursurile",
+    "beginner": "Începător",
+    "intermediate": "Intermediar",
+    "advanced": "Avansat",
+    "lessons": "lecții",
+    "hours": "ore",
+    "difficulty": "Dificultate",
+    "duration": "Durată"
+  },
+  "lesson": {
+    "title": "Lecție",
+    "estimatedTime": "Timp estimat",
+    "minutes": "minute",
+    "difficulty": "Dificultate",
+    "tags": "Etichete",
+    "saveLesson": "Salvează lecția",
+    "unsaveLesson": "Elimină din salvate",
+    "savedLessons": "Lecții salvate",
+    "rateLesson": "Evaluează lecția",
+    "progress": "Progres",
+    "checkpointCompleted": "Checkpoint completat!",
+    "markComplete": "Marchează ca completat",
+    "loadSimulation": "Încarcă simularea",
+    "loadVideo": "Încarcă videoclipul",
+    "keyPoints": "Puncte cheie",
+    "outline": "Cuprins",
+    "nextLesson": "Lecția următoare",
+    "previousLesson": "Lecția anterioară",
+    "communityProjects": "Proiecte din comunitate",
+    "watchVideo": "Urmărește videoclipul"
+  },
+  "exercise": {
+    "checkAnswer": "Verifică răspunsul",
+    "correct": "Corect! ✓",
+    "incorrect": "Incorect. Încearcă din nou.",
+    "tryAgain": "Încearcă din nou",
+    "selectAnswer": "Selectează un răspuns",
+    "pinMapping": "Mapare pini",
+    "dragInstruction": "Conectează pinii la componentele corespunzătoare"
+  },
+  "community": {
+    "title": "Comunitate",
+    "subtitle": "Proiecte create de comunitatea noastră",
+    "submitProject": "Trimite un proiect",
+    "loginToSubmit": "Autentifică-te pentru a trimite un proiect (în curând)",
+    "filterByDifficulty": "Filtrează după dificultate",
+    "filterByCourse": "Filtrează după curs",
+    "filterByComponents": "Filtrează după componente",
+    "noProjectsFound": "Nu s-au găsit proiecte",
+    "likes": "aprecieri"
+  },
+  "theme": {
+    "light": "Mod luminos",
+    "dark": "Mod întunecat",
+    "toggle": "Schimbă tema"
+  },
+  "language": {
+    "ro": "Română",
+    "en": "English",
+    "switch": "Schimbă limba"
+  },
+  "infoBox": {
+    "info": "Informație",
+    "warning": "Atenție",
+    "tip": "Sfat",
+    "danger": "Pericol"
+  },
+  "difficulty": {
+    "beginner": "Începător",
+    "intermediate": "Intermediar",
+    "advanced": "Avansat"
+  }
+}

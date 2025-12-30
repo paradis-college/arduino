@@ -1,0 +1,175 @@
+---
+id: p1-c3-l4-relays-en
+title: "Relays – Electrically Controlled Switches"
+course: "electromechanical-components"
+difficulty: "intermediate"
+tags: ["relay", "NO", "NC", "isolation", "high voltage", "switch"]
+estimatedMinutes: 30
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Relays – Electrically Controlled Switches
+
+In this lesson, you'll learn how relays work as electrically controlled switches, allowing low-voltage circuits to control high-voltage loads safely.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Relay coil and contact structure
+- NO (Normally Open) and NC (Normally Closed) contacts
+- Electrical isolation between control and load circuits
+- Safe control of high-voltage loads from Arduino
+
+<InfoBox type="info">
+  A relay is an electromagnetic switch. A small control current energizes a coil, which mechanically flips a switch to control a separate circuit.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Relay Structure" id="relay-structure">
+
+<P5SketchEmbed
+  id="relay-animation"
+  sketchId="p1-c3-l4-relay"
+  stepNumber={1}
+  title="Relay Coil & Contacts"
+  alt="Animation showing relay coil energizing and armature switching contacts"
+>
+  Click to toggle the relay coil. Watch the armature flip and the contacts switch between NO (Normally Open) and NC (Normally Closed). Notice how the low-voltage coil controls a separate high-voltage lamp circuit.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="relay-isolation-animation"
+  sketchId="p1-c3-l4-relay-isolation"
+  stepNumber={2}
+  title="Electrical Isolation"
+  alt="Low-voltage coil controlling separate high-voltage lamp circuit"
+>
+  See electrical isolation in action! The low-voltage Arduino circuit (left) controls the relay coil, which safely switches the separate high-voltage lamp circuit (right). No electrical connection between them!
+</P5SketchEmbed>
+
+### Main Components
+
+1. **Coil**: Electromagnet that creates the switching action
+2. **Armature**: Moving metal piece attached to the switch
+3. **Contacts**: The actual switch connections
+4. **Spring**: Returns contacts when coil is de-energized
+
+### How It Works
+
+1. Apply voltage to the coil terminals
+2. Coil creates a magnetic field
+3. Armature is pulled, moving the contacts
+4. Load circuit is connected/disconnected
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p1-c3-l4-relays" label="I understand relay structure" />
+
+</LessonChapter>
+
+<LessonChapter title="Contact Types" id="contact-types">
+
+
+
+### Common Terminal
+
+The **COM** (Common) terminal is the switching point.
+
+### Normally Open (NO)
+
+- **NO** contact is disconnected when relay is off
+- Connects to COM when relay is energized
+- Use for: Turning things ON with Arduino
+
+### Normally Closed (NC)
+
+- **NC** contact is connected when relay is off
+- Disconnects from COM when relay is energized
+- Use for: Fail-safe applications, turning things OFF
+
+### SPDT (Single Pole Double Throw)
+
+Most relays have all three terminals:
+- 1 COM, 1 NO, 1 NC
+- The switch toggles between NO and NC
+
+<InfoBox type="tip">
+  NC contacts are useful for safety systems - if power fails, the circuit remains closed (e.g., emergency stop circuits).
+</InfoBox>
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p1-c3-l4-relays" label="I understand NO and NC contacts" />
+
+</LessonChapter>
+
+<LessonChapter title="Electrical Isolation" id="electrical-isolation">
+
+
+
+### Why Isolation Matters
+
+The coil circuit and contact circuit are **completely separate**:
+- Arduino can safely control 120V/240V AC appliances
+- No electrical connection between control and load
+- Protects your microcontroller from high voltages
+
+### Safety Considerations
+
+- Use appropriate relay ratings (voltage and current)
+- Keep high-voltage wiring separate from low-voltage
+- Use relay modules with optocouplers for extra isolation
+
+<InfoBox type="warning">
+  Working with mains voltage (120V/240V) is dangerous! Always follow proper safety procedures and local electrical codes.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a relay with a coil and mechanical contact. Watch the coil energize and the contact flip to turn a separate lamp circuit on or off. Notice how the control and load circuits are isolated.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p1-c3-l4-relays"
+  question="What does 'NO' stand for in relay terminals?"
+  options={[
+    { id: "a", text: "Not Operational" },
+    { id: "b", text: "Normally Open" },
+    { id: "c", text: "Negative Output" },
+    { id: "d", text: "New Operation" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p1-c3-l4-relays"
+  question="Why can a relay safely control high-voltage loads from Arduino?"
+  options={[
+    { id: "a", text: "The Arduino provides high current" },
+    { id: "b", text: "The coil and contacts are electrically isolated" },
+    { id: "c", text: "Relays reduce voltage" },
+    { id: "d", text: "Arduino has built-in protection" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Relays are electromagnetic switches with coil and contacts
+- ✅ NO contacts close when energized, NC contacts open
+- ✅ Isolation allows safe control of high-voltage loads
+- ✅ Always use flyback diodes and proper safety precautions
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p1-c3-l4-relays" label="I completed the lesson!" />
+
+</LessonChapter>

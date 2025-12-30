@@ -1,0 +1,196 @@
+---
+id: p2-c1-l4-proximity-sensors-en
+title: "Proximity Sensors"
+course: "vision-detection-sensors"
+difficulty: "intermediate"
+tags: ["proximity", "threshold", "detection", "distance", "IR"]
+estimatedMinutes: 25
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Proximity Sensors
+
+In this lesson, you'll learn about proximity sensors - how they differ from distance sensors and how to use them for threshold-based detection.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Difference between proximity and distance sensing
+- Threshold-based detection principles
+- Avoiding false triggers
+- Common proximity sensor types
+
+<InfoBox type="info">
+  Proximity sensors answer a simple question: "Is something nearby?" Unlike distance sensors, they focus on presence detection rather than exact measurements.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Proximity Sensor Basics" id="proximity-basics">
+
+<P5SketchEmbed
+  id="proximity-animation"
+  sketchId="p2-c1-l4-proximity"
+  stepNumber={1}
+  title="Proximity Detection"
+  alt="Animation showing object approaching sensor with threshold indicator"
+>
+  Drag the object toward the sensor. Watch the indicator LED change from "Far" (green) to "Near" (red) when it crosses the detection threshold. Notice the live distance indicator updating as you move the object.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="proximity-threshold-animation"
+  sketchId="p2-c1-l4-proximity-threshold"
+  stepNumber={2}
+  title="Threshold Configuration"
+  alt="Animation showing threshold line with live distance indicator"
+>
+  Drag both the object and the threshold line. The NEAR/FAR status changes based on whether the object is above or below the threshold.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="proximity-wiring-power"
+  sketchId="p2-c1-l4-proximity-power"
+  stepNumber={3}
+  title="Connect Sensor Power"
+  alt="Animation showing proximity sensor power connections"
+>
+  Connect **VCC** to 5V and **GND** to ground. Most proximity sensors work on 3.3V-5V.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="proximity-wiring-signal"
+  sketchId="p2-c1-l4-proximity-signal"
+  stepNumber={4}
+  title="Connect Signal Output"
+  alt="Animation showing proximity sensor signal connection"
+>
+  Connect the **OUT** or **SIG** pin to a digital input pin on your Arduino (e.g., pin 7).
+</P5SketchEmbed>
+
+</LessonChapter>
+
+<LessonChapter title="Proximity vs Distance" id="proximity-vs-distance">
+
+### Distance Sensors
+
+- Measure exact distance to object
+- Return a range of values (cm, mm)
+- More complex processing needed
+- Example: HC-SR04 ultrasonic
+
+### Proximity Sensors
+
+- Detect if object is within threshold
+- Return simple binary output (near/far)
+- Fast response, simple logic
+- Example: IR proximity modules
+
+<InfoBox type="tip">
+  Use proximity sensors when you only need to know "is something there?" and don't need the actual distance.
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p2-c1-l4-proximity-sensors" label="I understand proximity vs distance sensing" />
+
+</LessonChapter>
+
+<LessonChapter title="Threshold Detection" id="threshold-detection">
+
+### How It Works
+
+Proximity sensors have a built-in threshold:
+1. Object enters detection range
+2. Sensor output goes HIGH (or LOW depending on type)
+3. Object leaves detection range
+4. Sensor output returns to default state
+
+### Adjustable Thresholds
+
+Many modules have a potentiometer to adjust:
+- **Detection distance**: How close object must be
+- Some have separate high/low thresholds for hysteresis
+
+### Hysteresis
+
+To prevent rapid on/off switching at the boundary:
+- Turn ON threshold: Object at 5cm
+- Turn OFF threshold: Object at 6cm
+
+This "dead zone" prevents jittering.
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p2-c1-l4-proximity-sensors" label="I understand threshold detection" />
+
+</LessonChapter>
+
+<LessonChapter title="Avoiding False Triggers" id="avoiding-false-triggers">
+
+### Common Issues
+
+1. **Ambient light interference**: Shield the sensor from sunlight
+2. **Reflective surfaces**: Adjust sensitivity for shiny objects
+3. **Color variations**: Dark objects may not reflect IR well
+4. **Edge cases**: Objects at the exact threshold distance
+
+### Best Practices
+
+- Test with actual objects you'll be detecting
+- Add software debouncing for noisy signals
+- Use appropriate detection range (not too far)
+- Consider environmental factors (dust, humidity)
+
+<InfoBox type="warning">
+  Different materials reflect IR differently. A white paper might trigger at 15cm, but black fabric might need to be 5cm away.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a movable object approaching a proximity sensor. Watch the indicator LED change color when the object crosses the threshold distance. Notice the difference between entering and exiting the detection zone.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p2-c1-l4-proximity-sensors"
+  question="What is the main advantage of proximity sensors over distance sensors?"
+  options={[
+    { id: "a", text: "Higher accuracy" },
+    { id: "b", text: "Longer range" },
+    { id: "c", text: "Simple binary output for quick decisions" },
+    { id: "d", text: "Lower cost always" }
+  ]}
+  correctIndex={2}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p2-c1-l4-proximity-sensors"
+  question="What is hysteresis in proximity detection?"
+  options={[
+    { id: "a", text: "Sensor memory effect" },
+    { id: "b", text: "Different ON and OFF thresholds to prevent jittering" },
+    { id: "c", text: "Sensor delay time" },
+    { id: "d", text: "Analog output mode" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Proximity sensors detect presence, not exact distance
+- ✅ Threshold-based detection gives simple binary output
+- ✅ Hysteresis prevents jittering at detection boundaries
+- ✅ Environmental factors can cause false triggers
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p2-c1-l4-proximity-sensors" label="I completed the lesson!" />
+
+</LessonChapter>

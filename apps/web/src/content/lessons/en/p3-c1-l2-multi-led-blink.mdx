@@ -1,0 +1,297 @@
+---
+id: p3-c1-l2-multi-led-blink-en
+title: "Make 3 Lights Dance! 💃🕺✨"
+course: "embedded-programming-basics"
+difficulty: "beginner"
+tags: ["LED", "array", "pattern", "multiple"]
+estimatedMinutes: 20
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Make 3 Lights Dance! 💃🕺✨
+
+Now let's control THREE lights at once! They can blink together, take turns, or create a dancing pattern! 🎵
+
+<LessonChapter title="What We'll Do Today" id="what-youll-learn">
+
+Today you will:
+- 💡💡💡 Control 3 LEDs at the same time
+- 🔄 Make them blink in a LINE (like a caterpillar!)
+- 🎭 Make different blink patterns
+
+<InfoBox type="info">
+  **Hey kids!** Imagine you're a conductor of an orchestra, and each light is a musician. You get to tell them when to play! 🎼
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Watch the Light Show! 🌈" id="watch-the-show">
+
+<P5SketchEmbed
+  id="multi-led-animation"
+  sketchId="p3-c1-l2-multi-led"
+  stepNumber={1}
+  title="3 Dancing Lights!"
+  alt="Three LEDs blinking in patterns"
+>
+  👀 **Look!** See the three lights do different dances! Try the different patterns: ALL TOGETHER, ONE AT A TIME, or BACK AND FORTH!
+</P5SketchEmbed>
+
+<InfoBox type="tip">
+  **Which pattern is your favorite?** The one where they all blink together like a heartbeat? Or the chasing pattern like a caterpillar crawling? 🐛
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Meet Your 3 LEDs! 👋" id="meet-the-leds">
+
+<P5SketchEmbed
+  id="three-led-setup-animation"
+  sketchId="p3-c1-l2-three-led-setup"
+  stepNumber={1}
+  title="Set Up 3 LEDs"
+  alt="Three LEDs connected to Arduino"
+>
+  We'll use pins **9**, **10**, and **11** for our three lights. Think of them as three friends named Nine, Ten, and Eleven! 🧒🧒🧒
+</P5SketchEmbed>
+
+### First, Tell Arduino About All 3 Pins
+
+Instead of writing three separate lines, we use a special trick!
+
+```cpp
+void setup() {
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(11, OUTPUT);
+}
+```
+
+This tells Arduino: *"Hey! Pins 9, 10, and 11 will all control lights!"*
+
+<InfoBox type="info">
+  **For parents:** This lesson introduces the concept of controlling multiple outputs, which prepares for arrays in later lessons. For now, we keep it simple with three individual pins.
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p3-c1-l2-multi-led-blink" label="I have 3 LEDs ready to go! 💡💡💡" />
+
+</LessonChapter>
+
+<LessonChapter title="Pattern 1: All Together! 🎇" id="pattern-all-together">
+
+Let's make all three lights blink at the same time - like fireworks! 🎆
+
+<P5SketchEmbed
+  id="simultaneous-blink-animation"
+  sketchId="p3-c1-l2-simultaneous-blink"
+  stepNumber={2}
+  title="All Lights Blink Together!"
+  alt="Three LEDs blinking simultaneously"
+>
+  👀 **Look!** All three lights turn ON together, then OFF together! Like fireworks exploding in the sky! 🎆
+</P5SketchEmbed>
+
+```cpp
+void loop() {
+  // Turn ALL lights ON together!
+  digitalWrite(9, HIGH);
+  digitalWrite(10, HIGH);
+  digitalWrite(11, HIGH);
+  delay(500);
+
+  // Turn ALL lights OFF together!
+  digitalWrite(9, LOW);
+  digitalWrite(10, LOW);
+  digitalWrite(11, LOW);
+  delay(500);
+}
+```
+
+<InfoBox type="tip">
+  **Think of it like:** When you say "JUMP!" all your friends jump together! When you say "STOP!" they all stop! 🤸
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Pattern 2: One at a Time! 🐛" id="pattern-chase">
+
+Now let's make the lights turn on one by one - like a caterpillar crawling! 🐛
+
+<P5SketchEmbed
+  id="chase-pattern-animation"
+  sketchId="p3-c1-l2-chase-pattern"
+  stepNumber={2}
+  title="The Chase Pattern"
+  alt="LEDs lighting up one by one"
+>
+  Watch as each light takes its turn: First **9**, then **10**, then **11**, then start over! It's like they're playing follow the leader!
+</P5SketchEmbed>
+
+```cpp
+void loop() {
+  // Light 1 blinks
+  digitalWrite(9, HIGH);
+  delay(200);
+  digitalWrite(9, LOW);
+
+  // Light 2 blinks
+  digitalWrite(10, HIGH);
+  delay(200);
+  digitalWrite(10, LOW);
+
+  // Light 3 blinks
+  digitalWrite(11, HIGH);
+  delay(200);
+  digitalWrite(11, LOW);
+}
+```
+
+<InfoBox type="tip">
+  **It's like a relay race!** 🏃 Light 1 runs, then passes the baton to Light 2, then to Light 3!
+</InfoBox>
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p3-c1-l2-multi-led-blink" label="I can make lights chase each other! 🐛" />
+
+</LessonChapter>
+
+<LessonChapter title="Pattern 3: Back and Forth! 🏓" id="pattern-ping-pong">
+
+Now let's make the lights go back and forth - like a ping-pong ball! 🏓
+
+```cpp
+void loop() {
+  // Go forward: 9 → 10 → 11
+  digitalWrite(9, HIGH);
+  delay(150);
+  digitalWrite(9, LOW);
+
+  digitalWrite(10, HIGH);
+  delay(150);
+  digitalWrite(10, LOW);
+
+  digitalWrite(11, HIGH);
+  delay(150);
+  digitalWrite(11, LOW);
+
+  // Go backward: 10 → 9
+  digitalWrite(10, HIGH);
+  delay(150);
+  digitalWrite(10, LOW);
+}
+```
+
+<InfoBox type="tip">
+  **Bounce bounce bounce!** The light bounces from one end to the other and back, just like a ball! 🎾
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Fun Experiments! 🧪" id="experiments">
+
+### Make It FASTER! 🚀
+
+Change all the `delay(200)` to `delay(50)`:
+```cpp
+delay(50);
+```
+Now they zoom around super fast!
+
+### Make It SLOWER! 🐢
+
+Change to `delay(500)`:
+```cpp
+delay(500);
+```
+Nice and slow, like a sleepy caterpillar!
+
+### Make a HEARTBEAT! ❤️
+
+Try this pattern that looks like a heart beating:
+```cpp
+// Quick double-beat
+digitalWrite(9, HIGH);
+digitalWrite(10, HIGH);
+digitalWrite(11, HIGH);
+delay(100);
+digitalWrite(9, LOW);
+digitalWrite(10, LOW);
+digitalWrite(11, LOW);
+delay(100);
+
+digitalWrite(9, HIGH);
+digitalWrite(10, HIGH);
+digitalWrite(11, HIGH);
+delay(100);
+digitalWrite(9, LOW);
+digitalWrite(10, LOW);
+digitalWrite(11, LOW);
+delay(400);
+```
+
+<InfoBox type="tip">
+  **Challenge:** Can you make a pattern that looks like waves in the ocean? 🌊 Try turning the lights on and off at different times!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Quiz Time! 🎯" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p3-c1-l2-multi-led-blink"
+  question="To make all 3 lights blink TOGETHER, what do we do?"
+  options={[
+    { id: "a", text: "Turn them all HIGH, wait, then turn them all LOW" },
+    { id: "b", text: "Turn them on one at a time" },
+    { id: "c", text: "Only turn on the first one" },
+    { id: "d", text: "Use different delay times for each" }
+  ]}
+  correctIndex={0}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p3-c1-l2-multi-led-blink"
+  question="In the chase pattern, what happens after light 9 turns off?"
+  options={[
+    { id: "a", text: "All lights turn on" },
+    { id: "b", text: "Light 10 turns on next!" },
+    { id: "c", text: "Light 9 turns on again" },
+    { id: "d", text: "Everything stops" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-3"
+  lessonKey="en/p3-c1-l2-multi-led-blink"
+  question="What happens if we make delay() smaller (like 50 instead of 200)?"
+  options={[
+    { id: "a", text: "Lights get brighter" },
+    { id: "b", text: "Lights blink FASTER! 🚀" },
+    { id: "c", text: "Lights turn off forever" },
+    { id: "d", text: "Nothing changes" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="You Did It! 🏆" id="summary">
+
+### What you learned today:
+
+- ✅ Control **3 LEDs** at the same time
+- ✅ Make them blink **together** (like fireworks! 🎆)
+- ✅ Make them chase **one by one** (like a caterpillar! 🐛)
+- ✅ Make them go **back and forth** (like ping-pong! 🏓)
+- ✅ Change speed with different **delay** numbers
+
+<InfoBox type="tip">
+  **Amazing job!** 🌟 You're now controlling multiple lights! Next lesson, we'll learn how to make lights fade in and out smoothly - like magic! ✨
+</InfoBox>
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p3-c1-l2-multi-led-blink" label="I can make 3 lights dance! I'm a light DJ! 🎧" />
+
+</LessonChapter>

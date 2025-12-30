@@ -1,0 +1,257 @@
+---
+id: p3-c4-l3-dc-motor-transistor-en
+title: "DC Motor with Transistor"
+course: "working-with-outputs"
+difficulty: "intermediate"
+tags: ["motor", "transistor", "PWM", "diode", "speed control"]
+estimatedMinutes: 30
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# DC Motor with Transistor
+
+In this lesson, you'll learn how to control a DC motor using a transistor and PWM for speed control.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Motor + transistor + flyback diode wiring
+- Using PWM for speed control
+- Understanding current requirements
+- Safe motor control practices
+
+<InfoBox type="info">
+  Motors need more current than Arduino pins can provide. Transistors act as electronic switches to handle the higher current!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Motor Control Basics" id="motor-control-basics">
+
+<P5SketchEmbed
+  id="dc-motor-animation"
+  sketchId="p3-c4-l3-dc-motor"
+  stepNumber={1}
+  title="PWM Motor Speed Control"
+  alt="Animation showing PWM slider controlling fan spin speed"
+>
+  Use the PWM slider to control motor speed. Watch the fan blades spin faster with higher PWM values. The transistor circuit diagram shows how current flows through the transistor and flyback diode.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="transistor-flow-animation"
+  sketchId="p3-c4-l3-transistor-flow"
+  stepNumber={2}
+  title="Transistor & Flyback Circuit"
+  alt="Animation showing transistor and diode flow path with switching and flyback"
+>
+  See how current flows through the transistor when ON. Click to toggle the motor - watch the flyback diode absorb back-EMF voltage spikes when the motor turns off.
+</P5SketchEmbed>
+
+<GifStep
+  stepNumber={3}
+  title="Wire the Transistor"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Motor+Transistor+GIF"
+  alt="Wiring transistor"
+>
+  Connect NPN transistor: Base to pin 9 through 1kΩ resistor, Collector to motor negative, Emitter to GND.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Add Flyback Diode"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Motor+Diode+GIF"
+  alt="Adding flyback diode"
+>
+  Connect diode across motor terminals (cathode to +, anode to -). This protects against voltage spikes when motor stops.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Control Speed with PWM"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Motor+PWM+GIF"
+  alt="PWM motor control"
+>
+  Use **analogWrite(9, speed)** to control motor speed from 0 (stopped) to 255 (full speed).
+</GifStep>
+
+</LessonChapter>
+
+<LessonChapter title="Why Use a Transistor?" id="why-transistor">
+
+### Arduino Pin Limitations
+
+- Arduino pins: ~20-40mA maximum
+- Small DC motors: 100-500mA
+- Larger motors: 1A or more
+
+### The Solution
+
+A transistor lets Arduino's small signal control a larger motor current from a separate power supply.
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p3-c4-l3-dc-motor-transistor" label="I understand why transistors are needed" />
+
+</LessonChapter>
+
+<LessonChapter title="Circuit Wiring" id="circuit-wiring">
+
+### Components Needed
+
+- NPN transistor (TIP120 or 2N2222)
+- Flyback diode (1N4001 or similar)
+- Base resistor (1kΩ)
+- DC motor
+- External power supply (if motor needs >5V or high current)
+
+### Wiring Diagram
+
+```
+Arduino PWM Pin → 1kΩ Resistor → Transistor Base
+Motor (+) → Power Supply (+)
+Motor (-) → Transistor Collector
+Transistor Emitter → GND
+Flyback Diode: Cathode to Motor(+), Anode to Motor(-)
+```
+
+<InfoBox type="warning">
+  The flyback diode is critical! It protects the transistor from voltage spikes when the motor turns off.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="PWM Speed Control" id="pwm-speed-control">
+
+### Using analogWrite()
+
+```cpp
+const int MOTOR_PIN = 9;  // PWM pin
+
+void setup() {
+  pinMode(MOTOR_PIN, OUTPUT);
+}
+
+void loop() {
+  // Full speed
+  analogWrite(MOTOR_PIN, 255);
+  delay(2000);
+
+  // Half speed
+  analogWrite(MOTOR_PIN, 127);
+  delay(2000);
+
+  // Quarter speed
+  analogWrite(MOTOR_PIN, 64);
+  delay(2000);
+
+  // Stop
+  analogWrite(MOTOR_PIN, 0);
+  delay(2000);
+}
+```
+
+### Speed with Potentiometer
+
+```cpp
+const int POT_PIN = A0;
+const int MOTOR_PIN = 9;
+
+void loop() {
+  int potValue = analogRead(POT_PIN);
+  int motorSpeed = map(potValue, 0, 1023, 0, 255);
+  analogWrite(MOTOR_PIN, motorSpeed);
+  delay(10);
+}
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p3-c4-l3-dc-motor-transistor" label="I understand PWM motor control" />
+
+</LessonChapter>
+
+<LessonChapter title="Code Example" id="code-example">
+
+### Complete Motor Control
+
+```cpp
+const int MOTOR_PIN = 9;
+const int POT_PIN = A0;
+const int BUTTON_PIN = 2;
+
+bool motorEnabled = false;
+
+void setup() {
+  pinMode(MOTOR_PIN, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+}
+
+void loop() {
+  // Button toggles motor enable
+  if (digitalRead(BUTTON_PIN) == LOW) {
+    motorEnabled = !motorEnabled;
+    delay(200);  // Debounce
+  }
+
+  if (motorEnabled) {
+    int speed = map(analogRead(POT_PIN), 0, 1023, 0, 255);
+    analogWrite(MOTOR_PIN, speed);
+  } else {
+    analogWrite(MOTOR_PIN, 0);
+  }
+}
+```
+
+<InfoBox type="tip">
+  For bidirectional motor control (forward AND reverse), you'll need an H-bridge circuit or motor driver IC like the L298N.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a motor icon that spins at a speed set by the PWM slider. The transistor and flyback diode icons highlight when active, helping you visualize the circuit operation.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p3-c4-l3-dc-motor-transistor"
+  question="What is the purpose of the flyback diode?"
+  options={[
+    { id: "a", text: "To make the motor spin faster" },
+    { id: "b", text: "To protect against voltage spikes when motor turns off" },
+    { id: "c", text: "To convert AC to DC" },
+    { id: "d", text: "To reduce power consumption" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p3-c4-l3-dc-motor-transistor"
+  question="What value would you use with analogWrite() for approximately 50% speed?"
+  options={[
+    { id: "a", text: "50" },
+    { id: "b", text: "127 or 128" },
+    { id: "c", text: "255" },
+    { id: "d", text: "512" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Transistors let Arduino control high-current motors
+- ✅ Flyback diodes protect against inductive spikes
+- ✅ PWM controls motor speed (0-255)
+- ✅ Always use base resistors with transistors
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p3-c4-l3-dc-motor-transistor" label="I completed the lesson!" />
+
+</LessonChapter>

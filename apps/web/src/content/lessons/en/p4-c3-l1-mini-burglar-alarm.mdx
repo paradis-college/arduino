@@ -1,0 +1,224 @@
+---
+id: p4-c3-l1-mini-burglar-alarm-en
+title: "Project – Mini Burglar Alarm"
+course: "burglar-alarm-system"
+difficulty: "intermediate"
+tags: ["PIR", "buzzer", "alarm", "security", "project"]
+estimatedMinutes: 40
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Project – Mini Burglar Alarm
+
+In this project, you'll build a motion-detecting security alarm with armed/triggered/idle states.
+
+<LessonChapter title="What You'll Build" id="what-youll-build">
+
+- Motion-detecting alarm system
+- Multiple states: Idle, Armed, Triggered
+- PIR sensor for detection
+- Buzzer for alarm sound
+- Button for arming/disarming
+
+<InfoBox type="info">
+  Security systems combine sensors, outputs, and state management to create responsive protection!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Project Setup" id="project-setup">
+
+<P5SketchEmbed
+  id="burglar-alarm-animation"
+  sketchId="p4-c3-l1-burglar-alarm"
+  stepNumber={1}
+  title="Burglar Alarm System"
+  alt="Animation showing PIR detection zone with intruder causing flashing siren"
+>
+  Watch the PIR detection zone for motion. When an intruder enters the detection area while the system is armed, the siren flashes and the alarm triggers. Click the Arm/Disarm button to toggle the system state.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="armed-state-animation"
+  sketchId="p4-c3-l1-armed-state"
+  stepNumber={2}
+  title="Armed/Disarmed State Control"
+  alt="Animation showing armed and disarmed states with countdown"
+>
+  Use the ARM and DISARM buttons to toggle the security system state. Watch the countdown when arming, and click in the PIR sensor zone to simulate motion detection when armed.
+</P5SketchEmbed>
+
+<GifStep
+  stepNumber={2}
+  title="Add Buzzer and LED"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Alarm+Output+GIF"
+  alt="Adding alarm outputs"
+>
+  Connect buzzer to pin 8 and alert LED to pin 13. These activate when motion is detected in armed state.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Add Arm/Disarm Button"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Alarm+Button+GIF"
+  alt="Arm/disarm button"
+>
+  Wire button to pin 3 with INPUT_PULLUP. Press to toggle between armed and disarmed states.
+</GifStep>
+
+</LessonChapter>
+
+<LessonChapter title="Components Needed" id="components-needed">
+
+- Arduino Uno
+- PIR motion sensor
+- Piezo buzzer
+- Push button (with pull-up)
+- LEDs: Green (idle), Yellow (armed), Red (triggered)
+- 220Ω resistors for LEDs
+- Breadboard and jumper wires
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p4-c3-l1-mini-burglar-alarm" label="I have gathered the components" />
+
+</LessonChapter>
+
+<LessonChapter title="System States" id="system-states">
+
+### State Definitions
+
+| State | Description | LED | Behavior |
+|-------|-------------|-----|----------|
+| IDLE | System off | Green | No detection |
+| ARMED | Monitoring | Yellow | Detecting motion |
+| TRIGGERED | Alarm active | Red | Buzzer sounding |
+
+### State Transitions
+
+- IDLE → ARMED: Press button
+- ARMED → TRIGGERED: Motion detected
+- TRIGGERED → IDLE: Press button (or timeout)
+- ARMED → IDLE: Press button (before motion)
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p4-c3-l1-mini-burglar-alarm" label="I understand the alarm states" />
+
+</LessonChapter>
+
+<LessonChapter title="Code Structure" id="code-structure">
+
+### Pin and State Definitions
+
+```cpp
+const int PIR_PIN = 2;
+const int BUTTON_PIN = 3;
+const int BUZZER_PIN = 8;
+const int LED_GREEN = 9;
+const int LED_YELLOW = 10;
+const int LED_RED = 11;
+
+enum AlarmState { IDLE, ARMED, TRIGGERED };
+AlarmState currentState = IDLE;
+```
+
+### State Machine
+
+```cpp
+void loop() {
+  bool buttonPressed = checkButton();
+  bool motionDetected = digitalRead(PIR_PIN) == HIGH;
+
+  switch (currentState) {
+    case IDLE:
+      setLeds(true, false, false);  // Green only
+      noTone(BUZZER_PIN);
+      if (buttonPressed) {
+        currentState = ARMED;
+        delay(5000);  // Delay before arming
+      }
+      break;
+
+    case ARMED:
+      setLeds(false, true, false);  // Yellow only
+      if (buttonPressed) {
+        currentState = IDLE;
+      } else if (motionDetected) {
+        currentState = TRIGGERED;
+      }
+      break;
+
+    case TRIGGERED:
+      setLeds(false, false, true);  // Red only
+      soundAlarm();
+      if (buttonPressed) {
+        currentState = IDLE;
+        noTone(BUZZER_PIN);
+      }
+      break;
+  }
+}
+```
+
+### Alarm Sound
+
+```cpp
+void soundAlarm() {
+  // Alternating tones for siren effect
+  tone(BUZZER_PIN, 1000, 200);
+  delay(250);
+  tone(BUZZER_PIN, 1500, 200);
+  delay(250);
+}
+```
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a floor plan with a PIR sensor detection zone. Move the intruder icon into the zone while the system is armed to trigger the alarm. Use the button to arm/disarm and see the siren indicator activate.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p4-c3-l1-mini-burglar-alarm"
+  question="Why have an IDLE state instead of just ARMED/TRIGGERED?"
+  options={[
+    { id: "a", text: "To save power" },
+    { id: "b", text: "To allow entering the room without triggering alarm" },
+    { id: "c", text: "It's not necessary" },
+    { id: "d", text: "To make the code longer" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p4-c3-l1-mini-burglar-alarm"
+  question="Why add a delay before the system becomes armed?"
+  options={[
+    { id: "a", text: "To let the PIR sensor warm up" },
+    { id: "b", text: "To give time to leave the room" },
+    { id: "c", text: "To save battery" },
+    { id: "d", text: "Delays are always required" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this project you learned:
+
+- ✅ State machines manage alarm system behavior
+- ✅ PIR sensors detect motion for security
+- ✅ Multiple states: Idle, Armed, Triggered
+- ✅ Entry/exit delays improve usability
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p4-c3-l1-mini-burglar-alarm" label="I completed the project!" />
+
+</LessonChapter>

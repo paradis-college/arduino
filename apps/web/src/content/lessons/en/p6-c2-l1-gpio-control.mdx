@@ -1,0 +1,229 @@
+---
+id: p6-c2-l1-gpio-control-en
+title: "Raspberry Pi GPIO Control"
+course: "gpio-pins"
+difficulty: "intermediate"
+tags: ["GPIO", "Raspberry Pi", "Python", "gpiozero", "LED", "button"]
+estimatedMinutes: 35
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Raspberry Pi GPIO Control
+
+In this lesson, you'll learn how to control Raspberry Pi's GPIO pins for simple LED and button projects.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- GPIO pin numbering (BCM vs BOARD)
+- Python gpiozero library basics
+- Simple LED and button scripts
+- Digital input and output
+
+<InfoBox type="info">
+  GPIO (General Purpose Input/Output) pins let Raspberry Pi interact with the physical world - just like Arduino!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="GPIO Basics" id="gpio-basics">
+
+<P5SketchEmbed
+  id="gpio-animation"
+  sketchId="p6-c2-l1-gpio"
+  stepNumber={1}
+  title="GPIO Pin Control"
+  alt="Animation showing clickable Pi pins toggling LED and reading button state"
+>
+  Click the GPIO pins on the virtual Raspberry Pi to toggle them HIGH or LOW. Watch the connected LED light up when the output pin is HIGH, and see the button state indicator update when pins are toggled.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="breadboard-leds-animation"
+  sketchId="p6-c2-l1-breadboard-leds"
+  stepNumber={2}
+  title="Breadboard LED Control"
+  alt="Breadboard LEDs reflecting selected pin state"
+>
+  Click GPIO buttons to toggle pin states. Watch the corresponding LEDs on the breadboard light up when pins go HIGH.
+</P5SketchEmbed>
+
+</LessonChapter>
+
+<LessonChapter title="GPIO Pin Numbering" id="gpio-numbering">
+
+### Two Numbering Schemes
+
+**BCM (Broadcom)**: GPIO numbers from the chip
+- GPIO17, GPIO27, GPIO22...
+- Used by gpiozero library
+
+**BOARD**: Physical pin positions
+- Pin 1, Pin 2, Pin 3...
+- Sequential, easier to count
+
+### Common GPIO Pins
+
+| BCM | BOARD | Use |
+|-----|-------|-----|
+| GPIO17 | Pin 11 | General IO |
+| GPIO27 | Pin 13 | General IO |
+| GPIO22 | Pin 15 | General IO |
+| GPIO5 | Pin 29 | General IO |
+| GPIO6 | Pin 31 | General IO |
+
+<InfoBox type="warning">
+  Some pins have special functions! Always check the pinout before connecting hardware. Pins 1 and 17 are 3.3V, Pins 2 and 4 are 5V.
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p6-c2-l1-gpio-control" label="I understand GPIO numbering" />
+
+</LessonChapter>
+
+<LessonChapter title="gpiozero Library" id="gpiozero-library">
+
+### Why gpiozero?
+
+- Simple, beginner-friendly
+- Pre-installed on Raspberry Pi OS
+- Object-oriented design
+- Handles cleanup automatically
+
+### Basic LED Control
+
+```python
+from gpiozero import LED
+from time import sleep
+
+led = LED(17)  # BCM pin 17
+
+led.on()
+sleep(1)
+led.off()
+sleep(1)
+
+# Or use blink!
+led.blink(on_time=0.5, off_time=0.5)
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p6-c2-l1-gpio-control" label="I understand LED control" />
+
+</LessonChapter>
+
+<LessonChapter title="Button Input" id="button-input">
+
+### Reading a Button
+
+```python
+from gpiozero import Button
+
+button = Button(17)  # BCM pin 17
+
+while True:
+    if button.is_pressed:
+        print("Button pressed!")
+    else:
+        print("Button released")
+```
+
+### Event-Based Approach
+
+```python
+from gpiozero import Button, LED
+from signal import pause
+
+button = Button(17)
+led = LED(27)
+
+button.when_pressed = led.on
+button.when_released = led.off
+
+pause()  # Keep program running
+```
+
+<InfoBox type="tip">
+  gpiozero buttons use internal pull-ups by default, so you only need to connect button between GPIO and GND.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Complete Example" id="complete-example">
+
+### LED Controlled by Button
+
+```python
+#!/usr/bin/env python3
+from gpiozero import LED, Button
+from signal import pause
+
+# Setup
+led = LED(17)
+button = Button(27)
+
+# Connect button to LED
+button.when_pressed = led.on
+button.when_released = led.off
+
+print("Press the button to light the LED!")
+print("Press Ctrl+C to exit")
+
+pause()
+```
+
+Save as `button_led.py` and run with:
+```bash
+python3 button_led.py
+```
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a Raspberry Pi top-view pinout diagram. Click on GPIO pins to toggle their state and watch virtual LEDs light up, demonstrating how GPIO control works.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p6-c2-l1-gpio-control"
+  question="What voltage level are Raspberry Pi GPIO pins?"
+  options={[
+    { id: "a", text: "5V" },
+    { id: "b", text: "3.3V" },
+    { id: "c", text: "12V" },
+    { id: "d", text: "1.8V" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p6-c2-l1-gpio-control"
+  question="Which Python library provides LED() and Button() classes?"
+  options={[
+    { id: "a", text: "RPi.GPIO" },
+    { id: "b", text: "pigpio" },
+    { id: "c", text: "gpiozero" },
+    { id: "d", text: "wiringPi" }
+  ]}
+  correctIndex={2}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ BCM vs BOARD pin numbering
+- ✅ gpiozero library for easy GPIO control
+- ✅ LED on/off/blink control
+- ✅ Button input with events
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p6-c2-l1-gpio-control" label="I completed the lesson!" />
+
+</LessonChapter>

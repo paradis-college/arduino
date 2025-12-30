@@ -1,0 +1,284 @@
+---
+id: p3-c1-l3-pwm-led-fade-en
+title: "Make Lights Glow Like Magic! ✨"
+course: "embedded-programming-basics"
+difficulty: "beginner"
+tags: ["PWM", "analogWrite", "fade", "brightness"]
+estimatedMinutes: 15
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Make Lights Glow Like Magic! ✨
+
+Instead of just ON and OFF, now we'll make lights get brighter and dimmer - like a sunrise! 🌅
+
+<LessonChapter title="What We'll Do Today" id="what-youll-learn">
+
+Today you will:
+- 🌟 Make a light get **brighter** slowly
+- 🌙 Make a light get **dimmer** slowly
+- 💫 Create a **breathing light** effect!
+
+<InfoBox type="info">
+  **Hey kids!** Imagine your light is like a sleepy kitten - it slowly opens its eyes (gets bright), then slowly closes them (gets dim)! 😺
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Watch the Glow! 🌈" id="watch-the-glow">
+
+<P5SketchEmbed
+  id="pwm-fade-animation"
+  sketchId="p3-c1-l3-pwm-fade"
+  stepNumber={1}
+  title="The Glowing Light!"
+  alt="LED fading in and out"
+>
+  👀 **Look!** Watch the light slowly get brighter, then slowly get dimmer. It's like the light is breathing! Move the slider to see different brightness levels!
+</P5SketchEmbed>
+
+<InfoBox type="tip">
+  **Try it!** Move the slider all the way left for OFF, all the way right for SUPER BRIGHT, or somewhere in the middle for a cozy glow! 💡
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Not Just ON and OFF! 🎚️" id="not-just-on-off">
+
+Before, we only had two choices:
+- `HIGH` = ALL THE WAY ON (100%)
+- `LOW` = ALL THE WAY OFF (0%)
+
+<P5SketchEmbed
+  id="brightness-scale-animation"
+  sketchId="p3-c1-l3-brightness-scale"
+  stepNumber={2}
+  title="Now We Have 256 Levels!"
+  alt="Brightness scale from 0 to 255"
+>
+  Now we can pick ANY brightness from **0** (off) to **255** (super bright)! Drag the slider to see all 256 different light settings!
+</P5SketchEmbed>
+
+### The Magic Number Scale 🔢
+
+| Number | How Bright? | Like... |
+|--------|-------------|---------|
+| **0** | Off! | 🌑 Night time |
+| **50** | A little bit | 🌒 Moonlight |
+| **127** | Half way | 🌓 Cloudy day |
+| **200** | Pretty bright | 🌤️ Sunny |
+| **255** | SUPER BRIGHT! | ☀️ Staring at the sun! |
+
+<InfoBox type="tip">
+  **Think of it like:** The volume knob on a radio! You can make it quiet, medium, or LOUD! 🔊
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p3-c1-l3-pwm-led-fade" label="I can choose any brightness from 0 to 255! 🔢" />
+
+</LessonChapter>
+
+<LessonChapter title="The New Magic Word: analogWrite! ✨" id="analogwrite">
+
+Instead of `digitalWrite`, we use `analogWrite`!
+
+```cpp
+analogWrite(pin, brightness);
+```
+
+- **pin** = Which light (use pins with a ~ symbol: 3, 5, 6, 9, 10, 11)
+- **brightness** = Pick a number from 0 to 255
+
+### Try These!
+
+```cpp
+analogWrite(9, 0);    // Light is OFF
+analogWrite(9, 50);   // Light is DIM (like a nightlight)
+analogWrite(9, 127);  // Light is MEDIUM
+analogWrite(9, 255);  // Light is SUPER BRIGHT!
+```
+
+<InfoBox type="warning">
+  **Important!** Only some pins work with `analogWrite`. Look for the little ~ symbol on your Arduino next to pins **3, 5, 6, 9, 10, and 11**!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Make a Breathing Light! 💫" id="breathing-light">
+
+Let's make the light fade in and fade out - like it's breathing!
+
+<P5SketchEmbed
+  id="breathing-light-animation"
+  sketchId="p3-c1-l3-breathing-light"
+  stepNumber={3}
+  title="Watch It Breathe!"
+  alt="LED breathing animation"
+>
+  The light slowly gets brighter... then slowly gets dimmer... over and over! It's like the light is taking slow breaths! 😮‍💨
+</P5SketchEmbed>
+
+### Fade IN (0 → 255) - Getting Brighter! ☀️
+
+```cpp
+for (int i = 0; i <= 255; i = i + 5) {
+  analogWrite(9, i);
+  delay(30);
+}
+```
+
+This makes `i` go from 0 to 255, step by step, making the light brighter!
+
+### Fade OUT (255 → 0) - Getting Dimmer! 🌙
+
+```cpp
+for (int i = 255; i >= 0; i = i - 5) {
+  analogWrite(9, i);
+  delay(30);
+}
+```
+
+This makes `i` go from 255 back to 0, making the light dimmer!
+
+<InfoBox type="tip">
+  **Don't worry about the `for` loop yet!** Just know it makes numbers go up (fade in) or down (fade out) automatically! 🔄
+</InfoBox>
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p3-c1-l3-pwm-led-fade" label="I can make a breathing light! 💫" />
+
+</LessonChapter>
+
+<LessonChapter title="The Complete Program! 🎉" id="complete-program">
+
+Here's everything together:
+
+```cpp
+void setup() {
+  pinMode(9, OUTPUT);
+}
+
+void loop() {
+  // Fade IN - get brighter!
+  for (int i = 0; i <= 255; i = i + 5) {
+    analogWrite(9, i);
+    delay(30);
+  }
+
+  // Fade OUT - get dimmer!
+  for (int i = 255; i >= 0; i = i - 5) {
+    analogWrite(9, i);
+    delay(30);
+  }
+}
+```
+
+<InfoBox type="tip">
+  **Upload it!** Watch your LED slowly breathe in and out! 😮‍💨✨
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Fun Experiments! 🧪" id="experiments">
+
+<P5SketchEmbed
+  id="rgb-mixing-animation"
+  sketchId="p3-c1-l3-rgb-mixing"
+  stepNumber={3}
+  title="Mix Your Own Colors! 🎨"
+  alt="RGB color mixing slider"
+>
+  👀 **Be an artist!** Move the RED, GREEN, and BLUE sliders to mix ANY color you want! Can you make purple? Orange? Pink? 🌈
+</P5SketchEmbed>
+
+### Breathe FASTER! 🏃
+
+Change `delay(30)` to `delay(10)`:
+```cpp
+delay(10);
+```
+Now it breathes fast like after running!
+
+### Breathe SLOWER! 🧘
+
+Change `delay(30)` to `delay(50)`:
+```cpp
+delay(50);
+```
+Nice and relaxed, like yoga breathing!
+
+### Make a CANDLE Flicker! 🕯️
+
+Random brightness for a spooky candle effect:
+```cpp
+void loop() {
+  analogWrite(9, random(100, 255));
+  delay(100);
+}
+```
+
+<InfoBox type="tip">
+  **Challenge:** Can you make a heartbeat pattern? (quick bright, quick dim, pause, repeat!) ❤️
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Quiz Time! 🎯" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p3-c1-l3-pwm-led-fade"
+  question="What does analogWrite(9, 127) do?"
+  options={[
+    { id: "a", text: "Turns the light completely OFF" },
+    { id: "b", text: "Makes the light MEDIUM brightness (about half)" },
+    { id: "c", text: "Makes the light SUPER BRIGHT" },
+    { id: "d", text: "Makes the light blink" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p3-c1-l3-pwm-led-fade"
+  question="What's the BRIGHTEST number we can use?"
+  options={[
+    { id: "a", text: "100 - that's a lot!" },
+    { id: "b", text: "1000 - bigger is better!" },
+    { id: "c", text: "255 - the maximum!" },
+    { id: "d", text: "50 - that's enough" }
+  ]}
+  correctIndex={2}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-3"
+  lessonKey="en/p3-c1-l3-pwm-led-fade"
+  question="Which pins can use analogWrite? (Hint: look for ~)"
+  options={[
+    { id: "a", text: "Only pin 13" },
+    { id: "b", text: "Pins 3, 5, 6, 9, 10, 11 (the ones with ~)" },
+    { id: "c", text: "All pins work the same" },
+    { id: "d", text: "Only pins 1 and 2" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="You Did It! 🏆" id="summary">
+
+### What you learned today:
+
+- ✅ **analogWrite** lets us control brightness (not just ON/OFF!)
+- ✅ Numbers go from **0** (off) to **255** (super bright)
+- ✅ Use pins with **~** symbol (3, 5, 6, 9, 10, 11)
+- ✅ We can make lights **fade in** and **fade out**
+- ✅ Changing **delay** makes it faster or slower
+
+<InfoBox type="tip">
+  **Great work!** 🌟 You learned how to control brightness like a pro! Next lesson, we'll learn about timing and why sometimes we DON'T want to use delay! ⏰
+</InfoBox>
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p3-c1-l3-pwm-led-fade" label="I can make lights glow and breathe! ✨" />
+
+</LessonChapter>

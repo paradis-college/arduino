@@ -1,0 +1,219 @@
+---
+id: p2-c2-l1-temperature-humidity-dht-en
+title: "Temperature & Humidity Sensors (DHT)"
+course: "environmental-monitoring-sensors"
+difficulty: "intermediate"
+tags: ["DHT11", "DHT22", "temperature", "humidity", "environmental"]
+estimatedMinutes: 25
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Temperature & Humidity Sensors (DHT)
+
+In this lesson, you'll learn how to use DHT sensors to measure temperature and humidity for environmental monitoring projects.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- DHT sensor wiring and types
+- Reading temperature and relative humidity
+- Simple comfort range indicators
+- DHT11 vs DHT22 differences
+
+<InfoBox type="info">
+  DHT sensors combine a humidity sensor and a temperature sensor in one package, communicating via a single digital pin.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="DHT Sensor Basics" id="dht-basics-intro">
+
+<P5SketchEmbed
+  id="temperature-animation"
+  sketchId="p2-c2-l1-temperature"
+  stepNumber={1}
+  title="Temperature & Humidity Gauge"
+  alt="Animation showing thermometer rising and falling with slider"
+>
+  Use the temperature slider to see the thermometer rise and fall. Watch the humidity droplet gauge fill and empty as you adjust the humidity slider. Labels update to show "cold", "comfortable", or "hot" ranges.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="humidity-gauge-animation"
+  sketchId="p2-c2-l1-humidity"
+  stepNumber={2}
+  title="Humidity Droplet Gauge"
+  alt="Animation showing humidity droplet gauge filling and emptying"
+>
+  Drag the slider to adjust humidity levels. Watch the water droplet gauge fill and empty smoothly, with comfort zone indicators showing dry, comfortable, and humid ranges.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="dht-wiring"
+  sketchId="p2-c2-l1-dht-wiring"
+  stepNumber={3}
+  title="Wire the DHT Sensor"
+  alt="Animation showing DHT sensor wiring"
+>
+  Connect **VCC** to 5V, **GND** to ground, and **DATA** to a digital pin (e.g., pin 2). Add a 10k pull-up resistor.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="dht-library-install"
+  sketchId="p2-c2-l1-dht-library"
+  stepNumber={4}
+  title="Install DHT Library"
+  alt="Animation showing DHT library installation"
+>
+  In Arduino IDE, go to Library Manager and install **DHT sensor library** by Adafruit.
+</P5SketchEmbed>
+
+</LessonChapter>
+
+<LessonChapter title="DHT Sensor Basics" id="dht-basics">
+
+### DHT11 vs DHT22
+
+| Feature | DHT11 | DHT22 |
+|---------|-------|-------|
+| Temperature Range | 0-50°C | -40 to 80°C |
+| Humidity Range | 20-80% | 0-100% |
+| Accuracy | ±2°C, ±5% RH | ±0.5°C, ±2% RH |
+| Speed | 1 reading/sec | 0.5 reading/sec |
+| Cost | Lower | Higher |
+
+### Wiring
+
+Most DHT modules have 3 pins:
+- **VCC**: 3.3V or 5V
+- **GND**: Ground
+- **DATA**: Digital pin (with 10kΩ pull-up)
+
+<InfoBox type="tip">
+  DHT22 is more accurate and has a wider range. Use DHT11 for simple projects where precision isn't critical.
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p2-c2-l1-temperature-humidity-dht" label="I understand DHT sensor basics" />
+
+</LessonChapter>
+
+<LessonChapter title="Reading Values" id="reading-values">
+
+### Using the DHT Library
+
+```cpp
+#include <DHT.h>
+
+#define DHT_PIN 2
+#define DHT_TYPE DHT22
+
+DHT dht(DHT_PIN, DHT_TYPE);
+
+void setup() {
+  Serial.begin(9600);
+  dht.begin();
+}
+
+void loop() {
+  float humidity = dht.readHumidity();
+  float tempC = dht.readTemperature();
+  float tempF = dht.readTemperature(true);
+
+  if (isnan(humidity) || isnan(tempC)) {
+    Serial.println("Failed to read from DHT!");
+    return;
+  }
+
+  Serial.print("Humidity: ");
+  Serial.print(humidity);
+  Serial.print("%  Temperature: ");
+  Serial.print(tempC);
+  Serial.println("°C");
+
+  delay(2000);  // DHT22 needs 2 seconds between readings
+}
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p2-c2-l1-temperature-humidity-dht" label="I understand how to read DHT values" />
+
+</LessonChapter>
+
+<LessonChapter title="Comfort Ranges" id="comfort-ranges">
+
+### Temperature Comfort
+
+- **Cold**: Below 18°C (64°F)
+- **Comfortable**: 18-24°C (64-75°F)
+- **Warm**: 24-28°C (75-82°F)
+- **Hot**: Above 28°C (82°F)
+
+### Humidity Comfort
+
+- **Dry**: Below 30% RH
+- **Comfortable**: 30-60% RH
+- **Humid**: Above 60% RH
+
+### Example Logic
+
+```cpp
+String getComfort(float temp, float hum) {
+  if (temp < 18) return "Cold";
+  if (temp > 28) return "Hot";
+  if (hum < 30) return "Dry";
+  if (hum > 60) return "Humid";
+  return "Comfortable";
+}
+```
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a thermometer and humidity gauge that respond to sliders. Watch the text labels update: "cold/warm/hot" for temperature and "dry/humid" for humidity levels.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p2-c2-l1-temperature-humidity-dht"
+  question="Which DHT sensor is more accurate?"
+  options={[
+    { id: "a", text: "DHT11" },
+    { id: "b", text: "DHT22" },
+    { id: "c", text: "They are the same" },
+    { id: "d", text: "Neither measures accurately" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p2-c2-l1-temperature-humidity-dht"
+  question="How often can you read from a DHT22?"
+  options={[
+    { id: "a", text: "100 times per second" },
+    { id: "b", text: "Once per second" },
+    { id: "c", text: "Once every 2 seconds" },
+    { id: "d", text: "Once per minute" }
+  ]}
+  correctIndex={2}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ DHT sensors measure both temperature and humidity
+- ✅ DHT22 is more accurate than DHT11
+- ✅ Use the DHT library to read values easily
+- ✅ Comfort ranges help categorize environmental conditions
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p2-c2-l1-temperature-humidity-dht" label="I completed the lesson!" />
+
+</LessonChapter>

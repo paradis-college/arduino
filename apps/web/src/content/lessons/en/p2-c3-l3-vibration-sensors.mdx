@@ -1,0 +1,246 @@
+---
+id: p2-c3-l3-vibration-sensors-en
+title: "Vibration Sensors"
+course: "consumer-electronics-sensors"
+difficulty: "intermediate"
+tags: ["vibration", "shock", "SW-420", "alarm", "detection"]
+estimatedMinutes: 25
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Vibration Sensors
+
+In this lesson, you'll learn how vibration sensors detect movement and shocks, and how to use them for alarm and monitoring systems.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Vibration sensor pulse detection
+- Distinguishing tap vs continuous vibration
+- Building alarm triggers
+- Practical vibration sensing applications
+
+<InfoBox type="info">
+  Vibration sensors detect physical movement and shocks. They're used in security systems, earthquake detectors, and machine monitoring.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Vibration Sensor Basics" id="vibration-basics-intro">
+
+<P5SketchEmbed
+  id="vibration-animation"
+  sketchId="p2-c3-l3-vibration"
+  stepNumber={1}
+  title="Vibration Detection"
+  alt="Animation showing box shaking when vibration event triggers"
+>
+  Click the "Shake" button to trigger a vibration event. Watch the box shake violently and see pulse spikes appear on the timeline showing each vibration detection.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="vibration-timeline-animation"
+  sketchId="p2-c3-l3-vibration-timeline"
+  stepNumber={2}
+  title="Vibration Event Timeline"
+  alt="Animation showing timeline with pulse spikes for each vibration"
+>
+  Click SHAKE to trigger vibrations. Each event creates a spike on the timeline, allowing you to visualize vibration patterns over time.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="vibration-mounting"
+  sketchId="p2-c3-l3-vibration-mounting"
+  stepNumber={3}
+  title="Mount the Vibration Sensor"
+  alt="Animation showing vibration sensor mounting"
+>
+  Secure the SW-420 or piezo vibration sensor to the surface you want to monitor. Firm mounting improves sensitivity.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="vibration-wiring"
+  sketchId="p2-c3-l3-vibration-wiring"
+  stepNumber={4}
+  title="Wire to Arduino"
+  alt="Animation showing vibration sensor wiring"
+>
+  Connect **VCC** to 5V, **GND** to ground, and **DO** (digital out) to a digital input pin (e.g., pin 3).
+</P5SketchEmbed>
+
+</LessonChapter>
+
+<LessonChapter title="Vibration Sensor Types" id="sensor-types">
+
+### Common Types
+
+**SW-420 Vibration Sensor Module**
+- Spring-based tilt/vibration detection
+- Digital output (HIGH on vibration)
+- Adjustable sensitivity potentiometer
+- Very affordable
+
+**Piezo Vibration Sensor**
+- Generates voltage when deformed
+- Analog output proportional to vibration
+- More sensitive to small vibrations
+- Better for continuous monitoring
+
+### SW-420 Pins
+
+| Pin | Function |
+|-----|----------|
+| VCC | 3.3-5V |
+| GND | Ground |
+| DO | Digital Output |
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p2-c3-l3-vibration-sensors" label="I understand vibration sensor types" />
+
+</LessonChapter>
+
+<LessonChapter title="Reading Vibration" id="reading-vibration">
+
+### Digital Vibration Detection
+
+```cpp
+const int VIBRATION_PIN = 2;
+const int LED_PIN = 13;
+
+void setup() {
+  pinMode(VIBRATION_PIN, INPUT);
+  pinMode(LED_PIN, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int vibration = digitalRead(VIBRATION_PIN);
+
+  if (vibration == HIGH) {
+    digitalWrite(LED_PIN, HIGH);
+    Serial.println("Vibration detected!");
+    delay(100);
+  } else {
+    digitalWrite(LED_PIN, LOW);
+  }
+}
+```
+
+### Counting Pulses
+
+For tap detection vs continuous vibration:
+
+```cpp
+int pulseCount = 0;
+unsigned long lastPulse = 0;
+
+void loop() {
+  if (digitalRead(VIBRATION_PIN) == HIGH) {
+    if (millis() - lastPulse > 50) {  // Debounce
+      pulseCount++;
+      lastPulse = millis();
+    }
+  }
+
+  // Reset count after 1 second of no vibration
+  if (millis() - lastPulse > 1000) {
+    if (pulseCount > 0) {
+      Serial.print("Pulses: ");
+      Serial.println(pulseCount);
+      pulseCount = 0;
+    }
+  }
+}
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p2-c3-l3-vibration-sensors" label="I understand vibration detection" />
+
+</LessonChapter>
+
+<LessonChapter title="Alarm Applications" id="alarm-applications">
+
+### Vibration Alarm
+
+```cpp
+const int BUZZER_PIN = 8;
+bool armed = true;
+
+void checkVibration() {
+  if (armed && digitalRead(VIBRATION_PIN) == HIGH) {
+    triggerAlarm();
+  }
+}
+
+void triggerAlarm() {
+  Serial.println("🚨 ALARM TRIGGERED!");
+  for (int i = 0; i < 5; i++) {
+    digitalWrite(BUZZER_PIN, HIGH);
+    delay(200);
+    digitalWrite(BUZZER_PIN, LOW);
+    delay(200);
+  }
+}
+```
+
+### Use Cases
+
+- **Anti-theft alarm**: Attach to bike, bag, or valuables
+- **Earthquake detection**: Monitor ground vibration
+- **Machine monitoring**: Detect unusual vibrations
+- **Door/window alarm**: Detect forced entry attempts
+
+<InfoBox type="tip">
+  Adjust the sensitivity potentiometer to avoid false triggers from normal movement while still detecting significant vibrations.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a box on a surface that wobbles when you press the "Shake" button. Watch the vibration pulse timeline and see the alarm indicator light up when vibration is detected.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p2-c3-l3-vibration-sensors"
+  question="What type of output does the SW-420 vibration sensor provide?"
+  options={[
+    { id: "a", text: "Analog voltage" },
+    { id: "b", text: "Digital HIGH/LOW" },
+    { id: "c", text: "I2C data" },
+    { id: "d", text: "PWM signal" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p2-c3-l3-vibration-sensors"
+  question="How can you distinguish between a tap and continuous vibration?"
+  options={[
+    { id: "a", text: "By measuring voltage level" },
+    { id: "b", text: "By counting pulses over time" },
+    { id: "c", text: "By checking sensor temperature" },
+    { id: "d", text: "It's not possible to distinguish" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Vibration sensors detect physical movement and shocks
+- ✅ SW-420 provides digital output, piezo gives analog
+- ✅ Count pulses to distinguish tap vs continuous vibration
+- ✅ Great for alarms, security, and monitoring applications
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p2-c3-l3-vibration-sensors" label="I completed the lesson!" />
+
+</LessonChapter>

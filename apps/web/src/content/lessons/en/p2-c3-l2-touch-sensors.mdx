@@ -1,0 +1,225 @@
+---
+id: p2-c3-l2-touch-sensors-en
+title: "Touch Sensors"
+course: "consumer-electronics-sensors"
+difficulty: "intermediate"
+tags: ["touch", "capacitive", "TTP223", "digital", "button replacement"]
+estimatedMinutes: 25
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Touch Sensors
+
+In this lesson, you'll learn how capacitive touch sensors work and how to use them as button replacements in your projects.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Capacitive touch sensor behavior
+- HIGH/LOW output reading
+- Replacing mechanical buttons with touch
+- Touch sensor applications
+
+<InfoBox type="info">
+  Capacitive touch sensors detect the electrical properties of the human body. When you touch the pad, it senses the change in capacitance.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Touch Sensor Basics" id="touch-basics-intro">
+
+<P5SketchEmbed
+  id="touch-sensor-animation"
+  sketchId="p2-c3-l2-touch"
+  stepNumber={1}
+  title="Touch Pad Response"
+  alt="Animation showing touch pad glowing with ripple effect when touched"
+>
+  Click or tap the touch pad to simulate a finger touch. Watch the pad glow with a ripple effect and see the HIGH/LOW indicator toggle instantly.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="touch-indicator-animation"
+  sketchId="p2-c3-l2-touch-indicator"
+  stepNumber={2}
+  title="Digital Touch Indicator"
+  alt="Animation showing touch HIGH/LOW indicator toggling instantly"
+>
+  Click and hold the touch pad to see the HIGH/LOW indicator toggle. The timeline shows touch events and an LED indicator lights up when touched.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="touch-wiring"
+  sketchId="p2-c3-l2-touch-wiring"
+  stepNumber={3}
+  title="Connect Touch Pad"
+  alt="Animation showing touch sensor wiring"
+>
+  Connect **VCC** to 3.3V/5V, **GND** to ground, and **SIG** to a digital input pin (e.g., pin 2).
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="touch-toggle-mode"
+  sketchId="p2-c3-l2-touch-toggle"
+  stepNumber={4}
+  title="Touch Modes Demo"
+  alt="Interactive demo of touch sensor modes"
+>
+  Some modules have a jumper to switch between **momentary** (touch = ON) and **toggle** (touch switches state) modes.
+</P5SketchEmbed>
+
+</LessonChapter>
+
+<LessonChapter title="Capacitive Touch Basics" id="capacitive-touch-basics">
+
+### How It Works
+
+1. Touch pad has a specific capacitance
+2. Human body adds capacitance when touching
+3. Sensor IC detects the change
+4. Output switches HIGH or LOW
+
+### TTP223 Module
+
+Common, inexpensive touch sensor module:
+- Single touch pad
+- Digital output (HIGH when touched)
+- 2.0-5.5V operating voltage
+- Adjustable sensitivity
+
+### Pin Configuration
+
+| Pin | Function |
+|-----|----------|
+| VCC | 2-5.5V Power |
+| GND | Ground |
+| OUT/SIG | Digital Output |
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p2-c3-l2-touch-sensors" label="I understand capacitive touch basics" />
+
+</LessonChapter>
+
+<LessonChapter title="Reading Touch Input" id="reading-touch">
+
+### Simple Code
+
+```cpp
+const int TOUCH_PIN = 2;
+const int LED_PIN = 13;
+
+void setup() {
+  pinMode(TOUCH_PIN, INPUT);
+  pinMode(LED_PIN, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int touched = digitalRead(TOUCH_PIN);
+
+  if (touched == HIGH) {
+    digitalWrite(LED_PIN, HIGH);
+    Serial.println("Touched!");
+  } else {
+    digitalWrite(LED_PIN, LOW);
+  }
+  delay(50);
+}
+```
+
+### Toggle Mode
+
+To toggle instead of momentary:
+
+```cpp
+bool ledState = false;
+bool lastTouchState = LOW;
+
+void loop() {
+  bool currentTouch = digitalRead(TOUCH_PIN);
+
+  if (currentTouch == HIGH && lastTouchState == LOW) {
+    ledState = !ledState;
+    digitalWrite(LED_PIN, ledState);
+    delay(50);  // Simple debounce
+  }
+
+  lastTouchState = currentTouch;
+}
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p2-c3-l2-touch-sensors" label="I understand reading touch input" />
+
+</LessonChapter>
+
+<LessonChapter title="Advantages Over Buttons" id="advantages">
+
+### Why Use Touch Sensors?
+
+- **No moving parts**: Won't wear out
+- **Sealed enclosures**: Touch through thin plastic
+- **Modern look**: Sleek interfaces
+- **Easy to clean**: Flat surface
+
+### Considerations
+
+- Need stable power supply
+- Can be affected by moisture
+- May trigger through thin gloves (or not)
+- Electromagnetic interference sensitivity
+
+<InfoBox type="tip">
+  Touch sensors work great for control panels, light switches, and interactive displays where durability and aesthetics matter!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a touch pad rectangle that lights up when a finger icon overlaps it. Watch the digital output indicator toggle between HIGH and LOW states.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p2-c3-l2-touch-sensors"
+  question="How do capacitive touch sensors detect touch?"
+  options={[
+    { id: "a", text: "By measuring pressure" },
+    { id: "b", text: "By sensing body heat" },
+    { id: "c", text: "By detecting capacitance change from human body" },
+    { id: "d", text: "By measuring resistance" }
+  ]}
+  correctIndex={2}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p2-c3-l2-touch-sensors"
+  question="What is an advantage of touch sensors over mechanical buttons?"
+  options={[
+    { id: "a", text: "They're always cheaper" },
+    { id: "b", text: "No moving parts to wear out" },
+    { id: "c", text: "They work better in cold weather" },
+    { id: "d", text: "They use less power" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Capacitive sensors detect body capacitance changes
+- ✅ TTP223 provides simple HIGH/LOW digital output
+- ✅ Touch sensors have no moving parts - more durable
+- ✅ Great for modern, sleek interfaces
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p2-c3-l2-touch-sensors" label="I completed the lesson!" />
+
+</LessonChapter>

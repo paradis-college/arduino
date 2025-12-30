@@ -1,0 +1,239 @@
+---
+id: p6-c4-l1-gpio-device-communication-en
+title: "Pi GPIO to Other Devices"
+course: "gpio-device-communication"
+difficulty: "advanced"
+tags: ["I2C", "SPI", "UART", "Arduino", "communication", "protocol"]
+estimatedMinutes: 45
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Pi GPIO to Other Devices
+
+In this lesson, you'll learn how to connect Raspberry Pi to Arduino and other devices using serial protocols.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- UART, I2C, and SPI basics
+- Pi-Arduino communication
+- Wiring considerations
+- Protocol selection guide
+
+<InfoBox type="info">
+  Raspberry Pi can communicate with Arduino and sensors using standard protocols - combining Pi's computing power with Arduino's real-time capabilities!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Device Communication" id="device-communication">
+
+<P5SketchEmbed
+  id="device-comm-animation"
+  sketchId="p6-c4-l1-device-comm"
+  stepNumber={1}
+  title="Pi to Arduino Communication"
+  alt="Animation showing data packets traveling between Pi and Arduino via UART"
+>
+  Watch data packets travel between the Raspberry Pi and Arduino over the UART connection. Click to send commands and see responses flow back through the serial link.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="byte-counter-animation"
+  sketchId="p6-c4-l1-byte-counter"
+  stepNumber={2}
+  title="Byte Counter Display"
+  alt="Live labels updating sent/received byte counts"
+>
+  Watch live byte counters as data flows between the Raspberry Pi and Arduino. Click devices to send packets and see TX/RX counters update in real-time.
+</P5SketchEmbed>
+
+</LessonChapter>
+
+<LessonChapter title="Communication Protocols" id="protocols">
+
+### UART (Serial)
+
+- Simple two-wire communication (TX, RX)
+- Point-to-point (one device)
+- Easy to implement
+- Use for: Arduino, GPS, Bluetooth modules
+
+### I2C
+
+- Two wires (SDA, SCL) for many devices
+- Addressable devices (up to 127)
+- Moderate speed
+- Use for: Sensors, displays, RTCs
+
+### SPI
+
+- Four wires (MOSI, MISO, SCK, CS)
+- Fast data transfer
+- One CS pin per device
+- Use for: SD cards, displays, ADCs
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p6-c4-l1-gpio-device-communication" label="I understand the protocols" />
+
+</LessonChapter>
+
+<LessonChapter title="UART: Pi to Arduino" id="uart-pi-arduino">
+
+### Wiring
+
+```
+Pi GPIO14 (TX) → Arduino RX (via voltage divider!)
+Pi GPIO15 (RX) → Arduino TX
+Pi GND → Arduino GND
+```
+
+<InfoBox type="warning">
+  Arduino TX is 5V, Pi RX is 3.3V! Use a voltage divider or level shifter to protect the Pi.
+</InfoBox>
+
+### Pi Code (Python)
+
+```python
+import serial
+from time import sleep
+
+ser = serial.Serial('/dev/ttyS0', 9600, timeout=1)
+
+while True:
+    ser.write(b'Hello Arduino\n')
+    sleep(1)
+
+    if ser.in_waiting > 0:
+        response = ser.readline().decode('utf-8').strip()
+        print(f"Arduino says: {response}")
+```
+
+### Arduino Code
+
+```cpp
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (Serial.available()) {
+    String msg = Serial.readStringUntil('\n');
+    Serial.print("Received: ");
+    Serial.println(msg);
+  }
+}
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p6-c4-l1-gpio-device-communication" label="I understand UART communication" />
+
+</LessonChapter>
+
+<LessonChapter title="I2C Communication" id="i2c-communication">
+
+### Enable I2C on Pi
+
+```bash
+sudo raspi-config
+# Interface Options → I2C → Enable
+```
+
+### Scan for Devices
+
+```bash
+sudo i2cdetect -y 1
+```
+
+### Python I2C Example
+
+```python
+import smbus2
+
+bus = smbus2.SMBus(1)  # I2C bus 1
+DEVICE_ADDR = 0x48     # Example device address
+
+# Read one byte
+data = bus.read_byte_data(DEVICE_ADDR, 0x00)
+print(f"Read: {data}")
+
+# Write one byte
+bus.write_byte_data(DEVICE_ADDR, 0x01, 0xFF)
+```
+
+### Wiring
+
+```
+Pi SDA (GPIO2) → Device SDA
+Pi SCL (GPIO3) → Device SCL
+Pi 3.3V → Device VCC (if 3.3V compatible)
+Pi GND → Device GND
+```
+
+</LessonChapter>
+
+<LessonChapter title="Protocol Selection" id="protocol-selection">
+
+### When to Use Each
+
+| Need | Protocol | Why |
+|------|----------|-----|
+| Talk to Arduino | UART | Simple, bidirectional |
+| Multiple sensors | I2C | One bus, many devices |
+| Fast data (display) | SPI | Highest speed |
+| Long distance | UART | More noise tolerant |
+
+<InfoBox type="tip">
+  I2C is great for sensors because you can connect many devices with just 2 wires. Check device datasheets for addresses!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows Raspberry Pi and Arduino/sensor icons connected with labeled UART, I2C, or SPI links. Watch animated data packets flow between devices as you trigger communication events.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p6-c4-l1-gpio-device-communication"
+  question="Which protocol allows multiple devices on two wires?"
+  options={[
+    { id: "a", text: "UART" },
+    { id: "b", text: "I2C" },
+    { id: "c", text: "SPI" },
+    { id: "d", text: "GPIO" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p6-c4-l1-gpio-device-communication"
+  question="Why do you need a voltage divider between Arduino TX and Pi RX?"
+  options={[
+    { id: "a", text: "To increase signal strength" },
+    { id: "b", text: "Arduino TX is 5V, Pi RX max is 3.3V" },
+    { id: "c", text: "To filter noise" },
+    { id: "d", text: "It's not required" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ UART for simple serial communication
+- ✅ I2C for multiple addressable devices
+- ✅ SPI for high-speed transfers
+- ✅ Voltage level considerations (5V vs 3.3V)
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p6-c4-l1-gpio-device-communication" label="I completed the lesson!" />
+
+</LessonChapter>

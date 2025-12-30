@@ -1,0 +1,286 @@
+---
+id: p3-c1-l5-setup-vs-loop-en
+title: "The Two Magic Boxes! 📦📦"
+course: "embedded-programming-basics"
+difficulty: "beginner"
+tags: ["setup", "loop", "structure", "basics"]
+estimatedMinutes: 15
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# The Two Magic Boxes! 📦📦
+
+Every Arduino program has TWO special boxes - one for "getting ready" and one for "doing it again and again!" Let's learn them!
+
+<LessonChapter title="What We'll Do Today" id="what-youll-learn">
+
+Today you will:
+- 📦 Learn about the **setup()** box (runs ONCE!)
+- 🔄 Learn about the **loop()** box (runs FOREVER!)
+- ✨ Understand where to put your code
+
+<InfoBox type="info">
+  **Hey kids!** Imagine you're a robot. First you wake up and stretch (that's setup). Then you do your dance moves over and over (that's loop)! 🤖💃
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Watch How It Works! 🎬" id="watch-how-it-works">
+
+<P5SketchEmbed
+  id="setup-loop-animation"
+  sketchId="p3-c1-l5-setup-loop"
+  stepNumber={1}
+  title="setup() then loop() forever!"
+  alt="Animation showing setup runs once then loop repeats"
+>
+  👀 **Watch!** See how the code goes through setup() ONE time, then loops through loop() over and over and over! Like a race track that never ends! 🏎️
+</P5SketchEmbed>
+
+<InfoBox type="tip">
+  **Count with me!** setup() runs: ONE time! loop() runs: 1, 2, 3, 4, 5... forever! ♾️
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Box 1: setup() - Getting Ready! 🎬" id="setup-box">
+
+<P5SketchEmbed
+  id="setup-once-animation"
+  sketchId="p3-c1-l5-setup-once"
+  stepNumber={1}
+  title="setup() Runs ONCE!"
+  alt="setup() function running once"
+>
+  **setup()** is like getting ready in the morning - you do it ONE TIME! Put on shoes, grab backpack, eat breakfast - but only once! Click to replay!
+</P5SketchEmbed>
+
+### What goes in setup()?
+
+Things you only need to do **ONE TIME**:
+
+```cpp
+void setup() {
+  pinMode(13, OUTPUT);     // Tell pin 13 it's an output - ONCE!
+  Serial.begin(9600);      // Start talking to computer - ONCE!
+  digitalWrite(13, HIGH);  // Turn on light at start - ONCE!
+}
+```
+
+### Real Life Examples 🏠
+
+| In Real Life | In Arduino |
+|--------------|------------|
+| 👟 Put on shoes (once) | pinMode(13, OUTPUT) |
+| 📱 Turn on your phone (once) | Serial.begin(9600) |
+| 🎒 Pack your backpack (once) | Set starting values |
+
+<InfoBox type="tip">
+  **Remember:** setup() is like waking up and getting ready. You only do it ONCE before your day starts! ☀️
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p3-c1-l5-setup-vs-loop" label="I understand setup() runs ONCE! 1️⃣" />
+
+</LessonChapter>
+
+<LessonChapter title="Box 2: loop() - Again and Again! 🔄" id="loop-box">
+
+<P5SketchEmbed
+  id="loop-forever-animation"
+  sketchId="p3-c1-l5-loop-forever"
+  stepNumber={2}
+  title="loop() Runs FOREVER!"
+  alt="loop() function running forever"
+>
+  **loop()** is like breathing - you do it over and over without stopping! In, out, in, out... forever!
+</P5SketchEmbed>
+
+### What goes in loop()?
+
+Things that need to happen **AGAIN AND AGAIN**:
+
+```cpp
+void loop() {
+  digitalWrite(13, HIGH);  // Light ON
+  delay(500);              // Wait
+  digitalWrite(13, LOW);   // Light OFF
+  delay(500);              // Wait
+  // Then it starts over at the top! 🔄
+}
+```
+
+### Real Life Examples 🔄
+
+| In Real Life | In Arduino |
+|--------------|------------|
+| 💨 Breathing (again and again) | Blink a light |
+| ❤️ Heartbeat (again and again) | Check a button |
+| 🚶 Walking steps (again and again) | Read a sensor |
+
+<InfoBox type="tip">
+  **Remember:** loop() is like breathing or your heartbeat - it happens over and over without you thinking about it! 💓
+</InfoBox>
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p3-c1-l5-setup-vs-loop" label="I understand loop() runs FOREVER! 🔄" />
+
+</LessonChapter>
+
+<LessonChapter title="The Complete Picture! 🎨" id="complete-picture">
+
+<P5SketchEmbed
+  id="code-highlight-animation"
+  sketchId="p3-c1-l5-code-highlight"
+  stepNumber={2}
+  title="Watch the Code Run! 💻"
+  alt="Code highlighting showing execution flow"
+>
+  👀 **Watch the yellow line!** See how the computer reads your code line by line. First it does setup(), then it goes through loop() over and over and over! 🔄
+</P5SketchEmbed>
+
+Here's how EVERY Arduino program works:
+
+```
+1. Arduino turns ON! ⚡
+2. setup() runs ONE time 📦
+3. loop() starts running... 🔄
+   ↓ do stuff
+   ↓ do stuff
+   ↓ do stuff
+   ← go back to start of loop()
+4. loop() runs FOREVER! ♾️
+```
+
+### A Complete Program:
+
+```cpp
+void setup() {
+  // This runs ONCE at the start!
+  pinMode(13, OUTPUT);
+  Serial.begin(9600);
+  Serial.println("Arduino woke up!");
+}
+
+void loop() {
+  // This runs FOREVER!
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+  delay(1000);
+  // Now we go back to the start of loop()!
+}
+```
+
+<P5SketchEmbed
+  id="program-flow-animation"
+  sketchId="p3-c1-l5-program-flow"
+  stepNumber={3}
+  title="Watch the Flow!"
+  alt="Program flow visualization"
+>
+  Power on → setup() runs → loop() runs → loop() runs → loop() runs → loop() runs... FOREVER! 🔄🔄🔄
+</P5SketchEmbed>
+
+</LessonChapter>
+
+<LessonChapter title="Common Mistakes! ❌→✅" id="common-mistakes">
+
+### Mistake 1: pinMode in loop() ❌
+
+```cpp
+// WRONG! ❌
+void loop() {
+  pinMode(13, OUTPUT);  // NO! This runs over and over!
+  digitalWrite(13, HIGH);
+}
+
+// CORRECT! ✅
+void setup() {
+  pinMode(13, OUTPUT);  // YES! Only once!
+}
+void loop() {
+  digitalWrite(13, HIGH);
+}
+```
+
+### Mistake 2: One-time messages in loop() ❌
+
+```cpp
+// WRONG! ❌ - This prints "Starting..." FOREVER!
+void loop() {
+  Serial.println("Starting...");
+}
+
+// CORRECT! ✅ - Print once in setup!
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Starting...");
+}
+```
+
+<InfoBox type="warning">
+  **Ask yourself:** "Does this need to happen once or over and over?" That tells you which box to use! 🤔
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Quiz Time! 🎯" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p3-c1-l5-setup-vs-loop"
+  question="How many times does setup() run?"
+  options={[
+    { id: "a", text: "Forever and ever!" },
+    { id: "b", text: "Only ONE time when Arduino starts! 1️⃣" },
+    { id: "c", text: "Twice - once for each pin" },
+    { id: "d", text: "It never runs" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p3-c1-l5-setup-vs-loop"
+  question="Where should pinMode() go?"
+  options={[
+    { id: "a", text: "In loop() so it runs many times" },
+    { id: "b", text: "In setup() because we only need to do it ONCE!" },
+    { id: "c", text: "Before setup() at the very top" },
+    { id: "d", text: "It doesn't matter where" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-3"
+  lessonKey="en/p3-c1-l5-setup-vs-loop"
+  question="What is loop() like in real life?"
+  options={[
+    { id: "a", text: "Putting on shoes (once)" },
+    { id: "b", text: "Breathing - in, out, in, out, forever! 💨" },
+    { id: "c", text: "Waking up in the morning" },
+    { id: "d", text: "Eating breakfast" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="You Did It! 🏆" id="summary">
+
+### What you learned today:
+
+- ✅ **setup()** runs **ONE TIME** - for getting ready!
+- ✅ **loop()** runs **FOREVER** - for the main action!
+- ✅ Put **pinMode()** in setup (only need once!)
+- ✅ Put **blinking code** in loop (needs to repeat!)
+- ✅ Ask yourself: "Once or forever?" 🤔
+
+<InfoBox type="tip">
+  **AMAZING!** 🌟 You now understand the heart of every Arduino program! You've completed the Arduino basics course! Now you can blink lights, control brightness, understand timing, and know how programs are structured! You're officially an Arduino coder! 🎉👨‍💻👩‍💻
+</InfoBox>
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p3-c1-l5-setup-vs-loop" label="I completed the Arduino basics course! 🎓🎉" />
+
+</LessonChapter>

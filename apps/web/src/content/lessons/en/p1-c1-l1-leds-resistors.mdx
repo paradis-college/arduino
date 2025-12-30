@@ -1,0 +1,176 @@
+---
+id: p1-c1-l1-leds-resistors-en
+title: "How LEDs and Resistors Work"
+course: "passive-components"
+difficulty: "beginner"
+tags: ["LED", "resistor", "V/I/R", "polarity", "series"]
+estimatedMinutes: 25
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# How LEDs and Resistors Work
+
+In this lesson, you'll learn the fundamentals of LEDs and resistors - two of the most essential components in electronics.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Basic voltage, current, and resistance (V/I/R) relationships
+- LED polarity (anode and cathode)
+- Why LEDs need series resistors
+- How to calculate resistor values for 5V and 3.3V systems (~220Ω)
+
+<InfoBox type="info">
+  An LED (Light Emitting Diode) is a semiconductor device that emits light when current flows through it in the forward direction.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Understanding Voltage, Current, and Resistance" id="understanding-vir">
+
+### Ohm's Law
+
+The relationship between voltage (V), current (I), and resistance (R) is defined by Ohm's Law:
+
+**V = I × R**
+
+- **Voltage (V)** - Electrical pressure, measured in Volts
+- **Current (I)** - Flow of electrons, measured in Amperes (A)
+- **Resistance (R)** - Opposition to current flow, measured in Ohms (Ω)
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p1-c1-l1-leds-resistors" label="I understand Ohm's Law" />
+
+</LessonChapter>
+
+<LessonChapter title="LED Polarity" id="led-polarity">
+
+<P5SketchEmbed
+  id="current-loop-animation"
+  sketchId="p1-c1-l1-current-loop"
+  stepNumber={1}
+  title="Current Flow Animation"
+  alt="Current-loop animation showing battery, resistor, and LED with moving dots"
+>
+  Watch how current (shown as blue dots) flows through the circuit from the battery, through the resistor where it slows down, and through the LED where it produces light. The resistor limits the current to protect the LED.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="diode-direction-animation"
+  sketchId="p1-c1-l1-diode-direction"
+  stepNumber={2}
+  title="Diode Direction Animation"
+  alt="Diode direction showing forward pass and reverse block with LED lighting"
+>
+  Watch the diode direction behavior. In forward bias, current passes through and the LED lights up. In reverse bias, current is blocked and the LED stays dark. The longer leg (anode) must connect to positive for current to flow.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="resistor-color-animation"
+  sketchId="p1-c1-l1-resistor-color"
+  stepNumber={3}
+  title="Resistor Color Code"
+  alt="220Ω color-code bands appearing on resistor with numerical decode overlay"
+>
+  Watch the color bands appear on the resistor: Red-Red-Brown = 220Ω. Learn to decode resistor values using the color code system. Each band represents a digit or multiplier.
+</P5SketchEmbed>
+
+<InfoBox type="warning">
+  Connecting an LED backwards won't damage it, but it won't light up either. Always check the polarity!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Why LEDs Need Resistors" id="why-resistors">
+
+LEDs have very low internal resistance. Without a current-limiting resistor, too much current will flow and destroy the LED.
+
+<P5SketchEmbed
+  id="voltage-slider-animation"
+  sketchId="p1-c1-l1-voltage-slider"
+  stepNumber={4}
+  title="Voltage & Current Relationship"
+  alt="Voltage slider adjusting bar-graph current with LED brightness updating live"
+>
+  Use the voltage slider (3.3V–5V) to adjust the power supply. Watch the current bar graph change and the LED brightness update in real-time. Higher voltage = more current = brighter LED!
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="led-polarity-animation"
+  sketchId="p1-c1-l1-led-polarity"
+  stepNumber={5}
+  title="LED Polarity Check"
+  alt="Correct vs reversed LED wiring with current dots bouncing back on reversed"
+>
+  Compare correct vs reversed LED wiring. When connected correctly, current flows and the LED glows. When reversed, current dots bounce back and the LED stays dark. Always check polarity!
+</P5SketchEmbed>
+
+### Calculating Resistor Value
+
+For a typical LED:
+- Forward voltage drop: ~2V
+- Safe operating current: ~20mA (0.02A)
+
+For a **5V system**:
+```
+R = (5V - 2V) / 0.02A = 150Ω (use 220Ω for safety)
+```
+
+For a **3.3V system**:
+```
+R = (3.3V - 2V) / 0.02A = 65Ω (use 100Ω or 220Ω for safety)
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p1-c1-l1-leds-resistors" label="I understand why LEDs need resistors" />
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a closed-loop circuit with a battery, resistor, and LED. Watch how current (shown as moving dots) slows down through the resistor. Use the slider to switch between 3.3V and 5V to see how current changes.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p1-c1-l1-leds-resistors"
+  question="Which leg of an LED is the anode (positive)?"
+  options={[
+    { id: "a", text: "The shorter leg" },
+    { id: "b", text: "The longer leg" },
+    { id: "c", text: "Both legs are the same" },
+    { id: "d", text: "The flat side" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p1-c1-l1-leds-resistors"
+  question="Why do LEDs need a series resistor?"
+  options={[
+    { id: "a", text: "To make them brighter" },
+    { id: "b", text: "To limit current and prevent damage" },
+    { id: "c", text: "To change the color" },
+    { id: "d", text: "To make them blink" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Ohm's Law: V = I × R
+- ✅ LED polarity: anode (long leg) to positive, cathode (short leg) to ground
+- ✅ LEDs need current-limiting resistors to prevent damage
+- ✅ ~220Ω is a safe resistor value for both 5V and 3.3V systems
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p1-c1-l1-leds-resistors" label="I completed the lesson!" />
+
+</LessonChapter>

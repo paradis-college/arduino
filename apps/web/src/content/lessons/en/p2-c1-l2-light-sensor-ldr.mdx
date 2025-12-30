@@ -1,0 +1,208 @@
+---
+id: p2-c1-l2-light-sensor-ldr-en
+title: "Light Sensor (LDR)"
+course: "vision-detection-sensors"
+difficulty: "beginner"
+tags: ["LDR", "photoresistor", "light", "analog", "voltage divider"]
+estimatedMinutes: 25
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Light Sensor (LDR)
+
+In this lesson, you'll learn how to use a Light Dependent Resistor (LDR) to detect light levels and create light-responsive projects.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- LDR basics and voltage divider circuits
+- Reading analog values (0-1023)
+- Relationship between brightness and resistance
+- Threshold-based control systems
+
+<InfoBox type="info">
+  An LDR (Light Dependent Resistor) changes its resistance based on light intensity - more light means lower resistance.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="LDR Basics" id="ldr-basics">
+
+<P5SketchEmbed
+  id="ldr-animation"
+  sketchId="p2-c1-l2-ldr"
+  stepNumber={1}
+  title="LDR Light Response"
+  alt="Animation showing room brightness slider changing LDR and analog value"
+>
+  Use the brightness slider to simulate different light conditions. Watch the LDR color change from dark (high resistance) to bright (low resistance), and see the analog value bar (0-1023) update with labels showing "dark", "dim", or "bright".
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="led-auto-dim-animation"
+  sketchId="p2-c1-l2-led-auto-dim"
+  stepNumber={2}
+  title="LED Auto-Dimming"
+  alt="Animation showing LED brightness adjusting based on LDR reading"
+>
+  This demonstrates auto-dimming behavior. As ambient light increases, the LED dims automatically (inverse relationship). The LDR value and LED PWM output are displayed.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="ldr-identify"
+  sketchId="p2-c1-l2-ldr-identify"
+  stepNumber={3}
+  title="Identify the LDR"
+  alt="Animation identifying LDR component features"
+>
+  An LDR looks like a small disc with a wavy pattern on top. It has two legs and is not polarized - either leg can connect to either side.
+</P5SketchEmbed>
+
+### How LDRs Work
+
+- **In darkness**: Resistance is HIGH (100kΩ - 1MΩ)
+- **In bright light**: Resistance is LOW (1kΩ - 10kΩ)
+
+<P5SketchEmbed
+  id="ldr-voltage-divider"
+  sketchId="p2-c1-l2-voltage-divider"
+  stepNumber={4}
+  title="Build the Voltage Divider"
+  alt="Animation showing voltage divider circuit construction"
+>
+  Connect 5V to one leg of the LDR. Connect the other leg to both a 10kΩ resistor (going to GND) and the Arduino analog pin (A0). This creates a voltage divider.
+</P5SketchEmbed>
+
+### Voltage Divider Circuit
+
+Since Arduino can only read voltage (not resistance), we create a voltage divider:
+
+```
+5V → [LDR] ─┬─→ [10kΩ Resistor] → GND
+            │
+            └─→ Analog Pin (A0)
+```
+
+The analog pin reads the voltage at the junction between the LDR and resistor. As light increases, LDR resistance drops, and voltage at the analog pin increases.
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p2-c1-l2-light-sensor-ldr" label="I understand LDR basics" />
+
+</LessonChapter>
+
+<LessonChapter title="Reading Analog Values" id="reading-analog">
+
+### The analogRead() Function
+
+```cpp
+int lightValue = analogRead(A0);  // Returns 0-1023
+```
+
+- **0**: No voltage (dark)
+- **1023**: Full 5V (bright)
+
+### Example Code
+
+```cpp
+const int LDR_PIN = A0;
+const int LED_PIN = 13;
+const int DARK_THRESHOLD = 300;
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int lightLevel = analogRead(LDR_PIN);
+  Serial.println(lightLevel);
+
+  if (lightLevel < DARK_THRESHOLD) {
+    digitalWrite(LED_PIN, HIGH);  // Turn on LED when dark
+  } else {
+    digitalWrite(LED_PIN, LOW);
+  }
+  delay(100);
+}
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p2-c1-l2-light-sensor-ldr" label="I understand analogRead and thresholds" />
+
+</LessonChapter>
+
+<LessonChapter title="Threshold-Based Control" id="threshold-control">
+
+### Setting Thresholds
+
+Test your LDR to find good threshold values:
+1. Cover the LDR completely - note the value (dark)
+2. Shine a light on it - note the value (bright)
+3. Choose threshold values in between
+
+### Multiple Thresholds
+
+```cpp
+if (lightLevel < 200) {
+  // Very dark - "Dark"
+} else if (lightLevel < 600) {
+  // Medium - "Dim"
+} else {
+  // Bright - "Bright"
+}
+```
+
+<InfoBox type="tip">
+  LDRs are perfect for automatic night lights, solar trackers, and ambient light-responsive displays!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a room brightness slider affecting an LDR icon. Watch the analog bar (0-1023) change and see labels ("dark", "dim", "bright") update based on thresholds.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p2-c1-l2-light-sensor-ldr"
+  question="What happens to an LDR's resistance when light increases?"
+  options={[
+    { id: "a", text: "Resistance increases" },
+    { id: "b", text: "Resistance decreases" },
+    { id: "c", text: "Resistance stays the same" },
+    { id: "d", text: "Resistance becomes negative" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p2-c1-l2-light-sensor-ldr"
+  question="What is the range of values returned by analogRead()?"
+  options={[
+    { id: "a", text: "0-100" },
+    { id: "b", text: "0-255" },
+    { id: "c", text: "0-1023" },
+    { id: "d", text: "0-5000" }
+  ]}
+  correctIndex={2}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ LDRs have high resistance in dark, low in bright light
+- ✅ Use a voltage divider to read light levels
+- ✅ analogRead() returns values from 0-1023
+- ✅ Thresholds help categorize light levels for control
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p2-c1-l2-light-sensor-ldr" label="I completed the lesson!" />
+
+</LessonChapter>

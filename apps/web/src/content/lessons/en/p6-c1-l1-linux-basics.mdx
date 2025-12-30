@@ -1,0 +1,211 @@
+---
+id: p6-c1-l1-linux-basics-en
+title: "Linux Basics on Raspberry Pi"
+course: "linux-basics"
+difficulty: "intermediate"
+tags: ["Linux", "Raspberry Pi", "terminal", "command line", "setup"]
+estimatedMinutes: 40
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Linux Basics on Raspberry Pi
+
+In this lesson, you'll learn the essential Linux commands needed to work with Raspberry Pi effectively.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Booting and accessing your Pi
+- Using the terminal
+- Core commands: ls, cd, mkdir, nano
+- File system navigation
+
+<InfoBox type="info">
+  Raspberry Pi runs Linux - a powerful, flexible operating system that gives you complete control over your computer!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Terminal Basics" id="terminal-basics">
+
+<P5SketchEmbed
+  id="linux-basics-animation"
+  sketchId="p6-c1-l1-linux-basics"
+  stepNumber={1}
+  title="Linux Terminal"
+  alt="Animation showing terminal typing commands with file tree updating"
+>
+  Watch commands being typed into the terminal. See the file tree update visually as you create directories and files using ls, cd, mkdir, and nano commands.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="nano-editor-animation"
+  sketchId="p6-c1-l1-nano-editor"
+  stepNumber={2}
+  title="Nano Text Editor"
+  alt="nano editor opening, file appearing in tree"
+>
+  Click "nano" to open the text editor. Type to edit the file, then save to see it appear in the file tree on the right.
+</P5SketchEmbed>
+
+</LessonChapter>
+
+<LessonChapter title="First Boot" id="first-boot">
+
+### Setting Up
+
+1. Flash Raspberry Pi OS to SD card (use Raspberry Pi Imager)
+2. Insert SD card into Pi
+3. Connect keyboard, mouse, monitor
+4. Power on with USB-C
+
+### Accessing Terminal
+
+- GUI: Click Terminal icon in taskbar
+- SSH: `ssh pi@raspberrypi.local` (enable in settings first)
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p6-c1-l1-linux-basics" label="I can access the terminal" />
+
+</LessonChapter>
+
+<LessonChapter title="Navigation Commands" id="navigation-commands">
+
+### pwd - Print Working Directory
+
+```bash
+pwd
+# Output: /home/pi
+```
+
+### ls - List Files
+
+```bash
+ls          # List files
+ls -l       # Detailed list
+ls -la      # Include hidden files
+ls -lh      # Human-readable sizes
+```
+
+### cd - Change Directory
+
+```bash
+cd Documents      # Go to Documents folder
+cd ..             # Go up one level
+cd ~              # Go to home directory
+cd /              # Go to root
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p6-c1-l1-linux-basics" label="I understand navigation commands" />
+
+</LessonChapter>
+
+<LessonChapter title="File Management" id="file-management">
+
+### mkdir - Make Directory
+
+```bash
+mkdir projects           # Create folder
+mkdir -p a/b/c          # Create nested folders
+```
+
+### cp - Copy
+
+```bash
+cp file.txt backup.txt   # Copy file
+cp -r folder/ backup/    # Copy folder recursively
+```
+
+### mv - Move/Rename
+
+```bash
+mv old.txt new.txt       # Rename file
+mv file.txt Documents/   # Move to folder
+```
+
+### rm - Remove
+
+```bash
+rm file.txt              # Delete file
+rm -r folder/            # Delete folder
+rm -rf folder/           # Force delete (careful!)
+```
+
+<InfoBox type="warning">
+  rm -rf is powerful and permanent! There's no recycle bin. Double-check before pressing Enter!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Editing Files" id="editing-files">
+
+### nano - Simple Text Editor
+
+```bash
+nano myfile.txt          # Open or create file
+```
+
+Inside nano:
+- Type to edit
+- `Ctrl+O` → Save (Write Out)
+- `Ctrl+X` → Exit
+- `Ctrl+K` → Cut line
+- `Ctrl+U` → Paste line
+
+### cat - Display File Contents
+
+```bash
+cat myfile.txt           # Show file contents
+```
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a terminal window where you can type commands. Watch the visual file-tree update as you use ls, cd, mkdir, and other commands to navigate and modify the structure.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p6-c1-l1-linux-basics"
+  question="What command shows your current directory?"
+  options={[
+    { id: "a", text: "cd" },
+    { id: "b", text: "ls" },
+    { id: "c", text: "pwd" },
+    { id: "d", text: "dir" }
+  ]}
+  correctIndex={2}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p6-c1-l1-linux-basics"
+  question="How do you go to your home directory?"
+  options={[
+    { id: "a", text: "cd home" },
+    { id: "b", text: "cd ~" },
+    { id: "c", text: "cd /" },
+    { id: "d", text: "home" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ pwd, ls, cd for navigation
+- ✅ mkdir, cp, mv, rm for file management
+- ✅ nano for editing text files
+- ✅ The Linux file system structure
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p6-c1-l1-linux-basics" label="I completed the lesson!" />
+
+</LessonChapter>

@@ -1,0 +1,216 @@
+---
+id: p3-c3-l1-reading-push-button-en
+title: "Reading a Push Button"
+course: "working-with-inputs"
+difficulty: "beginner"
+tags: ["button", "digitalRead", "INPUT_PULLUP", "digital input"]
+estimatedMinutes: 25
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Reading a Push Button
+
+In this lesson, you'll learn how to connect and read a push button to control LEDs and other outputs.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Button wiring with pull-up/pull-down resistors
+- `INPUT` vs `INPUT_PULLUP` modes
+- Using `digitalRead()` to detect button state
+- Turning LED on when button is pressed
+
+<InfoBox type="info">
+  Buttons are the most basic input device. Understanding how to read them opens the door to interactive projects!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Button Reading Basics" id="button-reading-basics">
+
+<P5SketchEmbed
+  id="push-button-animation"
+  sketchId="p3-c3-l1-push-button"
+  stepNumber={1}
+  title="Button State Indicator"
+  alt="Animation showing button press flipping HIGH/LOW indicator"
+>
+  Click the button to toggle between pressed and released states. Watch the digital HIGH/LOW indicator flip and see the LED light up when the button is pressed.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="led-button-state-animation"
+  sketchId="p3-c3-l1-led-button-state"
+  stepNumber={2}
+  title="LED Responds to Button"
+  alt="Animation showing LED lighting based on button state"
+>
+  See the LED light up when the button is pressed. The LED state directly follows the button input - pressed = ON, released = OFF.
+</P5SketchEmbed>
+
+<GifStep
+  stepNumber={3}
+  title="Wire Button with Pull-Down"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Button+Pulldown+GIF"
+  alt="Button with pull-down"
+>
+  Connect button between 5V and pin 7. Add a 10kΩ resistor from pin 7 to GND. This creates a pull-down configuration.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Or Use INPUT_PULLUP"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Button+Pullup+GIF"
+  alt="Using INPUT_PULLUP"
+>
+  Simpler option: connect button between pin 7 and GND. Use **pinMode(7, INPUT_PULLUP)** for internal pull-up.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Read Button State"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Button+Read+GIF"
+  alt="Reading button state"
+>
+  Use **digitalRead(7)** to get button state. With INPUT_PULLUP, pressed = LOW, released = HIGH (inverted!).
+</GifStep>
+
+</LessonChapter>
+
+<LessonChapter title="Button Wiring" id="button-wiring">
+
+### The Floating Pin Problem
+
+When a button is not pressed and the pin isn't connected to anything, it "floats" - reading random HIGH or LOW values.
+
+### Solution: Pull-Up or Pull-Down Resistor
+
+**Pull-Up (connects to 5V when open)**:
+- Pin is HIGH when button not pressed
+- Pin is LOW when button pressed
+- Arduino has internal pull-ups!
+
+**Pull-Down (connects to GND when open)**:
+- Pin is LOW when button not pressed
+- Pin is HIGH when button pressed
+- Requires external resistor
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p3-c3-l1-reading-push-button" label="I understand pull-up/pull-down" />
+
+</LessonChapter>
+
+<LessonChapter title="INPUT_PULLUP Mode" id="input-pullup">
+
+### The Easy Way
+
+Arduino has built-in pull-up resistors! Just use:
+
+```cpp
+pinMode(pin, INPUT_PULLUP);
+```
+
+Now:
+- Button not pressed → reads HIGH
+- Button pressed → reads LOW (connects to GND)
+
+### Wiring with INPUT_PULLUP
+
+```
+Button terminal 1 → Arduino pin (e.g., pin 2)
+Button terminal 2 → GND
+```
+
+No external resistor needed!
+
+<InfoBox type="warning">
+  With INPUT_PULLUP, the logic is inverted: LOW means pressed, HIGH means not pressed!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="digitalRead() Function" id="digitalread-function">
+
+### Reading Button State
+
+```cpp
+int buttonState = digitalRead(pin);
+```
+
+Returns `HIGH` or `LOW`.
+
+### Complete Example
+
+```cpp
+const int BUTTON_PIN = 2;
+const int LED_PIN = 13;
+
+void setup() {
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+  pinMode(LED_PIN, OUTPUT);
+}
+
+void loop() {
+  int buttonState = digitalRead(BUTTON_PIN);
+
+  if (buttonState == LOW) {  // LOW = pressed with INPUT_PULLUP
+    digitalWrite(LED_PIN, HIGH);
+  } else {
+    digitalWrite(LED_PIN, LOW);
+  }
+}
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p3-c3-l1-reading-push-button" label="I understand digitalRead" />
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a virtual button that you can click. Watch the digital line toggle between HIGH and LOW, and see the LED icon respond. Notice the "INPUT_PULLUP" label showing the mode.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p3-c3-l1-reading-push-button"
+  question="With INPUT_PULLUP, what does digitalRead return when button is pressed?"
+  options={[
+    { id: "a", text: "HIGH" },
+    { id: "b", text: "LOW" },
+    { id: "c", text: "1023" },
+    { id: "d", text: "PRESSED" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p3-c3-l1-reading-push-button"
+  question="Why use INPUT_PULLUP instead of INPUT?"
+  options={[
+    { id: "a", text: "It's faster" },
+    { id: "b", text: "It uses internal resistor, avoiding floating pins" },
+    { id: "c", text: "It makes buttons brighter" },
+    { id: "d", text: "It's required for all buttons" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Floating pins cause unreliable readings
+- ✅ INPUT_PULLUP uses internal pull-up resistor
+- ✅ With INPUT_PULLUP: LOW = pressed, HIGH = not pressed
+- ✅ digitalRead() returns the pin's current state
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p3-c3-l1-reading-push-button" label="I completed the lesson!" />
+
+</LessonChapter>

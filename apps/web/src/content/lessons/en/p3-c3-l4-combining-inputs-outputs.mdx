@@ -1,0 +1,283 @@
+---
+id: p3-c3-l4-combining-inputs-outputs-en
+title: "Combining Inputs and Outputs"
+course: "working-with-inputs"
+difficulty: "intermediate"
+tags: ["input", "output", "control panel", "logic", "integration"]
+estimatedMinutes: 30
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Combining Inputs and Outputs
+
+In this lesson, you'll learn how to combine multiple inputs (buttons, potentiometers) with multiple outputs (LEDs) to create interactive control panels.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Combining button and knob states
+- Writing output rules based on inputs
+- Building simple control panels
+- Practical integration patterns
+
+<InfoBox type="info">
+  Real projects combine multiple inputs and outputs. Learning to integrate them is key to building useful devices!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Control Panel Basics" id="control-panel-basics">
+
+<P5SketchEmbed
+  id="control-panel-animation"
+  sketchId="p3-c3-l4-control-panel"
+  stepNumber={1}
+  title="Interactive Control Panel"
+  alt="Animation showing buttons and knob feeding LED states"
+>
+  Use the control panel: click buttons to toggle LEDs on/off, and adjust the knob to control the third LED's brightness. Watch the logic diagram update based on your inputs.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="logic-diagram-animation"
+  sketchId="p3-c3-l4-logic-diagram"
+  stepNumber={2}
+  title="Logic Flow Diagram"
+  alt="Animation showing logic diagram updating based on inputs"
+>
+  See how inputs flow through the logic processing to control outputs. The diagram updates in real-time based on button and potentiometer states.
+</P5SketchEmbed>
+
+<GifStep
+  stepNumber={3}
+  title="Build the Control Panel"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Panel+Build+GIF"
+  alt="Building control panel"
+>
+  Wire 2 buttons to pins 2 and 3, a potentiometer to A0, and 3 LEDs to pins 9, 10, 11 with resistors.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Define Control Logic"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Panel+Logic+GIF"
+  alt="Defining control logic"
+>
+  Create rules: Button 1 toggles LED 1, Button 2 toggles LED 2, potentiometer controls LED 3 brightness.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Test the Interface"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=Panel+Test+GIF"
+  alt="Testing control panel"
+>
+  Upload and test each control. The panel should respond immediately to button presses and knob turns.
+</GifStep>
+
+</LessonChapter>
+
+<LessonChapter title="Multiple Input Types" id="multiple-input-types">
+
+### Reading Different Inputs
+
+```cpp
+const int BTN_1 = 2;
+const int BTN_2 = 3;
+const int POT_PIN = A0;
+
+const int LED_1 = 9;
+const int LED_2 = 10;
+const int LED_3 = 11;
+
+void setup() {
+  pinMode(BTN_1, INPUT_PULLUP);
+  pinMode(BTN_2, INPUT_PULLUP);
+  pinMode(LED_1, OUTPUT);
+  pinMode(LED_2, OUTPUT);
+  pinMode(LED_3, OUTPUT);
+}
+
+void loop() {
+  bool btn1Pressed = digitalRead(BTN_1) == LOW;
+  bool btn2Pressed = digitalRead(BTN_2) == LOW;
+  int potValue = analogRead(POT_PIN);
+
+  // React to inputs...
+}
+```
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p3-c3-l4-combining-inputs-outputs" label="I understand reading multiple inputs" />
+
+</LessonChapter>
+
+<LessonChapter title="Control Logic Patterns" id="control-logic">
+
+### If-Then Rules
+
+```cpp
+void loop() {
+  bool btn1 = digitalRead(BTN_1) == LOW;
+  bool btn2 = digitalRead(BTN_2) == LOW;
+  int pot = analogRead(POT_PIN);
+
+  // Rule 1: Button 1 turns on LED 1
+  digitalWrite(LED_1, btn1 ? HIGH : LOW);
+
+  // Rule 2: Button 2 turns on LED 2
+  digitalWrite(LED_2, btn2 ? HIGH : LOW);
+
+  // Rule 3: Both buttons turn on LED 3
+  digitalWrite(LED_3, (btn1 && btn2) ? HIGH : LOW);
+}
+```
+
+### Potentiometer as Intensity Control
+
+```cpp
+void loop() {
+  bool powerOn = digitalRead(BTN_1) == LOW;
+  int brightness = map(analogRead(POT_PIN), 0, 1023, 0, 255);
+
+  if (powerOn) {
+    analogWrite(LED_1, brightness);  // Pot controls brightness when on
+  } else {
+    analogWrite(LED_1, 0);           // Off when button not pressed
+  }
+}
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p3-c3-l4-combining-inputs-outputs" label="I understand control logic" />
+
+</LessonChapter>
+
+<LessonChapter title="Mode Selector" id="mode-selector">
+
+### Potentiometer as Mode Selector
+
+```cpp
+void loop() {
+  int pot = analogRead(POT_PIN);
+  int mode = pot / 342;  // Divide 1023 into 3 zones (0, 1, 2)
+
+  // Turn off all LEDs first
+  digitalWrite(LED_1, LOW);
+  digitalWrite(LED_2, LOW);
+  digitalWrite(LED_3, LOW);
+
+  // Light LED based on mode
+  switch (mode) {
+    case 0:
+      digitalWrite(LED_1, HIGH);
+      break;
+    case 1:
+      digitalWrite(LED_2, HIGH);
+      break;
+    case 2:
+      digitalWrite(LED_3, HIGH);
+      break;
+  }
+}
+```
+
+### Button as Mode Cycle
+
+```cpp
+int currentMode = 0;
+const int NUM_MODES = 3;
+
+void handleModeButton() {
+  currentMode = (currentMode + 1) % NUM_MODES;
+}
+```
+
+</LessonChapter>
+
+<LessonChapter title="Complete Control Panel Example" id="complete-example">
+
+### Simple Lighting Control Panel
+
+```cpp
+const int BTN_POWER = 2;
+const int BTN_MODE = 3;
+const int POT_BRIGHTNESS = A0;
+const int LEDS[] = {9, 10, 11};
+
+bool powerOn = false;
+int mode = 0;
+
+void loop() {
+  // Read inputs
+  if (buttonJustPressed(BTN_POWER)) {
+    powerOn = !powerOn;
+  }
+  if (buttonJustPressed(BTN_MODE)) {
+    mode = (mode + 1) % 3;
+  }
+  int brightness = map(analogRead(POT_BRIGHTNESS), 0, 1023, 0, 255);
+
+  // Apply outputs
+  if (!powerOn) {
+    allLedsOff();
+  } else {
+    applyMode(mode, brightness);
+  }
+}
+```
+
+<InfoBox type="tip">
+  Build up complexity gradually. Start with one input and one output, then add more once that works!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a virtual control panel with 2 buttons, a potentiometer knob, and 3 LEDs. Interact with the inputs and watch the LEDs react according to simple logic rules displayed on screen.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p3-c3-l4-combining-inputs-outputs"
+  question="What expression checks if BOTH button1 AND button2 are pressed?"
+  options={[
+    { id: "a", text: "btn1 || btn2" },
+    { id: "b", text: "btn1 && btn2" },
+    { id: "c", text: "btn1 + btn2" },
+    { id: "d", text: "btn1 == btn2" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p3-c3-l4-combining-inputs-outputs"
+  question="How can a potentiometer act as a mode selector?"
+  options={[
+    { id: "a", text: "By dividing its range into zones" },
+    { id: "b", text: "By connecting it to a button" },
+    { id: "c", text: "By using analogWrite" },
+    { id: "d", text: "Potentiometers can't select modes" }
+  ]}
+  correctIndex={0}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Combine digital (buttons) and analog (pots) inputs
+- ✅ Write if-then logic rules for outputs
+- ✅ Use potentiometers for modes or intensity control
+- ✅ Build complete interactive control panels
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p3-c3-l4-combining-inputs-outputs" label="I completed the lesson!" />
+
+</LessonChapter>

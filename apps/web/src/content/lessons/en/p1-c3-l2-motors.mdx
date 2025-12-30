@@ -1,0 +1,175 @@
+---
+id: p1-c3-l2-motors-en
+title: "Motors – Turning Electricity into Motion"
+course: "electromechanical-components"
+difficulty: "intermediate"
+tags: ["motor", "DC motor", "servo", "PWM", "speed control"]
+estimatedMinutes: 30
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Motors – Turning Electricity into Motion
+
+In this lesson, you'll learn how motors convert electrical energy into mechanical motion, and how to control them with Arduino.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Differences between DC motors and servo motors
+- Speed control using PWM (Pulse Width Modulation)
+- Basic direction control concepts
+- Practical motor control applications
+
+<InfoBox type="info">
+  Motors use electromagnetic principles to convert electrical energy into rotational motion. They're essential for robotics, automation, and countless other applications.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="DC Motors" id="dc-motors">
+
+<P5SketchEmbed
+  id="motor-pwm-animation"
+  sketchId="p1-c3-l2-motor-pwm"
+  stepNumber={1}
+  title="DC Motor PWM Speed Control"
+  alt="Animation showing DC motor speed controlled by PWM slider"
+>
+  Use the PWM slider to control motor speed. Watch the fan blades spin faster with higher duty cycles. Faster pulses = faster spin!
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="servo-control-animation"
+  sketchId="p1-c3-l2-servo-control"
+  stepNumber={2}
+  title="Servo Motor Control"
+  alt="Servo arm rotating to target angle with smooth interpolation"
+>
+  Use the angle slider to control the servo position from 0° to 180°. Watch the servo arm smoothly rotate to match the target angle. The position is controlled by PWM pulse width.
+</P5SketchEmbed>
+
+### How They Work
+
+DC motors spin continuously when voltage is applied:
+- **Forward rotation**: Apply positive voltage
+- **Reverse rotation**: Reverse the voltage polarity
+- **Speed**: Proportional to voltage/PWM duty cycle
+
+### Speed Control with PWM
+
+PWM varies the average voltage by rapidly switching on and off:
+- 0% duty cycle = Motor stopped
+- 50% duty cycle = Half speed
+- 100% duty cycle = Full speed
+
+### Current Requirements
+
+Most DC motors need more current than Arduino can provide directly. Use a transistor or motor driver!
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p1-c3-l2-motors" label="I understand DC motors and PWM speed control" />
+
+</LessonChapter>
+
+<LessonChapter title="Servo Motors" id="servo-motors">
+
+
+
+### What Makes Servos Different
+
+Servo motors have built-in:
+- **Gearbox**: Increases torque
+- **Position sensor**: Knows current angle
+- **Control circuit**: Maintains desired position
+
+### Position Control
+
+Servos respond to PWM signals differently:
+- **1ms pulse**: 0° position
+- **1.5ms pulse**: 90° position (center)
+- **2ms pulse**: 180° position
+
+Pulses repeat every 20ms (50Hz).
+
+### Standard vs Continuous Rotation
+
+- **Standard servo**: Moves to specific angle (0-180°)
+- **Continuous rotation servo**: Spins like a DC motor
+
+<InfoBox type="tip">
+  Servos are perfect for projects needing precise positioning, like robotic arms, pan-tilt cameras, or door locks.
+</InfoBox>
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p1-c3-l2-motors" label="I understand servo motors" />
+
+</LessonChapter>
+
+<LessonChapter title="Direction Control" id="direction-control">
+
+### H-Bridge Concept
+
+To reverse a DC motor's direction, you need an H-Bridge circuit:
+- Four switches arranged in an "H" pattern
+- Allows current to flow in either direction through the motor
+- Motor driver ICs (L298N, L293D) contain H-bridges
+
+### Arduino Motor Shield
+
+For easier control, use a motor shield that includes:
+- H-bridge drivers
+- PWM speed control
+- Current sensing
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows:
+  1. A DC motor icon whose spin speed follows a PWM slider
+  2. A servo arm that rotates to match the angle slider (0-180°)
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p1-c3-l2-motors"
+  question="How do you control a DC motor's speed with Arduino?"
+  options={[
+    { id: "a", text: "By changing the frequency" },
+    { id: "b", text: "Using PWM to vary average voltage" },
+    { id: "c", text: "By using different resistors" },
+    { id: "d", text: "By connecting more batteries" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p1-c3-l2-motors"
+  question="What type of signal controls a servo's position?"
+  options={[
+    { id: "a", text: "Analog voltage level" },
+    { id: "b", text: "PWM pulse width" },
+    { id: "c", text: "Serial data" },
+    { id: "d", text: "I2C commands" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ DC motors spin continuously, controlled by PWM for speed
+- ✅ Servo motors move to specific angles using pulse width signals
+- ✅ H-bridges allow bidirectional motor control
+- ✅ Motors typically need transistors or drivers for proper current
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p1-c3-l2-motors" label="I completed the lesson!" />
+
+</LessonChapter>

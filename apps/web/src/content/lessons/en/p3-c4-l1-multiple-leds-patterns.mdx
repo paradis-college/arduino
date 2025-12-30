@@ -1,0 +1,263 @@
+---
+id: p3-c4-l1-multiple-leds-patterns-en
+title: "Multiple LEDs & Patterns"
+course: "working-with-outputs"
+difficulty: "intermediate"
+tags: ["LED", "array", "pattern", "chase", "binary"]
+estimatedMinutes: 30
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Multiple LEDs & Patterns
+
+In this lesson, you'll create advanced LED patterns using arrays and loops - chase, ping-pong, binary counting, and more!
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- Using arrays for LED sequences
+- Loops for pattern generation
+- Chase, ping-pong, and binary count patterns
+- Adding speed control
+
+<InfoBox type="info">
+  LED patterns are great for learning arrays and loops while creating visually impressive displays!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="LED Pattern Basics" id="led-pattern-basics">
+
+<P5SketchEmbed
+  id="led-patterns-animation"
+  sketchId="p3-c4-l1-led-patterns"
+  stepNumber={1}
+  title="8-LED Chase Pattern"
+  alt="Animation showing 8 LEDs in chase pattern left to right"
+>
+  Watch the 8-LED chase animation running left→right→left like "Knight Rider". Click to toggle between chase mode and binary counter visualizing 00000000→11111111.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="binary-counter-animation"
+  sketchId="p3-c4-l1-binary-counter"
+  stepNumber={2}
+  title="Binary Counter Visualization"
+  alt="Animation showing binary counter from 00000000 to 11111111"
+>
+  Watch 8 LEDs count up in binary from 0 (00000000) to 255 (11111111). Each LED represents one bit. Press UP/DOWN to change speed, SPACE to reset.
+</P5SketchEmbed>
+
+<GifStep
+  stepNumber={3}
+  title="Wire 8 LED Strip"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=8LED+Wire+GIF"
+  alt="Wiring 8 LEDs"
+>
+  Connect 8 LEDs to pins 2-9 with 220Ω resistors. Arrange them in a row for visual effect.
+</GifStep>
+
+<GifStep
+  stepNumber={2}
+  title="Create Chase Pattern"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=LED+Chase+GIF"
+  alt="Chase pattern"
+>
+  Light one LED at a time, moving from left to right. This creates the classic "Knight Rider" effect.
+</GifStep>
+
+<GifStep
+  stepNumber={3}
+  title="Add Speed Control"
+  gifUrl="https://placehold.co/600x400/2563eb/white?text=LED+Speed+GIF"
+  alt="Speed control"
+>
+  Add a potentiometer to control pattern speed. Map analog value to delay time for adjustable animation speed.
+</GifStep>
+
+</LessonChapter>
+
+<LessonChapter title="LED Array Setup" id="led-array-setup">
+
+### 8-LED Configuration
+
+```cpp
+const int LED_COUNT = 8;
+const int ledPins[LED_COUNT] = {2, 3, 4, 5, 6, 7, 8, 9};
+
+void setup() {
+  for (int i = 0; i < LED_COUNT; i++) {
+    pinMode(ledPins[i], OUTPUT);
+  }
+}
+
+void allOff() {
+  for (int i = 0; i < LED_COUNT; i++) {
+    digitalWrite(ledPins[i], LOW);
+  }
+}
+
+void allOn() {
+  for (int i = 0; i < LED_COUNT; i++) {
+    digitalWrite(ledPins[i], HIGH);
+  }
+}
+```
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p3-c4-l1-multiple-leds-patterns" label="I understand LED array setup" />
+
+</LessonChapter>
+
+<LessonChapter title="Chase Pattern" id="chase-pattern">
+
+### Knight Rider / Cylon Effect
+
+```cpp
+void chasePattern(int delayTime) {
+  for (int i = 0; i < LED_COUNT; i++) {
+    allOff();
+    digitalWrite(ledPins[i], HIGH);
+    delay(delayTime);
+  }
+}
+```
+
+### Ping-Pong (Back and Forth)
+
+```cpp
+void pingPongPattern(int delayTime) {
+  // Forward
+  for (int i = 0; i < LED_COUNT; i++) {
+    allOff();
+    digitalWrite(ledPins[i], HIGH);
+    delay(delayTime);
+  }
+  // Backward
+  for (int i = LED_COUNT - 2; i > 0; i--) {
+    allOff();
+    digitalWrite(ledPins[i], HIGH);
+    delay(delayTime);
+  }
+}
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p3-c4-l1-multiple-leds-patterns" label="I understand chase patterns" />
+
+</LessonChapter>
+
+<LessonChapter title="Binary Count Pattern" id="binary-count">
+
+### Counting in Binary on LEDs
+
+```cpp
+void binaryCountPattern(int delayTime) {
+  for (int count = 0; count < 256; count++) {  // 8 bits = 0-255
+    for (int bit = 0; bit < LED_COUNT; bit++) {
+      if (count & (1 << bit)) {
+        digitalWrite(ledPins[bit], HIGH);
+      } else {
+        digitalWrite(ledPins[bit], LOW);
+      }
+    }
+    delay(delayTime);
+  }
+}
+```
+
+### Understanding Bitwise Operations
+
+- `count & (1 << bit)` checks if bit position is set
+- LED 0 = 1's place
+- LED 1 = 2's place
+- LED 2 = 4's place
+- etc.
+
+<InfoBox type="tip">
+  Binary counting is a great way to visualize how computers store numbers!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Speed Control" id="speed-control">
+
+### Using Potentiometer
+
+```cpp
+const int SPEED_POT = A0;
+
+void loop() {
+  int potValue = analogRead(SPEED_POT);
+  int delayTime = map(potValue, 0, 1023, 20, 500);
+
+  chasePattern(delayTime);
+}
+```
+
+### Pattern Selector
+
+```cpp
+int currentPattern = 0;
+
+void loop() {
+  int speed = map(analogRead(SPEED_POT), 0, 1023, 20, 300);
+
+  switch (currentPattern) {
+    case 0: chasePattern(speed); break;
+    case 1: pingPongPattern(speed); break;
+    case 2: binaryCountPattern(speed); break;
+  }
+}
+```
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows an 8-LED row with a pattern selector (chase, ping-pong, binary count) and a speed slider. Watch the LEDs animate and adjust the speed to see different effects.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p3-c4-l1-multiple-leds-patterns"
+  question="How many values can 8 LEDs display in binary?"
+  options={[
+    { id: "a", text: "8 values" },
+    { id: "b", text: "64 values" },
+    { id: "c", text: "256 values (0-255)" },
+    { id: "d", text: "1024 values" }
+  ]}
+  correctIndex={2}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p3-c4-l1-multiple-leds-patterns"
+  question="In a ping-pong pattern, why does the backward loop start at LED_COUNT - 2?"
+  options={[
+    { id: "a", text: "To skip the first LED" },
+    { id: "b", text: "To avoid repeating the last LED twice" },
+    { id: "c", text: "Arrays are zero-indexed" },
+    { id: "d", text: "It's a bug" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ Arrays efficiently manage multiple LEDs
+- ✅ Chase pattern: one LED at a time, forward
+- ✅ Ping-pong: forward and backward motion
+- ✅ Binary count: visualize 8-bit numbers on LEDs
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p3-c4-l1-multiple-leds-patterns" label="I completed the lesson!" />
+
+</LessonChapter>

@@ -1,0 +1,159 @@
+---
+id: p1-c2-l1-transistors-switches-en
+title: "Transistors as Switches"
+course: "active-components"
+difficulty: "intermediate"
+tags: ["transistor", "NPN", "switch", "amplifier", "motor"]
+estimatedMinutes: 30
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Transistors as Switches
+
+In this lesson, you'll learn how transistors work as electronic switches, allowing small currents to control larger loads.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- NPN transistor symbol and pin identification
+- How base current controls collector-emitter current
+- Using transistors to switch motors and LED strips
+- Why transistors are essential for microcontroller projects
+
+<InfoBox type="info">
+  A transistor is like an electronic valve - a small signal can control a much larger current flow.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="NPN Transistor Basics" id="npn-basics">
+
+<P5SketchEmbed
+  id="transistor-animation"
+  sketchId="p1-c2-l1-transistor"
+  stepNumber={1}
+  title="Transistor Current Control"
+  alt="Animation showing base slider controlling collector-emitter current"
+>
+  Use the slider to increase base current. Watch how a small base current unlocks a much larger collector-emitter flow, lighting up the load (LED/motor). The transistor acts as an electronic valve.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="transistor-load-animation"
+  sketchId="p1-c2-l1-transistor-load"
+  stepNumber={2}
+  title="Transistor Switching a Load"
+  alt="Load (motor/LED) turning on/off as transistor saturates/cuts off"
+>
+  Watch the load (motor or LED) turn on and off as the transistor switches. When base current flows, the transistor saturates and the load activates. Cut the base current and the transistor turns off.
+</P5SketchEmbed>
+
+### Pin Identification
+
+An NPN transistor has three pins:
+- **Base (B)** - Control input, small current here controls the transistor
+- **Collector (C)** - Where current flows in from the load
+- **Emitter (E)** - Where current flows out to ground
+
+### How It Works
+
+When a small current flows into the base:
+1. The transistor "turns on"
+2. A much larger current can flow from collector to emitter
+3. The gain (hFE) determines the amplification factor (typically 100-300x)
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p1-c2-l1-transistors-switches" label="I understand NPN transistor pins" />
+
+</LessonChapter>
+
+<LessonChapter title="Transistor as a Switch" id="transistor-switch">
+
+
+
+### Arduino to Motor Example
+
+Arduino pins can only provide ~20mA, but motors need much more current. A transistor bridges this gap:
+
+```
+Arduino Pin → Base Resistor → Base
+Motor+ → Collector
+Emitter → Ground
+Motor- → Collector (through flyback diode)
+```
+
+<InfoBox type="warning">
+  Always use a base resistor (typically 1kΩ) to limit current from the Arduino pin. Never connect the base directly to 5V!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Switching High-Power Loads" id="high-power-loads">
+
+### LED Strips and Motors
+
+For LED strips or motors that draw more than 40mA:
+1. Connect the load between power supply positive and the collector
+2. Connect emitter to ground
+3. Control via base with a small Arduino signal
+
+### Base Resistor Calculation
+
+```
+R_base = (V_arduino - V_be) / I_base
+R_base = (5V - 0.7V) / 0.001A = 4.3kΩ (use 1kΩ-4.7kΩ)
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p1-c2-l1-transistors-switches" label="I understand how to switch high-power loads" />
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a transistor diagram where you can increase the base current using a slider. Watch how the collector-emitter current increases and lights up the load (LED/motor).
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p1-c2-l1-transistors-switches"
+  question="Which pin controls whether an NPN transistor is on or off?"
+  options={[
+    { id: "a", text: "Collector" },
+    { id: "b", text: "Emitter" },
+    { id: "c", text: "Base" },
+    { id: "d", text: "Ground" }
+  ]}
+  correctIndex={2}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p1-c2-l1-transistors-switches"
+  question="Why use a transistor with an Arduino?"
+  options={[
+    { id: "a", text: "To reduce power consumption" },
+    { id: "b", text: "To switch loads that need more current than Arduino can provide" },
+    { id: "c", text: "To make the LED brighter" },
+    { id: "d", text: "To store electricity" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ NPN transistor has Base, Collector, and Emitter pins
+- ✅ Small base current controls larger collector-emitter current
+- ✅ Use transistors to switch motors, LED strips, and other high-current loads
+- ✅ Always use a base resistor to protect the Arduino
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p1-c2-l1-transistors-switches" label="I completed the lesson!" />
+
+</LessonChapter>

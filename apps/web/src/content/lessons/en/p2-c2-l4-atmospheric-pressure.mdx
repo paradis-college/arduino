@@ -1,0 +1,233 @@
+---
+id: p2-c2-l4-atmospheric-pressure-en
+title: "Atmospheric Pressure Sensors"
+course: "environmental-monitoring-sensors"
+difficulty: "intermediate"
+tags: ["BMP", "BME", "pressure", "barometer", "I2C", "weather"]
+estimatedMinutes: 30
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Atmospheric Pressure Sensors
+
+In this lesson, you'll learn how to use barometric pressure sensors to measure atmospheric pressure and correlate it with weather patterns.
+
+<LessonChapter title="What You'll Learn" id="what-youll-learn">
+
+- BMP/BME sensor wiring via I2C
+- Reading atmospheric pressure values
+- Simple weather correlation basics
+- Using pressure trends for forecasting
+
+<InfoBox type="info">
+  Barometric pressure sensors measure air pressure, which changes with altitude and weather conditions. Falling pressure often indicates incoming storms!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Pressure Sensor Basics" id="pressure-basics-intro">
+
+<P5SketchEmbed
+  id="pressure-animation"
+  sketchId="p2-c2-l4-pressure"
+  stepNumber={1}
+  title="Pressure Gauge"
+  alt="Animation showing pressure gauge needle swinging with slider input"
+>
+  Use the pressure slider to see the gauge needle swing. Watch the weather icon change based on pressure trends - high pressure typically means clear skies, low pressure indicates potential storms.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="weather-pressure-animation"
+  sketchId="p2-c2-l4-weather"
+  stepNumber={2}
+  title="Weather Prediction Display"
+  alt="Animation showing weather icon changing with pressure trend graph"
+>
+  Drag the slider to change pressure. Watch the weather icon change (storm, rain, clouds, partly cloudy, sun) and see the pressure trend graph update over time.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="bmp-i2c-wiring"
+  sketchId="p2-c2-l4-bmp-i2c"
+  stepNumber={3}
+  title="Connect I2C Pins"
+  alt="Animation showing BMP I2C connections"
+>
+  Connect **SDA** to A4 and **SCL** to A5 on Arduino Uno. These are the I2C communication pins.
+</P5SketchEmbed>
+
+<P5SketchEmbed
+  id="bmp-power-wiring"
+  sketchId="p2-c2-l4-bmp-power"
+  stepNumber={4}
+  title="Power the Sensor"
+  alt="Animation showing BMP power connections"
+>
+  Connect **VCC** to 3.3V and **GND** to ground. Most BMP/BME modules have an onboard regulator for 5V tolerance.
+</P5SketchEmbed>
+
+</LessonChapter>
+
+<LessonChapter title="Sensor Options" id="sensor-options">
+
+### Common Sensors
+
+| Sensor | Measures | Interface |
+|--------|----------|-----------|
+| BMP180 | Pressure, Temperature | I2C |
+| BMP280 | Pressure, Temperature | I2C/SPI |
+| BME280 | Pressure, Temperature, Humidity | I2C/SPI |
+| BME680 | Pressure, Temp, Humidity, Gas | I2C/SPI |
+
+### I2C Wiring
+
+```
+Sensor VCC → Arduino 3.3V or 5V
+Sensor GND → Arduino GND
+Sensor SDA → Arduino A4
+Sensor SCL → Arduino A5
+```
+
+<InfoBox type="tip">
+  BME280 is a great all-in-one choice - it measures pressure, temperature, AND humidity in one sensor!
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p2-c2-l4-atmospheric-pressure" label="I understand sensor options and wiring" />
+
+</LessonChapter>
+
+<LessonChapter title="Reading Pressure" id="reading-pressure">
+
+### Using Adafruit BME280 Library
+
+```cpp
+#include <Wire.h>
+#include <Adafruit_BME280.h>
+
+Adafruit_BME280 bme;
+
+void setup() {
+  Serial.begin(9600);
+
+  if (!bme.begin(0x76)) {
+    Serial.println("BME280 not found!");
+    while (1);
+  }
+}
+
+void loop() {
+  float pressure = bme.readPressure() / 100.0F;  // hPa
+  float temp = bme.readTemperature();
+  float humidity = bme.readHumidity();
+
+  Serial.print("Pressure: ");
+  Serial.print(pressure);
+  Serial.println(" hPa");
+
+  delay(2000);
+}
+```
+
+### Pressure Units
+
+- **Pascal (Pa)**: SI unit
+- **Hectopascal (hPa)**: 1 hPa = 100 Pa
+- **Millibar (mbar)**: 1 mbar = 1 hPa
+- **mmHg**: 1 hPa ≈ 0.75 mmHg
+
+Standard sea level pressure: **1013.25 hPa**
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p2-c2-l4-atmospheric-pressure" label="I understand reading pressure values" />
+
+</LessonChapter>
+
+<LessonChapter title="Weather Correlation" id="weather-correlation">
+
+### Pressure and Weather
+
+| Pressure | Trend | Likely Weather |
+|----------|-------|----------------|
+| High (above 1020 hPa) | Stable | Clear, sunny |
+| Normal (1010-1020) | - | Variable |
+| Low (below 1010 hPa) | Falling | Rain, storms |
+
+### Tracking Trends
+
+```cpp
+float pressureHistory[6];  // Last 6 readings
+int historyIndex = 0;
+
+void updateHistory(float pressure) {
+  pressureHistory[historyIndex] = pressure;
+  historyIndex = (historyIndex + 1) % 6;
+}
+
+String getTrend() {
+  float oldest = pressureHistory[(historyIndex + 1) % 6];
+  float newest = pressureHistory[historyIndex];
+  float diff = newest - oldest;
+
+  if (diff > 2) return "Rising ↑";
+  if (diff < -2) return "Falling ↓";
+  return "Stable →";
+}
+```
+
+<InfoBox type="tip">
+  Track pressure changes over hours, not minutes. A drop of 3-6 hPa over 3 hours often means a storm is coming!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Interactive Simulation" id="interactive-simulation">
+
+<InfoBox type="info">
+  The interactive p5.js simulation shows a pressure gauge dial with a history mini-graph. Watch the weather icon change (sunny, cloudy, rainy) based on the pressure value and trend.
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test Your Knowledge" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p2-c2-l4-atmospheric-pressure"
+  question="What interface do BMP/BME sensors commonly use?"
+  options={[
+    { id: "a", text: "Analog voltage" },
+    { id: "b", text: "I2C or SPI" },
+    { id: "c", text: "UART serial" },
+    { id: "d", text: "One-wire" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p2-c2-l4-atmospheric-pressure"
+  question="What does falling barometric pressure often indicate?"
+  options={[
+    { id: "a", text: "Clear, sunny weather" },
+    { id: "b", text: "Incoming storms or rain" },
+    { id: "c", text: "Higher altitude" },
+    { id: "d", text: "Sensor malfunction" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Summary" id="summary">
+
+In this lesson you learned:
+
+- ✅ BMP/BME sensors measure pressure (and often temp/humidity)
+- ✅ Standard sea level pressure is 1013.25 hPa
+- ✅ Falling pressure often indicates incoming bad weather
+- ✅ Track pressure trends over hours for weather forecasting
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p2-c2-l4-atmospheric-pressure" label="I completed the lesson!" />
+
+</LessonChapter>

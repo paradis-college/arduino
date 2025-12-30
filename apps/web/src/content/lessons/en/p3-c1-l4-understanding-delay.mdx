@@ -1,0 +1,249 @@
+---
+id: p3-c1-l4-understanding-delay-en
+title: "Why Arduino Takes Naps! 😴⏰"
+course: "embedded-programming-basics"
+difficulty: "beginner"
+tags: ["delay", "timing", "millis", "blocking"]
+estimatedMinutes: 15
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Why Arduino Takes Naps! 😴⏰
+
+Let's learn about `delay()` - when Arduino goes to sleep and can't do anything else! And why sometimes that's a problem! 💤
+
+<LessonChapter title="What We'll Do Today" id="what-youll-learn">
+
+Today you will:
+- 😴 Understand what happens during `delay()`
+- 🚫 Learn why Arduino can't do two things at once with delay
+- 💡 See when delay is OK and when it's NOT
+
+<InfoBox type="info">
+  **Hey kids!** Imagine you're playing a game, but every few seconds you have to close your eyes and count to 10. You can't catch the ball while counting! That's what delay does to Arduino! 🙈
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Watch What Happens! 🎬" id="watch-what-happens">
+
+<P5SketchEmbed
+  id="arduino-nap-animation"
+  sketchId="p3-c1-l4-arduino-nap"
+  stepNumber={1}
+  title="Arduino's Nap Time!"
+  alt="Visualization of delay blocking"
+>
+  👀 **Look!** When delay() is running, see how Arduino is "sleeping" and can't do anything else. The button doesn't work until Arduino wakes up!
+</P5SketchEmbed>
+
+<InfoBox type="tip">
+  **Press the button during delay!** Notice how Arduino doesn't respond? It's taking a nap! 😴
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="What delay() Really Does 💤" id="what-delay-does">
+
+When you write `delay(1000)`, here's what happens:
+
+<P5SketchEmbed
+  id="delay-timing-animation"
+  sketchId="p3-c1-l4-delay"
+  stepNumber={2}
+  title="Arduino Goes to Sleep!"
+  alt="Arduino sleeping during delay"
+>
+  Arduino STOPS everything and counts: "one elephant... 🐘" It can't see buttons, can't read sensors, can't do ANYTHING until it wakes up!
+</P5SketchEmbed>
+
+### It's Like Closing Your Eyes! 🙈
+
+```cpp
+digitalWrite(13, HIGH);  // Light ON
+delay(2000);             // Close eyes for 2 seconds...
+                         // Can't see anything!
+                         // Can't do anything!
+digitalWrite(13, LOW);   // Light OFF (finally!)
+```
+
+<InfoBox type="warning">
+  **During delay(2000):** Arduino is completely asleep! Even if you press a button 100 times, Arduino won't notice! 😴
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="en/p3-c1-l4-understanding-delay" label="I understand delay makes Arduino sleep! 😴" />
+
+</LessonChapter>
+
+<LessonChapter title="When Delay is a Problem! 🚨" id="when-delay-is-problem">
+
+<P5SketchEmbed
+  id="frozen-task-animation"
+  sketchId="p3-c1-l4-frozen-task"
+  stepNumber={2}
+  title="Watch Everything Freeze! ❄️"
+  alt="Animation showing tasks freezing during delay"
+>
+  👀 **Look!** When delay() happens, EVERYTHING stops! Both the LED AND the sensor reading freeze! It's like the whole world pauses! 🥶
+</P5SketchEmbed>
+
+### The Button Problem 🔘
+
+Imagine this: You want a light to blink AND respond to a button.
+
+```cpp
+void loop() {
+  // Check button
+  if (digitalRead(2) == LOW) {
+    // Do something when pressed!
+  }
+
+  // Blink light
+  digitalWrite(13, HIGH);
+  delay(2000);  // Sleep 2 seconds - MISS BUTTON!
+  digitalWrite(13, LOW);
+  delay(2000);  // Sleep again - MISS BUTTON!
+}
+```
+
+<P5SketchEmbed
+  id="missed-button-animation"
+  sketchId="p3-c1-l4-missed-button"
+  stepNumber={3}
+  title="Missed Button Press!"
+  alt="Button press missed during delay"
+>
+  **Problem:** While sleeping during delay, Arduino MISSES your button presses! Click the button during delay to see it get missed! It's like trying to talk to someone who's napping! 😴
+</P5SketchEmbed>
+
+<InfoBox type="tip">
+  **Think about it:** If delay is 2 seconds, and you press the button for 0.1 seconds, Arduino probably won't catch it! 🎯
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="When Delay is OK! ✅" id="when-delay-is-ok">
+
+Delay IS fine for simple things:
+
+### ✅ OK: Simple blinking light
+
+```cpp
+void loop() {
+  digitalWrite(13, HIGH);
+  delay(500);
+  digitalWrite(13, LOW);
+  delay(500);
+}
+```
+This is fine if you don't need buttons or sensors!
+
+### ✅ OK: Short delays
+
+```cpp
+delay(10);  // Just 10 milliseconds - super quick!
+```
+Short delays are usually OK because Arduino wakes up fast!
+
+### ✅ OK: Startup message
+
+```cpp
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Starting up...");
+  delay(2000);  // OK here - just once at the start
+}
+```
+
+<Checkpoint id="checkpoint-2" lessonKey="en/p3-c1-l4-understanding-delay" label="I know when delay is OK and when it's not! 👍" />
+
+</LessonChapter>
+
+<LessonChapter title="A Sneak Peek: millis()! 🔮" id="sneak-peek-millis">
+
+There's a BETTER way! Instead of sleeping, Arduino can LOOK AT A CLOCK! ⏰
+
+<P5SketchEmbed
+  id="clock-method-animation"
+  sketchId="p3-c1-l4-clock-method"
+  stepNumber={4}
+  title="The Clock Method"
+  alt="millis() clock concept"
+>
+  Instead of sleeping, Arduino keeps checking the clock: "Has 1 second passed yet? No? OK, I'll check the button. Has 1 second passed? Yes! Time to blink!"
+</P5SketchEmbed>
+
+### The Idea (Don't Worry About Code Yet!)
+
+- **delay()** = Close eyes and count 🙈
+- **millis()** = Keep looking at a clock ⏰👀
+
+With the clock method, Arduino stays awake and can do MANY things!
+
+<InfoBox type="info">
+  **You'll learn millis() later!** For now, just remember: there's a way to time things WITHOUT sleeping! 🎉
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Quiz Time! 🎯" id="test-your-knowledge">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="en/p3-c1-l4-understanding-delay"
+  question="What happens during delay(3000)?"
+  options={[
+    { id: "a", text: "Arduino does other things while waiting" },
+    { id: "b", text: "Arduino sleeps and can't do ANYTHING for 3 seconds! 😴" },
+    { id: "c", text: "The light gets brighter" },
+    { id: "d", text: "Arduino reads buttons faster" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="en/p3-c1-l4-understanding-delay"
+  question="Why might Arduino miss a button press?"
+  options={[
+    { id: "a", text: "The button is broken" },
+    { id: "b", text: "Arduino is sleeping during delay and can't see the button! 🙈" },
+    { id: "c", text: "Buttons don't work with Arduino" },
+    { id: "d", text: "You need to press harder" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-3"
+  lessonKey="en/p3-c1-l4-understanding-delay"
+  question="When is delay() usually OK to use?"
+  options={[
+    { id: "a", text: "When you need to respond to buttons fast" },
+    { id: "b", text: "For simple blinking without buttons, or very short delays" },
+    { id: "c", text: "Always - delay is always perfect!" },
+    { id: "d", text: "Never - delay is always bad" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="You Did It! 🏆" id="summary">
+
+### What you learned today:
+
+- ✅ **delay()** makes Arduino SLEEP and do nothing else
+- ✅ During delay, Arduino can **miss button presses**
+- ✅ **Short delays** are usually OK
+- ✅ **Long delays** can be a problem if you need to respond to things
+- ✅ There's a better way called **millis()** (you'll learn later!)
+
+<InfoBox type="tip">
+  **Great job!** 🌟 Now you understand why Arduino sometimes needs to stay awake! In the next lesson, we'll learn about setup() and loop() - the two main parts of every Arduino program! 🎉
+</InfoBox>
+
+<Checkpoint id="checkpoint-3" lessonKey="en/p3-c1-l4-understanding-delay" label="I understand Arduino naps and timing! ⏰" />
+
+</LessonChapter>

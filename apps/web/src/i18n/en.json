@@ -1,0 +1,112 @@
+{
+  "common": {
+    "home": "Home",
+    "courses": "Courses",
+    "paths": "Paths",
+    "projects": "Projects",
+    "community": "Community",
+    "login": "Login",
+    "logout": "Logout",
+    "search": "Search",
+    "loading": "Loading...",
+    "error": "Error",
+    "notFound": "Page not found",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "close": "Close"
+  },
+  "home": {
+    "title": "Learn Arduino",
+    "subtitle": "Interactive platform for learning electronics and programming with Arduino",
+    "startLearning": "Start Learning",
+    "exploreCourses": "Explore Courses",
+    "explorePaths": "Explore Learning Paths",
+    "featuredCourses": "Featured Courses",
+    "whyArduino": "Why Arduino?",
+    "whyArduinoDesc": "Arduino is the perfect platform to start learning programming and electronics."
+  },
+  "paths": {
+    "title": "Learning Paths",
+    "subtitle": "Choose a complete learning path",
+    "courses": "courses"
+  },
+  "courses": {
+    "title": "Courses",
+    "subtitle": "Explore our Arduino courses",
+    "allCourses": "All Courses",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced",
+    "lessons": "lessons",
+    "hours": "hours",
+    "difficulty": "Difficulty",
+    "duration": "Duration"
+  },
+  "lesson": {
+    "title": "Lesson",
+    "estimatedTime": "Estimated time",
+    "minutes": "minutes",
+    "difficulty": "Difficulty",
+    "tags": "Tags",
+    "saveLesson": "Save lesson",
+    "unsaveLesson": "Remove from saved",
+    "savedLessons": "Saved lessons",
+    "rateLesson": "Rate this lesson",
+    "progress": "Progress",
+    "checkpointCompleted": "Checkpoint completed!",
+    "markComplete": "Mark as complete",
+    "loadSimulation": "Load simulation",
+    "loadVideo": "Load video",
+    "keyPoints": "Key Points",
+    "outline": "Outline",
+    "nextLesson": "Next lesson",
+    "previousLesson": "Previous lesson",
+    "communityProjects": "Community Projects",
+    "watchVideo": "Watch the video"
+  },
+  "exercise": {
+    "checkAnswer": "Check Answer",
+    "correct": "Correct! ✓",
+    "incorrect": "Incorrect. Try again.",
+    "tryAgain": "Try Again",
+    "selectAnswer": "Select an answer",
+    "pinMapping": "Pin Mapping",
+    "dragInstruction": "Connect the pins to the corresponding components"
+  },
+  "community": {
+    "title": "Community",
+    "subtitle": "Projects created by our community",
+    "submitProject": "Submit a project",
+    "loginToSubmit": "Log in to submit your project (coming soon)",
+    "filterByDifficulty": "Filter by difficulty",
+    "filterByCourse": "Filter by course",
+    "filterByComponents": "Filter by components",
+    "noProjectsFound": "No projects found",
+    "likes": "likes"
+  },
+  "theme": {
+    "light": "Light mode",
+    "dark": "Dark mode",
+    "toggle": "Toggle theme"
+  },
+  "language": {
+    "ro": "Română",
+    "en": "English",
+    "switch": "Switch language"
+  },
+  "infoBox": {
+    "info": "Info",
+    "warning": "Warning",
+    "tip": "Tip",
+    "danger": "Danger"
+  },
+  "difficulty": {
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced"
+  }
+}

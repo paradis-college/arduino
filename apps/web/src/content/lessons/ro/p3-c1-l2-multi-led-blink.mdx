@@ -1,0 +1,295 @@
+---
+id: p3-c1-l2-multi-led-blink-ro
+title: "Fă 3 Lumini să Danseze! 💃🕺✨"
+course: "embedded-programming-basics"
+difficulty: "beginner"
+tags: ["LED", "array", "pattern", "multiple"]
+estimatedMinutes: 20
+hasInteractiveExercises: true
+videoId: "dQw4w9WgXcQ"
+---
+
+# Fă 3 Lumini să Danseze! 💃🕺✨
+
+Acum hai să controlăm TREI lumini deodată! Pot să clipească împreună, pe rând, sau să creeze un pattern de dans! 🎵
+
+<LessonChapter title="Ce Vom Face Azi" id="ce-vom-face">
+
+Azi vei:
+- 💡💡💡 Controla 3 LED-uri în același timp
+- 🔄 Să le faci să clipească în LINIE (ca o omidă!)
+- 🎭 Să faci diferite pattern-uri de clipire
+
+<InfoBox type="info">
+  **Hei copii!** Imaginează-ți că ești dirijorul unei orchestre, și fiecare lumină e un muzician. Tu le spui când să cânte! 🎼
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Urmărește Spectacolul de Lumini! 🌈" id="urmareste-spectacolul">
+
+<P5SketchEmbed
+  id="multi-led-animation"
+  sketchId="p3-c1-l2-multi-led"
+  stepNumber={1}
+  title="3 Lumini Dansatoare!"
+  alt="Trei LED-uri clipind în pattern-uri"
+>
+  👀 **Privește!** Vezi cele trei lumini făcând diferite dansuri! Încearcă diferitele pattern-uri: TOATE ÎMPREUNĂ, UNUL CÂTE UNUL, sau ÎNAINTE ȘI ÎNAPOI!
+</P5SketchEmbed>
+
+<InfoBox type="tip">
+  **Care pattern îți place cel mai mult?** Cel unde toate clipesc împreună ca o bătaie de inimă? Sau cel de urmărire ca o omidă care se târăște? 🐛
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Întâlnește-ți Cele 3 LED-uri! 👋" id="intalneste-ledurile">
+
+<P5SketchEmbed
+  id="three-led-setup-animation"
+  sketchId="p3-c1-l2-three-led-setup"
+  stepNumber={1}
+  title="Pregătește 3 LED-uri"
+  alt="Trei LED-uri conectate la Arduino"
+>
+  Vom folosi pinii **9**, **10** și **11** pentru cele trei lumini. Gândește-te la ele ca trei prieteni numiți Nouă, Zece și Unsprezece! 🧒🧒🧒
+</P5SketchEmbed>
+
+### Mai întâi, spune-i Arduino-ului despre toți cei 3 pini
+
+```cpp
+void setup() {
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(11, OUTPUT);
+}
+```
+
+Asta îi spune Arduino-ului: *"Hei! Pinii 9, 10 și 11 vor controla toți lumini!"*
+
+<InfoBox type="info">
+  **Pentru părinți:** Această lecție introduce conceptul de control a mai multor ieșiri, ceea ce pregătește pentru array-uri în lecțiile viitoare. Deocamdată, păstrăm simplu cu trei pini individuali.
+</InfoBox>
+
+<Checkpoint id="checkpoint-1" lessonKey="ro/p3-c1-l2-multi-led-blink" label="Am 3 LED-uri gata de acțiune! 💡💡💡" />
+
+</LessonChapter>
+
+<LessonChapter title="Pattern 1: Toate Împreună! 🎇" id="pattern-toate-impreuna">
+
+Hai să facem toate cele trei lumini să clipească în același timp - ca artificii! 🎆
+
+<P5SketchEmbed
+  id="simultaneous-blink-animation"
+  sketchId="p3-c1-l2-simultaneous-blink"
+  stepNumber={2}
+  title="Toate Luminile Clipesc Împreună!"
+  alt="Trei LED-uri clipind simultan"
+>
+  👀 **Privește!** Toate cele trei lumini se aprind ÎMPREUNĂ, apoi se sting ÎMPREUNĂ! Ca artificiile care explodează în cer! 🎆
+</P5SketchEmbed>
+
+```cpp
+void loop() {
+  // Aprinde TOATE luminile împreună!
+  digitalWrite(9, HIGH);
+  digitalWrite(10, HIGH);
+  digitalWrite(11, HIGH);
+  delay(500);
+
+  // Stinge TOATE luminile împreună!
+  digitalWrite(9, LOW);
+  digitalWrite(10, LOW);
+  digitalWrite(11, LOW);
+  delay(500);
+}
+```
+
+<InfoBox type="tip">
+  **Gândește-te așa:** Când zici "SARI!" toți prietenii tăi sar împreună! Când zici "STOP!" toți se opresc! 🤸
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Pattern 2: Unul Câte Unul! 🐛" id="pattern-urmarire">
+
+Acum hai să facem luminile să se aprindă una câte una - ca o omidă care se târăște! 🐛
+
+<P5SketchEmbed
+  id="chase-pattern-animation"
+  sketchId="p3-c1-l2-chase-pattern"
+  stepNumber={2}
+  title="Pattern-ul de Urmărire"
+  alt="LED-urile se aprind unul câte unul"
+>
+  Privește cum fiecare lumină își ia rândul: Mai întâi **9**, apoi **10**, apoi **11**, apoi de la început! E ca și cum joacă urmărește liderul!
+</P5SketchEmbed>
+
+```cpp
+void loop() {
+  // Lumina 1 clipește
+  digitalWrite(9, HIGH);
+  delay(200);
+  digitalWrite(9, LOW);
+
+  // Lumina 2 clipește
+  digitalWrite(10, HIGH);
+  delay(200);
+  digitalWrite(10, LOW);
+
+  // Lumina 3 clipește
+  digitalWrite(11, HIGH);
+  delay(200);
+  digitalWrite(11, LOW);
+}
+```
+
+<InfoBox type="tip">
+  **E ca o cursă de ștafetă!** 🏃 Lumina 1 aleargă, apoi dă ștafeta Luminii 2, apoi Luminii 3!
+</InfoBox>
+
+<Checkpoint id="checkpoint-2" lessonKey="ro/p3-c1-l2-multi-led-blink" label="Pot să fac luminile să se urmărească! 🐛" />
+
+</LessonChapter>
+
+<LessonChapter title="Pattern 3: Înainte și Înapoi! 🏓" id="pattern-ping-pong">
+
+Acum hai să facem luminile să meargă înainte și înapoi - ca o minge de ping-pong! 🏓
+
+```cpp
+void loop() {
+  // Mergi înainte: 9 → 10 → 11
+  digitalWrite(9, HIGH);
+  delay(150);
+  digitalWrite(9, LOW);
+
+  digitalWrite(10, HIGH);
+  delay(150);
+  digitalWrite(10, LOW);
+
+  digitalWrite(11, HIGH);
+  delay(150);
+  digitalWrite(11, LOW);
+
+  // Mergi înapoi: 10 → 9
+  digitalWrite(10, HIGH);
+  delay(150);
+  digitalWrite(10, LOW);
+}
+```
+
+<InfoBox type="tip">
+  **Boing boing boing!** Lumina sare de la un capăt la altul și înapoi, exact ca o minge! 🎾
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Experimente Distractive! 🧪" id="experimente">
+
+### Fă-le MAI RAPIDE! 🚀
+
+Schimbă toate `delay(200)` cu `delay(50)`:
+```cpp
+delay(50);
+```
+Acum zboară super repede!
+
+### Fă-le MAI LENTE! 🐢
+
+Schimbă cu `delay(500)`:
+```cpp
+delay(500);
+```
+Frumos și încet, ca o omidă somnoroasă!
+
+### Fă o BĂTAIE DE INIMĂ! ❤️
+
+Încearcă acest pattern care arată ca o inimă care bate:
+```cpp
+// Bătaie rapidă dublă
+digitalWrite(9, HIGH);
+digitalWrite(10, HIGH);
+digitalWrite(11, HIGH);
+delay(100);
+digitalWrite(9, LOW);
+digitalWrite(10, LOW);
+digitalWrite(11, LOW);
+delay(100);
+
+digitalWrite(9, HIGH);
+digitalWrite(10, HIGH);
+digitalWrite(11, HIGH);
+delay(100);
+digitalWrite(9, LOW);
+digitalWrite(10, LOW);
+digitalWrite(11, LOW);
+delay(400);
+```
+
+<InfoBox type="tip">
+  **Provocare:** Poți să faci un pattern care arată ca valurile oceanului? 🌊 Încearcă să aprinzi și să stingi luminile la momente diferite!
+</InfoBox>
+
+</LessonChapter>
+
+<LessonChapter title="Test! 🎯" id="testeaza-cunostintele">
+
+<ExerciseMultipleChoice
+  id="quiz-1"
+  lessonKey="ro/p3-c1-l2-multi-led-blink"
+  question="Ca să faci toate 3 luminile să clipească ÎMPREUNĂ, ce facem?"
+  options={[
+    { id: "a", text: "Le punem pe toate HIGH, așteptăm, apoi pe toate LOW" },
+    { id: "b", text: "Le aprindem una câte una" },
+    { id: "c", text: "Aprindem doar prima" },
+    { id: "d", text: "Folosim timpi diferiți de delay pentru fiecare" }
+  ]}
+  correctIndex={0}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-2"
+  lessonKey="ro/p3-c1-l2-multi-led-blink"
+  question="În pattern-ul de urmărire, ce se întâmplă după ce lumina 9 se stinge?"
+  options={[
+    { id: "a", text: "Toate luminile se aprind" },
+    { id: "b", text: "Lumina 10 se aprinde următoarea!" },
+    { id: "c", text: "Lumina 9 se aprinde din nou" },
+    { id: "d", text: "Totul se oprește" }
+  ]}
+  correctIndex={1}
+/>
+
+<ExerciseMultipleChoice
+  id="quiz-3"
+  lessonKey="ro/p3-c1-l2-multi-led-blink"
+  question="Ce se întâmplă dacă facem delay() mai mic (ca 50 în loc de 200)?"
+  options={[
+    { id: "a", text: "Luminile devin mai strălucitoare" },
+    { id: "b", text: "Luminile clipesc MAI REPEDE! 🚀" },
+    { id: "c", text: "Luminile se sting pentru totdeauna" },
+    { id: "d", text: "Nimic nu se schimbă" }
+  ]}
+  correctIndex={1}
+/>
+
+</LessonChapter>
+
+<LessonChapter title="Ai Reușit! 🏆" id="rezumat">
+
+### Ce ai învățat azi:
+
+- ✅ Controlezi **3 LED-uri** în același timp
+- ✅ Le faci să clipească **împreună** (ca artificii! 🎆)
+- ✅ Le faci să se urmărească **unul câte unul** (ca o omidă! 🐛)
+- ✅ Le faci să meargă **înainte și înapoi** (ca ping-pong! 🏓)
+- ✅ Schimbi viteza cu diferite numere **delay**
+
+<InfoBox type="tip">
+  **Bravo!** 🌟 Acum controlezi mai multe lumini! În lecția următoare, vom învăța cum să facem luminile să se aprindă și să se stingă lin - ca prin magie! ✨
+</InfoBox>
+
+<Checkpoint id="checkpoint-3" lessonKey="ro/p3-c1-l2-multi-led-blink" label="Pot să fac 3 lumini să danseze! Sunt DJ de lumini! 🎧" />
+
+</LessonChapter>
