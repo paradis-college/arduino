@@ -31,6 +31,7 @@ repos:
       - id: check-merge-conflict
       - id: check-yaml
       - id: check-json
+        exclude: (^|/)(tsconfig(\..*)?\.json)$
       - id: detect-private-key
       # - id: check-added-large-files
         # args: ["--maxkb=10240"] # 10 MB, adjust if you commit large assets intentionally
