@@ -24,7 +24,7 @@ exclude: >
 repos:
   # Generic hygiene (whitespace, merge markers, basic safety checks)
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -49,7 +49,7 @@ repos:
 
   # Lint: React/Next/TS (uses your repo’s eslint config)
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v9.10.0
+    rev: v10.0.0-beta.0
     hooks:
       - id: eslint
         files: \.(js|jsx|ts|tsx)$
@@ -66,7 +66,7 @@ repos:
 
   # Optional but useful for lesson repos: Markdown linting (keeps docs consistent)
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.41.0
+    rev: v0.47.0
     hooks:
       - id: markdownlint
         files: \.(md|mdx)$
